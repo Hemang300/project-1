@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 :root{
   --paper:#E7EAE5;
@@ -384,6 +385,32 @@ details.guide li{margin-bottom:7px;max-width:64ch}
   padding:11px 20px;border-radius:5px;
 }
 .dv .callrow span{color:#B6AEC4;font-size:13.5px}
+
+/* ---------- cloud sync ---------- */
+.sync{
+  display:flex;gap:14px;align-items:flex-start;
+  border:1px solid var(--line);border-left:4px solid var(--muted);border-radius:var(--radius);
+  padding:16px;background:var(--surface);margin-bottom:14px;transition:border-color .2s ease;
+}
+.sync.on{border-left-color:var(--calm)}
+.sync.off{border-left-color:var(--signal)}
+.sync .sicon{
+  width:40px;height:40px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+  background:var(--surface-2);color:var(--muted);
+}
+.sync.on .sicon{background:color-mix(in srgb, var(--calm) 18%, var(--surface-2));color:var(--calm)}
+.sync .sbody{flex:1;min-width:0}
+.sync .srow{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.sync .stitle{font-weight:700;font-size:15.5px;letter-spacing:-0.01em}
+.sync .signedas{color:var(--muted);font-size:13px;margin-left:auto}
+.sync .ssub{color:var(--muted);font-size:13.5px;margin:3px 0 0;max-width:52ch}
+.sync form{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.sync input[type=email]{flex:1;min-width:170px}
+.sync .btn{padding:10px 16px;min-height:42px;font-size:14.5px}
+.configwarn{
+  margin-top:10px;font-size:13px;color:var(--signal);background:var(--surface-2);
+  border-left:3px solid var(--signal);padding:8px 10px;border-radius:3px;
+}
 
 /* ---------- bottom bar ---------- */
 .bar{
@@ -785,6 +812,25 @@ footer p{max-width:64ch}
 
 <div id="page-profile" class="page">
 
+<div class="sync off" id="syncCard">
+  <span class="sicon" id="syncIcon" aria-hidden="true">
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H6.5A4.5 4.5 0 0 1 5 10.2 5.5 5.5 0 0 1 15.9 8H16.5a4 4 0 0 1 1 7.9"/></svg>
+  </span>
+  <div class="sbody">
+    <div class="srow">
+      <span class="stitle" id="syncTitle">Not synced</span>
+      <span class="signedas" id="syncSub"></span>
+    </div>
+    <p class="ssub" id="syncDesc">Sign in to keep your profile and contacts backed up and available on any device. Without this, everything still works — it just stays only on this device.</p>
+    <form id="syncForm">
+      <input type="email" id="syncEmail" placeholder="you@example.com" autocomplete="email" required>
+      <button class="btn btn-go" id="syncSend" type="submit">Send magic link</button>
+      <button class="btn" id="syncOut" type="button" style="display:none">Sign out</button>
+    </form>
+    <p class="configwarn" id="configWarn" style="display:none">This deployment hasn't been connected to a database yet — add your Supabase URL and key near the top of the file's script to turn this on.</p>
+  </div>
+</div>
+
 <section id="dv-aware">
   <div class="dv">
     <p class="eyebrow">Recognise abuse</p>
@@ -966,6 +1012,206 @@ themeBtn.addEventListener('click', function(){
   paintThemeBtn();
 });
 
+/* ============================================================
+   CLOUD SYNC — Supabase
+   ------------------------------------------------------------
+   Fill in these two values from your own project:
+   Supabase dashboard → Settings → API → Project URL / anon key.
+   Everything below degrades gracefully if you leave them blank:
+   the app just runs on-device only, exactly as before.
+   ============================================================ */
+var SUPABASE_URL = 'https://ajojoywzmjwutnwwsacl.supabase.co';
+var SUPABASE_ANON_KEY = 'sb_publishable_wDOIgrprOns-gBO7bDT4Sg_ZVZ0n0Cy';
+
+var sb = null;
+var sbUser = null;
+var configured = SUPABASE_URL.indexOf('YOUR-PROJECT') === -1 && SUPABASE_ANON_KEY.indexOf('YOUR-ANON') === -1;
+
+if(configured && window.supabase && window.supabase.createClient){
+  sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+} else {
+  var cw = $('configWarn'); if(cw) cw.style.display = 'block';
+}
+
+function uuid(){
+  if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
+    var r = Math.random()*16|0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+function setSyncStatus(text, state){
+  var card = $('syncCard');
+  if(card) card.className = 'sync' + (state === 'on' ? ' on' : state === 'off' ? ' off' : '');
+  var el = $('syncDesc');
+  if(el) el.textContent = text;
+}
+
+function paintSyncUI(){
+  if(!$('syncCard')) return;
+  if(sbUser){
+    $('syncTitle').textContent = 'Synced';
+    $('syncCard').className = 'sync on';
+    $('syncSub').textContent = sbUser.email || '';
+    $('syncForm').style.display = 'none';
+    $('syncOut').style.display = 'inline-flex';
+    $('syncDesc').textContent = 'Your profile, contacts and checklist are backed up and will show up on any device you sign into.';
+  } else {
+    $('syncTitle').textContent = configured ? 'Not synced' : 'Cloud sync not set up';
+    $('syncCard').className = 'sync off';
+    $('syncSub').textContent = '';
+    $('syncForm').style.display = 'flex';
+    $('syncOut').style.display = 'none';
+    if(configured){
+      $('syncDesc').textContent = 'Sign in to keep your profile and contacts backed up and available on any device. Without this, everything still works — it just stays only on this device.';
+    }
+  }
+}
+paintSyncUI();
+
+if(sb){
+  sb.auth.getSession().then(function(res){
+    var session = res.data && res.data.session;
+    if(session){ sbUser = session.user; paintSyncUI(); cloudPullAll(sbUser.id); }
+  });
+  sb.auth.onAuthStateChange(function(event, session){
+    if(event === 'SIGNED_IN' && session){
+      sbUser = session.user; paintSyncUI();
+      setSyncStatus('Signed in. Loading your saved data…', 'on');
+      cloudPullAll(sbUser.id);
+    } else if(event === 'SIGNED_OUT'){
+      sbUser = null; paintSyncUI();
+    }
+  });
+}
+
+var syncForm = $('syncForm');
+if(syncForm){
+  syncForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(!sb){ setSyncStatus('Cloud sync isn\'t connected yet on this deployment.', 'off'); return; }
+    var email = $('syncEmail').value.trim();
+    if(!email) return;
+    $('syncSend').disabled = true;
+    $('syncSend').textContent = 'Sending…';
+    sb.auth.signInWithOtp({
+      email: email,
+      options: { emailRedirectTo: window.location.href.split('#')[0] }
+    }).then(function(res){
+      $('syncSend').disabled = false;
+      $('syncSend').textContent = 'Send magic link';
+      if(res.error) setSyncStatus(res.error.message, 'off');
+      else setSyncStatus('Check ' + email + ' for a sign-in link, then come back to this tab.', 'off');
+    });
+  });
+}
+var syncOutBtn = $('syncOut');
+if(syncOutBtn){
+  syncOutBtn.addEventListener('click', function(){
+    if(sb) sb.auth.signOut();
+    sbUser = null; paintSyncUI();
+    setSyncStatus('Signed out. Your data on this device is untouched.', 'off');
+  });
+}
+
+/* ---- cloud CRUD — every one of these is a no-op if not signed in ---- */
+function cloudPushProfile(){
+  if(!sb || !sbUser) return;
+  sb.from('profiles').upsert({
+    id: sbUser.id,
+    full_name: profile.pName || null,
+    blood_group: profile.pBlood || null,
+    age: profile.pAge ? parseInt(profile.pAge,10) : null,
+    vehicle_no: profile.pVehicle || null,
+    medical_notes: profile.pMed || null,
+    home_address: profile.pHome || null,
+    work_address: profile.pWork || null,
+    nearest_station: profile.pStation || null
+  }).then(function(res){
+    if(res.error) setSyncStatus('Couldn\'t save to the cloud: ' + res.error.message, 'off');
+  });
+}
+function cloudUpsertContact(c, order){
+  if(!sb || !sbUser) return;
+  sb.from('emergency_contacts').upsert({
+    id: c.id, user_id: sbUser.id, name: c.name, phone: c.num, sort_order: order || 0
+  }).then(function(res){
+    if(res.error) setSyncStatus('Couldn\'t save that contact to the cloud: ' + res.error.message, 'off');
+  });
+}
+function cloudDeleteContact(id){
+  if(!sb || !sbUser || !id) return;
+  sb.from('emergency_contacts').delete().eq('id', id).then(function(){});
+}
+function cloudSetRule(ruleId, done){
+  if(!sb || !sbUser) return;
+  if(done){
+    sb.from('rule_progress').upsert({ user_id: sbUser.id, rule_id: ruleId }).then(function(){});
+  } else {
+    sb.from('rule_progress').delete().eq('user_id', sbUser.id).eq('rule_id', ruleId).then(function(){});
+  }
+}
+function cloudClearRules(){
+  if(!sb || !sbUser) return;
+  sb.from('rule_progress').delete().eq('user_id', sbUser.id).then(function(){});
+}
+function cloudWipeAll(){
+  if(!sb || !sbUser) return;
+  cloudPushProfile();
+  sb.from('emergency_contacts').delete().eq('user_id', sbUser.id).then(function(){});
+  sb.from('rule_progress').delete().eq('user_id', sbUser.id).then(function(){});
+}
+function logAlert(via){
+  if(!sb || !sbUser) return;
+  sb.from('sos_alerts').insert({
+    user_id: sbUser.id,
+    lat: coords ? parseFloat(coords.lat) : null,
+    lon: coords ? parseFloat(coords.lon) : null,
+    accuracy_m: coords ? coords.acc : null,
+    message: baseMessage(),
+    sent_via: via
+  }).then(function(){});
+}
+function cloudPullAll(uid){
+  if(!sb) return;
+  Promise.all([
+    sb.from('profiles').select('*').eq('id', uid).maybeSingle(),
+    sb.from('emergency_contacts').select('*').eq('user_id', uid).order('sort_order'),
+    sb.from('rule_progress').select('rule_id').eq('user_id', uid)
+  ]).then(function(results){
+    var prof = results[0].data, cons = results[1].data, rules = results[2].data;
+    if(prof){
+      profile.pName = prof.full_name || '';
+      profile.pBlood = prof.blood_group || '';
+      profile.pAge = prof.age || '';
+      profile.pVehicle = prof.vehicle_no || '';
+      profile.pMed = prof.medical_notes || '';
+      profile.pHome = prof.home_address || '';
+      profile.pWork = prof.work_address || '';
+      profile.pStation = prof.nearest_station || '';
+      fillProfile(); paintIdCard();
+      try{ localStorage.setItem(PKEY, JSON.stringify(profile)); }catch(e){}
+    }
+    if(cons){
+      contacts = cons.map(function(c){ return { id:c.id, name:c.name, num:c.phone }; });
+      renderContacts();
+      try{ localStorage.setItem(KEY, JSON.stringify(contacts)); }catch(e){}
+    }
+    if(rules){
+      ticked = {};
+      rules.forEach(function(r){ ticked[r.rule_id] = true; });
+      Array.prototype.forEach.call(boxes, function(b){ b.checked = !!ticked[b.id]; });
+      try{ localStorage.setItem(RKEY, JSON.stringify(ticked)); }catch(e){}
+      paintRules();
+    }
+    refreshShare();
+    setSyncStatus('Your profile, contacts and checklist are backed up and will show up on any device you sign into.', 'on');
+  }).catch(function(err){
+    setSyncStatus('Could not load your saved data: ' + err.message, 'off');
+  });
+}
+
 /* ---------------- contacts ---------------- */
 var KEY = 'sk_contacts';
 var contacts = [];
@@ -1002,7 +1248,9 @@ function renderContacts(){
     del.className = 'icobtn'; del.type = 'button'; del.textContent = 'Remove';
     del.setAttribute('aria-label','Remove ' + c.name);
     del.addEventListener('click', function(){
-      contacts.splice(i,1); saveContacts(); renderContacts(); refreshShare();
+      var removed = contacts.splice(i,1)[0];
+      saveContacts(); renderContacts(); refreshShare();
+      if(removed && removed.id) cloudDeleteContact(removed.id);
     });
     li.appendChild(g); li.appendChild(call); li.appendChild(del);
     list.appendChild(li);
@@ -1014,10 +1262,12 @@ $('addC').addEventListener('click', function(){
     setStatus($('shareStatus'),'Add both a name and a phone number.','bad');
     return;
   }
-  contacts.push({ name:n, num:p });
+  var newContact = { id: uuid(), name:n, num:p };
+  contacts.push(newContact);
   saveContacts(); renderContacts(); refreshShare();
   $('cName').value = ''; $('cNum').value = '';
   setStatus($('shareStatus'), n + ' saved on this device.', 'ok');
+  cloudUpsertContact(newContact, contacts.length - 1);
 });
 renderContacts();
 
@@ -1090,7 +1340,11 @@ $('copyBtn').addEventListener('click', function(){
   }
 });
 
+$('waBtn').addEventListener('click', function(){ logAlert('whatsapp'); });
+$('smsBtn').addEventListener('click', function(){ logAlert('sms'); });
+
 $('quickAlert').addEventListener('click', function(){
+  showPage('home');
   document.getElementById('location').scrollIntoView({behavior:'smooth', block:'start'});
   if(!coords) $('locBtn').click();
   setStatus($('shareStatus'), contacts.length
@@ -1532,6 +1786,7 @@ function saveProfile(quiet){
   }
   paintIdCard();
   refreshShare();
+  cloudPushProfile();
 }
 fillProfile();
 paintIdCard();
@@ -1546,6 +1801,7 @@ $('clearProfile').addEventListener('click', function(){
   try{ localStorage.removeItem(PKEY); localStorage.removeItem(KEY); }catch(e){}
   renderContacts(); paintIdCard(); refreshShare();
   setStatus($('profStatus'), 'Everything cleared.', 'ok');
+  cloudWipeAll();
 });
 $('shareHome').addEventListener('click', function(){
   if(!profile.pHome){
@@ -1594,6 +1850,7 @@ Array.prototype.forEach.call(boxes, function(b){
     ticked[b.id] = b.checked;
     try{ localStorage.setItem(RKEY, JSON.stringify(ticked)); }catch(e){}
     paintRules();
+    cloudSetRule(b.id, b.checked);
   });
 });
 $('ruleReset').addEventListener('click', function(){
@@ -1601,6 +1858,7 @@ $('ruleReset').addEventListener('click', function(){
   Array.prototype.forEach.call(boxes, function(b){ b.checked = false; });
   try{ localStorage.removeItem(RKEY); }catch(e){}
   paintRules();
+  cloudClearRules();
 });
 paintRules();
 
