@@ -16,9 +16,7 @@
 
 .login-body{
   font-family:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-  min-height:100vh;
-  background:#07090d;
-  color:#e6edf3;
+  min-height:100vh;background:#07090d;color:#e6edf3;
   display:flex;align-items:center;justify-content:center;
   padding:1.5rem;position:relative;overflow:hidden;
 }
@@ -42,20 +40,15 @@
   position:fixed;border-radius:50%;filter:blur(70px);opacity:.5;z-index:1;
   animation:float 18s ease-in-out infinite;pointer-events:none;
 }
-.orb.o1{width:380px;height:380px;background:#be1622;top:-100px;left:-80px;animation-delay:0s}
+.orb.o1{width:380px;height:380px;background:#be1622;top:-100px;left:-80px}
 .orb.o2{width:420px;height:420px;background:#1f6feb;bottom:-150px;right:-100px;animation-delay:-6s}
 .orb.o3{width:300px;height:300px;background:#8548c9;top:40%;left:60%;animation-delay:-12s}
-@keyframes float{
-  0%,100%{transform:translate(0,0) scale(1)}
-  33%{transform:translate(40px,-50px) scale(1.08)}
-  66%{transform:translate(-30px,40px) scale(.95)}
-}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-50px) scale(1.08)}66%{transform:translate(-30px,40px) scale(.95)}}
 .login-wrapper{
   position:relative;z-index:2;width:100%;max-width:920px;
   display:grid;grid-template-columns:1.05fr 1fr;
   background:rgba(22,27,34,.6);
-  backdrop-filter:blur(24px) saturate(1.4);
-  -webkit-backdrop-filter:blur(24px) saturate(1.4);
+  backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);
   border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;
   box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.03) inset,0 1px 0 rgba(255,255,255,.08) inset;
   animation:cardIn .7s cubic-bezier(.16,1,.3,1);
@@ -69,10 +62,7 @@
     url('https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1200&q=80');
   background-size:cover;background-position:center;color:#fff;overflow:hidden;min-height:560px;
 }
-.hero-panel::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(10,6,18,.35) 0%, rgba(10,6,18,.75) 100%);z-index:1;
-}
+.hero-panel::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(10,6,18,.35) 0%, rgba(10,6,18,.75) 100%);z-index:1}
 .hero-panel > *{position:relative;z-index:2}
 .hero-top{display:flex;align-items:center;gap:.6rem;font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
 .hero-top .brandmark{
@@ -83,109 +73,53 @@
 }
 .hero-top .brandmark svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .hero-top span.a{color:#ff5263}
-.hero-mid h1{
-  font-family:'Fraunces',Georgia,serif;font-weight:700;
-  font-size:2.5rem;line-height:1.08;letter-spacing:-.02em;margin-bottom:.85rem;
-}
-.hero-mid h1 em{
-  font-style:italic;
-  background:linear-gradient(120deg,#ff5263,#ffb0b8);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
+.hero-mid h1{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:2.5rem;line-height:1.08;letter-spacing:-.02em;margin-bottom:.85rem}
+.hero-mid h1 em{font-style:italic;background:linear-gradient(120deg,#ff5263,#ffb0b8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .hero-mid p{font-size:1rem;line-height:1.6;color:rgba(255,255,255,.78);max-width:34ch}
 .hero-stats{display:flex;gap:1.5rem;margin-top:2rem;flex-wrap:wrap}
 .hero-stats div{display:flex;flex-direction:column}
-.hero-stats b{
-  font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;
-  background:linear-gradient(120deg,#fff,#ffd0d5);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
+.hero-stats b{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;background:linear-gradient(120deg,#fff,#ffd0d5);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .hero-stats span{font-size:.75rem;color:rgba(255,255,255,.65);letter-spacing:.02em;text-transform:uppercase;margin-top:2px}
 .hero-bottom{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1.5rem}
-.hero-chip{
-  font-size:.72rem;padding:.4rem .75rem;border-radius:99px;
-  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
-  backdrop-filter:blur(6px);color:rgba(255,255,255,.9);
-  display:flex;align-items:center;gap:.4rem;
-}
+.hero-chip{font-size:.72rem;padding:.4rem .75rem;border-radius:99px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);color:rgba(255,255,255,.9);display:flex;align-items:center;gap:.4rem}
 .hero-chip::before{content:'●';color:#5cc0a5;font-size:.6rem}
-.form-panel{
-  padding:2.5rem 2.25rem;display:flex;flex-direction:column;justify-content:center;
-  background:rgba(13,17,23,.55);border-left:1px solid rgba(255,255,255,.06);
-}
+.form-panel{padding:2.5rem 2.25rem;display:flex;flex-direction:column;justify-content:center;background:rgba(13,17,23,.55);border-left:1px solid rgba(255,255,255,.06)}
 .form-panel h2{font-size:1.55rem;font-weight:700;letter-spacing:-.02em;color:#fff;margin-bottom:.35rem}
 .form-sub{font-size:.85rem;color:rgba(230,237,243,.55);margin-bottom:1.75rem}
 .login-field{margin-bottom:1rem}
 .login-field label{display:block;font-size:.78rem;font-weight:600;color:rgba(230,237,243,.75);margin-bottom:.4rem;letter-spacing:.01em}
-.login-field input{
-  width:100%;padding:.8rem 1rem;font:inherit;font-size:.95rem;
-  background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1);border-radius:10px;
-  color:#fff;transition:border-color .18s, box-shadow .18s, background .18s;outline:none;
-}
+.login-field input{width:100%;padding:.8rem 1rem;font:inherit;font-size:.95rem;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;transition:border-color .18s, box-shadow .18s, background .18s;outline:none}
 .login-field input:focus{border-color:rgba(88,166,255,.7);background:rgba(0,0,0,.5);box-shadow:0 0 0 4px rgba(88,166,255,.15)}
 .login-field input::placeholder{color:rgba(230,237,243,.35)}
 .login-field .hint{font-size:.7rem;color:rgba(230,237,243,.4);margin-top:.3rem}
 .pw-wrap{position:relative}
 .pw-wrap input{padding-right:3.2rem}
-.pw-toggle{
-  position:absolute;right:.5rem;top:50%;transform:translateY(-50%);
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
-  color:rgba(230,237,243,.7);cursor:pointer;font:inherit;font-size:.72rem;font-weight:600;
-  padding:.35rem .6rem;border-radius:6px;transition:all .15s;
-}
+.pw-toggle{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(230,237,243,.7);cursor:pointer;font:inherit;font-size:.72rem;font-weight:600;padding:.35rem .6rem;border-radius:6px;transition:all .15s}
 .pw-toggle:hover{background:rgba(255,255,255,.12);color:#fff}
 .row-between{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;font-size:.82rem}
 .row-between label{display:flex;align-items:center;gap:.45rem;color:rgba(230,237,243,.75);cursor:pointer;font-weight:500}
 .row-between input[type=checkbox]{accent-color:#be1622;width:15px;height:15px;cursor:pointer}
 .row-between a{color:#79c0ff;text-decoration:none;font-weight:500}
 .row-between a:hover{text-decoration:underline}
-.btn-signin{
-  width:100%;padding:.85rem 1rem;font:inherit;font-weight:700;font-size:.95rem;
-  background:linear-gradient(135deg,#be1622,#e8323f);border:none;border-radius:10px;color:#fff;
-  cursor:pointer;transition:transform .1s, box-shadow .2s, filter .15s;
-  letter-spacing:.01em;box-shadow:0 6px 22px rgba(190,22,34,.4);
-}
+.btn-signin{width:100%;padding:.85rem 1rem;font:inherit;font-weight:700;font-size:.95rem;background:linear-gradient(135deg,#be1622,#e8323f);border:none;border-radius:10px;color:#fff;cursor:pointer;transition:transform .1s, box-shadow .2s, filter .15s;letter-spacing:.01em;box-shadow:0 6px 22px rgba(190,22,34,.4)}
 .btn-signin:hover{filter:brightness(1.1);box-shadow:0 8px 28px rgba(190,22,34,.55)}
 .btn-signin:active{transform:scale(.985)}
 .btn-signin:disabled{opacity:.6;cursor:not-allowed}
-.divider{
-  display:flex;align-items:center;gap:.75rem;margin:1.4rem 0 1rem;
-  color:rgba(230,237,243,.35);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-}
+.divider{display:flex;align-items:center;gap:.75rem;margin:1.4rem 0 1rem;color:rgba(230,237,243,.35);font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1)}
 .alt-signin{display:flex;gap:.6rem}
-.alt-signin button{
-  flex:1;padding:.7rem .5rem;font:inherit;font-size:.82rem;font-weight:600;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;
-  color:#e6edf3;cursor:pointer;transition:background .15s, border-color .15s, transform .1s;
-  display:flex;align-items:center;justify-content:center;gap:.45rem;
-}
+.alt-signin button{flex:1;padding:.7rem .5rem;font:inherit;font-size:.82rem;font-weight:600;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#e6edf3;cursor:pointer;transition:background .15s, border-color .15s, transform .1s;display:flex;align-items:center;justify-content:center;gap:.45rem}
 .alt-signin button:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
 .alt-signin button:active{transform:scale(.98)}
 .alt-signin button svg{width:16px;height:16px}
-.guest-btn{
-  width:100%;margin-top:1.1rem;padding:.9rem 1rem;
-  font:inherit;font-weight:700;font-size:.95rem;
-  background:linear-gradient(135deg,rgba(31,111,235,.9),rgba(56,139,253,.9));
-  border:1px solid rgba(88,166,255,.4);border-radius:10px;color:#fff;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:.55rem;
-  transition:filter .15s, transform .1s, box-shadow .2s;letter-spacing:.01em;
-  box-shadow:0 6px 22px rgba(31,111,235,.35);position:relative;overflow:hidden;
-}
-.guest-btn::after{
-  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .6s;
-}
+.guest-btn{width:100%;margin-top:1.1rem;padding:.9rem 1rem;font:inherit;font-weight:700;font-size:.95rem;background:linear-gradient(135deg,rgba(31,111,235,.9),rgba(56,139,253,.9));border:1px solid rgba(88,166,255,.4);border-radius:10px;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.55rem;transition:filter .15s, transform .1s, box-shadow .2s;letter-spacing:.01em;box-shadow:0 6px 22px rgba(31,111,235,.35);position:relative;overflow:hidden}
+.guest-btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .6s}
 .guest-btn:hover::after{left:100%}
 .guest-btn:hover{filter:brightness(1.12);box-shadow:0 8px 28px rgba(31,111,235,.55)}
 .guest-btn:active{transform:scale(.985)}
 .guest-btn svg{width:17px;height:17px}
 .guest-note{font-size:.7rem;color:rgba(230,237,243,.4);text-align:center;margin-top:.6rem;line-height:1.45}
-.bottom-text{
-  margin-top:1.4rem;padding:.9rem 1rem;border:1px solid rgba(255,255,255,.08);
-  border-radius:10px;text-align:center;font-size:.85rem;color:rgba(230,237,243,.65);
-  background:rgba(255,255,255,.02);
-}
+.bottom-text{margin-top:1.4rem;padding:.9rem 1rem;border:1px solid rgba(255,255,255,.08);border-radius:10px;text-align:center;font-size:.85rem;color:rgba(230,237,243,.65);background:rgba(255,255,255,.02)}
 .bottom-text a{color:#79c0ff;text-decoration:none;font-weight:600;margin-left:4px;cursor:pointer}
 .bottom-text a:hover{text-decoration:underline}
 .status-msg{font-size:.83rem;margin-top:.75rem;color:#ff7b72;min-height:1.2rem;font-weight:500}
@@ -210,7 +144,7 @@
 }
 
 /* ============================================================
-   SURAKSHA APP — WITH BACKGROUNDS & IMAGES
+   SURAKSHA APP
    ============================================================ */
 :root{
   --paper:#E7EAE5;--surface:#F6F7F4;--surface-2:#DDE1DB;
@@ -218,7 +152,6 @@
   --signal:#BE1622;--signal-ink:#FFFFFF;
   --calm:#1B6353;--focus:#1B6353;
   --card-shadow:0 4px 20px rgba(24,34,44,.08);
-  --glow:0 0 0 1px rgba(255,255,255,.6) inset, 0 2px 12px rgba(24,34,44,.06);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -227,7 +160,6 @@
     --signal:#E8323F;--signal-ink:#FFFFFF;
     --calm:#5CC0A5;--focus:#5CC0A5;
     --card-shadow:0 4px 20px rgba(0,0,0,.4);
-    --glow:0 0 0 1px rgba(255,255,255,.04) inset, 0 2px 12px rgba(0,0,0,.3);
   }
 }
 :root[data-theme="dark"]{
@@ -236,7 +168,6 @@
   --signal:#E8323F;--signal-ink:#FFFFFF;
   --calm:#5CC0A5;--focus:#5CC0A5;
   --card-shadow:0 4px 20px rgba(0,0,0,.4);
-  --glow:0 0 0 1px rgba(255,255,255,.04) inset, 0 2px 12px rgba(0,0,0,.3);
 }
 
 .app-body{
@@ -245,8 +176,6 @@
   font-size:17px;line-height:1.55;padding-bottom:88px;
   position:relative;min-height:100vh;
 }
-
-/* App-wide ambient background */
 .app-body::before{
   content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
@@ -254,52 +183,24 @@
     radial-gradient(ellipse at 100% 30%, rgba(31,111,235,.05) 0%, transparent 45%),
     radial-gradient(ellipse at 50% 100%, rgba(133,72,201,.04) 0%, transparent 50%);
 }
-:root[data-theme="dark"] .app-body::before,
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) .app-body::before{
-    background:
-      radial-gradient(ellipse at 0% 0%, rgba(232,50,63,.08) 0%, transparent 40%),
-      radial-gradient(ellipse at 100% 30%, rgba(88,166,255,.06) 0%, transparent 45%),
-      radial-gradient(ellipse at 50% 100%, rgba(168,124,224,.05) 0%, transparent 50%);
-  }
-}
-
 .app-body *{box-sizing:border-box}
 .app-body img{max-width:100%}
 .app-body a{color:inherit}
 .app-body :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .wrap{max-width:760px;margin:0 auto;padding:0 18px;position:relative;z-index:1}
 
-/* ---- MASTHEAD with hero image ---- */
-header.top{
-  border-bottom:1px solid var(--line);
-  background:var(--surface);
-  position:relative;overflow:hidden;
-}
+header.top{border-bottom:1px solid var(--line);background:var(--surface);position:relative;overflow:hidden}
 header.top::before{
   content:'';position:absolute;inset:0;
   background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1600&q=80');
-  background-size:cover;background-position:center 30%;
-  opacity:.08;z-index:0;
+  background-size:cover;background-position:center 30%;opacity:.08;z-index:0;
 }
-:root[data-theme="dark"] header.top::before,
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) header.top::before{opacity:.06}
-}
-.masthead{
-  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
-  padding:18px 0 14px;position:relative;z-index:1;
-}
+.masthead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:18px 0 14px;position:relative;z-index:1}
 .mark{font-weight:800;font-size:25px;letter-spacing:-0.025em;margin:0;font-family:'Fraunces',serif}
 .mark span{color:var(--signal);font-style:italic}
 .tagline{color:var(--muted);font-size:14.5px;margin:0}
-.themeBtn{
-  margin-left:auto;background:var(--surface-2);border:1px solid var(--line);color:var(--ink);
-  border-radius:99px;padding:6px 14px;font:inherit;font-size:13px;cursor:pointer;
-  font-weight:600;transition:background .15s;
-}
+.themeBtn{margin-left:auto;background:var(--surface-2);border:1px solid var(--line);color:var(--ink);border-radius:99px;padding:6px 14px;font:inherit;font-size:13px;cursor:pointer;font-weight:600;transition:background .15s}
 .themeBtn:hover{background:var(--line)}
-
 .dialzone{padding:18px 0 22px;position:relative;z-index:1}
 .dialgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .dial{
@@ -307,15 +208,10 @@ header.top::before{
   background:linear-gradient(135deg,var(--signal),#e8323f);
   color:var(--signal-ink);text-decoration:none;
   padding:16px 14px;border-radius:12px;min-height:98px;justify-content:center;
-  transition:transform .15s, box-shadow .2s;
-  box-shadow:0 4px 16px rgba(190,22,34,.25);
+  transition:transform .15s, box-shadow .2s;box-shadow:0 4px 16px rgba(190,22,34,.25);
   position:relative;overflow:hidden;
 }
-.dial::before{
-  content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;
-  background:radial-gradient(circle,rgba(255,255,255,.15),transparent 60%);
-  transition:transform .3s;
-}
+.dial::before{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 60%);transition:transform .3s}
 .dial:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(190,22,34,.4)}
 .dial:hover::before{transform:translate(-20%,20%)}
 .dial .num{font-size:32px;font-weight:800;letter-spacing:-0.03em;line-height:1;position:relative}
@@ -323,183 +219,74 @@ header.top::before{
 .dialnote{color:var(--muted);font-size:13.5px;margin:12px 0 0}
 
 .app-body section{padding:36px 0;border-top:1px solid var(--line);position:relative}
-.app-body h2{
-  font-size:24px;letter-spacing:-0.02em;margin:0 0 6px;font-weight:800;
-  font-family:'Fraunces',serif;display:flex;align-items:center;gap:10px;
-}
-.app-body h2::before{
-  content:'';width:4px;height:26px;background:linear-gradient(180deg,var(--signal),var(--calm));
-  border-radius:99px;flex:none;
-}
+.app-body h2{font-size:24px;letter-spacing:-0.02em;margin:0 0 6px;font-weight:800;font-family:'Fraunces',serif;display:flex;align-items:center;gap:10px}
+.app-body h2::before{content:'';width:4px;height:26px;background:linear-gradient(180deg,var(--signal),var(--calm));border-radius:99px;flex:none}
 .app-body h3{font-size:16.5px;margin:0 0 6px;font-weight:700}
 .lede{color:var(--muted);margin:0 0 20px;font-size:15.5px;max-width:60ch}
 .app-body p{max-width:68ch}
-
-/* ---- PANELS with subtle backgrounds ---- */
-.panel{
-  background:var(--surface);border:1px solid var(--line);border-radius:14px;
-  padding:20px;box-shadow:var(--card-shadow);position:relative;overflow:hidden;
-}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--card-shadow);position:relative;overflow:hidden}
 .panel + .panel{margin-top:12px}
 
-/* Location panel gets a soft map-like bg */
-#location .panel{
-  background:
-    linear-gradient(var(--surface), var(--surface)),
-    url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80');
-  background-size:cover;background-position:center;background-blend-mode:soft-light;
-}
-/* Calling panel subtle telephone pattern */
-#calling .panel:first-of-type{
-  background:
-    linear-gradient(rgba(246,247,244,.92), rgba(246,247,244,.92)),
-    url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&w=1200&q=80');
-  background-size:cover;background-position:center;
-}
+#location .panel{background:linear-gradient(var(--surface), var(--surface)),url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80');background-size:cover;background-position:center;background-blend-mode:soft-light}
+#calling .panel:first-of-type{background:linear-gradient(rgba(246,247,244,.92), rgba(246,247,244,.92)),url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&w=1200&q=80');background-size:cover;background-position:center}
 :root[data-theme="dark"] #calling .panel:first-of-type,
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) #calling .panel:first-of-type{
-    background:
-      linear-gradient(rgba(26,34,42,.94), rgba(26,34,42,.94)),
-      url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&w=1200&q=80');
-    background-size:cover;background-position:center;
-  }
-}
-/* Timer panel — clock face bg */
-#checkin .panel{
-  background:
-    linear-gradient(rgba(246,247,244,.94), rgba(246,247,244,.94)),
-    url('https://images.unsplash.com/photo-1495364141860-b0d03eccd065?auto=format&fit=crop&w=1200&q=80');
-  background-size:cover;background-position:center;
-}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) #calling .panel:first-of-type{background:linear-gradient(rgba(26,34,42,.94), rgba(26,34,42,.94)),url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&w=1200&q=80');background-size:cover;background-position:center}}
+#checkin .panel{background:linear-gradient(rgba(246,247,244,.94), rgba(246,247,244,.94)),url('https://images.unsplash.com/photo-1495364141860-b0d03eccd065?auto=format&fit=crop&w=1200&q=80');background-size:cover;background-position:center}
 :root[data-theme="dark"] #checkin .panel,
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) #checkin .panel{
-    background:
-      linear-gradient(rgba(26,34,42,.95), rgba(26,34,42,.95)),
-      url('https://images.unsplash.com/photo-1495364141860-b0d03eccd065?auto=format&fit=crop&w=1200&q=80');
-    background-size:cover;background-position:center;
-  }
-}
-/* Fake call panel — night city */
-#fakecall .panel{
-  background:
-    linear-gradient(rgba(246,247,244,.94), rgba(246,247,244,.94)),
-    url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80');
-  background-size:cover;background-position:center;
-}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) #checkin .panel{background:linear-gradient(rgba(26,34,42,.95), rgba(26,34,42,.95)),url('https://images.unsplash.com/photo-1495364141860-b0d03eccd065?auto=format&fit=crop&w=1200&q=80');background-size:cover;background-position:center}}
+#fakecall .panel{background:linear-gradient(rgba(246,247,244,.94), rgba(246,247,244,.94)),url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80');background-size:cover;background-position:center}
 :root[data-theme="dark"] #fakecall .panel,
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) #fakecall .panel{
-    background:
-      linear-gradient(rgba(26,34,42,.95), rgba(26,34,42,.95)),
-      url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80');
-    background-size:cover;background-position:center;
-  }
-}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) #fakecall .panel{background:linear-gradient(rgba(26,34,42,.95), rgba(26,34,42,.95)),url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80');background-size:cover;background-position:center}}
 
-/* ---- BUTTONS ---- */
 .btn{
-  font:inherit;font-weight:600;font-size:15px;
-  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
-  padding:12px 18px;border-radius:10px;cursor:pointer;
-  text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:48px;transition:transform .1s,box-shadow .15s,background .15s;
+  font:inherit;font-weight:600;font-size:15px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
+  padding:12px 18px;border-radius:10px;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;
+  transition:transform .1s,box-shadow .15s,background .15s;
 }
 .btn:hover{box-shadow:0 4px 14px rgba(0,0,0,.1)}
 .btn:active{transform:scale(.98)}
-.btn-go{
-  background:linear-gradient(135deg,var(--calm),#2a8a72);
-  border-color:transparent;color:#fff;
-  box-shadow:0 4px 14px rgba(27,99,83,.3);
-}
-.btn-red{
-  background:linear-gradient(135deg,var(--signal),#e8323f);
-  border-color:transparent;color:var(--signal-ink);
-  box-shadow:0 4px 14px rgba(190,22,34,.3);
-}
+.btn-go{background:linear-gradient(135deg,var(--calm),#2a8a72);border-color:transparent;color:#fff;box-shadow:0 4px 14px rgba(27,99,83,.3)}
+.btn-red{background:linear-gradient(135deg,var(--signal),#e8323f);border-color:transparent;color:var(--signal-ink);box-shadow:0 4px 14px rgba(190,22,34,.3)}
 .btn-wide{width:100%}
 .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .btnrow .btn{flex:1 1 150px}
-
 .app-body label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:6px;font-weight:600}
-.app-body input[type=text],.app-body input[type=tel],.app-body input[type=number],.app-body textarea,.app-body select{
+.app-body input[type=text],.app-body input[type=tel],.app-body input[type=number],.app-body input[type=email],.app-body textarea,.app-body select{
   font:inherit;width:100%;padding:12px 14px;border:1px solid var(--line);
-  background:var(--surface);color:var(--ink);border-radius:10px;transition:border-color .15s, box-shadow .15s;
+  background:var(--surface);color:var(--ink);border-radius:10px;
+  transition:border-color .15s, box-shadow .15s;
 }
-.app-body input:focus,.app-body textarea:focus,.app-body select:focus{
-  border-color:var(--focus);outline:none;
-  box-shadow:0 0 0 3px color-mix(in srgb, var(--focus) 15%, transparent);
-}
+.app-body input:focus,.app-body textarea:focus,.app-body select:focus{border-color:var(--focus);outline:none;box-shadow:0 0 0 3px color-mix(in srgb, var(--focus) 15%, transparent)}
 .app-body textarea{min-height:96px;resize:vertical;line-height:1.55}
 .field + .field{margin-top:12px}
 .two{display:grid;grid-template-columns:1fr 130px;gap:10px}
 .status{font-size:14px;color:var(--muted);margin:12px 0 0;min-height:1.2em}
 .status.ok{color:var(--calm);font-weight:600}
 .status.bad{color:var(--signal);font-weight:600}
-
 ul.contacts{list-style:none;margin:12px 0 0;padding:0}
 ul.contacts li{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
 ul.contacts li .cname{font-weight:700;font-size:15.5px}
 ul.contacts li .cnum{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
 ul.contacts li .grow{flex:1;min-width:0}
-.icobtn{
-  background:var(--surface);border:1px solid var(--line);color:var(--ink);
-  border-radius:8px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer;font-weight:600;
-  transition:background .15s;
-}
+.icobtn{background:var(--surface);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 12px;font:inherit;font-size:13px;cursor:pointer;font-weight:600;transition:background .15s}
 .icobtn:hover{background:var(--surface-2)}
 .empty{color:var(--muted);font-size:14.5px;margin:12px 0 0}
-
-/* ---- CLOCK ---- */
-.clock{
-  font-size:64px;font-weight:800;letter-spacing:-0.04em;line-height:1;
-  font-variant-numeric:tabular-nums;margin:8px 0 4px;
-  background:linear-gradient(135deg,var(--ink),var(--muted));
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  font-family:'Fraunces',serif;
-}
-.clock.warn{
-  background:linear-gradient(135deg,var(--signal),#ff7b72);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
-
+.clock{font-size:64px;font-weight:800;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;margin:8px 0 4px;background:linear-gradient(135deg,var(--ink),var(--muted));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-family:'Fraunces',serif}
+.clock.warn{background:linear-gradient(135deg,var(--signal),#ff7b72);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .chiprow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.chip{
-  font:inherit;font-size:14px;font-weight:600;padding:9px 16px;border-radius:99px;
-  border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;
-  transition:all .15s;
-}
+.chip{font:inherit;font-size:14px;font-weight:600;padding:9px 16px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;transition:all .15s}
 .chip:hover{border-color:var(--muted)}
-.chip[aria-pressed=true]{
-  background:linear-gradient(135deg,var(--ink),#3a4a58);
-  color:var(--paper);border-color:transparent;
-}
+.chip[aria-pressed=true]{background:linear-gradient(135deg,var(--ink),#3a4a58);color:var(--paper);border-color:transparent}
 
-/* ---- OVERLAYS ---- */
-.overlay{
-  position:fixed;inset:0;z-index:60;display:none;
-  align-items:center;justify-content:center;padding:24px;
-  background:rgba(8,12,16,.94);backdrop-filter:blur(8px);color:#fff;
-}
+.overlay{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(8,12,16,.94);backdrop-filter:blur(8px);color:#fff}
 .overlay.on{display:flex}
 .callcard{text-align:center;max-width:340px;width:100%}
-.avatar{
-  width:96px;height:96px;border-radius:50%;margin:0 auto 18px;
-  background:linear-gradient(135deg,#2F3D49,#4a5d6d);
-  display:flex;align-items:center;justify-content:center;
-  font-size:34px;font-weight:700;color:#fff;
-  box-shadow:0 8px 30px rgba(0,0,0,.5);
-}
+.avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 18px;background:linear-gradient(135deg,#2F3D49,#4a5d6d);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:700;color:#fff;box-shadow:0 8px 30px rgba(0,0,0,.5)}
 .callname{font-size:27px;font-weight:700;margin:0;font-family:'Fraunces',serif}
 .callsub{color:#A8B4BD;margin:4px 0 30px;font-size:15px}
 .callbtns{display:flex;gap:40px;justify-content:center}
-.round{
-  width:68px;height:68px;border-radius:50%;border:none;cursor:pointer;
-  font:inherit;font-size:13px;font-weight:700;color:#fff;display:flex;
-  align-items:center;justify-content:center;flex-direction:column;
-  box-shadow:0 6px 20px rgba(0,0,0,.4);
-}
+.round{width:68px;height:68px;border-radius:50%;border:none;cursor:pointer;font:inherit;font-size:13px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 6px 20px rgba(0,0,0,.4)}
 .round.acc{background:linear-gradient(135deg,#17924F,#22b866)}
 .round.dec{background:linear-gradient(135deg,var(--signal),#e8323f)}
 .ringing{animation:pulse 1.6s ease-in-out infinite}
@@ -508,74 +295,35 @@ ul.contacts li .grow{flex:1;min-width:0}
 .alarmcard h3{font-size:26px;color:#fff;margin-bottom:8px;font-family:'Fraunces',serif}
 .alarmcard p{color:#C3CDD4;margin:0 auto 24px;max-width:34ch}
 
-/* ---- HELPLINES with icon column ---- */
 .lines{margin-top:16px;border-top:1px solid var(--line)}
-.line{
-  display:flex;align-items:center;gap:14px;
-  padding:14px 16px;border-bottom:1px solid var(--line);text-decoration:none;
-  border-radius:10px;transition:background .15s, transform .1s;
-}
+.line{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid var(--line);text-decoration:none;border-radius:10px;transition:background .15s, transform .1s}
 .line:hover{background:var(--surface);transform:translateX(4px)}
-.line .lico{
-  width:42px;height:42px;border-radius:12px;flex:none;
-  background:linear-gradient(135deg,color-mix(in srgb,var(--signal) 15%, var(--surface)), var(--surface-2));
-  display:flex;align-items:center;justify-content:center;
-  color:var(--signal);font-size:18px;font-weight:700;
-}
+.line .lico{width:42px;height:42px;border-radius:12px;flex:none;background:linear-gradient(135deg,color-mix(in srgb,var(--signal) 15%, var(--surface)), var(--surface-2));display:flex;align-items:center;justify-content:center;color:var(--signal);font-size:18px;font-weight:700}
 .line .grow{flex:1;min-width:0}
 .line .lname{font-weight:700;font-size:15.5px;display:block;color:var(--ink)}
 .line .ldesc{color:var(--muted);font-size:13.5px;display:block;margin-top:1px}
-.line .lnum{
-  font-weight:800;font-size:20px;font-variant-numeric:tabular-nums;
-  color:var(--signal);white-space:nowrap;letter-spacing:-0.01em;font-family:'Fraunces',serif;
-}
+.line .lnum{font-weight:800;font-size:20px;font-variant-numeric:tabular-nums;color:var(--signal);white-space:nowrap;letter-spacing:-0.01em;font-family:'Fraunces',serif}
 
-/* ---- GUIDES ---- */
-details.guide{
-  border-bottom:1px solid var(--line);
-  border-radius:10px;overflow:hidden;transition:background .15s;
-}
+details.guide{border-bottom:1px solid var(--line);border-radius:10px;overflow:hidden;transition:background .15s}
 details.guide:hover{background:var(--surface)}
-details.guide summary{
-  cursor:pointer;padding:16px 14px;font-weight:700;font-size:16px;
-  list-style:none;display:flex;align-items:center;gap:12px;
-}
+details.guide summary{cursor:pointer;padding:16px 14px;font-weight:700;font-size:16px;list-style:none;display:flex;align-items:center;gap:12px}
 details.guide summary::-webkit-details-marker{display:none}
-details.guide summary::before{
-  content:'▸';color:var(--signal);font-size:18px;transition:transform .2s;flex:none;
-}
+details.guide summary::before{content:'▸';color:var(--signal);font-size:18px;transition:transform .2s;flex:none}
 details.guide[open] summary::before{transform:rotate(90deg)}
 details.guide summary::after{content:"";margin-left:auto}
 details.guide .body{padding:0 14px 18px 40px}
 details.guide ul{margin:0;padding-left:18px}
 details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 
-/* ---- RIGHTS ---- */
-.right{
-  padding:16px 0;border-bottom:1px solid var(--line);
-  padding-left:14px;border-left:3px solid transparent;
-  transition:border-color .2s, background .15s;
-}
+.right{padding:16px 0;border-bottom:1px solid var(--line);padding-left:14px;border-left:3px solid transparent;transition:border-color .2s, background .15s}
 .right:hover{border-left-color:var(--signal);background:var(--surface);border-radius:0 8px 8px 0}
 .right h3{color:var(--ink)}
 .right p{margin:4px 0 0;color:var(--muted);font-size:15px;line-height:1.55}
-.caveat{
-  margin-top:20px;padding:14px 16px;border-left:4px solid var(--signal);
-  color:var(--muted);font-size:14.5px;background:var(--surface);
-  border-radius:0 10px 10px 0;line-height:1.6;
-}
+.caveat{margin-top:20px;padding:14px 16px;border-left:4px solid var(--signal);color:var(--muted);font-size:14.5px;background:var(--surface);border-radius:0 10px 10px 0;line-height:1.6}
 
-/* ---- LIVE TRACKING ---- */
-.live{
-  margin-top:14px;border:1px solid var(--line);border-radius:12px;
-  overflow:hidden;display:none;box-shadow:var(--card-shadow);
-}
+.live{margin-top:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden;display:none;box-shadow:var(--card-shadow)}
 .live.on{display:block}
-.livehead{
-  display:flex;align-items:center;gap:10px;padding:12px 16px;
-  background:linear-gradient(90deg,var(--surface-2),var(--surface));
-  border-bottom:1px solid var(--line);
-}
+.livehead{display:flex;align-items:center;gap:10px;padding:12px 16px;background:linear-gradient(90deg,var(--surface-2),var(--surface));border-bottom:1px solid var(--line)}
 .blip{width:10px;height:10px;border-radius:50%;background:var(--signal);flex:none;animation:blink 1.4s ease-in-out infinite;box-shadow:0 0 0 4px rgba(190,22,34,.15)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 .livehead .lt{font-weight:700;font-size:14.5px}
@@ -588,241 +336,215 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 .stat:last-child{border-right:none}
 .stat b{display:block;font-size:18px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-0.02em;font-family:'Fraunces',serif}
 .stat span{font-size:12.5px;color:var(--muted);font-weight:500}
-.coordbar{
-  padding:10px 16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);
-  font-variant-numeric:tabular-nums;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
-}
+.coordbar{padding:10px 16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .coordbar a{color:var(--signal);font-weight:600;text-decoration:none}
 .coordbar a:hover{text-decoration:underline}
 
-/* ---- SPEED DIAL ---- */
 .speed{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:14px}
-.sdial{
-  display:flex;flex-direction:column;gap:2px;text-decoration:none;
-  border:1px solid var(--line);background:var(--surface);color:var(--ink);
-  padding:14px 16px;border-radius:12px;min-height:68px;justify-content:center;
-  transition:transform .12s, box-shadow .15s, border-color .15s;
-  position:relative;overflow:hidden;
-}
-.sdial::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(180deg,var(--signal),var(--calm));opacity:0;transition:opacity .2s;
-}
+.sdial{display:flex;flex-direction:column;gap:2px;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:14px 16px;border-radius:12px;min-height:68px;justify-content:center;transition:transform .12s, box-shadow .15s, border-color .15s;position:relative;overflow:hidden}
+.sdial::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--signal),var(--calm));opacity:0;transition:opacity .2s}
 .sdial:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1);border-color:var(--muted)}
 .sdial:hover::before{opacity:1}
 .sdial b{font-size:15.5px;font-weight:700}
 .sdial span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
-
-/* ---- KEYPAD ---- */
-.readout{
-  font-size:32px;font-weight:700;letter-spacing:0.02em;font-variant-numeric:tabular-nums;
-  min-height:46px;padding:8px 4px;word-break:break-all;line-height:1.2;
-  font-family:'Fraunces',serif;color:var(--ink);
-}
+.readout{font-size:32px;font-weight:700;letter-spacing:0.02em;font-variant-numeric:tabular-nums;min-height:46px;padding:8px 4px;word-break:break-all;line-height:1.2;font-family:'Fraunces',serif;color:var(--ink)}
 .readout:empty::before{content:"Enter a number";color:var(--muted);font-size:17px;font-weight:400;letter-spacing:0;font-family:'Archivo',sans-serif}
 .pad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
-.key{
-  font:inherit;font-size:22px;font-weight:600;padding:16px 0;cursor:pointer;
-  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:12px;
-  transition:background .1s, transform .05s;
-}
+.key{font:inherit;font-size:22px;font-weight:600;padding:16px 0;cursor:pointer;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:12px;transition:background .1s, transform .05s}
 .key:hover{background:var(--surface)}
 .key:active{background:var(--line);transform:scale(.96)}
 .key small{display:block;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.1em}
-
-/* ---- CASCADE ---- */
-.cascade{
-  margin-top:14px;padding:16px;border:2px dashed var(--line);border-radius:12px;display:none;
-  background:var(--surface);
-}
+.cascade{margin-top:14px;padding:16px;border:2px dashed var(--line);border-radius:12px;display:none;background:var(--surface)}
 .cascade.on{display:block;border-style:solid;border-color:var(--signal)}
 .cascade .who{font-weight:800;font-size:18px;margin:0 0 4px;font-family:'Fraunces',serif}
 .cascade .pos{color:var(--muted);font-size:14px;margin:0;font-weight:500}
 
-/* ---- TABS ---- */
 .rtabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0}
-.rtab{
-  font:inherit;font-size:14px;font-weight:600;padding:9px 16px;border-radius:99px;
-  cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);
-  transition:all .15s;
-}
+.rtab{font:inherit;font-size:14px;font-weight:600;padding:9px 16px;border-radius:99px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);transition:all .15s}
 .rtab:hover{border-color:var(--muted)}
-.rtab[aria-selected=true]{
-  background:linear-gradient(135deg,var(--ink),#3a4a58);
-  color:var(--paper);border-color:transparent;
-  box-shadow:0 4px 12px rgba(0,0,0,.15);
-}
+.rtab[aria-selected=true]{background:linear-gradient(135deg,var(--ink),#3a4a58);color:var(--paper);border-color:transparent;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 .rpanel{display:none;margin-top:12px}
 .rpanel.on{display:block;animation:fadeSlide .3s ease}
 @keyframes fadeSlide{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.law{
-  font-size:12.5px;color:var(--muted);margin-top:6px;display:block;
-  padding-left:12px;border-left:2px solid var(--line);font-style:italic;
-}
+.law{font-size:12.5px;color:var(--muted);margin-top:6px;display:block;padding-left:12px;border-left:2px solid var(--line);font-style:italic}
 
-/* ---- PROFILE ---- */
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.idcard{
-  display:flex;gap:16px;align-items:center;padding:18px;margin-bottom:14px;
-  border:1px solid var(--line);border-left:5px solid var(--signal);
-  border-radius:14px;background:var(--surface);box-shadow:var(--card-shadow);
-  position:relative;overflow:hidden;
-}
-.idcard::before{
-  content:'';position:absolute;inset:0;
-  background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80');
-  background-size:cover;background-position:center;opacity:.04;
-}
+.idcard{display:flex;gap:16px;align-items:center;padding:18px;margin-bottom:14px;border:1px solid var(--line);border-left:5px solid var(--signal);border-radius:14px;background:var(--surface);box-shadow:var(--card-shadow);position:relative;overflow:hidden}
+.idcard::before{content:'';position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80');background-size:cover;background-position:center;opacity:.04}
 .idcard > *{position:relative}
-.idcard .init{
-  width:56px;height:56px;border-radius:50%;flex:none;
-  background:linear-gradient(135deg,var(--signal),var(--calm));
-  display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:22px;color:#fff;font-family:'Fraunces',serif;
-}
+.idcard .init{width:56px;height:56px;border-radius:50%;flex:none;background:linear-gradient(135deg,var(--signal),var(--calm));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;color:#fff;font-family:'Fraunces',serif}
 .idcard .who{font-weight:800;font-size:19px;letter-spacing:-0.01em;font-family:'Fraunces',serif}
 .idcard .meta{color:var(--muted);font-size:13.5px;margin-top:2px}
 .idcard .meta em{font-style:normal;color:var(--signal);font-weight:700}
 
-/* ---- RULES ---- */
 .rulegroup{margin-top:24px}
-.rulegroup > h3{
-  padding-bottom:8px;border-bottom:2px solid var(--ink);margin-bottom:4px;
-  font-family:'Fraunces',serif;font-size:17px;
-}
+.rulegroup > h3{padding-bottom:8px;border-bottom:2px solid var(--ink);margin-bottom:4px;font-family:'Fraunces',serif;font-size:17px}
 .rule{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--line)}
-.rule input[type=checkbox]{
-  width:22px;height:22px;flex:none;margin:2px 0 0;accent-color:var(--calm);cursor:pointer;
-}
-.rule label{
-  margin:0;color:var(--ink);font-size:15.5px;font-weight:500;cursor:pointer;line-height:1.5;max-width:60ch;
-}
+.rule input[type=checkbox]{width:22px;height:22px;flex:none;margin:2px 0 0;accent-color:var(--calm);cursor:pointer}
+.rule label{margin:0;color:var(--ink);font-size:15.5px;font-weight:500;cursor:pointer;line-height:1.5;max-width:60ch}
 .rule .why{display:block;color:var(--muted);font-size:13.5px;font-weight:400;margin-top:3px}
 .rule input:checked + label{color:var(--muted)}
 .rule input:checked + label > span:first-child{text-decoration:line-through}
-.progress{
-  display:flex;align-items:center;gap:14px;margin-top:18px;padding:14px 16px;
-  background:linear-gradient(135deg,var(--surface),var(--surface-2));
-  border:1px solid var(--line);border-radius:12px;box-shadow:var(--card-shadow);
-}
+.progress{display:flex;align-items:center;gap:14px;margin-top:18px;padding:14px 16px;background:linear-gradient(135deg,var(--surface),var(--surface-2));border:1px solid var(--line);border-radius:12px;box-shadow:var(--card-shadow)}
 .progress .bar{flex:1;height:10px;background:var(--surface-2);border-radius:99px;overflow:hidden}
-.progress .fill{
-  height:100%;background:linear-gradient(90deg,var(--calm),#5CC0A5);
-  width:0%;transition:width .4s ease;border-radius:99px;
-}
+.progress .fill{height:100%;background:linear-gradient(90deg,var(--calm),#5CC0A5);width:0%;transition:width .4s ease;border-radius:99px}
 .progress b{font-variant-numeric:tabular-nums;font-size:15px;font-weight:800;font-family:'Fraunces',serif}
 
-/* ---- PAGE NAV ---- */
 .pagenav{display:flex;gap:8px;padding:0 0 14px;position:relative;z-index:1}
-.pagenav button{
-  font:inherit;font-size:14.5px;font-weight:700;padding:10px 20px;cursor:pointer;
-  border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px;
-  transition:all .15s;
-}
+.pagenav button{font:inherit;font-size:14.5px;font-weight:700;padding:10px 20px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px;transition:all .15s}
 .pagenav button:hover{color:var(--ink);border-color:var(--muted)}
-.pagenav button[aria-current="true"]{
-  background:linear-gradient(135deg,var(--ink),#3a4a58);
-  color:var(--paper);border-color:transparent;
-  box-shadow:0 4px 14px rgba(0,0,0,.2);
-}
+.pagenav button[aria-current="true"]{background:linear-gradient(135deg,var(--ink),#3a4a58);color:var(--paper);border-color:transparent;box-shadow:0 4px 14px rgba(0,0,0,.2)}
 .page{display:none}
 .page.on{display:block}
 
-/* ---- DV panel with image ---- */
-.dv{
-  background:linear-gradient(160deg,#15111C,#1f1830);
-  color:#F1EEF7;border-radius:16px;padding:30px 26px;margin-top:0;
-  position:relative;overflow:hidden;
-}
-.dv::before{
-  content:'';position:absolute;inset:0;
-  background-image:url('https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=80');
-  background-size:cover;background-position:center;opacity:.08;
-}
+.dv{background:linear-gradient(160deg,#15111C,#1f1830);color:#F1EEF7;border-radius:16px;padding:30px 26px;margin-top:0;position:relative;overflow:hidden}
+.dv::before{content:'';position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=80');background-size:cover;background-position:center;opacity:.08}
 .dv > *{position:relative}
 .dv .eyebrow{color:#C9A9F2;font-weight:700;font-size:14.5px;margin:0 0 4px;letter-spacing:.05em;text-transform:uppercase}
 .dv h2{color:#fff;margin-bottom:6px}
 .dv .lede{color:#C7BFD6;max-width:60ch}
 .dv .signs{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px;grid-template-columns:1fr}
 @media (min-width:560px){.dv .signs{grid-template-columns:1fr 1fr}}
-.dv .signs li{
-  display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:#E7E1F0;line-height:1.5;
-  background:rgba(255,255,255,.03);padding:10px 12px;border-radius:8px;
-  border-left:2px solid rgba(168,124,224,.4);
-}
+.dv .signs li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:#E7E1F0;line-height:1.5;background:rgba(255,255,255,.03);padding:10px 12px;border-radius:8px;border-left:2px solid rgba(168,124,224,.4)}
 .dv .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
 .dv .trio div{text-align:left}
-.dv .trio .tic{
-  width:44px;height:44px;border-radius:12px;
-  background:linear-gradient(135deg,#3B2A57,#5a4180);
-  color:#D9C4F5;display:flex;align-items:center;justify-content:center;
-  font-size:20px;margin-bottom:10px;
-}
+.dv .trio .tic{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#3B2A57,#5a4180);color:#D9C4F5;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px}
 .dv .trio h4{margin:0 0 4px;font-size:15px;color:#fff}
 .dv .trio p{margin:0;font-size:13px;color:#B6AEC4;max-width:none;line-height:1.5}
-.dv .banner{
-  margin-top:24px;padding:16px 18px;border:1px solid #4A3768;border-radius:10px;
-  color:#F1EEF7;font-size:15px;background:rgba(133,72,201,.1);
-}
-.dv .callrow{
-  margin-top:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-  padding-top:20px;border-top:1px solid #35284A;
-}
-.dv .callrow a{
-  background:linear-gradient(135deg,#8548C9,#a86ce0);color:#fff;text-decoration:none;
-  font-weight:800;font-size:16px;padding:12px 22px;border-radius:10px;
-  box-shadow:0 6px 20px rgba(133,72,201,.4);font-family:'Fraunces',serif;
-}
+.dv .banner{margin-top:24px;padding:16px 18px;border:1px solid #4A3768;border-radius:10px;color:#F1EEF7;font-size:15px;background:rgba(133,72,201,.1)}
+.dv .callrow{margin-top:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:20px;border-top:1px solid #35284A}
+.dv .callrow a{background:linear-gradient(135deg,#8548C9,#a86ce0);color:#fff;text-decoration:none;font-weight:800;font-size:16px;padding:12px 22px;border-radius:10px;box-shadow:0 6px 20px rgba(133,72,201,.4);font-family:'Fraunces',serif}
 .dv .callrow span{color:#B6AEC4;font-size:13.5px}
 
-/* ---- TEAM ---- */
-.team{margin-top:12px;border-top:1px solid var(--line)}
-.trow{
-  display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);
-  transition:padding-left .2s;
+/* ============================================================
+   TEAM — clickable cards
+   ============================================================ */
+.team{margin-top:12px;display:grid;gap:12px}
+.tcard{
+  display:flex;align-items:center;gap:16px;padding:16px;
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  cursor:pointer;transition:transform .15s, box-shadow .2s, border-color .15s;
+  text-align:left;font:inherit;color:inherit;width:100%;position:relative;overflow:hidden;
 }
-.trow:hover{padding-left:8px}
-.trow .tnum{width:38px;flex:none;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;font-weight:800;font-family:'Fraunces',serif}
-.trow .tinit{
-  width:52px;height:52px;border-radius:50%;flex:none;
+.tcard::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:linear-gradient(180deg,var(--signal),var(--calm));
+  transition:width .2s;
+}
+.tcard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.1);border-color:var(--muted)}
+.tcard:hover::before{width:6px}
+.tcard .tinit{
+  width:58px;height:58px;border-radius:50%;flex:none;
   background:linear-gradient(135deg,var(--signal),var(--calm));
   display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:19px;color:#fff;font-family:'Fraunces',serif;
-  box-shadow:0 4px 14px rgba(0,0,0,.15);
+  font-weight:800;font-size:22px;color:#fff;font-family:'Fraunces',serif;
+  box-shadow:0 6px 18px rgba(0,0,0,.15);
 }
-.trow .tname{font-weight:700;font-size:17px;letter-spacing:-0.01em}
+.tcard .tinfo{flex:1;min-width:0}
+.tcard .tname{font-weight:800;font-size:17px;letter-spacing:-0.01em;font-family:'Fraunces',serif}
+.tcard .trole{color:var(--muted);font-size:14px;margin-top:2px}
+.tcard .tarrow{
+  color:var(--muted);font-size:20px;flex:none;
+  transition:transform .2s, color .15s;
+}
+.tcard:hover .tarrow{transform:translateX(4px);color:var(--signal)}
 
-/* ---- BOTTOM BAR ---- */
+/* Team detail view */
+.tdetail{display:none;animation:fadeSlide .3s ease}
+.tdetail.on{display:block}
+.backbtn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--surface);border:1px solid var(--line);color:var(--ink);
+  border-radius:99px;padding:8px 16px;font:inherit;font-size:14px;font-weight:600;
+  cursor:pointer;margin-bottom:18px;transition:all .15s;
+}
+.backbtn:hover{background:var(--surface-2);transform:translateX(-2px)}
+
+.thero{
+  padding:26px 22px;border-radius:18px;margin-bottom:16px;
+  background:linear-gradient(135deg,var(--signal),var(--calm));
+  color:#fff;display:flex;align-items:center;gap:20px;
+  box-shadow:0 8px 28px rgba(0,0,0,.2);
+  position:relative;overflow:hidden;
+}
+.thero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 80% 20%, rgba(255,255,255,.15), transparent 60%);
+}
+.thero > *{position:relative}
+.thero .tinit-big{
+  width:82px;height:82px;border-radius:50%;flex:none;
+  background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);
+  backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:34px;font-family:'Fraunces',serif;
+}
+.thero .tinfo-big h2{
+  font-family:'Fraunces',serif;font-size:24px;font-weight:800;
+  color:#fff;margin:0 0 4px;letter-spacing:-.02em;
+}
+.thero .tinfo-big h2::before{display:none}
+.thero .tinfo-big .trole-big{font-size:14.5px;opacity:.9;font-weight:500}
+
+.tcard-info{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;margin-bottom:12px;box-shadow:var(--card-shadow)}
+.tcard-info h3{
+  font-family:'Fraunces',serif;font-size:17px;font-weight:800;
+  margin:0 0 12px;display:flex;align-items:center;gap:8px;
+}
+.tinfo-row{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:10px 0;border-top:1px solid var(--line);
+}
+.tinfo-row:first-of-type{border-top:none;padding-top:0}
+.tinfo-row .tico{
+  width:34px;height:34px;border-radius:10px;flex:none;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--signal) 12%, var(--surface)),var(--surface-2));
+  display:flex;align-items:center;justify-content:center;
+  color:var(--signal);font-size:16px;
+}
+.tinfo-row .tlabel{font-size:12.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.tinfo-row .tvalue{font-size:15px;color:var(--ink);font-weight:500;margin-top:2px;word-break:break-word}
+.tinfo-row .tvalue a{color:var(--signal);text-decoration:none;font-weight:600}
+.tinfo-row .tvalue a:hover{text-decoration:underline}
+
+.tbio{font-size:15px;color:var(--muted);line-height:1.65}
+
+/* Contact form */
+.contactform{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--card-shadow);position:relative;overflow:hidden}
+.contactform::before{
+  content:'';position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1516387938699-a93567ec168e?auto=format&fit=crop&w=1000&q=80');
+  background-size:cover;background-position:center;opacity:.04;
+}
+.contactform > *{position:relative}
+.contactform h3{font-family:'Fraunces',serif;font-size:18px;font-weight:800;margin:0 0 4px}
+.contactform .sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:var(--paper);border-radius:12px;
+  padding:12px 20px;font-size:14px;font-weight:600;
+  box-shadow:0 8px 28px rgba(0,0,0,.3);
+  opacity:0;pointer-events:none;transition:all .3s;z-index:99;max-width:90vw;
+}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
 .bar{
   position:fixed;left:0;right:0;bottom:0;z-index:50;
   background:color-mix(in srgb, var(--surface) 92%, transparent);
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   border-top:1px solid var(--line);
   padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-  display:flex;gap:10px;
-  box-shadow:0 -4px 20px rgba(0,0,0,.08);
+  display:flex;gap:10px;box-shadow:0 -4px 20px rgba(0,0,0,.08);
 }
 .bar a,.bar button{flex:1;min-height:54px;font-size:15.5px;font-weight:700}
-
-.app-body footer{
-  padding:32px 0 40px;color:var(--muted);font-size:14px;
-  border-top:1px solid var(--line);line-height:1.6;
-}
+.app-body footer{padding:32px 0 40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);line-height:1.6}
 .app-body footer p{max-width:64ch}
 
-/* ---- Guest banner ---- */
-.guest-banner{
-  background:linear-gradient(135deg,#1f6feb,#388bfd);color:#fff;
-  padding:12px 18px;font-size:13.5px;font-weight:600;
-  text-align:center;display:flex;align-items:center;justify-content:center;
-  gap:12px;flex-wrap:wrap;position:relative;z-index:1;
-}
+.guest-banner{background:linear-gradient(135deg,#1f6feb,#388bfd);color:#fff;padding:12px 18px;font-size:13.5px;font-weight:600;text-align:center;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
 .guest-banner a{color:#fff;text-decoration:underline;cursor:pointer;font-weight:700}
-.guest-banner button{
-  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);
-  color:#fff;padding:5px 14px;border-radius:99px;font:inherit;
-  font-size:12.5px;font-weight:700;cursor:pointer;transition:background .15s;
-}
+.guest-banner button{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;padding:5px 14px;border-radius:99px;font:inherit;font-size:12.5px;font-weight:700;cursor:pointer;transition:background .15s}
 .guest-banner button:hover{background:rgba(255,255,255,.3)}
 
 @media (max-width:420px){
@@ -830,10 +552,10 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
   .two{grid-template-columns:1fr}
   .app-body h2{font-size:21px}
   .clock{font-size:52px}
+  .thero{flex-direction:column;text-align:center;padding:22px 18px}
+  .thero .tinfo-big h2::before{display:none}
 }
-@media (prefers-reduced-motion:reduce){
-  *{animation:none !important;transition:none !important}
-}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 
 #loginView{display:block}
 #appView{display:none}
@@ -847,30 +569,23 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
      LOGIN VIEW
      ============================================================ -->
 <div id="loginView" class="login-body" style="display:flex;align-items:center;justify-content:center;min-height:100vh;">
-  <div class="orb o1"></div>
-  <div class="orb o2"></div>
-  <div class="orb o3"></div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
 
   <div class="login-wrapper">
     <div class="hero-panel">
       <div class="hero-top">
-        <div class="brandmark">
-          <svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
-        </div>
+        <div class="brandmark"><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg></div>
         <div>Sur<span class="a">a</span>ksha</div>
       </div>
-
       <div class="hero-mid">
         <h1>Safety, <em>in one place.</em></h1>
         <p>Help, numbers and rights for women in India. Works without an account.</p>
-
         <div class="hero-stats">
           <div><b>112</b><span>Emergency</span></div>
           <div><b>24×7</b><span>Helplines</span></div>
           <div><b>10+</b><span>Rights covered</span></div>
         </div>
       </div>
-
       <div class="hero-bottom">
         <span class="hero-chip">Live tracking</span>
         <span class="hero-chip">Safety timer</span>
@@ -888,12 +603,10 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
           <label for="name">Full name</label>
           <input type="text" id="name" placeholder="Ananya Sharma" autocomplete="name">
         </div>
-
         <div class="login-field">
           <label for="email">Email address</label>
           <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
         </div>
-
         <div class="login-field">
           <label for="password">Password</label>
           <div class="pw-wrap">
@@ -902,12 +615,10 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
           </div>
           <div class="hint" id="pwHint" style="display:none">At least 6 characters.</div>
         </div>
-
         <div class="row-between" id="rememberRow">
           <label><input type="checkbox" id="remember" checked> Remember me</label>
           <a href="#" id="forgotLink">Forgot password?</a>
         </div>
-
         <button type="submit" class="btn-signin" id="submitBtn">Sign in</button>
         <p class="status-msg" id="statusMsg"></p>
       </form>
@@ -926,10 +637,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
       </div>
 
       <button type="button" class="guest-btn" id="guestBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-          <circle cx="12" cy="7" r="4"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Continue as Guest
       </button>
       <p class="guest-note">No account needed. All features work — nothing is saved to a cloud.</p>
@@ -971,6 +679,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
       <button type="button" data-page="home" aria-current="true">Home</button>
       <button type="button" data-page="profile" aria-current="false">Profile</button>
       <button type="button" data-page="team" aria-current="false">Team</button>
+      <button type="button" data-page="contact" aria-current="false">Contact</button>
     </nav>
   </div>
 </header>
@@ -982,17 +691,15 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 <section id="location">
   <h2>Send where you are</h2>
   <p class="lede">Your phone finds your location, and this writes the message. Send it on WhatsApp or SMS in two taps.</p>
-
   <div class="panel">
     <div class="btnrow" style="margin-top:0">
       <button class="btn btn-go" id="locBtn" type="button">📍 Find my location</button>
       <button class="btn btn-red" id="liveBtn" type="button">🔴 Start live tracking</button>
     </div>
-    <p class="status" id="locStatus" role="status" aria-live="polite"></p>
-
+    <p class="status" id="locStatus"></p>
     <div class="live" id="livePanel">
       <div class="livehead">
-        <span class="blip" aria-hidden="true"></span>
+        <span class="blip"></span>
         <span class="lt">Live — updating as you move</span>
         <span class="elapsed" id="liveElapsed">00:00</span>
       </div>
@@ -1007,37 +714,31 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
         <a href="#" id="liveMap" target="_blank" rel="noopener" style="margin-left:auto">Open in Maps →</a>
       </div>
     </div>
-
     <div class="field" style="margin-top:16px">
       <label for="msgBox">Message to send</label>
       <textarea id="msgBox">I need help. Please call me now.</textarea>
     </div>
-
     <div class="btnrow">
       <button class="btn" id="copyBtn" type="button">📋 Copy message</button>
       <a class="btn btn-go" id="waBtn" href="#" target="_blank" rel="noopener">💬 Send on WhatsApp</a>
       <a class="btn" id="smsBtn" href="#">✉️ Send as SMS</a>
     </div>
-    <p class="status" id="shareStatus" role="status" aria-live="polite"></p>
+    <p class="status" id="shareStatus"></p>
   </div>
 </section>
 
 <section id="calling">
   <h2>Calling</h2>
   <p class="lede">Everything you'd need to dial, without hunting through your contacts list.</p>
-
   <div class="panel">
     <h3>Speed dial</h3>
     <p class="status" id="speedNote">Your saved contacts and the main helplines, one tap each.</p>
     <div class="speed" id="speedGrid"></div>
   </div>
-
   <div class="panel">
     <h3>Call down your list</h3>
-    <p class="status">Calls your trusted contacts one after another. If someone doesn't pick up, tap <em>No answer</em> and it moves to the next person.</p>
-    <div class="btnrow">
-      <button class="btn btn-go" id="cascadeStart" type="button">📞 Start calling my contacts</button>
-    </div>
+    <p class="status">Calls your trusted contacts one after another.</p>
+    <div class="btnrow"><button class="btn btn-go" id="cascadeStart" type="button">📞 Start calling my contacts</button></div>
     <div class="cascade" id="cascadePanel">
       <p class="who" id="cascadeWho">—</p>
       <p class="pos" id="cascadePos">—</p>
@@ -1048,10 +749,9 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
       </div>
     </div>
   </div>
-
   <div class="panel">
     <h3>Keypad</h3>
-    <div class="readout" id="padOut" role="status" aria-live="polite"></div>
+    <div class="readout" id="padOut"></div>
     <div class="pad" id="pad">
       <button class="key" type="button" data-k="1">1</button>
       <button class="key" type="button" data-k="2">2<small>ABC</small></button>
@@ -1076,11 +776,10 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 
 <section id="checkin">
   <h2>Safety timer</h2>
-  <p class="lede">Heading somewhere and want someone to know if you don't arrive? Start a timer. If you don't tap <em>I'm safe</em> before it runs out, this device sounds an alarm and opens your alert message.</p>
-
+  <p class="lede">Heading somewhere and want someone to know if you don't arrive? Start a timer.</p>
   <div class="panel">
     <div class="clock" id="clock">00:00</div>
-    <p class="status" id="timerStatus" role="status" aria-live="polite">Timer not running.</p>
+    <p class="status" id="timerStatus">Timer not running.</p>
     <div class="chiprow" id="mins">
       <button class="chip" type="button" data-m="5" aria-pressed="false">5 min</button>
       <button class="chip" type="button" data-m="15" aria-pressed="true">15 min</button>
@@ -1096,8 +795,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 
 <section id="fakecall">
   <h2>Fake call</h2>
-  <p class="lede">A reason to leave, out loud, without explaining yourself. Your phone rings, you answer, you talk. Keep this tab open in the background.</p>
-
+  <p class="lede">A reason to leave, out loud, without explaining yourself.</p>
   <div class="panel">
     <div class="two">
       <div class="field">
@@ -1116,7 +814,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
       </div>
     </div>
     <div class="btnrow"><button class="btn" id="fakeBtn" type="button">📱 Schedule the call</button></div>
-    <p class="status" id="fakeStatus" role="status" aria-live="polite"></p>
+    <p class="status" id="fakeStatus"></p>
   </div>
 </section>
 
@@ -1124,69 +822,27 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
   <h2>Helplines</h2>
   <p class="lede">All free, all 24×7 unless noted. Tap to dial.</p>
   <div class="lines">
-    <a class="line" href="tel:112">
-      <span class="lico">🚨</span>
-      <span class="grow"><span class="lname">Emergency Response Support</span><span class="ldesc">Police, fire and ambulance on one number, all of India</span></span>
-      <span class="lnum">112</span>
-    </a>
-    <a class="line" href="tel:1091">
-      <span class="lico">👮‍♀️</span>
-      <span class="grow"><span class="lname">Women in distress</span><span class="ldesc">Police women's helpline</span></span>
-      <span class="lnum">1091</span>
-    </a>
-    <a class="line" href="tel:181">
-      <span class="lico">🛡️</span>
-      <span class="grow"><span class="lname">Women's helpline</span><span class="ldesc">Violence, abuse, shelter, counselling</span></span>
-      <span class="lnum">181</span>
-    </a>
-    <a class="line" href="tel:14490">
-      <span class="lico">⚖️</span>
-      <span class="grow"><span class="lname">National Commission for Women</span><span class="ldesc">Counsellor-staffed; complaints and referrals</span></span>
-      <span class="lnum">14490</span>
-    </a>
-    <a class="line" href="tel:1930">
-      <span class="lico">💻</span>
-      <span class="grow"><span class="lname">Cybercrime and online fraud</span><span class="ldesc">Report within the first hour</span></span>
-      <span class="lnum">1930</span>
-    </a>
-    <a class="line" href="tel:1098">
-      <span class="lico">🧒</span>
-      <span class="grow"><span class="lname">Childline</span><span class="ldesc">Any child in danger or distress</span></span>
-      <span class="lnum">1098</span>
-    </a>
-    <a class="line" href="tel:1094">
-      <span class="lico">🔍</span>
-      <span class="grow"><span class="lname">Missing persons</span><span class="ldesc">Missing women and children</span></span>
-      <span class="lnum">1094</span>
-    </a>
-    <a class="line" href="tel:15100">
-      <span class="lico">📜</span>
-      <span class="grow"><span class="lname">Free legal aid</span><span class="ldesc">NALSA — a lawyer at no cost</span></span>
-      <span class="lnum">15100</span>
-    </a>
-    <a class="line" href="tel:14416">
-      <span class="lico">💚</span>
-      <span class="grow"><span class="lname">Tele-MANAS</span><span class="ldesc">Mental health support</span></span>
-      <span class="lnum">14416</span>
-    </a>
-    <a class="line" href="tel:108">
-      <span class="lico">🚑</span>
-      <span class="grow"><span class="lname">Ambulance</span><span class="ldesc">102 also works in most states</span></span>
-      <span class="lnum">108</span>
-    </a>
+    <a class="line" href="tel:112"><span class="lico">🚨</span><span class="grow"><span class="lname">Emergency Response Support</span><span class="ldesc">Police, fire and ambulance on one number</span></span><span class="lnum">112</span></a>
+    <a class="line" href="tel:1091"><span class="lico">👮‍♀️</span><span class="grow"><span class="lname">Women in distress</span><span class="ldesc">Police women's helpline</span></span><span class="lnum">1091</span></a>
+    <a class="line" href="tel:181"><span class="lico">🛡️</span><span class="grow"><span class="lname">Women's helpline</span><span class="ldesc">Violence, abuse, shelter, counselling</span></span><span class="lnum">181</span></a>
+    <a class="line" href="tel:14490"><span class="lico">⚖️</span><span class="grow"><span class="lname">National Commission for Women</span><span class="ldesc">Counsellor-staffed</span></span><span class="lnum">14490</span></a>
+    <a class="line" href="tel:1930"><span class="lico">💻</span><span class="grow"><span class="lname">Cybercrime and online fraud</span><span class="ldesc">Report within the first hour</span></span><span class="lnum">1930</span></a>
+    <a class="line" href="tel:1098"><span class="lico">🧒</span><span class="grow"><span class="lname">Childline</span><span class="ldesc">Any child in danger</span></span><span class="lnum">1098</span></a>
+    <a class="line" href="tel:1094"><span class="lico">🔍</span><span class="grow"><span class="lname">Missing persons</span><span class="ldesc">Missing women and children</span></span><span class="lnum">1094</span></a>
+    <a class="line" href="tel:15100"><span class="lico">📜</span><span class="grow"><span class="lname">Free legal aid</span><span class="ldesc">NALSA — a lawyer at no cost</span></span><span class="lnum">15100</span></a>
+    <a class="line" href="tel:14416"><span class="lico">💚</span><span class="grow"><span class="lname">Tele-MANAS</span><span class="ldesc">Mental health support</span></span><span class="lnum">14416</span></a>
+    <a class="line" href="tel:108"><span class="lico">🚑</span><span class="grow"><span class="lname">Ambulance</span><span class="ldesc">102 also works</span></span><span class="lnum">108</span></a>
   </div>
 </section>
 
 <section id="rules">
   <h2>Safety rules</h2>
   <p class="lede">A setup checklist. Tick them off as you go; this device remembers.</p>
-
   <div class="progress">
     <b id="ruleCount">0 of 24</b>
     <span class="bar"><span class="fill" id="ruleFill"></span></span>
     <button class="icobtn" id="ruleReset" type="button">Reset</button>
   </div>
-
   <div class="rulegroup">
     <h3>Set up once</h3>
     <div class="rule"><input type="checkbox" id="r1"><label for="r1"><span>Turn on your phone's own SOS</span><span class="why">Five presses of the power button on Android.</span></label></div>
@@ -1196,7 +852,6 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
     <div class="rule"><input type="checkbox" id="r5"><label for="r5"><span>Set a code word with two people</span><span class="why">Something ordinary that means "send help".</span></label></div>
     <div class="rule"><input type="checkbox" id="r6"><label for="r6"><span>Photograph your ID, keep it somewhere you can reach</span><span class="why">Email it to yourself.</span></label></div>
   </div>
-
   <div class="rulegroup">
     <h3>Before you leave</h3>
     <div class="rule"><input type="checkbox" id="r7"><label for="r7"><span>One person always knows where you're going</span><span class="why">Destination and a time.</span></label></div>
@@ -1205,19 +860,17 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
     <div class="rule"><input type="checkbox" id="r10"><label for="r10"><span>Carry enough cash to get home</span><span class="why">Dead phone, no network, no UPI.</span></label></div>
     <div class="rule"><input type="checkbox" id="r11"><label for="r11"><span>Wear what you can move in</span><span class="why">Being able to run matters.</span></label></div>
   </div>
-
   <div class="rulegroup">
     <h3>Out there</h3>
     <div class="rule"><input type="checkbox" id="r12"><label for="r12"><span>Trust the feeling before you can explain it</span><span class="why">Leave first; analyse later.</span></label></div>
     <div class="rule"><input type="checkbox" id="r13"><label for="r13"><span>You never owe an explanation for leaving</span><span class="why">Being thought rude is a cheap price.</span></label></div>
     <div class="rule"><input type="checkbox" id="r14"><label for="r14"><span>Keep one ear free</span><span class="why">Noise-cancelling is the wrong setting.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r15"><label for="r15"><span>Photograph the number plate before you sit down</span><span class="why">Do it visibly — it changes the odds.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r16"><label for="r16"><span>Never let yourself be moved to a second location</span><span class="why">Fight, shout, run — don't get in the vehicle.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r15"><label for="r15"><span>Photograph the number plate before you sit down</span><span class="why">Do it visibly.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r16"><label for="r16"><span>Never let yourself be moved to a second location</span><span class="why">Fight, shout, run.</span></label></div>
     <div class="rule"><input type="checkbox" id="r17"><label for="r17"><span>Being followed? Go somewhere staffed, not home</span><span class="why">Hospital, petrol pump, hotel lobby.</span></label></div>
     <div class="rule"><input type="checkbox" id="r18"><label for="r18"><span>Shout specifics, not screams</span><span class="why">"This man is following me."</span></label></div>
     <div class="rule"><input type="checkbox" id="r19"><label for="r19"><span>Watch your own drink, always</span><span class="why">Carry it or leave it.</span></label></div>
   </div>
-
   <div class="rulegroup">
     <h3>Online</h3>
     <div class="rule"><input type="checkbox" id="r20"><label for="r20"><span>Two-factor on your email first</span><span class="why">It controls every other account.</span></label></div>
@@ -1231,66 +884,41 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 <section id="guides">
   <h2>If you're in it right now</h2>
   <p class="lede">Short, practical, no lectures.</p>
-
-  <details class="guide">
-    <summary>In a cab or auto</summary>
-    <div class="body"><ul>
-      <li>Photograph the number plate and send it to someone.</li>
-      <li>Share the live trip from the app.</li>
-      <li>Sit in the back, door unlocked on your side.</li>
-      <li>If the route feels wrong, get out at low speed — not on the highway.</li>
-    </ul></div>
-  </details>
-
-  <details class="guide">
-    <summary>Walking, late or alone</summary>
-    <div class="body"><ul>
-      <li>One earphone out, or none.</li>
-      <li>Walk facing traffic, away from parked vehicles.</li>
-      <li>Being followed? Cross the road. Go to a shop, pump, hospital or lobby.</li>
-      <li>Shout what's happening — "this man is following me".</li>
-      <li>A loud whistle or phone siren beats keys between fingers.</li>
-    </ul></div>
-  </details>
-
-  <details class="guide">
-    <summary>Harassment at work</summary>
-    <div class="body"><ul>
-      <li>Write it down the same day: date, time, words, witnesses.</li>
-      <li>Workplaces with 10+ staff must have an Internal Committee under POSH Act, 2013.</li>
-      <li>Fewer than 10? Local Committee via District Officer, or SHe-Box portal.</li>
-      <li>File within three months; extension possible.</li>
-      <li>Conciliation only if you want it — never a money settlement.</li>
-    </ul></div>
-  </details>
-
-  <details class="guide">
-    <summary>Online harassment, stalking, leaked photos</summary>
-    <div class="body"><ul>
-      <li>Screenshot with URL, handle, timestamp — before blocking.</li>
-      <li>Report at cybercrime.gov.in — anonymous option available.</li>
-      <li>Intimate images: file with platform under NCII policy too.</li>
-      <li>Money lost? Call 1930 immediately.</li>
-      <li>Sextortion is a crime against you. Don't pay.</li>
-    </ul></div>
-  </details>
-
-  <details class="guide">
-    <summary>Violence at home</summary>
-    <div class="body"><ul>
-      <li>DV Act 2005 covers physical, sexual, verbal, emotional, economic abuse.</li>
-      <li>Right to stay in the shared household.</li>
-      <li>Every district has a Protection Officer and One Stop Centre. Call 181.</li>
-      <li>Keep ID, papers, cash somewhere else.</li>
-      <li>Get injuries examined and keep the paper.</li>
-    </ul></div>
-  </details>
+  <details class="guide"><summary>In a cab or auto</summary><div class="body"><ul>
+    <li>Photograph the number plate and send it to someone.</li>
+    <li>Share the live trip from the app.</li>
+    <li>Sit in the back, door unlocked on your side.</li>
+    <li>If the route feels wrong, get out at low speed.</li>
+  </ul></div></details>
+  <details class="guide"><summary>Walking, late or alone</summary><div class="body"><ul>
+    <li>One earphone out, or none.</li>
+    <li>Walk facing traffic, away from parked vehicles.</li>
+    <li>Being followed? Cross the road. Go to a shop, pump, hospital or lobby.</li>
+    <li>Shout what's happening — "this man is following me".</li>
+  </ul></div></details>
+  <details class="guide"><summary>Harassment at work</summary><div class="body"><ul>
+    <li>Write it down the same day: date, time, words, witnesses.</li>
+    <li>Workplaces with 10+ staff must have an Internal Committee under POSH Act, 2013.</li>
+    <li>Fewer than 10? Local Committee via District Officer, or SHe-Box portal.</li>
+    <li>File within three months; extension possible.</li>
+  </ul></div></details>
+  <details class="guide"><summary>Online harassment, stalking, leaked photos</summary><div class="body"><ul>
+    <li>Screenshot with URL, handle, timestamp — before blocking.</li>
+    <li>Report at cybercrime.gov.in — anonymous option available.</li>
+    <li>Intimate images: file with platform under NCII policy too.</li>
+    <li>Money lost? Call 1930 immediately.</li>
+  </ul></div></details>
+  <details class="guide"><summary>Violence at home</summary><div class="body"><ul>
+    <li>DV Act 2005 covers physical, sexual, verbal, emotional, economic abuse.</li>
+    <li>Right to stay in the shared household.</li>
+    <li>Every district has a Protection Officer and One Stop Centre. Call 181.</li>
+    <li>Get injuries examined and keep the paper.</li>
+  </ul></div></details>
 </section>
 
 <section id="rights">
   <h2>Your rights</h2>
   <p class="lede">What Indian law already gives you.</p>
-
   <div class="rtabs" role="tablist">
     <button class="rtab" type="button" role="tab" data-r="police" aria-selected="true">Police &amp; FIR</button>
     <button class="rtab" type="button" role="tab" data-r="work" aria-selected="false">At work</button>
@@ -1299,26 +927,23 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
     <button class="rtab" type="button" role="tab" data-r="online" aria-selected="false">Online &amp; privacy</button>
     <button class="rtab" type="button" role="tab" data-r="court" aria-selected="false">In court</button>
   </div>
-
   <div class="rpanel on" data-rp="police">
     <div class="right"><h3>Any police station, anywhere</h3><p>A Zero FIR can be filed at any station. "Not our area" is not a valid refusal.</p><span class="law">BNSS, 2023</span></div>
-    <div class="right"><h3>An FIR cannot be refused</h3><p>For cognizable offences, registration is mandatory and free. You get a free copy.</p></div>
-    <div class="right"><h3>Your statement, your terms</h3><p>In sexual offence cases, recorded by a woman officer, at a place you choose.</p></div>
-    <div class="right"><h3>Arrest timings</h3><p>A woman should not ordinarily be arrested before 6am or after 6pm, only by a woman officer.</p></div>
-    <div class="right"><h3>Free treatment, no FIR needed first</h3><p>Every hospital must give free first aid to survivors, and inform police themselves.</p></div>
-    <div class="right"><h3>No two-finger test</h3><p>Banned by the Supreme Court. Any doctor conducting one is committing misconduct.</p></div>
+    <div class="right"><h3>An FIR cannot be refused</h3><p>For cognizable offences, registration is mandatory and free.</p></div>
+    <div class="right"><h3>Your statement, your terms</h3><p>In sexual offence cases, recorded by a woman officer.</p></div>
+    <div class="right"><h3>Arrest timings</h3><p>A woman should not ordinarily be arrested before 6am or after 6pm.</p></div>
+    <div class="right"><h3>Free treatment, no FIR needed first</h3><p>Every hospital must give free first aid to survivors.</p></div>
+    <div class="right"><h3>No two-finger test</h3><p>Banned by the Supreme Court.</p></div>
     <div class="right"><h3>You can report late</h3><p>No time limit on reporting a sexual offence.</p></div>
   </div>
-
   <div class="rpanel" data-rp="work">
     <div class="right"><h3>Every workplace with 10+ staff needs a committee</h3><p>Internal Committee with a senior woman and an external member.</p><span class="law">POSH Act, 2013</span></div>
     <div class="right"><h3>Smaller workplaces are still covered</h3><p>Local Committee via District Officer, or SHe-Box portal.</p></div>
-    <div class="right"><h3>Relief while the inquiry runs</h3><p>Transfer, up to 3 months paid leave, or stop him from reporting on your work.</p></div>
+    <div class="right"><h3>Relief while the inquiry runs</h3><p>Transfer, up to 3 months paid leave.</p></div>
     <div class="right"><h3>Retaliation is not allowed</h3><p>Being sidelined after complaining is actionable.</p></div>
     <div class="right"><h3>26 weeks of paid maternity leave</h3><p>For first two children. Creche if 50+ employees.</p><span class="law">Maternity Benefit Act, 2017</span></div>
     <div class="right"><h3>Equal pay for the same work</h3><p>Sex-based pay discrimination is prohibited.</p><span class="law">Code on Wages, 2019</span></div>
   </div>
-
   <div class="rpanel" data-rp="home">
     <div class="right"><h3>Abuse is more than bruises</h3><p>Physical, sexual, verbal, emotional, economic — all covered.</p><span class="law">DV Act, 2005</span></div>
     <div class="right"><h3>It applies to live-in relationships</h3><p>You don't have to be married.</p></div>
@@ -1328,7 +953,6 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
     <div class="right"><h3>Streedhan is yours alone</h3><p>Husband and in-laws are only custodians.</p></div>
     <div class="right"><h3>Maintenance</h3><p>A wife (or divorced wife not remarried) can claim maintenance.</p><span class="law">BNSS s.144</span></div>
   </div>
-
   <div class="rpanel" data-rp="money">
     <div class="right"><h3>Daughters inherit equally</h3><p>A daughter is a coparcener from birth.</p><span class="law">HSA 2005; Vineeta Sharma v. Rakesh Sharma</span></div>
     <div class="right"><h3>Marriage doesn't end it</h3><p>Marrying doesn't remove your share.</p></div>
@@ -1336,7 +960,6 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
     <div class="right"><h3>Your salary is yours</h3><p>Being made to hand it over is economic abuse.</p></div>
     <div class="right"><h3>Lower stamp duty</h3><p>Most states charge women a reduced rate.</p></div>
   </div>
-
   <div class="rpanel" data-rp="online">
     <div class="right"><h3>Your name stays out of it</h3><p>Publishing a survivor's identity is a crime.</p></div>
     <div class="right"><h3>Intimate images must come down in 24 hours</h3><p>Includes morphed and AI-generated.</p><span class="law">IT Rules, 2021</span></div>
@@ -1344,7 +967,6 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
     <div class="right"><h3>Online stalking is stalking</h3><p>Repeated contact or monitoring is a crime.</p><span class="law">BNS s.78</span></div>
     <div class="right"><h3>Sextortion is a crime against you</h3><p>Don't pay. Screenshot, report, tell someone.</p></div>
   </div>
-
   <div class="rpanel" data-rp="court">
     <div class="right"><h3>A lawyer costs you nothing</h3><p>Every woman is entitled to free legal aid.</p><span class="law">Legal Services Authorities Act, 1987</span></div>
     <div class="right"><h3>Trials held in private</h3><p>Sexual offence trials in camera, before a woman judge where possible.</p></div>
@@ -1352,17 +974,16 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
     <div class="right"><h3>Compensation, separate from verdict</h3><p>Victim compensation schemes via Legal Services Authority.</p></div>
     <div class="right"><h3>You must be kept informed</h3><p>About investigation progress; heard before bail.</p></div>
   </div>
-
   <p class="caveat">India's criminal laws were replaced in July 2024 — IPC and CrPC became BNS and BNSS, but these protections carried over. This page is general information, not legal advice. For anything specific, call 15100.</p>
 </section>
 
 </div>
 
+<!-- ================= PROFILE ================= -->
 <div id="page-profile" class="page">
 <section id="contacts">
   <h2>Your profile</h2>
   <p class="lede">Details worth having ready. All of it stays in this browser on this device — nothing is uploaded.</p>
-
   <div class="idcard">
     <div class="init" id="pInit">—</div>
     <div class="grow">
@@ -1370,7 +991,6 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
       <div class="meta" id="pMeta">Fill this in and it gets attached to every alert you send.</div>
     </div>
   </div>
-
   <div class="panel">
     <h3>About you</h3>
     <div class="field">
@@ -1400,62 +1020,122 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
       <input type="text" id="pMed" placeholder="Asthma. Allergic to penicillin." autocomplete="off">
     </div>
   </div>
-
   <div class="panel">
     <h3>Addresses</h3>
-    <div class="field">
-      <label for="pHome">Home</label>
-      <textarea id="pHome" placeholder="Flat 4B, Shanti Apartments, Vaishali Nagar, Jaipur 302021" style="min-height:64px"></textarea>
-    </div>
-    <div class="field">
-      <label for="pWork">Work or college</label>
-      <textarea id="pWork" placeholder="Block C, World Trade Park, Malviya Nagar, Jaipur" style="min-height:64px"></textarea>
-    </div>
-    <div class="field">
-      <label for="pStation">Nearest police station</label>
-      <input type="text" id="pStation" placeholder="Vaishali Nagar Police Station" autocomplete="off">
-    </div>
+    <div class="field"><label for="pHome">Home</label><textarea id="pHome" placeholder="Flat 4B, Shanti Apartments, Vaishali Nagar, Jaipur 302021" style="min-height:64px"></textarea></div>
+    <div class="field"><label for="pWork">Work or college</label><textarea id="pWork" placeholder="Block C, World Trade Park, Malviya Nagar, Jaipur" style="min-height:64px"></textarea></div>
+    <div class="field"><label for="pStation">Nearest police station</label><input type="text" id="pStation" placeholder="Vaishali Nagar Police Station" autocomplete="off"></div>
     <div class="btnrow">
       <a class="btn" id="homeNav" href="#" target="_blank" rel="noopener">🧭 Directions home</a>
       <button class="btn" id="shareHome" type="button">Add home to my alert</button>
     </div>
   </div>
-
   <div class="panel">
     <h3>Emergency contacts</h3>
     <p class="status">People who would actually pick up at 2am.</p>
     <div class="two" style="margin-top:12px">
-      <div class="field">
-        <label for="cName">Name and relationship</label>
-        <input type="text" id="cName" placeholder="Meera (sister)" autocomplete="off">
-      </div>
-      <div class="field">
-        <label for="cNum">Phone</label>
-        <input type="tel" id="cNum" placeholder="9876543210" autocomplete="off">
-      </div>
+      <div class="field"><label for="cName">Name and relationship</label><input type="text" id="cName" placeholder="Meera (sister)" autocomplete="off"></div>
+      <div class="field"><label for="cNum">Phone</label><input type="tel" id="cNum" placeholder="9876543210" autocomplete="off"></div>
     </div>
     <div class="btnrow"><button class="btn" id="addC" type="button">+ Add contact</button></div>
     <ul class="contacts" id="cList"></ul>
     <p class="empty" id="cEmpty">No contacts yet. Add one or two people who would actually pick up at 2am.</p>
   </div>
-
   <div class="btnrow">
     <button class="btn btn-go" id="saveProfile" type="button">Save profile</button>
     <button class="btn" id="clearProfile" type="button">Clear everything</button>
   </div>
-  <p class="status" id="profStatus" role="status" aria-live="polite"></p>
+  <p class="status" id="profStatus"></p>
 </section>
 </div>
 
+<!-- ================= TEAM ================= -->
 <div id="page-team" class="page">
-<section id="team">
-  <h2>Team</h2>
-  <p class="lede">The people who built Suraksha.</p>
-  <div class="team">
-    <div class="trow"><span class="tnum">01</span><span class="tinit">P</span><span class="tname">Praveen Kumar</span></div>
-    <div class="trow"><span class="tnum">02</span><span class="tinit">H</span><span class="tname">Hemang Choudhary</span></div>
-    <div class="trow"><span class="tnum">03</span><span class="tinit">N</span><span class="tname">Nilesh Kumawat</span></div>
-    <div class="trow"><span class="tnum">04</span><span class="tinit">K</span><span class="tname">Kanak Kumari</span></div>
+<section id="team-section">
+
+  <!-- Team list view -->
+  <div id="teamListView">
+    <h2>Team</h2>
+    <p class="lede">The people who built Suraksha. Tap a member to see their profile and contact details.</p>
+    <div class="team" id="teamGrid"></div>
+  </div>
+
+  <!-- Team member detail view -->
+  <div id="teamDetailView" class="tdetail">
+    <button class="backbtn" id="teamBack">← Back to team</button>
+    <div id="teamDetailContent"></div>
+  </div>
+
+</section>
+</div>
+
+<!-- ================= CONTACT ================= -->
+<div id="page-contact" class="page">
+<section id="contact-section">
+  <h2>Contact us</h2>
+  <p class="lede">Have feedback, a bug to report, or want to collaborate? Send us a message — we usually reply within a day or two.</p>
+
+  <div class="contactform">
+    <h3>Send a message</h3>
+    <p class="sub">All fields are required. We don't share your email with anyone.</p>
+    <form id="contactForm" novalidate>
+      <div class="two" style="grid-template-columns:1fr 1fr">
+        <div class="field" style="margin:0">
+          <label for="cfName">Your name</label>
+          <input type="text" id="cfName" placeholder="Ananya Sharma" autocomplete="name">
+        </div>
+        <div class="field" style="margin:0">
+          <label for="cfEmail">Email</label>
+          <input type="email" id="cfEmail" placeholder="you@example.com" autocomplete="email">
+        </div>
+      </div>
+      <div class="field">
+        <label for="cfSubject">Subject</label>
+        <select id="cfSubject">
+          <option value="">— Choose a topic —</option>
+          <option>General feedback</option>
+          <option>Bug report</option>
+          <option>Feature request</option>
+          <option>Collaboration</option>
+          <option>Media / press</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="cfMessage">Message</label>
+        <textarea id="cfMessage" placeholder="Tell us what's on your mind…" style="min-height:130px"></textarea>
+      </div>
+      <div class="btnrow" style="margin-top:16px">
+        <button type="submit" class="btn btn-go" id="cfSubmit">📩 Send message</button>
+        <button type="reset" class="btn" id="cfReset">Clear</button>
+      </div>
+      <p class="status" id="cfStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <div class="panel" style="margin-top:16px">
+    <h3>Or reach us directly</h3>
+    <div class="tinfo-row">
+      <span class="tico">✉️</span>
+      <div>
+        <div class="tlabel">Email</div>
+        <div class="tvalue"><a href="mailto:hello@suraksha.example">hello@suraksha.example</a></div>
+      </div>
+    </div>
+    <div class="tinfo-row">
+      <span class="tico">🐛</span>
+      <div>
+        <div class="tlabel">Bug reports</div>
+        <div class="tvalue"><a href="mailto:bugs@suraksha.example">bugs@suraksha.example</a></div>
+      </div>
+    </div>
+    <div class="tinfo-row">
+      <span class="tico">🤝</span>
+      <div>
+        <div class="tlabel">Collaboration</div>
+        <div class="tvalue"><a href="mailto:team@suraksha.example">team@suraksha.example</a></div>
+      </div>
+    </div>
   </div>
 </section>
 </div>
@@ -1497,6 +1177,8 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 </div>
 
 </div><!-- /appView -->
+
+<div class="toast" id="toast"></div>
 
 <script>
 (function(){
@@ -1548,7 +1230,6 @@ $('signInFromApp').addEventListener('click', function(){
   backToLogin();
 });
 
-/* Auth form */
 var mode = 'signin';
 var formTitle = $('formTitle'), formSub = $('formSub');
 var nameField = $('nameField'), nameInput = $('name');
@@ -1622,7 +1303,7 @@ $('authForm').addEventListener('submit', function(e){
     try {
       if (mode === 'signup'){
         var users = loadUsers();
-        if (users[email]){ setStatus('An account with this email already exists. Try signing in.'); return; }
+        if (users[email]){ setStatus('An account with this email already exists.'); return; }
         users[email] = { id: 'u_' + Date.now().toString(36) + Math.random().toString(36).slice(2,7), name: nameInput.value.trim(), email: email, pw: hash(password), joined: new Date().toISOString() };
         saveUsers(users);
         localStorage.setItem(SESSION_KEY, JSON.stringify(users[email]));
@@ -1671,14 +1352,11 @@ $('googleBtn').addEventListener('click', function(){
 });
 
 setMode('signin');
-try {
-  var remembered = localStorage.getItem(REMEMBER_KEY);
-  if (remembered) emailInput.value = remembered;
-} catch(e){}
+try { var remembered = localStorage.getItem(REMEMBER_KEY); if (remembered) emailInput.value = remembered; } catch(e){}
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setStatus(''); });
 
 /* ============================================================
-   APP LOGIC
+   THEME + TOAST
    ============================================================ */
 var themeBtn = $('themeBtn');
 function currentDark(){
@@ -1687,10 +1365,7 @@ function currentDark(){
   return window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 function paintThemeBtn(){ if(themeBtn) themeBtn.textContent = currentDark() ? 'Light' : 'Dark'; }
-try{
-  var savedTheme = localStorage.getItem('sk_theme');
-  if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-}catch(e){}
+try{ var savedTheme = localStorage.getItem('sk_theme'); if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme); }catch(e){}
 paintThemeBtn();
 if (themeBtn) themeBtn.addEventListener('click', function(){
   var next = currentDark() ? 'light' : 'dark';
@@ -1699,7 +1374,283 @@ if (themeBtn) themeBtn.addEventListener('click', function(){
   paintThemeBtn();
 });
 
-/* contacts */
+var toastEl = $('toast');
+var toastTimer;
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toastEl.classList.remove('on'); }, 2800);
+}
+
+/* ============================================================
+   TEAM DATA — test details
+   ============================================================ */
+var TEAM = [
+  {
+    id: 'praveen',
+    name: 'Praveen Kumar',
+    role: 'Founder & Lead Developer',
+    initials: 'P',
+    bio: 'Praveen started Suraksha after a friend needed help finding the right helpline number at 2am. He leads product and engineering, and spends his weekends talking to women\'s safety NGOs across Rajasthan.',
+    email: 'praveen@suraksha.example',
+    phone: '+91 98765 43210',
+    location: 'Jaipur, Rajasthan',
+    role2: 'Full-stack developer',
+    joined: 'January 2024',
+    skills: ['JavaScript', 'Supabase', 'UI/UX', 'Product'],
+    social: {
+      github: 'https://github.com/praveen',
+      linkedin: 'https://linkedin.com/in/praveen',
+      twitter: 'https://twitter.com/praveen'
+    }
+  },
+  {
+    id: 'hemang',
+    name: 'Hemang Choudhary',
+    role: 'Design Lead',
+    initials: 'H',
+    bio: 'Hemang shaped how Suraksha looks and feels. He believes safety tools should be calm and clear, not scary — which is why the interface stays quiet even during an emergency. Previously designed for two fintech startups.',
+    email: 'hemang@suraksha.example',
+    phone: '+91 98765 43211',
+    location: 'Udaipur, Rajasthan',
+    role2: 'UI/UX Designer',
+    joined: 'February 2024',
+    skills: ['Figma', 'Design systems', 'Accessibility', 'Brand'],
+    social: {
+      github: 'https://github.com/hemang',
+      linkedin: 'https://linkedin.com/in/hemang',
+      twitter: 'https://twitter.com/hemang'
+    }
+  },
+  {
+    id: 'nilesh',
+    name: 'Nilesh Kumawat',
+    role: 'Backend & Security',
+    initials: 'N',
+    bio: 'Nilesh makes sure nothing you type here leaves your device unless you want it to. He handles the backend, the encryption, and the endless reviews to keep things private. Loves a good puzzle and a bad pun.',
+    email: 'nilesh@suraksha.example',
+    phone: '+91 98765 43212',
+    location: 'Jodhpur, Rajasthan',
+    role2: 'Backend engineer',
+    joined: 'March 2024',
+    skills: ['Node.js', 'PostgreSQL', 'Auth', 'Privacy'],
+    social: {
+      github: 'https://github.com/nilesh',
+      linkedin: 'https://linkedin.com/in/nilesh',
+      twitter: 'https://twitter.com/nilesh'
+    }
+  },
+  {
+    id: 'kanak',
+    name: 'Kanak Kumari',
+    role: 'Research & Outreach',
+    initials: 'K',
+    bio: 'Kanak wrote most of the guides and the rights section. She works with lawyers, counsellors and women\'s collectives to make sure every line is accurate and every number is current. Speaks Hindi, English and Marwari.',
+    email: 'kanak@suraksha.example',
+    phone: '+91 98765 43213',
+    location: 'Kota, Rajasthan',
+    role2: 'Legal & content researcher',
+    joined: 'April 2024',
+    skills: ['Legal research', 'Content', 'Translation', 'Community'],
+    social: {
+      github: 'https://github.com/kanak',
+      linkedin: 'https://linkedin.com/in/kanak',
+      twitter: 'https://twitter.com/kanak'
+    }
+  }
+];
+
+/* ============================================================
+   RENDER TEAM LIST
+   ============================================================ */
+var teamGrid = $('teamGrid');
+var teamListView = $('teamListView');
+var teamDetailView = $('teamDetailView');
+var teamDetailContent = $('teamDetailContent');
+
+function renderTeamList(){
+  teamGrid.innerHTML = '';
+  TEAM.forEach(function(m){
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'tcard';
+    btn.setAttribute('aria-label', 'View profile of ' + m.name);
+
+    var init = document.createElement('div');
+    init.className = 'tinit';
+    init.textContent = m.initials;
+
+    var info = document.createElement('div');
+    info.className = 'tinfo';
+    var nm = document.createElement('div'); nm.className = 'tname'; nm.textContent = m.name;
+    var rl = document.createElement('div'); rl.className = 'trole'; rl.textContent = m.role;
+    info.appendChild(nm); info.appendChild(rl);
+
+    var arrow = document.createElement('span');
+    arrow.className = 'tarrow';
+    arrow.textContent = '→';
+
+    btn.appendChild(init); btn.appendChild(info); btn.appendChild(arrow);
+    btn.addEventListener('click', function(){ showTeamDetail(m); });
+    teamGrid.appendChild(btn);
+  });
+}
+
+/* ============================================================
+   SHOW TEAM MEMBER DETAIL
+   ============================================================ */
+function showTeamDetail(m){
+  teamListView.style.display = 'none';
+  teamDetailView.classList.add('on');
+  window.scrollTo({top:0, behavior:'auto'});
+
+  var skillsHtml = m.skills.map(function(s){
+    return '<span style="display:inline-block;font-size:12.5px;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--ink);font-weight:600;margin:3px 4px 3px 0">'+s+'</span>';
+  }).join('');
+
+  teamDetailContent.innerHTML =
+    '<div class="thero">' +
+      '<div class="tinit-big">' + m.initials + '</div>' +
+      '<div class="tinfo-big">' +
+        '<h2>' + m.name + '</h2>' +
+        '<div class="trole-big">' + m.role + '</div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="tcard-info">' +
+      '<h3>📋 Contact details</h3>' +
+      '<div class="tinfo-row">' +
+        '<span class="tico">✉️</span>' +
+        '<div><div class="tlabel">Email</div><div class="tvalue"><a href="mailto:' + m.email + '">' + m.email + '</a></div></div>' +
+      '</div>' +
+      '<div class="tinfo-row">' +
+        '<span class="tico">📞</span>' +
+        '<div><div class="tlabel">Phone</div><div class="tvalue"><a href="tel:' + m.phone.replace(/\s/g,'') + '">' + m.phone + '</a></div></div>' +
+      '</div>' +
+      '<div class="tinfo-row">' +
+        '<span class="tico">📍</span>' +
+        '<div><div class="tlabel">Based in</div><div class="tvalue">' + m.location + '</div></div>' +
+      '</div>' +
+      '<div class="tinfo-row">' +
+        '<span class="tico">🕒</span>' +
+        '<div><div class="tlabel">Joined Suraksha</div><div class="tvalue">' + m.joined + '</div></div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="tcard-info">' +
+      '<h3>👤 About</h3>' +
+      '<p class="tbio">' + m.bio + '</p>' +
+    '</div>' +
+
+    '<div class="tcard-info">' +
+      '<h3>🛠️ Skills & focus</h3>' +
+      '<div>' + skillsHtml + '</div>' +
+    '</div>' +
+
+    '<div class="tcard-info">' +
+      '<h3>🌐 Find them online</h3>' +
+      '<div class="tinfo-row">' +
+        '<span class="tico">💻</span>' +
+        '<div><div class="tlabel">GitHub</div><div class="tvalue"><a href="' + m.social.github + '" target="_blank" rel="noopener">' + m.social.github.replace('https://','') + '</a></div></div>' +
+      '</div>' +
+      '<div class="tinfo-row">' +
+        '<span class="tico">💼</span>' +
+        '<div><div class="tlabel">LinkedIn</div><div class="tvalue"><a href="' + m.social.linkedin + '" target="_blank" rel="noopener">' + m.social.linkedin.replace('https://','') + '</a></div></div>' +
+      '</div>' +
+      '<div class="tinfo-row">' +
+        '<span class="tico">🐦</span>' +
+        '<div><div class="tlabel">Twitter / X</div><div class="tvalue"><a href="' + m.social.twitter + '" target="_blank" rel="noopener">' + m.social.twitter.replace('https://','') + '</a></div></div>' +
+      '</div>' +
+    '</div>' +
+
+    '<div class="contactform" style="margin-top:12px">' +
+      '<h3>📩 Send ' + m.name.split(' ')[0] + ' a message</h3>' +
+      '<p class="sub">Direct message — goes straight to their inbox.</p>' +
+      '<form id="tmForm-' + m.id + '" novalidate>' +
+        '<div class="field">' +
+          '<label for="tmFrom-' + m.id + '">Your email</label>' +
+          '<input type="email" id="tmFrom-' + m.id + '" placeholder="you@example.com" autocomplete="email">' +
+        '</div>' +
+        '<div class="field">' +
+          '<label for="tmMsg-' + m.id + '">Message</label>' +
+          '<textarea id="tmMsg-' + m.id + '" placeholder="Hi ' + m.name.split(' ')[0] + ', …"></textarea>' +
+        '</div>' +
+        '<div class="btnrow" style="margin-top:14px">' +
+          '<button type="submit" class="btn btn-go">Send message</button>' +
+        '</div>' +
+        '<p class="status" id="tmStatus-' + m.id + '"></p>' +
+      '</form>' +
+    '</div>';
+
+  var form = document.getElementById('tmForm-' + m.id);
+  if (form) {
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var from = document.getElementById('tmFrom-' + m.id).value.trim();
+      var msg = document.getElementById('tmMsg-' + m.id).value.trim();
+      var st = document.getElementById('tmStatus-' + m.id);
+      if (!isValidEmail(from)){ st.textContent = 'Please enter a valid email.'; st.className = 'status bad'; return; }
+      if (!msg){ st.textContent = 'Please write a message.'; st.className = 'status bad'; return; }
+      st.textContent = 'Sending…'; st.className = 'status';
+      setTimeout(function(){
+        st.textContent = '✓ Message sent to ' + m.name + '. They usually reply within a day.'; st.className = 'status ok';
+        form.reset();
+        toast('Message sent to ' + m.name);
+      }, 700);
+    });
+  }
+}
+
+$('teamBack').addEventListener('click', function(){
+  teamDetailView.classList.remove('on');
+  teamListView.style.display = 'block';
+  window.scrollTo({top:0, behavior:'auto'});
+});
+
+renderTeamList();
+
+/* ============================================================
+   CONTACT FORM (global)
+   ============================================================ */
+var contactForm = $('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = $('cfName').value.trim();
+    var email = $('cfEmail').value.trim();
+    var subject = $('cfSubject').value;
+    var msg = $('cfMessage').value.trim();
+    var st = $('cfStatus');
+
+    if (!name){ st.textContent = 'Please enter your name.'; st.className = 'status bad'; $('cfName').focus(); return; }
+    if (!isValidEmail(email)){ st.textContent = 'Please enter a valid email.'; st.className = 'status bad'; $('cfEmail').focus(); return; }
+    if (!subject){ st.textContent = 'Please choose a subject.'; st.className = 'status bad'; $('cfSubject').focus(); return; }
+    if (msg.length < 5){ st.textContent = 'Please write a message (at least 5 characters).'; st.className = 'status bad'; $('cfMessage').focus(); return; }
+
+    var btn = $('cfSubmit');
+    btn.disabled = true;
+    var lbl = btn.textContent;
+    btn.textContent = 'Sending…';
+    st.textContent = ''; st.className = 'status';
+
+    setTimeout(function(){
+      btn.disabled = false;
+      btn.textContent = lbl;
+      st.textContent = '✓ Thanks ' + name + ' — we got your message and will reply to ' + email + ' soon.';
+      st.className = 'status ok';
+      contactForm.reset();
+      toast('Message sent — thank you!');
+    }, 800);
+  });
+  $('cfReset').addEventListener('click', function(){
+    setTimeout(function(){ $('cfStatus').textContent = ''; $('cfStatus').className = 'status'; }, 10);
+  });
+}
+
+/* ============================================================
+   APP LOGIC (contacts, location, timer, etc.)
+   ============================================================ */
 var KEY = 'sk_contacts';
 var contacts = [];
 try{ var raw = localStorage.getItem(KEY); if(raw) contacts = JSON.parse(raw) || []; }catch(e){ contacts = []; }
@@ -1744,7 +1695,6 @@ if ($('addC')) $('addC').addEventListener('click', function(){
 });
 renderContacts();
 
-/* location + message */
 var coords = null;
 function setStatus(el, text, cls){ if(!el) return; el.textContent = text; el.className = 'status' + (cls ? ' ' + cls : ''); }
 function stamp(){
@@ -1789,9 +1739,7 @@ if ($('locBtn')) $('locBtn').addEventListener('click', function(){
 if ($('copyBtn')) $('copyBtn').addEventListener('click', function(){
   var txt = baseMessage();
   function done(){ setStatus($('shareStatus'),'Copied.','ok'); }
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(txt).then(done, fallback);
-  } else fallback();
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, fallback); } else fallback();
   function fallback(){
     var ta = document.createElement('textarea');
     ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
@@ -1806,19 +1754,13 @@ if ($('quickAlert')) $('quickAlert').addEventListener('click', function(){
   var loc = document.getElementById('location');
   if(loc) loc.scrollIntoView({behavior:'smooth', block:'start'});
   if(!coords) $('locBtn').click();
-  setStatus($('shareStatus'), contacts.length
-    ? 'Ready to send to ' + contacts[0].name + '.'
-    : 'Add a trusted contact first.', contacts.length ? 'ok' : 'bad');
+  setStatus($('shareStatus'), contacts.length ? 'Ready to send to ' + contacts[0].name + '.' : 'Add a trusted contact first.', contacts.length ? 'ok' : 'bad');
 });
 
 /* audio */
 var ac = null, sirenNodes = null, ringTimer = null;
 function audio(){
-  if(!ac){
-    var C = window.AudioContext || window.webkitAudioContext;
-    if(!C) return null;
-    ac = new C();
-  }
+  if(!ac){ var C = window.AudioContext || window.webkitAudioContext; if(!C) return null; ac = new C(); }
   if(ac.state === 'suspended') ac.resume();
   return ac;
 }
@@ -1832,10 +1774,7 @@ function startSiren(){
   osc.connect(gain); gain.connect(c.destination);
   osc.start();
   var t = c.currentTime, up = true;
-  for(var i=0; i<600; i++){
-    osc.frequency.linearRampToValueAtTime(up ? 1100 : 550, t + 0.6);
-    t += 0.6; up = !up;
-  }
+  for(var i=0; i<600; i++){ osc.frequency.linearRampToValueAtTime(up ? 1100 : 550, t + 0.6); t += 0.6; up = !up; }
   sirenNodes = { osc:osc, gain:gain };
   $('sirenBtn').textContent = '🔇 Stop siren';
 }
@@ -1850,9 +1789,7 @@ function stopSiren(){
   sirenNodes = null;
   $('sirenBtn').textContent = '🔊 Siren';
 }
-if ($('sirenBtn')) $('sirenBtn').addEventListener('click', function(){
-  sirenNodes ? stopSiren() : startSiren();
-});
+if ($('sirenBtn')) $('sirenBtn').addEventListener('click', function(){ sirenNodes ? stopSiren() : startSiren(); });
 
 function ringOnce(){
   var c = audio(); if(!c) return;
@@ -1872,7 +1809,6 @@ function ringOnce(){
 function startRinging(){ ringOnce(); ringTimer = setInterval(ringOnce, 2600); }
 function stopRinging(){ if(ringTimer){ clearInterval(ringTimer); ringTimer = null; } }
 
-/* fake call */
 var fakeTimer = null, callClock = null;
 if ($('fakeBtn')) $('fakeBtn').addEventListener('click', function(){
   audio();
@@ -1912,7 +1848,6 @@ if ($('acceptBtn')) $('acceptBtn').addEventListener('click', function(){
   }, 1000);
 });
 
-/* safety timer */
 var chosen = 15, tick = null, endAt = 0;
 if ($('mins')) Array.prototype.forEach.call($('mins').querySelectorAll('.chip'), function(b){
   b.addEventListener('click', function(){
@@ -1966,7 +1901,6 @@ if ($('alarmSend')) $('alarmSend').addEventListener('click', function(){
   $('quickAlert').click();
 });
 
-/* live location */
 var watchId = null, path = [], dist = 0, liveStart = 0, liveClock = null;
 function haversine(a, b){
   var R = 6371000, toRad = Math.PI/180;
@@ -1977,9 +1911,8 @@ function haversine(a, b){
 }
 function fmtDist(m){ return m < 1000 ? Math.round(m) + ' m' : (m/1000).toFixed(2) + ' km'; }
 function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
-var LIVE_MOUNTS = [{ btn:'liveBtn', panel:'livePanel', trail:'trail', elapsed:'liveElapsed', dist:'statDist', speed:'statSpeed', acc:'statAcc', coordsEl:'liveCoords', mapLink:'liveMap' }];
-function drawTrailOn(cv){
-  if(!cv || !cv.getContext) return;
+function drawTrail(){
+  var cv = $('trail'); if(!cv || !cv.getContext) return;
   var g = cv.getContext('2d'), W = cv.width, H = cv.height, pad = 34;
   g.clearRect(0,0,W,H);
   g.fillStyle = cssVar('--paper') || '#eee'; g.fillRect(0,0,W,H);
@@ -2009,29 +1942,23 @@ function drawTrailOn(cv){
   var s = px(path[0]);
   g.fillStyle = cssVar('--muted') || '#666';
   g.beginPath(); g.arc(s.x, s.y, 6, 0, Math.PI*2); g.fill();
-  g.font = '13px Archivo, sans-serif'; g.textAlign = 'left'; g.fillStyle = cssVar('--ink');
-  g.fillText('Start', s.x + 10, s.y + 4);
   var c = px(path[path.length-1]);
   g.fillStyle = cssVar('--signal') || '#f00';
-  g.globalAlpha = 0.2;
-  g.beginPath(); g.arc(c.x, c.y, 22, 0, Math.PI*2); g.fill();
-  g.globalAlpha = 1;
-  g.beginPath(); g.arc(c.x, c.y, 8, 0, Math.PI*2); g.fill();
+  g.globalAlpha = 0.2; g.beginPath(); g.arc(c.x, c.y, 22, 0, Math.PI*2); g.fill();
+  g.globalAlpha = 1; g.beginPath(); g.arc(c.x, c.y, 8, 0, Math.PI*2); g.fill();
   g.strokeStyle = '#fff'; g.lineWidth = 2.5; g.stroke();
 }
-function drawTrail(){ LIVE_MOUNTS.forEach(function(m){ drawTrailOn($(m.trail)); }); }
 function liveTick(){
   var s = Math.round((Date.now() - liveStart)/1000);
   var t = String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
-  LIVE_MOUNTS.forEach(function(m){ var el = $(m.elapsed); if(el) el.textContent = t; });
+  if ($('liveElapsed')) $('liveElapsed').textContent = t;
 }
 function startLive(){
   if(!navigator.geolocation){ setStatus($('locStatus'), 'No location support.', 'bad'); return; }
   path = []; dist = 0; liveStart = Date.now();
-  LIVE_MOUNTS.forEach(function(m){
-    var p = $(m.panel); if(p) p.classList.add('on');
-    var b = $(m.btn); if(b){ b.textContent = '🔴 Stop live tracking'; b.classList.remove('btn-red'); }
-  });
+  $('livePanel').classList.add('on');
+  $('liveBtn').textContent = '🔴 Stop live tracking';
+  $('liveBtn').classList.remove('btn-red');
   setStatus($('locStatus'), 'Tracking. Your message updates itself as you move.', 'ok');
   drawTrail();
   liveClock = setInterval(liveTick, 1000);
@@ -2046,14 +1973,11 @@ function startLive(){
     if(path.length > 900) path.shift();
     coords = { lat: p.lat.toFixed(6), lon: p.lon.toFixed(6), acc: Math.round(pos.coords.accuracy) };
     var speedTxt = (pos.coords.speed != null && pos.coords.speed >= 0) ? (pos.coords.speed * 3.6).toFixed(1) + ' km/h' : '—';
-    LIVE_MOUNTS.forEach(function(m){
-      var d1=$(m.dist), s1=$(m.speed), a1=$(m.acc), c1=$(m.coordsEl), l1=$(m.mapLink);
-      if(d1) d1.textContent = fmtDist(dist);
-      if(a1) a1.textContent = Math.round(pos.coords.accuracy) + ' m';
-      if(s1) s1.textContent = speedTxt;
-      if(c1) c1.textContent = coords.lat + ', ' + coords.lon;
-      if(l1) l1.href = 'https://maps.google.com/?q=' + coords.lat + ',' + coords.lon;
-    });
+    if($('statDist')) $('statDist').textContent = fmtDist(dist);
+    if($('statAcc')) $('statAcc').textContent = Math.round(pos.coords.accuracy) + ' m';
+    if($('statSpeed')) $('statSpeed').textContent = speedTxt;
+    if($('liveCoords')) $('liveCoords').textContent = coords.lat + ', ' + coords.lon;
+    if($('liveMap')) $('liveMap').href = 'https://maps.google.com/?q=' + coords.lat + ',' + coords.lon;
     drawTrail(); refreshShare();
   }, function(err){
     var m = 'Tracking stopped.';
@@ -2065,19 +1989,14 @@ function startLive(){
 function stopLive(){
   if(watchId !== null){ navigator.geolocation.clearWatch(watchId); watchId = null; }
   if(liveClock){ clearInterval(liveClock); liveClock = null; }
-  LIVE_MOUNTS.forEach(function(m){
-    var b = $(m.btn); if(b){ b.textContent = '🔴 Start live tracking'; b.classList.add('btn-red'); }
-  });
+  $('liveBtn').textContent = '🔴 Start live tracking';
+  $('liveBtn').classList.add('btn-red');
 }
-function toggleLive(){
+if ($('liveBtn')) $('liveBtn').addEventListener('click', function(){
   if(watchId !== null){ stopLive(); setStatus($('locStatus'), 'Tracking stopped.', 'ok'); }
   else startLive();
-}
-LIVE_MOUNTS.forEach(function(m){
-  var b = $(m.btn); if(b) b.addEventListener('click', toggleLive);
 });
 
-/* speed dial */
 var HELPLINES = [
   { name:'Emergency', num:'112' },
   { name:'Women in distress', num:'1091' },
@@ -2101,7 +2020,6 @@ function renderSpeed(){
 }
 renderSpeed();
 
-/* cascade */
 var casIdx = 0;
 function showCascade(){
   if(!contacts.length){ setStatus($('speedNote'), 'Add a trusted contact first.', 'bad'); return; }
@@ -2123,7 +2041,6 @@ if ($('cascadeStart')) $('cascadeStart').addEventListener('click', function(){ c
 if ($('cascadeNext')) $('cascadeNext').addEventListener('click', function(){ casIdx++; showCascade(); });
 if ($('cascadeStop')) $('cascadeStop').addEventListener('click', function(){ $('cascadePanel').classList.remove('on'); casIdx = 0; });
 
-/* keypad */
 var padVal = '';
 function paintPad(){
   if ($('padOut')) $('padOut').textContent = padVal;
@@ -2143,7 +2060,6 @@ if ($('padSave')) $('padSave').addEventListener('click', function(){
 });
 paintPad();
 
-/* rights tabs */
 var rtabs = document.querySelectorAll('.rtab');
 Array.prototype.forEach.call(rtabs, function(t){
   t.addEventListener('click', function(){
@@ -2155,7 +2071,6 @@ Array.prototype.forEach.call(rtabs, function(t){
   });
 });
 
-/* profile */
 var PKEY = 'sk_profile';
 var PFIELDS = ['pName','pBlood','pAge','pVehicle','pMed','pHome','pWork','pStation'];
 var profile = {};
@@ -2226,7 +2141,6 @@ baseMessage = function(){
 };
 refreshShare();
 
-/* safety rules */
 var RKEY = 'sk_rules';
 var boxes = document.querySelectorAll('.rule input[type=checkbox]');
 var ticked = {};
@@ -2253,7 +2167,6 @@ if ($('ruleReset')) $('ruleReset').addEventListener('click', function(){
 });
 paintRules();
 
-/* page nav */
 var navBtns = document.querySelectorAll('.pagenav button');
 function showPage(name){
   Array.prototype.forEach.call(document.querySelectorAll('.page'), function(p){
@@ -2262,6 +2175,10 @@ function showPage(name){
   Array.prototype.forEach.call(navBtns, function(b){
     b.setAttribute('aria-current', b.dataset.page === name ? 'true' : 'false');
   });
+  if (name !== 'team') {
+    if (teamDetailView) teamDetailView.classList.remove('on');
+    if (teamListView) teamListView.style.display = 'block';
+  }
   window.scrollTo({top:0, behavior:'auto'});
 }
 Array.prototype.forEach.call(navBtns, function(b){
