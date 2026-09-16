@@ -1,1 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Suraksha — women's safety, in one place</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7EAE5;
+  --surface:#F6F7F4;
+  --surface-2:#DDE1DB;
+  --ink:#18222C;
+  --muted:#5D6A74;
+  --line:#C6CCC4;
+  --signal:#BE1622;
+  --signal-ink:#FFFFFF;
+  --calm:#1B6353;
+  --focus:#1B6353;
+  --shadow:0 1px 0 var(--line);
+  --radius:4px;
+}
+:root:not([data-theme="light"]){
+  @media (prefers-color-scheme: dark){
+    --paper:#12181D;
+    --surface:#1A222A;
+    --surface-2:#232D36;
+    --ink:#E8EDE9;
+    --muted:#9DAAB3;
+    --line:#2E3A44;
+    --signal:#E8323F;
+    --signal-ink:#FFFFFF;
+    --calm:#5CC0A5;
+    --focus:#5CC0A5;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12181D;
+  --surface:#1A222A;
+  --surface-2:#232D36;
+  --ink:#E8EDE9;
+  --muted:#9DAAB3;
+  --line:#2E3A44;
+  --signal:#E8323F;
+  --signal-ink:#FFFFFF;
+  --calm:#5CC0A5;
+  --focus:#5CC0A5;
+}
 
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  font-size:17px;
+  line-height:1.55;
+  padding-bottom:88px;
+}
+img{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+.wrap{max-width:760px;margin:0 auto;padding:0 18px}
+
+/* ---------- masthead ---------- */
+header.top{
+  border-bottom:1px solid var(--line);
+  background:var(--surface);
+}
+.masthead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:18px 0 14px}
+.mark{
+  font-weight:700;font-size:25px;letter-spacing:-0.025em;margin:0;
+}
+.mark span{color:var(--signal)}
+.tagline{color:var(--muted);font-size:14.5px;margin:0}
+.themeBtn{
+  margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);
+  border-radius:99px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer;
+}
+
+/* ---------- dial row ---------- */
+.dialzone{padding:18px 0 22px}
+.dialgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.dial{
+  display:flex;flex-direction:column;gap:2px;
+  background:var(--signal);color:var(--signal-ink);
+  text-decoration:none;padding:14px 12px;border-radius:var(--radius);
+  min-height:92px;justify-content:center;
+}
+.dial .num{font-size:30px;font-weight:700;letter-spacing:-0.03em;line-height:1}
+.dial .who{font-size:13px;line-height:1.25;opacity:.92}
+.dialnote{color:var(--muted);font-size:13.5px;margin:10px 0 0}
+
+/* ---------- sections ---------- */
+section{padding:30px 0;border-top:1px solid var(--line)}
+h2{font-size:22px;letter-spacing:-0.02em;margin:0 0 6px;font-weight:700}
+h3{font-size:16.5px;margin:0 0 4px;font-weight:600}
+.lede{color:var(--muted);margin:0 0 18px;font-size:15.5px;max-width:60ch}
+p{max-width:68ch}
+
+.panel{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:16px;
+}
+.panel + .panel{margin-top:10px}
+
+/* ---------- buttons/inputs ---------- */
+.btn{
+  font:inherit;font-weight:600;font-size:15px;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
+  padding:11px 16px;border-radius:var(--radius);cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:46px;
+}
+.btn:hover{border-color:var(--muted)}
+.btn-go{background:var(--calm);border-color:var(--calm);color:#fff}
+.btn-red{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+.btn-wide{width:100%}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btnrow .btn{flex:1 1 150px}
+
+label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:5px;font-weight:500}
+input[type=text],input[type=tel],input[type=number],textarea,select{
+  font:inherit;width:100%;padding:10px 12px;border:1px solid var(--line);
+  background:var(--paper);color:var(--ink);border-radius:var(--radius);
+}
+textarea{min-height:92px;resize:vertical;line-height:1.5}
+.field + .field{margin-top:10px}
+.two{display:grid;grid-template-columns:1fr 130px;gap:8px}
+
+.status{font-size:14px;color:var(--muted);margin:10px 0 0;min-height:1.2em}
+.status.ok{color:var(--calm);font-weight:500}
+.status.bad{color:var(--signal);font-weight:500}
+
+/* ---------- contacts ---------- */
+ul.contacts{list-style:none;margin:12px 0 0;padding:0}
+ul.contacts li{
+  display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);
+}
+ul.contacts li .cname{font-weight:600;font-size:15.5px}
+ul.contacts li .cnum{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+ul.contacts li .grow{flex:1;min-width:0}
+.icobtn{
+  background:none;border:1px solid var(--line);color:var(--muted);
+  border-radius:var(--radius);padding:6px 10px;font:inherit;font-size:13px;cursor:pointer;
+}
+.empty{color:var(--muted);font-size:14.5px;margin:12px 0 0}
+
+/* ---------- timer ---------- */
+.clock{
+  font-size:56px;font-weight:700;letter-spacing:-0.04em;line-height:1;
+  font-variant-numeric:tabular-nums;margin:6px 0 2px;
+}
+.clock.warn{color:var(--signal)}
+.chiprow{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.chip{
+  font:inherit;font-size:14px;padding:8px 14px;border-radius:99px;
+  border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;
+}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* ---------- overlays ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:60;display:none;
+  align-items:center;justify-content:center;padding:24px;
+  background:rgba(8,12,16,.94);color:#fff;
+}
+.overlay.on{display:flex}
+.callcard{text-align:center;max-width:340px;width:100%}
+.avatar{
+  width:96px;height:96px;border-radius:50%;margin:0 auto 18px;
+  background:#2F3D49;display:flex;align-items:center;justify-content:center;
+  font-size:34px;font-weight:600;color:#fff;
+}
+.callname{font-size:27px;font-weight:600;margin:0}
+.callsub{color:#A8B4BD;margin:4px 0 30px;font-size:15px}
+.callbtns{display:flex;gap:40px;justify-content:center}
+.round{
+  width:68px;height:68px;border-radius:50%;border:none;cursor:pointer;
+  font:inherit;font-size:13px;font-weight:600;color:#fff;display:flex;
+  align-items:center;justify-content:center;flex-direction:column;
+}
+.round.acc{background:#17924F}
+.round.dec{background:var(--signal)}
+.ringing{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
+
+.alarmcard{text-align:center;max-width:420px}
+.alarmcard h3{font-size:26px;color:#fff;margin-bottom:8px}
+.alarmcard p{color:#C3CDD4;margin:0 auto 24px;max-width:34ch}
+
+/* ---------- helplines ---------- */
+.lines{margin-top:14px;border-top:1px solid var(--line)}
+.line{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;
+}
+.line .grow{flex:1;min-width:0}
+.line .lname{font-weight:600;font-size:15.5px;display:block}
+.line .ldesc{color:var(--muted);font-size:13.5px;display:block}
+.line .lnum{
+  font-weight:700;font-size:19px;font-variant-numeric:tabular-nums;
+  color:var(--signal);white-space:nowrap;letter-spacing:-0.01em;
+}
+
+/* ---------- guides (accordion) ---------- */
+details.guide{border-bottom:1px solid var(--line)}
+details.guide summary{
+  cursor:pointer;padding:14px 0;font-weight:600;font-size:16px;
+  list-style:none;display:flex;align-items:center;gap:10px;
+}
+details.guide summary::-webkit-details-marker{display:none}
+details.guide summary::after{content:"+";margin-left:auto;color:var(--muted);font-weight:400;font-size:20px}
+details.guide[open] summary::after{content:"–"}
+details.guide .body{padding:0 0 16px}
+details.guide ul{margin:0;padding-left:18px}
+details.guide li{margin-bottom:7px;max-width:64ch}
+
+/* ---------- rights ---------- */
+.right{padding:14px 0;border-bottom:1px solid var(--line)}
+.right p{margin:3px 0 0;color:var(--muted);font-size:15px}
+.caveat{
+  margin-top:16px;padding:12px 14px;border-left:3px solid var(--muted);
+  color:var(--muted);font-size:14.5px;background:var(--surface);
+}
+
+/* ---------- live tracking ---------- */
+.live{margin-top:12px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:none}
+.live.on{display:block}
+.livehead{
+  display:flex;align-items:center;gap:9px;padding:11px 14px;
+  background:var(--surface-2);border-bottom:1px solid var(--line);
+}
+.blip{width:10px;height:10px;border-radius:50%;background:var(--signal);flex:none;animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.livehead .lt{font-weight:600;font-size:14.5px}
+.livehead .elapsed{margin-left:auto;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+#trail{display:block;width:100%;height:190px;background:var(--paper)}
+.livestats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.stat{padding:10px 12px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:none}
+.stat b{display:block;font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-0.02em}
+.stat span{font-size:12.5px;color:var(--muted)}
+.coordbar{
+  padding:9px 14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);
+  font-variant-numeric:tabular-nums;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+
+/* ---------- calling ---------- */
+.speed{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
+.sdial{
+  display:flex;flex-direction:column;gap:1px;text-decoration:none;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
+  padding:12px 14px;border-radius:var(--radius);min-height:64px;justify-content:center;
+}
+.sdial b{font-size:15.5px;font-weight:600}
+.sdial span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.readout{
+  font-size:30px;font-weight:600;letter-spacing:0.02em;font-variant-numeric:tabular-nums;
+  min-height:42px;padding:6px 2px;word-break:break-all;line-height:1.2;
+}
+.readout:empty::before{content:"Enter a number";color:var(--muted);font-size:17px;font-weight:400;letter-spacing:0}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}
+.key{
+  font:inherit;font-size:22px;font-weight:600;padding:14px 0;cursor:pointer;
+  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:var(--radius);
+}
+.key:active{background:var(--line)}
+.key small{display:block;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.08em}
+.cascade{margin-top:12px;padding:12px;border:1px dashed var(--line);border-radius:var(--radius);display:none}
+.cascade.on{display:block}
+.cascade .who{font-weight:600;font-size:17px;margin:0 0 2px}
+.cascade .pos{color:var(--muted);font-size:13.5px;margin:0}
+
+/* ---------- rights ---------- */
+.rtabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0}
+.rtab{
+  font:inherit;font-size:14px;padding:8px 13px;border-radius:99px;cursor:pointer;
+  border:1px solid var(--line);background:var(--paper);color:var(--ink);
+}
+.rtab[aria-selected=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.rpanel{display:none;margin-top:6px}
+.rpanel.on{display:block}
+.law{
+  font-size:12.5px;color:var(--muted);margin-top:5px;display:block;
+  padding-left:10px;border-left:2px solid var(--line);
+}
+
+/* ---------- bottom bar ---------- */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:var(--surface);border-top:1px solid var(--line);
+  padding:9px 12px calc(9px + env(safe-area-inset-bottom));
+  display:flex;gap:8px;
+}
+.bar a,.bar button{flex:1;min-height:52px;font-size:15.5px}
+
+footer{padding:28px 0 36px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer p{max-width:64ch}
+
+@media (max-width:420px){
+  .dial .num{font-size:25px}
+  .two{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="masthead">
+      <h1 class="mark">Sur<span>a</span>ksha</h1>
+      <p class="tagline">Help, numbers and rights — for women in India</p>
+      <button class="themeBtn" id="themeBtn" type="button">Dark</button>
+    </div>
+    <div class="dialzone">
+      <div class="dialgrid">
+        <a class="dial" href="tel:112"><span class="num">112</span><span class="who">Police, fire, ambulance</span></a>
+        <a class="dial" href="tel:1091"><span class="num">1091</span><span class="who">Women in distress</span></a>
+        <a class="dial" href="tel:181"><span class="num">181</span><span class="who">Abuse &amp; violence, 24×7</span></a>
+      </div>
+      <p class="dialnote">These dial straight from a phone. 112 works even with no balance, and on most phones by pressing the power button five times.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= LOCATION ================= -->
+<section id="location">
+  <h2>Send where you are</h2>
+  <p class="lede">Your phone finds your location, and this writes the message. Send it on WhatsApp or SMS in two taps.</p>
+
+  <div class="panel">
+    <div class="btnrow" style="margin-top:0">
+      <button class="btn btn-go" id="locBtn" type="button">Find my location</button>
+      <button class="btn btn-red" id="liveBtn" type="button">Start live tracking</button>
+    </div>
+    <p class="status" id="locStatus" role="status" aria-live="polite"></p>
+
+    <div class="live" id="livePanel">
+      <div class="livehead">
+        <span class="blip" aria-hidden="true"></span>
+        <span class="lt">Live — updating as you move</span>
+        <span class="elapsed" id="liveElapsed">00:00</span>
+      </div>
+      <canvas id="trail" width="700" height="380" aria-label="Map of the path you have travelled since tracking started"></canvas>
+      <div class="livestats">
+        <div class="stat"><b id="statDist">0 m</b><span>Travelled</span></div>
+        <div class="stat"><b id="statSpeed">—</b><span>Speed</span></div>
+        <div class="stat"><b id="statAcc">—</b><span>Accuracy</span></div>
+      </div>
+      <div class="coordbar">
+        <span id="liveCoords">Waiting for the first fix…</span>
+        <a href="#" id="liveMap" target="_blank" rel="noopener" style="margin-left:auto">Open in Maps</a>
+      </div>
+    </div>
+
+    <div class="field" style="margin-top:14px">
+      <label for="msgBox">Message to send</label>
+      <textarea id="msgBox">I need help. Please call me now.</textarea>
+    </div>
+
+    <div class="btnrow">
+      <button class="btn" id="copyBtn" type="button">Copy message</button>
+      <a class="btn btn-go" id="waBtn" href="#" target="_blank" rel="noopener">Send on WhatsApp</a>
+      <a class="btn" id="smsBtn" href="#">Send as SMS</a>
+    </div>
+    <p class="status" id="shareStatus" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- ================= CONTACTS ================= -->
+<section id="contacts">
+  <h2>Your trusted contacts</h2>
+  <p class="lede">Saved only on this device, in this browser. Nothing is uploaded, and no one else can see them.</p>
+
+  <div class="panel">
+    <div class="two">
+      <div class="field">
+        <label for="cName">Name</label>
+        <input type="text" id="cName" placeholder="Meera (sister)" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="cNum">Phone</label>
+        <input type="tel" id="cNum" placeholder="9876543210" autocomplete="off">
+      </div>
+    </div>
+    <div class="btnrow"><button class="btn" id="addC" type="button">Add contact</button></div>
+    <ul class="contacts" id="cList"></ul>
+    <p class="empty" id="cEmpty">No contacts yet. Add one or two people who would actually pick up at 2am.</p>
+  </div>
+</section>
+
+<!-- ================= CALLING ================= -->
+<section id="calling">
+  <h2>Calling</h2>
+  <p class="lede">Everything you'd need to dial, without hunting through your contacts list.</p>
+
+  <div class="panel">
+    <h3>Speed dial</h3>
+    <p class="status" id="speedNote">Your saved contacts and the main helplines, one tap each.</p>
+    <div class="speed" id="speedGrid"></div>
+  </div>
+
+  <div class="panel">
+    <h3>Call down your list</h3>
+    <p class="status">Calls your trusted contacts one after another. If someone doesn't pick up, tap <em>No answer</em> and it moves to the next person.</p>
+    <div class="btnrow">
+      <button class="btn btn-go" id="cascadeStart" type="button">Start calling my contacts</button>
+    </div>
+    <div class="cascade" id="cascadePanel">
+      <p class="who" id="cascadeWho">—</p>
+      <p class="pos" id="cascadePos">—</p>
+      <div class="btnrow">
+        <a class="btn btn-red" id="cascadeCall" href="#">Call now</a>
+        <button class="btn" id="cascadeNext" type="button">No answer — next</button>
+        <button class="btn" id="cascadeStop" type="button">Stop</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Keypad</h3>
+    <div class="readout" id="padOut" role="status" aria-live="polite"></div>
+    <div class="pad" id="pad">
+      <button class="key" type="button" data-k="1">1</button>
+      <button class="key" type="button" data-k="2">2<small>ABC</small></button>
+      <button class="key" type="button" data-k="3">3<small>DEF</small></button>
+      <button class="key" type="button" data-k="4">4<small>GHI</small></button>
+      <button class="key" type="button" data-k="5">5<small>JKL</small></button>
+      <button class="key" type="button" data-k="6">6<small>MNO</small></button>
+      <button class="key" type="button" data-k="7">7<small>PQRS</small></button>
+      <button class="key" type="button" data-k="8">8<small>TUV</small></button>
+      <button class="key" type="button" data-k="9">9<small>WXYZ</small></button>
+      <button class="key" type="button" data-k="*">*</button>
+      <button class="key" type="button" data-k="0">0<small>+</small></button>
+      <button class="key" type="button" data-k="#">#</button>
+    </div>
+    <div class="btnrow">
+      <a class="btn btn-go" id="padCall" href="#">Call</a>
+      <button class="btn" id="padDel" type="button">Delete</button>
+      <button class="btn" id="padSave" type="button">Save as contact</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHECK-IN ================= -->
+<section id="checkin">
+  <h2>Safety timer</h2>
+  <p class="lede">Heading somewhere and want someone to know if you don't arrive? Start a timer. If you don't tap <em>I'm safe</em> before it runs out, this device sounds an alarm and opens your alert message.</p>
+
+  <div class="panel">
+    <div class="clock" id="clock">00:00</div>
+    <p class="status" id="timerStatus" role="status" aria-live="polite">Timer not running.</p>
+    <div class="chiprow" id="mins">
+      <button class="chip" type="button" data-m="5" aria-pressed="false">5 min</button>
+      <button class="chip" type="button" data-m="15" aria-pressed="true">15 min</button>
+      <button class="chip" type="button" data-m="30" aria-pressed="false">30 min</button>
+      <button class="chip" type="button" data-m="60" aria-pressed="false">60 min</button>
+    </div>
+    <div class="btnrow">
+      <button class="btn btn-go" id="startT" type="button">Start timer</button>
+      <button class="btn" id="safeT" type="button">I'm safe</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAKE CALL ================= -->
+<section id="fakecall">
+  <h2>Fake call</h2>
+  <p class="lede">A reason to leave, out loud, without explaining yourself. Your phone rings, you answer, you talk. Keep this tab open in the background.</p>
+
+  <div class="panel">
+    <div class="two">
+      <div class="field">
+        <label for="callerName">Caller shows as</label>
+        <input type="text" id="callerName" value="Papa" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="callDelay">Rings in</label>
+        <select id="callDelay">
+          <option value="5">5 sec</option>
+          <option value="15" selected>15 sec</option>
+          <option value="30">30 sec</option>
+          <option value="60">1 min</option>
+          <option value="180">3 min</option>
+        </select>
+      </div>
+    </div>
+    <div class="btnrow"><button class="btn" id="fakeBtn" type="button">Schedule the call</button></div>
+    <p class="status" id="fakeStatus" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+<!-- ================= HELPLINES ================= -->
+<section id="helplines">
+  <h2>Helplines</h2>
+  <p class="lede">All free, all 24×7 unless noted. Tap to dial.</p>
+  <div class="lines">
+    <a class="line" href="tel:112"><span class="grow"><span class="lname">Emergency Response Support</span><span class="ldesc">Police, fire and ambulance on one number, all of India</span></span><span class="lnum">112</span></a>
+    <a class="line" href="tel:1091"><span class="grow"><span class="lname">Women in distress</span><span class="ldesc">Police women's helpline</span></span><span class="lnum">1091</span></a>
+    <a class="line" href="tel:181"><span class="grow"><span class="lname">Women's helpline</span><span class="ldesc">Violence, abuse, shelter, counselling — links you to One Stop Centres</span></span><span class="lnum">181</span></a>
+    <a class="line" href="tel:14490"><span class="grow"><span class="lname">National Commission for Women</span><span class="ldesc">Counsellor-staffed; complaints and referrals. Also on WhatsApp at 7827170170</span></span><span class="lnum">14490</span></a>
+    <a class="line" href="tel:1930"><span class="grow"><span class="lname">Cybercrime and online fraud</span><span class="ldesc">Report within the first hour to have the best chance of freezing money</span></span><span class="lnum">1930</span></a>
+    <a class="line" href="tel:1098"><span class="grow"><span class="lname">Childline</span><span class="ldesc">Any child in danger, distress or being married off</span></span><span class="lnum">1098</span></a>
+    <a class="line" href="tel:1094"><span class="grow"><span class="lname">Missing persons</span><span class="ldesc">Missing women and children</span></span><span class="lnum">1094</span></a>
+    <a class="line" href="tel:15100"><span class="grow"><span class="lname">Free legal aid</span><span class="ldesc">NALSA — a lawyer at no cost, and help filing</span></span><span class="lnum">15100</span></a>
+    <a class="line" href="tel:14416"><span class="grow"><span class="lname">Tele-MANAS</span><span class="ldesc">Mental health support in many Indian languages</span></span><span class="lnum">14416</span></a>
+    <a class="line" href="tel:108"><span class="grow"><span class="lname">Ambulance</span><span class="ldesc">102 also works in most states</span></span><span class="lnum">108</span></a>
+  </div>
+  <p class="status">In Rajasthan, 1090 reaches the Abhay command centre and 18001200020 is the state women's helpline. Elsewhere, 181 and 1091 are the ones to remember.</p>
+</section>
+
+<!-- ================= GUIDES ================= -->
+<section id="guides">
+  <h2>If you're in it right now</h2>
+  <p class="lede">Short, practical, no lectures.</p>
+
+  <details class="guide">
+    <summary>In a cab or auto</summary>
+    <div class="body"><ul>
+      <li>Before you sit: photograph the number plate and send it to someone. Doing it visibly is itself a deterrent.</li>
+      <li>Share the live trip from the app. If it's a street auto, share your live location from WhatsApp instead — 8 hours, not 15 minutes.</li>
+      <li>Sit in the back, on the side away from the driver, with the door unlocked on your side.</li>
+      <li>If the route feels wrong, say out loud on a call that you're near a specific landmark. Wrong turns at low speed are the moment to get out, not the highway.</li>
+      <li>You don't owe anyone conversation. Not answering personal questions is normal and fine.</li>
+    </ul></div>
+  </details>
+
+  <details class="guide">
+    <summary>Walking, late or alone</summary>
+    <div class="body"><ul>
+      <li>One earphone out, or none. Hearing footsteps behind you matters more than the playlist.</li>
+      <li>Walk facing traffic where you can, in the middle of the footpath, away from parked vehicles and doorways.</li>
+      <li>If you think you're being followed, cross the road. If they cross too, go into any open shop, petrol pump, hospital or hotel lobby and tell the staff. Don't walk to your own door.</li>
+      <li>Shout what's happening, not just noise — "this man is following me" makes people look. "Fire" makes people come.</li>
+      <li>Keys between your fingers is a myth that injures you. A loud whistle, your phone's siren and distance work better.</li>
+    </ul></div>
+  </details>
+
+  <details class="guide">
+    <summary>Harassment at work</summary>
+    <div class="body"><ul>
+      <li>Write it down the same day: date, time, exact words, who else was around. A contemporaneous note carries real weight later.</li>
+      <li>Every workplace with 10 or more employees must have an Internal Committee under the POSH Act, 2013. Ask HR for its members in writing.</li>
+      <li>Fewer than 10 employees, or the complaint is against the employer? Go to the Local Committee through your District Officer, or file on the government's SHe-Box portal.</li>
+      <li>The complaint should normally be filed within three months, though the committee can extend that for good reason.</li>
+      <li>Conciliation can only happen if you want it, and it can never be a money settlement dressed up as one.</li>
+    </ul></div>
+  </details>
+
+  <details class="guide">
+    <summary>Online harassment, stalking, leaked photos</summary>
+    <div class="body"><ul>
+      <li>Screenshot everything with the URL, handle and timestamp visible, before you block. Blocking first loses the evidence.</li>
+      <li>Report at cybercrime.gov.in — the women-and-children section lets you report anonymously.</li>
+      <li>For intimate images shared without consent, also file directly with the platform under its non-consensual imagery policy, which is faster than the police route.</li>
+      <li>Money already lost? Call 1930 immediately. The first hour is when a transfer can still be frozen.</li>
+      <li>Sextortion is a crime against you, not by you. Don't pay — it never stops at one payment.</li>
+    </ul></div>
+  </details>
+
+  <details class="guide">
+    <summary>Violence at home</summary>
+    <div class="body"><ul>
+      <li>The Protection of Women from Domestic Violence Act, 2005 covers physical, sexual, verbal, emotional and economic abuse — and applies to live-in relationships, not only marriage.</li>
+      <li>You have the right to stay in the shared household. Being thrown out is itself something a court can reverse.</li>
+      <li>Every district has a Protection Officer and a One Stop Centre. Call 181 and ask them to connect you.</li>
+      <li>Keep somewhere else: ID, bank papers, marriage documents, children's papers, a spare phone, some cash. With a friend, not in the house.</li>
+      <li>Get injuries examined by a doctor and keep the paper. Medical records are the evidence that lasts.</li>
+    </ul></div>
+  </details>
+</section>
+
+<!-- ================= RIGHTS ================= -->
+<section id="rights">
+  <h2>Your rights</h2>
+  <p class="lede">What Indian law already gives you. Saying it out loud, at the desk or in the HR meeting, changes how things go.</p>
+
+  <div class="rtabs" role="tablist">
+    <button class="rtab" type="button" role="tab" data-r="police" aria-selected="true">Police &amp; FIR</button>
+    <button class="rtab" type="button" role="tab" data-r="work" aria-selected="false">At work</button>
+    <button class="rtab" type="button" role="tab" data-r="home" aria-selected="false">Marriage &amp; home</button>
+    <button class="rtab" type="button" role="tab" data-r="money" aria-selected="false">Money &amp; property</button>
+    <button class="rtab" type="button" role="tab" data-r="online" aria-selected="false">Online &amp; privacy</button>
+    <button class="rtab" type="button" role="tab" data-r="court" aria-selected="false">In court</button>
+  </div>
+
+  <div class="rpanel on" data-rp="police">
+    <div class="right"><h3>Any police station, anywhere</h3><p>A Zero FIR can be filed at any station regardless of where the incident happened. It is then transferred to the right one. "Not our area" is not a valid refusal.</p><span class="law">BNSS, 2023 — registration irrespective of jurisdiction</span></div>
+    <div class="right"><h3>An FIR cannot be refused</h3><p>For a cognizable offence, registration is mandatory and free. If it's refused, send your complaint in writing to the Superintendent of Police, or go directly to a Magistrate. You're entitled to a free copy of the FIR.</p></div>
+    <div class="right"><h3>Your statement, your terms</h3><p>In sexual offence cases the statement is recorded by a woman officer, and it can be recorded at your home or another place you choose, with someone of your choice present. If you have a disability, an interpreter or special educator must be provided and the statement videographed.</p></div>
+    <div class="right"><h3>Arrest timings</h3><p>A woman should not ordinarily be arrested before 6am or after 6pm, and only by a woman officer. Exceptions need a magistrate's prior written permission.</p></div>
+    <div class="right"><h3>Free treatment, no FIR needed first</h3><p>Every hospital, government or private, must give free first aid and treatment to a survivor of sexual assault or acid attack, and inform the police itself. They cannot ask you to bring an FIR first.</p></div>
+    <div class="right"><h3>No two-finger test</h3><p>The Supreme Court has banned it outright and called it re-victimising. Any doctor who conducts one is committing misconduct.</p></div>
+    <div class="right"><h3>You can report late</h3><p>There is no time limit on reporting a sexual offence. A delayed complaint is still a valid complaint.</p></div>
+  </div>
+
+  <div class="rpanel" data-rp="work">
+    <div class="right"><h3>Every workplace with 10+ staff needs a committee</h3><p>An Internal Committee, headed by a senior woman, with an external member from an NGO or legal background. Not having one is itself a violation, and HR must tell you who is on it.</p><span class="law">Sexual Harassment of Women at Workplace (POSH) Act, 2013</span></div>
+    <div class="right"><h3>Smaller workplaces are still covered</h3><p>Under 10 employees, informal work, domestic work, or a complaint against the employer himself — go to the Local Committee through your District Officer, or file online on the government's SHe-Box portal.</p></div>
+    <div class="right"><h3>Relief while the inquiry runs</h3><p>You can ask for a transfer for yourself or the respondent, up to three months of paid leave over and above your normal leave, or for him to be stopped from reporting on your work. The inquiry should finish within 90 days.</p></div>
+    <div class="right"><h3>Retaliation is not allowed</h3><p>Being sidelined, denied a promotion, or pushed out after complaining is itself actionable. Conciliation can only happen if you ask for it, and it can never be a cash settlement.</p></div>
+    <div class="right"><h3>26 weeks of paid maternity leave</h3><p>For your first two children; 12 weeks after that, and 12 weeks for an adopting or commissioning mother. You cannot be dismissed for being pregnant, and workplaces with 50+ employees must provide a creche.</p><span class="law">Maternity Benefit (Amendment) Act, 2017</span></div>
+    <div class="right"><h3>Equal pay for the same work</h3><p>Discriminating on pay or on recruitment for the same or similar work, on the ground of sex, is prohibited.</p><span class="law">Code on Wages, 2019</span></div>
+  </div>
+
+  <div class="rpanel" data-rp="home">
+    <div class="right"><h3>Abuse is more than bruises</h3><p>The law covers physical, sexual, verbal, emotional and economic abuse — including withholding money, taking your salary, or threatening to throw you out.</p><span class="law">Protection of Women from Domestic Violence Act, 2005</span></div>
+    <div class="right"><h3>It applies to live-in relationships</h3><p>You do not have to be married. Relationships "in the nature of marriage" are covered, as are mothers, sisters and daughters facing abuse from family members.</p></div>
+    <div class="right"><h3>The right to stay in the house</h3><p>You cannot be evicted from a shared household, whether or not you own it or your name is on the rent. A court can order him to leave instead.</p></div>
+    <div class="right"><h3>Orders a magistrate can pass</h3><p>Protection orders stopping contact, residence orders, monetary relief for expenses and lost earnings, custody of children, and compensation. Apply through a Protection Officer — every district has one — or a lawyer.</p></div>
+    <div class="right"><h3>Cruelty and dowry are crimes</h3><p>Cruelty by a husband or his relatives is a criminal offence, as is demanding dowry, giving it or taking it. Harassment over dowry is punishable regardless of whether anything was paid.</p><span class="law">BNS s.85 (earlier IPC 498A); Dowry Prohibition Act, 1961</span></div>
+    <div class="right"><h3>Streedhan is yours alone</h3><p>Everything given to you before, during or after marriage — jewellery, cash, gifts — is your absolute property. Your husband and in-laws are only custodians and must return it on demand.</p></div>
+    <div class="right"><h3>Maintenance</h3><p>A wife, including a divorced wife who hasn't remarried, can claim maintenance from her husband. It can be claimed through the criminal court, the family court, or under the Domestic Violence Act.</p><span class="law">BNSS s.144 (earlier CrPC s.125)</span></div>
+  </div>
+
+  <div class="rpanel" data-rp="money">
+    <div class="right"><h3>Daughters inherit equally</h3><p>A daughter is a coparcener in ancestral property from birth, with the same rights and liabilities as a son. The Supreme Court confirmed in 2020 that this applies whether or not the father was alive in 2005.</p><span class="law">Hindu Succession (Amendment) Act, 2005; Vineeta Sharma v. Rakesh Sharma</span></div>
+    <div class="right"><h3>Marriage doesn't end it</h3><p>Getting married does not take away your share in your parents' property. Signing a "relinquishment" at a wedding under pressure can be challenged.</p></div>
+    <div class="right"><h3>Banking on your own</h3><p>You can open an account, take a loan, hold property and run a business without a husband's, father's or any male relative's signature or consent. A bank asking for one is in the wrong.</p></div>
+    <div class="right"><h3>Your salary is yours</h3><p>Nobody in your household has a legal claim on your earnings. Being made to hand over your salary is economic abuse under the Domestic Violence Act.</p></div>
+    <div class="right"><h3>Lower stamp duty</h3><p>Most states charge women buyers a reduced rate of stamp duty on property registration. Worth asking about before a sale deed is drawn up in someone else's name.</p></div>
+  </div>
+
+  <div class="rpanel" data-rp="online">
+    <div class="right"><h3>Your name stays out of it</h3><p>Publishing the identity of a survivor of a sexual offence is itself a crime. Media, police and online accounts cannot name you or print details that identify you.</p></div>
+    <div class="right"><h3>Intimate images must come down in 24 hours</h3><p>Platforms are required to remove non-consensual intimate imagery, including morphed and AI-generated images, within 24 hours of a complaint. Sharing such images is separately punishable.</p><span class="law">IT Rules, 2021; IT Act s.66E, 67A</span></div>
+    <div class="right"><h3>Report anonymously</h3><p>cybercrime.gov.in has a dedicated section for crimes against women and children where you can report without giving your name. For money already lost, call 1930 within the hour.</p></div>
+    <div class="right"><h3>Online stalking is stalking</h3><p>Repeatedly contacting you, or monitoring your internet or messaging activity against your wishes, is a criminal offence — not "just messages".</p><span class="law">BNS s.78 (earlier IPC 354D)</span></div>
+    <div class="right"><h3>Sextortion is a crime against you</h3><p>You have committed no offence by being in the images. Don't pay. Screenshot, report, and tell one person you trust.</p></div>
+  </div>
+
+  <div class="rpanel" data-rp="court">
+    <div class="right"><h3>A lawyer costs you nothing</h3><p>Every woman is entitled to free legal aid through the District Legal Services Authority, whatever her income. Call 15100 or walk into the DLSA office at your district court.</p><span class="law">Legal Services Authorities Act, 1987 — s.12(c)</span></div>
+    <div class="right"><h3>Trials held in private</h3><p>Sexual offence trials are conducted in camera, and as far as practicable before a woman judge. The public and press are kept out.</p></div>
+    <div class="right"><h3>Your past is not on trial</h3><p>Evidence of your character or previous sexual experience is not admissible on the question of consent. Questions about it can be objected to.</p></div>
+    <div class="right"><h3>Compensation, separate from the verdict</h3><p>Victim compensation schemes run through the Legal Services Authority, and can be awarded even where the accused is not convicted or not traced.</p></div>
+    <div class="right"><h3>You must be kept informed</h3><p>You're entitled to be told how the investigation is progressing, and to be heard before the accused is released on bail in serious offences.</p></div>
+  </div>
+
+  <p class="caveat">India's criminal laws were replaced in July 2024 — section numbers changed from the IPC and CrPC to the Bharatiya Nyaya Sanhita and Bharatiya Nagarik Suraksha Sanhita, but these protections carried over. This page is general information, not legal advice. For anything specific, talk to a lawyer or call 15100.</p>
+</section>
+
+<footer>
+  <p>Suraksha is a page, not an emergency service. It can't call anyone for you and it can't reach the police on its own. In danger right now, dial 112.</p>
+  <p style="margin-top:10px">Your contacts and settings stay in this browser on this device. Nothing typed here is sent anywhere.</p>
+</footer>
+
+</main>
+
+<!-- ================= BOTTOM BAR ================= -->
+<div class="bar">
+  <a class="btn btn-red" href="tel:112">Call 112</a>
+  <button class="btn" id="sirenBtn" type="button">Siren</button>
+  <button class="btn" id="quickAlert" type="button">Alert contacts</button>
+</div>
+
+<!-- ================= OVERLAYS ================= -->
+<div class="overlay" id="callOverlay" role="dialog" aria-modal="true" aria-label="Incoming call">
+  <div class="callcard">
+    <div class="avatar ringing" id="callInitial">P</div>
+    <p class="callname" id="callWho">Papa</p>
+    <p class="callsub" id="callSub">Incoming call — mobile</p>
+    <div class="callbtns">
+      <button class="round dec" id="declineBtn" type="button">End</button>
+      <button class="round acc" id="acceptBtn" type="button">Answer</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="alarmOverlay" role="dialog" aria-modal="true" aria-label="Timer finished">
+  <div class="alarmcard">
+    <h3>Your timer ran out</h3>
+    <p>You didn't check in. Silence this, or send your alert now.</p>
+    <div class="btnrow" style="justify-content:center">
+      <button class="btn" id="stopAlarm" type="button">I'm safe — stop</button>
+      <button class="btn btn-red" id="alarmSend" type="button">Send alert</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var $ = function(id){ return document.getElementById(id); };
+
+/* ---------------- theme ---------------- */
+var themeBtn = $('themeBtn');
+function currentDark(){
+  var t = document.documentElement.getAttribute('data-theme');
+  if(t) return t === 'dark';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function paintThemeBtn(){ themeBtn.textContent = currentDark() ? 'Light' : 'Dark'; }
+try{
+  var savedTheme = localStorage.getItem('sk_theme');
+  if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+}catch(e){}
+paintThemeBtn();
+themeBtn.addEventListener('click', function(){
+  var next = currentDark() ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try{ localStorage.setItem('sk_theme', next); }catch(e){}
+  paintThemeBtn();
+});
+
+/* ---------------- contacts ---------------- */
+var KEY = 'sk_contacts';
+var contacts = [];
+try{
+  var raw = localStorage.getItem(KEY);
+  if(raw) contacts = JSON.parse(raw) || [];
+}catch(e){ contacts = []; }
+if(!Array.isArray(contacts)) contacts = [];
+
+function saveContacts(){
+  try{ localStorage.setItem(KEY, JSON.stringify(contacts)); }
+  catch(e){ setStatus($('shareStatus'),'This browser blocked saving. Contacts will be lost when you close the tab.','bad'); }
+}
+function digits(s){ return (s||'').replace(/[^\d+]/g,''); }
+function waNumber(s){
+  var d = digits(s).replace(/^\+/,'');
+  if(d.length === 10) d = '91' + d;          // assume India for bare 10-digit
+  if(d.length === 11 && d.charAt(0) === '0') d = '91' + d.slice(1);
+  return d;
+}
+function renderContacts(){
+  var list = $('cList');
+  list.innerHTML = '';
+  $('cEmpty').style.display = contacts.length ? 'none' : 'block';
+  contacts.forEach(function(c, i){
+    var li = document.createElement('li');
+    var g = document.createElement('span'); g.className = 'grow';
+    var n = document.createElement('span'); n.className = 'cname'; n.textContent = c.name;
+    var p = document.createElement('span'); p.className = 'cnum'; p.textContent = ' ' + c.num;
+    g.appendChild(n); g.appendChild(document.createElement('br')); g.appendChild(p);
+    var call = document.createElement('a');
+    call.className = 'icobtn'; call.href = 'tel:' + digits(c.num); call.textContent = 'Call';
+    var del = document.createElement('button');
+    del.className = 'icobtn'; del.type = 'button'; del.textContent = 'Remove';
+    del.setAttribute('aria-label','Remove ' + c.name);
+    del.addEventListener('click', function(){
+      contacts.splice(i,1); saveContacts(); renderContacts(); refreshShare();
+    });
+    li.appendChild(g); li.appendChild(call); li.appendChild(del);
+    list.appendChild(li);
+  });
+}
+$('addC').addEventListener('click', function(){
+  var n = $('cName').value.trim(), p = $('cNum').value.trim();
+  if(!n || !digits(p)){
+    setStatus($('shareStatus'),'Add both a name and a phone number.','bad');
+    return;
+  }
+  contacts.push({ name:n, num:p });
+  saveContacts(); renderContacts(); refreshShare();
+  $('cName').value = ''; $('cNum').value = '';
+  setStatus($('shareStatus'), n + ' saved on this device.', 'ok');
+});
+renderContacts();
+
+/* ---------------- location + message ---------------- */
+var coords = null;
+function setStatus(el, text, cls){
+  el.textContent = text;
+  el.className = 'status' + (cls ? ' ' + cls : '');
+}
+function stamp(){
+  var d = new Date();
+  return d.toLocaleString(undefined,{hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'});
+}
+function baseMessage(){
+  var t = $('msgBox').value.trim();
+  if(!t) t = 'I need help. Please call me now.';
+  if(coords){
+    t += '\n\nMy location: https://maps.google.com/?q=' + coords.lat + ',' + coords.lon;
+    t += '\n(accurate to about ' + coords.acc + ' m, at ' + stamp() + ')';
+  }
+  return t;
+}
+function refreshShare(){
+  var text = encodeURIComponent(baseMessage());
+  var first = contacts.length ? waNumber(contacts[0].num) : '';
+  $('waBtn').href = first ? ('https://wa.me/' + first + '?text=' + text)
+                          : ('https://wa.me/?text=' + text);
+  var smsTo = contacts.map(function(c){ return digits(c.num); }).join(',');
+  var sep = (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) ? '&' : '?';
+  $('smsBtn').href = 'sms:' + smsTo + sep + 'body=' + text;
+}
+$('msgBox').addEventListener('input', refreshShare);
+refreshShare();
+
+$('locBtn').addEventListener('click', function(){
+  if(!navigator.geolocation){
+    setStatus($('locStatus'),'This browser can\'t get a location. Type a landmark into the message instead.','bad');
+    return;
+  }
+  setStatus($('locStatus'),'Finding you…');
+  navigator.geolocation.getCurrentPosition(function(pos){
+    coords = {
+      lat: pos.coords.latitude.toFixed(6),
+      lon: pos.coords.longitude.toFixed(6),
+      acc: Math.round(pos.coords.accuracy)
+    };
+    setStatus($('locStatus'),'Found you, within about ' + coords.acc + ' m. It\'s been added to the message below.','ok');
+    refreshShare();
+  }, function(err){
+    var m = 'Couldn\'t get your location.';
+    if(err.code === 1) m = 'Location is blocked. Allow it in your browser\'s site settings, or type a landmark into the message.';
+    if(err.code === 3) m = 'Location timed out. Try again, or move near a window.';
+    setStatus($('locStatus'), m, 'bad');
+  }, { enableHighAccuracy:true, timeout:12000, maximumAge:0 });
+});
+
+$('copyBtn').addEventListener('click', function(){
+  var txt = baseMessage();
+  function done(){ setStatus($('shareStatus'),'Copied. Paste it anywhere.','ok'); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(done, fallback);
+  } else { fallback(); }
+  function fallback(){
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }
+    catch(e){ setStatus($('shareStatus'),'Copying is blocked here. Select the message and copy it manually.','bad'); }
+    document.body.removeChild(ta);
+  }
+});
+
+$('quickAlert').addEventListener('click', function(){
+  document.getElementById('location').scrollIntoView({behavior:'smooth', block:'start'});
+  if(!coords) $('locBtn').click();
+  setStatus($('shareStatus'), contacts.length
+    ? 'Ready to send to ' + contacts[0].name + '. Pick WhatsApp or SMS.'
+    : 'Add a trusted contact first, or use WhatsApp and choose someone there.', contacts.length ? 'ok' : 'bad');
+});
+
+/* ---------------- audio ---------------- */
+var ac = null, sirenNodes = null, ringTimer = null;
+function audio(){
+  if(!ac){
+    var C = window.AudioContext || window.webkitAudioContext;
+    if(!C) return null;
+    ac = new C();
+  }
+  if(ac.state === 'suspended') ac.resume();
+  return ac;
+}
+function startSiren(){
+  var c = audio(); if(!c || sirenNodes) return;
+  var osc = c.createOscillator(), gain = c.createGain();
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(600, c.currentTime);
+  gain.gain.setValueAtTime(0.0001, c.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.35, c.currentTime + 0.05);
+  osc.connect(gain); gain.connect(c.destination);
+  osc.start();
+  var t = c.currentTime, up = true;
+  for(var i=0; i<600; i++){
+    osc.frequency.linearRampToValueAtTime(up ? 1100 : 550, t + 0.6);
+    t += 0.6; up = !up;
+  }
+  sirenNodes = { osc:osc, gain:gain };
+  $('sirenBtn').textContent = 'Stop siren';
+}
+function stopSiren(){
+  if(!sirenNodes) return;
+  try{
+    sirenNodes.gain.gain.cancelScheduledValues(ac.currentTime);
+    sirenNodes.gain.gain.setValueAtTime(sirenNodes.gain.gain.value, ac.currentTime);
+    sirenNodes.gain.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.08);
+    sirenNodes.osc.stop(ac.currentTime + 0.12);
+  }catch(e){}
+  sirenNodes = null;
+  $('sirenBtn').textContent = 'Siren';
+}
+$('sirenBtn').addEventListener('click', function(){
+  sirenNodes ? stopSiren() : startSiren();
+});
+
+function ringOnce(){
+  var c = audio(); if(!c) return;
+  [0, 0.4].forEach(function(off){
+    var o = c.createOscillator(), g = c.createGain();
+    o.type = 'sine'; o.frequency.value = 440;
+    var o2 = c.createOscillator(); o2.type = 'sine'; o2.frequency.value = 480;
+    g.gain.setValueAtTime(0.0001, c.currentTime + off);
+    g.gain.exponentialRampToValueAtTime(0.25, c.currentTime + off + 0.02);
+    g.gain.setValueAtTime(0.25, c.currentTime + off + 0.3);
+    g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + off + 0.34);
+    o.connect(g); o2.connect(g); g.connect(c.destination);
+    o.start(c.currentTime + off); o2.start(c.currentTime + off);
+    o.stop(c.currentTime + off + 0.36); o2.stop(c.currentTime + off + 0.36);
+  });
+}
+function startRinging(){
+  ringOnce();
+  ringTimer = setInterval(ringOnce, 2600);
+}
+function stopRinging(){
+  if(ringTimer){ clearInterval(ringTimer); ringTimer = null; }
+}
+
+/* ---------------- fake call ---------------- */
+var fakeTimer = null, callClock = null;
+$('fakeBtn').addEventListener('click', function(){
+  audio(); // unlock audio on this tap
+  if(fakeTimer){ clearTimeout(fakeTimer); fakeTimer = null; }
+  var name = $('callerName').value.trim() || 'Papa';
+  var secs = parseInt($('callDelay').value, 10);
+  setStatus($('fakeStatus'), name + ' will call in ' + secs + ' seconds. Leave this tab open.', 'ok');
+  fakeTimer = setTimeout(function(){
+    $('callWho').textContent = name;
+    $('callInitial').textContent = name.charAt(0).toUpperCase();
+    $('callInitial').classList.add('ringing');
+    $('callSub').textContent = 'Incoming call — mobile';
+    $('callOverlay').classList.add('on');
+    $('acceptBtn').focus();
+    startRinging();
+    if(navigator.vibrate) navigator.vibrate([500,300,500,300,500]);
+  }, secs * 1000);
+});
+function endCall(){
+  stopRinging();
+  if(callClock){ clearInterval(callClock); callClock = null; }
+  $('callOverlay').classList.remove('on');
+  setStatus($('fakeStatus'), '');
+  if(navigator.vibrate) navigator.vibrate(0);
+}
+$('declineBtn').addEventListener('click', endCall);
+$('acceptBtn').addEventListener('click', function(){
+  stopRinging();
+  if(navigator.vibrate) navigator.vibrate(0);
+  $('callInitial').classList.remove('ringing');
+  var s = 0;
+  $('callSub').textContent = '00:00';
+  callClock = setInterval(function(){
+    s++;
+    var m = String(Math.floor(s/60)).padStart(2,'0'), r = String(s%60).padStart(2,'0');
+    $('callSub').textContent = m + ':' + r;
+  }, 1000);
+});
+
+/* ---------------- safety timer ---------------- */
+var chosen = 15, tick = null, endAt = 0;
+Array.prototype.forEach.call($('mins').querySelectorAll('.chip'), function(b){
+  b.addEventListener('click', function(){
+    Array.prototype.forEach.call($('mins').querySelectorAll('.chip'), function(x){
+      x.setAttribute('aria-pressed','false');
+    });
+    b.setAttribute('aria-pressed','true');
+    chosen = parseInt(b.dataset.m, 10);
+    if(!tick) $('clock').textContent = String(chosen).padStart(2,'0') + ':00';
+  });
+});
+$('clock').textContent = '15:00';
+
+function paintClock(ms){
+  var s = Math.max(0, Math.round(ms/1000));
+  var m = String(Math.floor(s/60)).padStart(2,'0'), r = String(s%60).padStart(2,'0');
+  $('clock').textContent = m + ':' + r;
+  $('clock').classList.toggle('warn', s <= 60);
+}
+$('startT').addEventListener('click', function(){
+  audio();
+  if(tick) clearInterval(tick);
+  endAt = Date.now() + chosen*60000;
+  paintClock(chosen*60000);
+  setStatus($('timerStatus'), 'Running. Tap "I\'m safe" when you arrive.', 'ok');
+  tick = setInterval(function(){
+    var left = endAt - Date.now();
+    paintClock(left);
+    if(left <= 0){
+      clearInterval(tick); tick = null;
+      setStatus($('timerStatus'), 'Timer ran out.', 'bad');
+      $('alarmOverlay').classList.add('on');
+      $('stopAlarm').focus();
+      startSiren();
+      if(navigator.vibrate) navigator.vibrate([800,200,800,200,800]);
+    }
+  }, 250);
+});
+$('safeT').addEventListener('click', function(){
+  if(tick){ clearInterval(tick); tick = null; }
+  stopSiren();
+  $('alarmOverlay').classList.remove('on');
+  paintClock(chosen*60000);
+  $('clock').classList.remove('warn');
+  setStatus($('timerStatus'), 'Timer stopped. Glad you\'re there.', 'ok');
+  if(navigator.vibrate) navigator.vibrate(0);
+});
+$('stopAlarm').addEventListener('click', function(){ $('safeT').click(); });
+$('alarmSend').addEventListener('click', function(){
+  stopSiren();
+  $('alarmOverlay').classList.remove('on');
+  if(navigator.vibrate) navigator.vibrate(0);
+  $('quickAlert').click();
+});
+
+/* ---------------- live location ---------------- */
+var watchId = null, path = [], dist = 0, liveStart = 0, liveClock = null;
+
+function haversine(a, b){
+  var R = 6371000, toRad = Math.PI/180;
+  var dLat = (b.lat - a.lat) * toRad, dLon = (b.lon - a.lon) * toRad;
+  var la1 = a.lat * toRad, la2 = b.lat * toRad;
+  var h = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(la1)*Math.cos(la2)*Math.sin(dLon/2)*Math.sin(dLon/2);
+  return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
+}
+function fmtDist(m){
+  return m < 1000 ? Math.round(m) + ' m' : (m/1000).toFixed(2) + ' km';
+}
+function cssVar(n){
+  return getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+}
+function drawTrail(){
+  var cv = $('trail'); if(!cv.getContext) return;
+  var g = cv.getContext('2d'), W = cv.width, H = cv.height, pad = 34;
+  g.clearRect(0,0,W,H);
+  g.fillStyle = cssVar('--paper'); g.fillRect(0,0,W,H);
+
+  /* grid */
+  g.strokeStyle = cssVar('--line'); g.lineWidth = 1;
+  for(var x = 0; x <= W; x += 50){ g.beginPath(); g.moveTo(x+.5,0); g.lineTo(x+.5,H); g.stroke(); }
+  for(var y = 0; y <= H; y += 50){ g.beginPath(); g.moveTo(0,y+.5); g.lineTo(W,y+.5); g.stroke(); }
+
+  if(!path.length){
+    g.fillStyle = cssVar('--muted'); g.font = '16px Archivo, sans-serif'; g.textAlign = 'center';
+    g.fillText('Waiting for a GPS fix…', W/2, H/2);
+    return;
+  }
+
+  var lats = path.map(function(p){ return p.lat; }), lons = path.map(function(p){ return p.lon; });
+  var minLa = Math.min.apply(null,lats), maxLa = Math.max.apply(null,lats);
+  var minLo = Math.min.apply(null,lons), maxLo = Math.max.apply(null,lons);
+  var spanLa = Math.max(maxLa - minLa, 0.00035), spanLo = Math.max(maxLo - minLo, 0.00035);
+  var span = Math.max(spanLa, spanLo);
+  var cLa = (minLa + maxLa)/2, cLo = (minLo + maxLo)/2;
+  var size = Math.min(W, H) - pad*2;
+  function px(p){
+    return {
+      x: W/2 + ((p.lon - cLo) / span) * size,
+      y: H/2 - ((p.lat - cLa) / span) * size
+    };
+  }
+
+  /* path */
+  if(path.length > 1){
+    g.strokeStyle = cssVar('--calm'); g.lineWidth = 3;
+    g.lineJoin = 'round'; g.lineCap = 'round';
+    g.beginPath();
+    path.forEach(function(p,i){ var q = px(p); i ? g.lineTo(q.x,q.y) : g.moveTo(q.x,q.y); });
+    g.stroke();
+  }
+  /* start marker */
+  var s = px(path[0]);
+  g.fillStyle = cssVar('--muted');
+  g.beginPath(); g.arc(s.x, s.y, 5, 0, Math.PI*2); g.fill();
+  g.font = '12px Archivo, sans-serif'; g.textAlign = 'left';
+  g.fillText('Start', s.x + 9, s.y + 4);
+
+  /* current position */
+  var c = px(path[path.length-1]);
+  g.fillStyle = cssVar('--signal');
+  g.globalAlpha = 0.18;
+  g.beginPath(); g.arc(c.x, c.y, 18, 0, Math.PI*2); g.fill();
+  g.globalAlpha = 1;
+  g.beginPath(); g.arc(c.x, c.y, 7, 0, Math.PI*2); g.fill();
+  g.strokeStyle = cssVar('--paper'); g.lineWidth = 2; g.stroke();
+
+  /* scale bar */
+  var metresAcross = span * 111320;
+  g.fillStyle = cssVar('--muted'); g.textAlign = 'left'; g.font = '12px Archivo, sans-serif';
+  g.fillText('about ' + fmtDist(metresAcross) + ' across', 12, H - 12);
+}
+function liveTick(){
+  var s = Math.round((Date.now() - liveStart)/1000);
+  $('liveElapsed').textContent = String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+}
+function startLive(){
+  if(!navigator.geolocation){
+    setStatus($('locStatus'), 'This browser can\'t track location.', 'bad'); return;
+  }
+  path = []; dist = 0;
+  liveStart = Date.now();
+  $('livePanel').classList.add('on');
+  $('liveBtn').textContent = 'Stop live tracking';
+  $('liveBtn').classList.remove('btn-red');
+  setStatus($('locStatus'), 'Tracking. Your message updates itself as you move — resend it any time for a fresh position.', 'ok');
+  drawTrail();
+  liveClock = setInterval(liveTick, 1000);
+
+  watchId = navigator.geolocation.watchPosition(function(pos){
+    var p = { lat: pos.coords.latitude, lon: pos.coords.longitude, t: Date.now() };
+    if(path.length){
+      var d = haversine(path[path.length-1], p);
+      if(d < 2 && pos.coords.accuracy > 25) return;   /* ignore GPS jitter */
+      dist += d;
+    }
+    path.push(p);
+    if(path.length > 900) path.shift();
+
+    coords = { lat: p.lat.toFixed(6), lon: p.lon.toFixed(6), acc: Math.round(pos.coords.accuracy) };
+    $('statDist').textContent = fmtDist(dist);
+    $('statAcc').textContent = Math.round(pos.coords.accuracy) + ' m';
+    $('statSpeed').textContent = (pos.coords.speed != null && pos.coords.speed >= 0)
+      ? (pos.coords.speed * 3.6).toFixed(1) + ' km/h' : '—';
+    $('liveCoords').textContent = coords.lat + ', ' + coords.lon;
+    $('liveMap').href = 'https://maps.google.com/?q=' + coords.lat + ',' + coords.lon;
+    drawTrail();
+    refreshShare();
+  }, function(err){
+    var m = 'Tracking stopped — couldn\'t read your location.';
+    if(err.code === 1) m = 'Location is blocked. Allow it in your browser\'s site settings and start again.';
+    setStatus($('locStatus'), m, 'bad');
+    stopLive();
+  }, { enableHighAccuracy:true, timeout:20000, maximumAge:1000 });
+}
+function stopLive(){
+  if(watchId !== null){ navigator.geolocation.clearWatch(watchId); watchId = null; }
+  if(liveClock){ clearInterval(liveClock); liveClock = null; }
+  $('liveBtn').textContent = 'Start live tracking';
+  $('liveBtn').classList.add('btn-red');
+}
+$('liveBtn').addEventListener('click', function(){
+  if(watchId !== null){
+    stopLive();
+    setStatus($('locStatus'), 'Tracking stopped. Your last position is still in the message.', 'ok');
+  } else {
+    startLive();
+  }
+});
+
+/* ---------------- calling: speed dial ---------------- */
+var HELPLINES = [
+  { name:'Emergency', num:'112' },
+  { name:'Women in distress', num:'1091' },
+  { name:'Women\'s helpline', num:'181' },
+  { name:'Cybercrime', num:'1930' },
+  { name:'Legal aid', num:'15100' },
+  { name:'Ambulance', num:'108' }
+];
+function renderSpeed(){
+  var grid = $('speedGrid');
+  grid.innerHTML = '';
+  contacts.concat(HELPLINES).forEach(function(c){
+    var a = document.createElement('a');
+    a.className = 'sdial';
+    a.href = 'tel:' + digits(c.num);
+    var b = document.createElement('b'); b.textContent = c.name;
+    var s = document.createElement('span'); s.textContent = c.num;
+    a.appendChild(b); a.appendChild(s);
+    grid.appendChild(a);
+  });
+}
+renderSpeed();
+
+/* ---------------- calling: cascade ---------------- */
+var casIdx = 0;
+function showCascade(){
+  if(!contacts.length){
+    setStatus($('speedNote'), 'Add a trusted contact above first.', 'bad');
+    return;
+  }
+  if(casIdx >= contacts.length){
+    $('cascadeWho').textContent = 'Everyone tried';
+    $('cascadePos').textContent = 'Nobody answered. Consider calling 112 or 1091.';
+    $('cascadeCall').href = 'tel:112';
+    $('cascadeCall').textContent = 'Call 112 instead';
+    return;
+  }
+  var c = contacts[casIdx];
+  $('cascadePanel').classList.add('on');
+  $('cascadeWho').textContent = c.name;
+  $('cascadePos').textContent = c.num + ' — ' + (casIdx+1) + ' of ' + contacts.length;
+  $('cascadeCall').href = 'tel:' + digits(c.num);
+  $('cascadeCall').textContent = 'Call ' + c.name;
+}
+$('cascadeStart').addEventListener('click', function(){ casIdx = 0; showCascade(); });
+$('cascadeNext').addEventListener('click', function(){ casIdx++; showCascade(); });
+$('cascadeStop').addEventListener('click', function(){
+  $('cascadePanel').classList.remove('on'); casIdx = 0;
+});
+
+/* ---------------- calling: keypad ---------------- */
+var padVal = '';
+function paintPad(){
+  $('padOut').textContent = padVal;
+  $('padCall').href = padVal ? 'tel:' + padVal : '#';
+}
+Array.prototype.forEach.call($('pad').querySelectorAll('.key'), function(k){
+  k.addEventListener('click', function(){
+    if(padVal.length < 18){ padVal += k.dataset.k; paintPad(); }
+  });
+});
+$('padDel').addEventListener('click', function(){ padVal = padVal.slice(0,-1); paintPad(); });
+$('padSave').addEventListener('click', function(){
+  if(!padVal){ return; }
+  $('cNum').value = padVal;
+  $('cName').focus();
+  document.getElementById('contacts').scrollIntoView({behavior:'smooth', block:'start'});
+});
+paintPad();
+
+/* keep speed dial in sync when contacts change */
+var _render = renderContacts;
+renderContacts = function(){ _render(); renderSpeed(); };
+renderSpeed();
+
+/* ---------------- rights tabs ---------------- */
+var rtabs = document.querySelectorAll('.rtab');
+Array.prototype.forEach.call(rtabs, function(t){
+  t.addEventListener('click', function(){
+    Array.prototype.forEach.call(rtabs, function(x){ x.setAttribute('aria-selected','false'); });
+    t.setAttribute('aria-selected','true');
+    Array.prototype.forEach.call(document.querySelectorAll('.rpanel'), function(p){
+      p.classList.toggle('on', p.dataset.rp === t.dataset.r);
+    });
+  });
+});
+
+/* close overlays on Escape */
+document.addEventListener('keydown', function(e){
+  if(e.key !== 'Escape') return;
+  if($('callOverlay').classList.contains('on')) endCall();
+  if($('alarmOverlay').classList.contains('on')) $('stopAlarm').click();
+});
+})();
+</script>
+</body>
+</html>
