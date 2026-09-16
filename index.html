@@ -52,9 +52,20 @@
 
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
+html{
+  background:var(--paper);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 8% -8%, color-mix(in srgb, var(--signal) 7%, transparent), transparent 60%),
+    radial-gradient(ellipse 900px 600px at 100% 0%, color-mix(in srgb, var(--calm) 9%, transparent), transparent 55%),
+    radial-gradient(ellipse 1000px 700px at 50% 110%, color-mix(in srgb, var(--calm) 5%, transparent), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-attachment:fixed;
+  background-size:auto,auto,auto,140px 140px;
+  min-height:100%;
+}
 body{
   margin:0;
-  background:var(--paper);
+  background:transparent;
   color:var(--ink);
   font-family:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
   font-size:17px;
@@ -125,7 +136,7 @@ p{max-width:68ch}
 .btnrow .btn{flex:1 1 150px}
 
 label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:5px;font-weight:500}
-input[type=text],input[type=tel],input[type=number],textarea,select{
+input[type=text],input[type=tel],input[type=number],input[type=password],input[type=email],textarea,select{
   font:inherit;width:100%;padding:10px 12px;border:1px solid var(--line);
   background:var(--paper);color:var(--ink);border-radius:var(--radius);
 }
@@ -447,9 +458,150 @@ footer p{max-width:64ch}
 @media (prefers-reduced-motion:reduce){
   *{animation:none !important;transition:none !important}
 }
+
+/* ---------- auth gate ---------- */
+#authGate{
+  position:fixed;inset:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;overflow-y:auto;
+  background:var(--paper);
+  background-image:
+    radial-gradient(ellipse 800px 500px at 10% -10%, color-mix(in srgb, var(--signal) 10%, transparent), transparent 60%),
+    radial-gradient(ellipse 800px 500px at 100% 10%, color-mix(in srgb, var(--calm) 10%, transparent), transparent 55%);
+}
+#authGate.hidden{display:none}
+.authcard{width:100%;max-width:380px;padding:8px 0 40px}
+.authmark{font-weight:700;font-size:27px;letter-spacing:-0.025em;margin:0 0 2px;text-align:center}
+.authmark span{color:var(--signal)}
+.authtag{color:var(--muted);font-size:14.5px;text-align:center;margin:0 0 26px}
+.authpanel{
+  background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  padding:22px 20px;box-shadow:0 10px 30px -12px rgba(0,0,0,.25);
+}
+.authtabs{display:flex;gap:6px;margin-bottom:18px;background:var(--surface-2);border-radius:99px;padding:3px}
+.authtab{
+  flex:1;font:inherit;font-size:14px;font-weight:600;padding:9px 10px;border-radius:99px;
+  border:none;background:transparent;color:var(--muted);cursor:pointer;
+}
+.authtab[aria-selected=true]{background:var(--ink);color:var(--paper)}
+.authview{display:none}
+.authview.on{display:block}
+.authnote{font-size:13px;color:var(--muted);margin:14px 0 0;text-align:center}
+.authnote a,.linklike{background:none;border:none;padding:0;color:var(--calm);font:inherit;font-weight:600;cursor:pointer;text-decoration:underline}
+.authstatus{font-size:14px;margin:12px 0 0;min-height:1.2em;color:var(--muted)}
+.authstatus.ok{color:var(--calm);font-weight:500}
+.authstatus.bad{color:var(--signal);font-weight:500}
+.pwrow{position:relative}
+.pwrow .toggle{
+  position:absolute;right:6px;top:29px;background:none;border:none;color:var(--muted);
+  font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;padding:6px 8px;
+}
+.authfoot{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);text-align:center}
+.guestbtn{background:none;border:none;color:var(--muted);font:inherit;font-size:13.5px;text-decoration:underline;cursor:pointer}
 </style>
 </head>
 <body>
+
+<!-- ================= AUTH GATE ================= -->
+<div id="authGate">
+  <div class="authcard">
+    <h1 class="authmark">Sur<span>a</span>ksha</h1>
+    <p class="authtag">Sign in to keep your safety setup private on this device</p>
+
+    <div class="authpanel">
+      <div class="authtabs" role="tablist">
+        <button class="authtab" type="button" role="tab" data-a="login" aria-selected="true">Log in</button>
+        <button class="authtab" type="button" role="tab" data-a="signup" aria-selected="false">Create account</button>
+      </div>
+
+      <!-- ---- LOG IN ---- -->
+      <div class="authview on" data-av="login">
+        <div class="field">
+          <label for="liUser">Username</label>
+          <input type="text" id="liUser" autocomplete="username" autocapitalize="off">
+        </div>
+        <div class="field pwrow">
+          <label for="liPass">Password</label>
+          <input type="password" id="liPass" autocomplete="current-password">
+          <button class="toggle" type="button" data-show="liPass">Show</button>
+        </div>
+        <div class="btnrow">
+          <button class="btn btn-go btn-wide" id="liGo" type="button">Log in</button>
+        </div>
+        <p class="authnote"><button class="linklike" type="button" id="toForgot">Forgot your password?</button></p>
+        <p class="authstatus" id="liStatus" role="status" aria-live="polite"></p>
+      </div>
+
+      <!-- ---- CREATE ACCOUNT ---- -->
+      <div class="authview" data-av="signup">
+        <div class="field">
+          <label for="suUser">Choose a username</label>
+          <input type="text" id="suUser" autocomplete="username" autocapitalize="off">
+        </div>
+        <div class="field pwrow">
+          <label for="suPass">Choose a password</label>
+          <input type="password" id="suPass" autocomplete="new-password">
+          <button class="toggle" type="button" data-show="suPass">Show</button>
+        </div>
+        <div class="field">
+          <label for="suQ">Security question</label>
+          <select id="suQ">
+            <option value="pet">What was the name of your first pet?</option>
+            <option value="school">What was the name of your first school?</option>
+            <option value="city">In what city were you born?</option>
+            <option value="mother">What is your mother's maiden name?</option>
+            <option value="custom">Write my own question</option>
+          </select>
+        </div>
+        <div class="field" id="suQCustomWrap" style="display:none">
+          <label for="suQCustom">Your question</label>
+          <input type="text" id="suQCustom" placeholder="e.g. What street did you grow up on?">
+        </div>
+        <div class="field">
+          <label for="suA">Answer</label>
+          <input type="text" id="suA" autocomplete="off">
+        </div>
+        <div class="btnrow">
+          <button class="btn btn-go btn-wide" id="suGo" type="button">Create account</button>
+        </div>
+        <p class="authstatus" id="suStatus" role="status" aria-live="polite"></p>
+      </div>
+
+      <!-- ---- FORGOT PASSWORD ---- -->
+      <div class="authview" data-av="forgot">
+        <p class="status" style="margin-top:0" id="fgIntro">Enter your username to see your security question.</p>
+        <div class="field">
+          <label for="fgUser">Username</label>
+          <input type="text" id="fgUser" autocomplete="username" autocapitalize="off">
+        </div>
+        <div class="btnrow" id="fgFindRow">
+          <button class="btn btn-wide" id="fgFind" type="button">Find my account</button>
+        </div>
+
+        <div id="fgQWrap" style="display:none">
+          <div class="field">
+            <label id="fgQLabel" for="fgA">Security question</label>
+            <input type="text" id="fgA" placeholder="Your answer" autocomplete="off">
+          </div>
+          <div class="field pwrow">
+            <label for="fgNewPass">New password</label>
+            <input type="password" id="fgNewPass" autocomplete="new-password">
+            <button class="toggle" type="button" data-show="fgNewPass">Show</button>
+          </div>
+          <div class="btnrow">
+            <button class="btn btn-go btn-wide" id="fgReset" type="button">Reset password</button>
+          </div>
+        </div>
+        <p class="authstatus" id="fgStatus" role="status" aria-live="polite"></p>
+        <p class="authnote"><button class="linklike" type="button" id="fromForgot">Back to log in</button></p>
+      </div>
+
+      <div class="authfoot">
+        <button class="guestbtn" type="button" id="skipAuth">Skip for now — use as guest on this device</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <header class="top">
   <div class="wrap">
@@ -986,6 +1138,7 @@ footer p{max-width:64ch}
   <div class="btnrow">
     <button class="btn btn-go" id="saveProfile" type="button">Save profile</button>
     <button class="btn" id="clearProfile" type="button">Clear everything</button>
+    <button class="btn" id="logoutBtn" type="button">Log out</button>
   </div>
   <p class="status" id="profStatus" role="status" aria-live="polite"></p>
 </section>
@@ -1047,6 +1200,222 @@ footer p{max-width:64ch}
 (function(){
 "use strict";
 var $ = function(id){ return document.getElementById(id); };
+
+/* ---------------- auth gate ---------------- */
+var AKEY = 'sk_account';
+var QUESTIONS = {
+  pet: "What was the name of your first pet?",
+  school: "What was the name of your first school?",
+  city: "In what city were you born?",
+  mother: "What is your mother's maiden name?"
+};
+
+function normAnswer(s){ return (s||'').trim().toLowerCase(); }
+
+function sha256(str){
+  if(window.crypto && crypto.subtle && crypto.subtle.digest){
+    var buf = new TextEncoder().encode(str);
+    return crypto.subtle.digest('SHA-256', buf).then(function(hashBuf){
+      var bytes = Array.prototype.slice.call(new Uint8Array(hashBuf));
+      return bytes.map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+    });
+  }
+  // very old browser fallback — not cryptographic, just avoids storing plain text
+  var h = 0;
+  for(var i = 0; i < str.length; i++){ h = ((h<<5)-h) + str.charCodeAt(i); h |= 0; }
+  return Promise.resolve('fnv' + Math.abs(h).toString(16));
+}
+
+function loadAccount(){
+  try{
+    var raw = localStorage.getItem(AKEY);
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){ return null; }
+}
+function saveAccount(acc){
+  try{ localStorage.setItem(AKEY, JSON.stringify(acc)); return true; }
+  catch(e){ return false; }
+}
+
+var SKEY = 'sk_session';
+function isLoggedIn(){
+  try{ return localStorage.getItem(SKEY) === '1' || sessionStorage.getItem(SKEY) === '1'; }
+  catch(e){ return false; }
+}
+function setLoggedIn(){
+  try{ localStorage.setItem(SKEY, '1'); }catch(e){}
+}
+function clearSession(){
+  try{ localStorage.removeItem(SKEY); sessionStorage.removeItem(SKEY); }catch(e){}
+}
+
+function setAuthStatus(el, text, cls){
+  el.textContent = text;
+  el.className = 'authstatus' + (cls ? ' ' + cls : '');
+}
+
+function openGate(){
+  var gate = $('authGate');
+  if(gate) gate.classList.remove('hidden');
+}
+function closeGate(){
+  var gate = $('authGate');
+  if(gate) gate.classList.add('hidden');
+}
+
+function switchAuthView(name){
+  Array.prototype.forEach.call(document.querySelectorAll('.authview'), function(v){
+    v.classList.toggle('on', v.dataset.av === name);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.authtab'), function(t){
+    t.setAttribute('aria-selected', t.dataset.a === name ? 'true' : 'false');
+  });
+}
+Array.prototype.forEach.call(document.querySelectorAll('.authtab'), function(t){
+  t.addEventListener('click', function(){ switchAuthView(t.dataset.a); });
+});
+var toForgotBtn = $('toForgot');
+if(toForgotBtn) toForgotBtn.addEventListener('click', function(){
+  $('fgQWrap').style.display = 'none';
+  $('fgFindRow').style.display = 'flex';
+  $('fgIntro').textContent = 'Enter your username to see your security question.';
+  setAuthStatus($('fgStatus'), '');
+  switchAuthView('forgot');
+});
+var fromForgotBtn = $('fromForgot');
+if(fromForgotBtn) fromForgotBtn.addEventListener('click', function(){ switchAuthView('login'); });
+
+Array.prototype.forEach.call(document.querySelectorAll('.toggle'), function(btn){
+  btn.addEventListener('click', function(){
+    var input = $(btn.dataset.show);
+    if(!input) return;
+    var showing = input.type === 'text';
+    input.type = showing ? 'password' : 'text';
+    btn.textContent = showing ? 'Show' : 'Hide';
+  });
+});
+
+var suQSel = $('suQ');
+if(suQSel) suQSel.addEventListener('change', function(){
+  $('suQCustomWrap').style.display = suQSel.value === 'custom' ? 'block' : 'none';
+});
+
+/* ---- create account ---- */
+var suGoBtn = $('suGo');
+if(suGoBtn) suGoBtn.addEventListener('click', function(){
+  var user = $('suUser').value.trim();
+  var pass = $('suPass').value;
+  var qKey = $('suQ').value;
+  var qText = qKey === 'custom' ? $('suQCustom').value.trim() : QUESTIONS[qKey];
+  var answer = $('suA').value;
+
+  if(!user || !pass){ setAuthStatus($('suStatus'), 'Add a username and a password.', 'bad'); return; }
+  if(pass.length < 4){ setAuthStatus($('suStatus'), 'Use at least 4 characters for the password.', 'bad'); return; }
+  if(!qText){ setAuthStatus($('suStatus'), 'Add your security question.', 'bad'); return; }
+  if(!answer){ setAuthStatus($('suStatus'), 'Add an answer to your security question.', 'bad'); return; }
+
+  var existing = loadAccount();
+  if(existing && existing.user && existing.user.toLowerCase() === user.toLowerCase()){
+    setAuthStatus($('suStatus'), 'That username is already set up on this device. Log in instead, or use Forgot password.', 'bad');
+    return;
+  }
+
+  suGoBtn.disabled = true;
+  Promise.all([sha256(pass), sha256(normAnswer(answer))]).then(function(hashes){
+    saveAccount({ user: user, passHash: hashes[0], question: qText, answerHash: hashes[1] });
+    suGoBtn.disabled = false;
+    setAuthStatus($('suStatus'), 'Account created.', 'ok');
+    setLoggedIn();
+    closeGate();
+  });
+});
+
+/* ---- log in ---- */
+var liGoBtn = $('liGo');
+if(liGoBtn) liGoBtn.addEventListener('click', function(){
+  var user = $('liUser').value.trim();
+  var pass = $('liPass').value;
+  var acc = loadAccount();
+  if(!acc){ setAuthStatus($('liStatus'), 'No account set up on this device yet — create one.', 'bad'); return; }
+  if(!user || !pass){ setAuthStatus($('liStatus'), 'Enter your username and password.', 'bad'); return; }
+  if(user.toLowerCase() !== acc.user.toLowerCase()){ setAuthStatus($('liStatus'), 'That username doesn\'t match this device.', 'bad'); return; }
+
+  liGoBtn.disabled = true;
+  sha256(pass).then(function(hash){
+    liGoBtn.disabled = false;
+    if(hash === acc.passHash){
+      setAuthStatus($('liStatus'), 'Welcome back.', 'ok');
+      setLoggedIn();
+      closeGate();
+    } else {
+      setAuthStatus($('liStatus'), 'Wrong password.', 'bad');
+    }
+  });
+});
+[$('liUser'), $('liPass')].forEach(function(inp){
+  if(inp) inp.addEventListener('keydown', function(e){ if(e.key === 'Enter') liGoBtn.click(); });
+});
+
+/* ---- forgot password ---- */
+var fgFindBtn = $('fgFind');
+if(fgFindBtn) fgFindBtn.addEventListener('click', function(){
+  var user = $('fgUser').value.trim();
+  var acc = loadAccount();
+  if(!acc){ setAuthStatus($('fgStatus'), 'No account is set up on this device.', 'bad'); return; }
+  if(!user || user.toLowerCase() !== acc.user.toLowerCase()){
+    setAuthStatus($('fgStatus'), 'That username doesn\'t match this device.', 'bad'); return;
+  }
+  $('fgQLabel').textContent = acc.question;
+  $('fgQWrap').style.display = 'block';
+  $('fgFindRow').style.display = 'none';
+  $('fgIntro').textContent = 'Answer your security question to reset your password.';
+  setAuthStatus($('fgStatus'), '');
+});
+var fgResetBtn = $('fgReset');
+if(fgResetBtn) fgResetBtn.addEventListener('click', function(){
+  var acc = loadAccount();
+  if(!acc) return;
+  var answer = $('fgA').value;
+  var newPass = $('fgNewPass').value;
+  if(!answer){ setAuthStatus($('fgStatus'), 'Enter your answer.', 'bad'); return; }
+  if(!newPass || newPass.length < 4){ setAuthStatus($('fgStatus'), 'Choose a new password of at least 4 characters.', 'bad'); return; }
+
+  fgResetBtn.disabled = true;
+  sha256(normAnswer(answer)).then(function(ansHash){
+    if(ansHash !== acc.answerHash){
+      fgResetBtn.disabled = false;
+      setAuthStatus($('fgStatus'), 'That answer doesn\'t match.', 'bad');
+      return;
+    }
+    sha256(newPass).then(function(passHash){
+      acc.passHash = passHash;
+      saveAccount(acc);
+      fgResetBtn.disabled = false;
+      setAuthStatus($('fgStatus'), 'Password reset. You can log in now.', 'ok');
+      $('liUser').value = acc.user;
+      $('fgA').value = ''; $('fgNewPass').value = '';
+      setTimeout(function(){ switchAuthView('login'); }, 900);
+    });
+  });
+});
+
+var skipBtn = $('skipAuth');
+if(skipBtn) skipBtn.addEventListener('click', function(){ closeGate(); });
+
+/* ---- decide what to show on load ---- */
+(function initGate(){
+  var acc = loadAccount();
+  if(!acc){
+    switchAuthView('signup');
+    openGate();
+  } else if(!isLoggedIn()){
+    $('liUser').value = acc.user;
+    switchAuthView('login');
+    openGate();
+  } else {
+    closeGate();
+  }
+})();
 
 /* ---------------- theme ---------------- */
 var themeBtn = $('themeBtn');
@@ -1876,6 +2245,16 @@ $('clearProfile').addEventListener('click', function(){
   setStatus($('profStatus'), 'Everything cleared.', 'ok');
   cloudWipeAll();
 });
+var logoutBtn = $('logoutBtn');
+if(logoutBtn) logoutBtn.addEventListener('click', function(){
+  clearSession();
+  var acc = loadAccount();
+  if(acc) $('liUser').value = acc.user;
+  $('liPass').value = '';
+  switchAuthView('login');
+  openGate();
+});
+
 $('shareHome').addEventListener('click', function(){
   if(!profile.pHome){
     setStatus($('profStatus'), 'Add your home address first.', 'bad'); return;
