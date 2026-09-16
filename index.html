@@ -1,130 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Suraksha — women's safety, in one place</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
 <style>
+/* ============================================================
+   LOGIN PAGE STYLES
+   ============================================================ */
+.login-body{
+  font-family:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  background:#0b0f13;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:1.5rem;color:#e6edf3;margin:0;
+}
+.login-body::before{
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(circle at 30% 10%, rgba(88,166,255,.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 90%, rgba(190,22,34,.06) 0%, transparent 55%),
+    radial-gradient(circle at 70% 20%, rgba(56,139,253,.04) 0%, transparent 40%);
+  pointer-events:none;z-index:0;
+}
+.login-body::after{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px);
+  background-size:44px 44px;pointer-events:none;z-index:0;
+}
+.login-wrapper{
+  position:relative;z-index:1;width:100%;max-width:372px;
+  display:flex;flex-direction:column;align-items:center;gap:1.25rem;
+  animation:fadeUp .45s ease-out;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.login-brand{
+  display:flex;align-items:center;gap:.5rem;font-size:1.65rem;font-weight:700;
+  letter-spacing:-.025em;color:#f0f6fc;
+}
+.login-brand span{color:#e8323f}
+.login-brand .dot{
+  width:8px;height:8px;background:#e8323f;border-radius:50%;
+  display:inline-block;margin-left:4px;margin-top:6px;opacity:.9;
+}
+.login-card{
+  background:#161b22;border:1px solid #30363d;border-radius:8px;
+  padding:1.5rem 1.5rem 1.75rem;width:100%;
+  box-shadow:0 4px 14px rgba(0,0,0,.4);
+}
+.login-card h2{
+  font-size:1.35rem;font-weight:600;text-align:center;
+  margin:0 0 1.5rem;letter-spacing:-.01em;color:#f0f6fc;
+}
+.login-field{margin-bottom:1rem}
+.login-field label{
+  display:block;font-size:.8rem;font-weight:500;
+  color:#c9d1d9;margin-bottom:.4rem;letter-spacing:.01em;
+}
+.login-field input{
+  width:100%;padding:.65rem .9rem;font:inherit;font-size:.95rem;
+  background:#0d1117;border:1px solid #30363d;border-radius:6px;
+  color:#e6edf3;transition:border-color .15s,box-shadow .15s;outline:none;
+}
+.login-field input:focus{border-color:#58a6ff;box-shadow:0 0 0 3px rgba(88,166,255,.3)}
+.login-field input::placeholder{color:#6e7681}
+.login-field .hint{font-size:.72rem;color:#6e7681;margin-top:.3rem}
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:3rem}
+.pw-toggle{
+  position:absolute;right:.5rem;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:#6e7681;cursor:pointer;
+  font:inherit;font-size:.78rem;font-weight:500;padding:.25rem .4rem;
+}
+.pw-toggle:hover{color:#58a6ff}
+.row-between{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1rem;font-size:.82rem;
+}
+.row-between label{display:flex;align-items:center;gap:.4rem;color:#c9d1d9;cursor:pointer;font-weight:500}
+.row-between input[type=checkbox]{accent-color:#238636;width:14px;height:14px;cursor:pointer}
+.row-between a{color:#58a6ff;text-decoration:none}
+.row-between a:hover{text-decoration:underline}
+.btn-signin{
+  width:100%;padding:.7rem 1rem;font:inherit;font-weight:600;font-size:.95rem;
+  background:#238636;border:1px solid rgba(240,246,252,.1);border-radius:6px;
+  color:#fff;cursor:pointer;transition:background .15s,transform .05s;
+  letter-spacing:.01em;
+}
+.btn-signin:hover{background:#2ea043}
+.btn-signin:active{background:#238636;transform:scale(.985)}
+.btn-signin:disabled{opacity:.6;cursor:not-allowed}
+.divider{
+  display:flex;align-items:center;gap:.75rem;margin:1.35rem 0 1rem;
+  color:#6e7681;font-size:.75rem;font-weight:500;letter-spacing:.04em;
+}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:#30363d}
+.alt-signin{display:flex;gap:.6rem}
+.alt-signin button{
+  flex:1;padding:.6rem .5rem;font:inherit;font-size:.85rem;font-weight:500;
+  background:#21262d;border:1px solid #30363d;border-radius:6px;color:#e6edf3;
+  cursor:pointer;transition:background .15s,border-color .15s;
+  display:flex;align-items:center;justify-content:center;gap:.4rem;
+}
+.alt-signin button:hover{background:#30363d;border-color:#8b949e}
+.alt-signin button svg{width:18px;height:18px}
+
+/* ============ GUEST BUTTON ============ */
+.guest-btn{
+  width:100%;margin-top:1rem;padding:.75rem 1rem;
+  font:inherit;font-weight:700;font-size:.95rem;
+  background:linear-gradient(135deg,#1f6feb,#388bfd);
+  border:none;border-radius:6px;color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.55rem;
+  transition:filter .15s,transform .05s,box-shadow .15s;
+  letter-spacing:.01em;box-shadow:0 2px 10px rgba(31,111,235,.35);
+}
+.guest-btn:hover{filter:brightness(1.1);box-shadow:0 4px 16px rgba(31,111,235,.5)}
+.guest-btn:active{transform:scale(.99)}
+.guest-btn svg{width:17px;height:17px}
+.guest-note{
+  font-size:.72rem;color:#6e7681;text-align:center;
+  margin-top:.55rem;line-height:1.45;
+}
+.bottom-text{
+  margin-top:1.25rem;padding:.85rem 1rem;border:1px solid #30363d;
+  border-radius:8px;text-align:center;font-size:.9rem;color:#c9d1d9;
+}
+.bottom-text a{color:#58a6ff;text-decoration:none;font-weight:500;margin-left:4px;cursor:pointer}
+.bottom-text a:hover{text-decoration:underline}
+.footer-links{
+  display:flex;gap:1.2rem;justify-content:center;margin-top:1rem;
+  font-size:.72rem;color:#6e7681;flex-wrap:wrap;
+}
+.footer-links a{color:#6e7681;text-decoration:none}
+.footer-links a:hover{color:#58a6ff}
+.status-msg{
+  font-size:.85rem;margin-top:.75rem;color:#f85149;
+  min-height:1.2rem;font-weight:500;
+}
+.status-msg.ok{color:#3fb950}
+.status-msg.info{color:#58a6ff}
+:focus-visible{outline:3px solid #58a6ff;outline-offset:2px;border-radius:4px}
+
+/* ============================================================
+   SURAKSHA APP STYLES (original — unchanged)
+   ============================================================ */
 :root{
-  --paper:#E7EAE5;
-  --surface:#F6F7F4;
-  --surface-2:#DDE1DB;
-  --ink:#18222C;
-  --muted:#5D6A74;
-  --line:#C6CCC4;
-  --signal:#BE1622;
-  --signal-ink:#FFFFFF;
-  --calm:#1B6353;
-  --focus:#1B6353;
-  --shadow:0 1px 0 var(--line);
-  --radius:4px;
+  --paper:#E7EAE5;--surface:#F6F7F4;--surface-2:#DDE1DB;
+  --ink:#18222C;--muted:#5D6A74;--line:#C6CCC4;
+  --signal:#BE1622;--signal-ink:#FFFFFF;
+  --calm:#1B6353;--focus:#1B6353;
 }
 :root:not([data-theme="light"]){
   @media (prefers-color-scheme: dark){
-    --paper:#12181D;
-    --surface:#1A222A;
-    --surface-2:#232D36;
-    --ink:#E8EDE9;
-    --muted:#9DAAB3;
-    --line:#2E3A44;
-    --signal:#E8323F;
-    --signal-ink:#FFFFFF;
-    --calm:#5CC0A5;
-    --focus:#5CC0A5;
+    --paper:#12181D;--surface:#1A222A;--surface-2:#232D36;
+    --ink:#E8EDE9;--muted:#9DAAB3;--line:#2E3A44;
+    --signal:#E8323F;--signal-ink:#FFFFFF;
+    --calm:#5CC0A5;--focus:#5CC0A5;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#12181D;
-  --surface:#1A222A;
-  --surface-2:#232D36;
-  --ink:#E8EDE9;
-  --muted:#9DAAB3;
-  --line:#2E3A44;
-  --signal:#E8323F;
-  --signal-ink:#FFFFFF;
-  --calm:#5CC0A5;
-  --focus:#5CC0A5;
+  --paper:#12181D;--surface:#1A222A;--surface-2:#232D36;
+  --ink:#E8EDE9;--muted:#9DAAB3;--line:#2E3A44;
+  --signal:#E8323F;--signal-ink:#FFFFFF;
+  --calm:#5CC0A5;--focus:#5CC0A5;
 }
-
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-html{
-  background:var(--paper);
-  background-image:
-    radial-gradient(ellipse 900px 500px at 8% -8%, color-mix(in srgb, var(--signal) 7%, transparent), transparent 60%),
-    radial-gradient(ellipse 900px 600px at 100% 0%, color-mix(in srgb, var(--calm) 9%, transparent), transparent 55%),
-    radial-gradient(ellipse 1000px 700px at 50% 110%, color-mix(in srgb, var(--calm) 5%, transparent), transparent 60%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.028 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-attachment:fixed;
-  background-size:auto,auto,auto,140px 140px;
-  min-height:100%;
-}
-body{
-  margin:0;
-  background:transparent;
-  color:var(--ink);
+.app-body{
+  margin:0;background:var(--paper);color:var(--ink);
   font-family:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-  font-size:17px;
-  line-height:1.55;
-  padding-bottom:88px;
+  font-size:17px;line-height:1.55;padding-bottom:88px;
 }
-img{max-width:100%}
-a{color:inherit}
-:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-
+.app-body *{box-sizing:border-box}
+.app-body img{max-width:100%}
+.app-body a{color:inherit}
+.app-body :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
 .wrap{max-width:760px;margin:0 auto;padding:0 18px}
-
-/* ---------- masthead ---------- */
-header.top{
-  border-bottom:1px solid var(--line);
-  background:var(--surface);
-}
+header.top{border-bottom:1px solid var(--line);background:var(--surface)}
 .masthead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:18px 0 14px}
-.mark{
-  font-weight:700;font-size:25px;letter-spacing:-0.025em;margin:0;
-}
+.mark{font-weight:700;font-size:25px;letter-spacing:-0.025em;margin:0}
 .mark span{color:var(--signal)}
 .tagline{color:var(--muted);font-size:14.5px;margin:0}
 .themeBtn{
   margin-left:auto;background:none;border:1px solid var(--line);color:var(--muted);
   border-radius:99px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer;
 }
-
-/* ---------- dial row ---------- */
 .dialzone{padding:18px 0 22px}
 .dialgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .dial{
   display:flex;flex-direction:column;gap:2px;
   background:var(--signal);color:var(--signal-ink);
-  text-decoration:none;padding:14px 12px;border-radius:var(--radius);
+  text-decoration:none;padding:14px 12px;border-radius:4px;
   min-height:92px;justify-content:center;
 }
 .dial .num{font-size:30px;font-weight:700;letter-spacing:-0.03em;line-height:1}
 .dial .who{font-size:13px;line-height:1.25;opacity:.92}
 .dialnote{color:var(--muted);font-size:13.5px;margin:10px 0 0}
-
-/* ---------- sections ---------- */
-section{padding:30px 0;border-top:1px solid var(--line)}
-h2{font-size:22px;letter-spacing:-0.02em;margin:0 0 6px;font-weight:700}
-h3{font-size:16.5px;margin:0 0 4px;font-weight:600}
+.app-body section{padding:30px 0;border-top:1px solid var(--line)}
+.app-body h2{font-size:22px;letter-spacing:-0.02em;margin:0 0 6px;font-weight:700}
+.app-body h3{font-size:16.5px;margin:0 0 4px;font-weight:600}
 .lede{color:var(--muted);margin:0 0 18px;font-size:15.5px;max-width:60ch}
-p{max-width:68ch}
-
-.panel{
-  background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--radius);padding:16px;
-}
+.app-body p{max-width:68ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:16px}
 .panel + .panel{margin-top:10px}
-
-/* ---------- buttons/inputs ---------- */
 .btn{
   font:inherit;font-weight:600;font-size:15px;
   border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
-  padding:11px 16px;border-radius:var(--radius);cursor:pointer;
+  padding:11px 16px;border-radius:4px;cursor:pointer;
   text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;
   min-height:46px;
 }
@@ -134,39 +220,28 @@ p{max-width:68ch}
 .btn-wide{width:100%}
 .btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .btnrow .btn{flex:1 1 150px}
-
-label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:5px;font-weight:500}
-input[type=text],input[type=tel],input[type=number],input[type=password],input[type=email],textarea,select{
+.app-body label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:5px;font-weight:500}
+.app-body input[type=text],.app-body input[type=tel],.app-body input[type=number],.app-body textarea,.app-body select{
   font:inherit;width:100%;padding:10px 12px;border:1px solid var(--line);
-  background:var(--paper);color:var(--ink);border-radius:var(--radius);
+  background:var(--paper);color:var(--ink);border-radius:4px;
 }
-textarea{min-height:92px;resize:vertical;line-height:1.5}
+.app-body textarea{min-height:92px;resize:vertical;line-height:1.5}
 .field + .field{margin-top:10px}
 .two{display:grid;grid-template-columns:1fr 130px;gap:8px}
-
 .status{font-size:14px;color:var(--muted);margin:10px 0 0;min-height:1.2em}
 .status.ok{color:var(--calm);font-weight:500}
 .status.bad{color:var(--signal);font-weight:500}
-
-/* ---------- contacts ---------- */
 ul.contacts{list-style:none;margin:12px 0 0;padding:0}
-ul.contacts li{
-  display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);
-}
+ul.contacts li{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
 ul.contacts li .cname{font-weight:600;font-size:15.5px}
 ul.contacts li .cnum{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
 ul.contacts li .grow{flex:1;min-width:0}
 .icobtn{
   background:none;border:1px solid var(--line);color:var(--muted);
-  border-radius:var(--radius);padding:6px 10px;font:inherit;font-size:13px;cursor:pointer;
+  border-radius:4px;padding:6px 10px;font:inherit;font-size:13px;cursor:pointer;
 }
 .empty{color:var(--muted);font-size:14.5px;margin:12px 0 0}
-
-/* ---------- timer ---------- */
-.clock{
-  font-size:56px;font-weight:700;letter-spacing:-0.04em;line-height:1;
-  font-variant-numeric:tabular-nums;margin:6px 0 2px;
-}
+.clock{font-size:56px;font-weight:700;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;margin:6px 0 2px}
 .clock.warn{color:var(--signal)}
 .chiprow{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
 .chip{
@@ -174,8 +249,6 @@ ul.contacts li .grow{flex:1;min-width:0}
   border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;
 }
 .chip[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-
-/* ---------- overlays ---------- */
 .overlay{
   position:fixed;inset:0;z-index:60;display:none;
   align-items:center;justify-content:center;padding:24px;
@@ -200,26 +273,15 @@ ul.contacts li .grow{flex:1;min-width:0}
 .round.dec{background:var(--signal)}
 .ringing{animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
-
 .alarmcard{text-align:center;max-width:420px}
 .alarmcard h3{font-size:26px;color:#fff;margin-bottom:8px}
 .alarmcard p{color:#C3CDD4;margin:0 auto 24px;max-width:34ch}
-
-/* ---------- helplines ---------- */
 .lines{margin-top:14px;border-top:1px solid var(--line)}
-.line{
-  display:flex;align-items:center;gap:12px;
-  padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;
-}
+.line{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none}
 .line .grow{flex:1;min-width:0}
 .line .lname{font-weight:600;font-size:15.5px;display:block}
 .line .ldesc{color:var(--muted);font-size:13.5px;display:block}
-.line .lnum{
-  font-weight:700;font-size:19px;font-variant-numeric:tabular-nums;
-  color:var(--signal);white-space:nowrap;letter-spacing:-0.01em;
-}
-
-/* ---------- guides (accordion) ---------- */
+.line .lnum{font-weight:700;font-size:19px;font-variant-numeric:tabular-nums;color:var(--signal);white-space:nowrap;letter-spacing:-0.01em}
 details.guide{border-bottom:1px solid var(--line)}
 details.guide summary{
   cursor:pointer;padding:14px 0;font-weight:600;font-size:16px;
@@ -231,22 +293,15 @@ details.guide[open] summary::after{content:"–"}
 details.guide .body{padding:0 0 16px}
 details.guide ul{margin:0;padding-left:18px}
 details.guide li{margin-bottom:7px;max-width:64ch}
-
-/* ---------- rights ---------- */
 .right{padding:14px 0;border-bottom:1px solid var(--line)}
 .right p{margin:3px 0 0;color:var(--muted);font-size:15px}
 .caveat{
   margin-top:16px;padding:12px 14px;border-left:3px solid var(--muted);
   color:var(--muted);font-size:14.5px;background:var(--surface);
 }
-
-/* ---------- live tracking ---------- */
-.live{margin-top:12px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:none}
+.live{margin-top:12px;border:1px solid var(--line);border-radius:4px;overflow:hidden;display:none}
 .live.on{display:block}
-.livehead{
-  display:flex;align-items:center;gap:9px;padding:11px 14px;
-  background:var(--surface-2);border-bottom:1px solid var(--line);
-}
+.livehead{display:flex;align-items:center;gap:9px;padding:11px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
 .blip{width:10px;height:10px;border-radius:50%;background:var(--signal);flex:none;animation:blink 1.4s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 .livehead .lt{font-weight:600;font-size:14.5px}
@@ -259,187 +314,81 @@ details.guide li{margin-bottom:7px;max-width:64ch}
 .stat:last-child{border-right:none}
 .stat b{display:block;font-size:17px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-0.02em}
 .stat span{font-size:12.5px;color:var(--muted)}
-.coordbar{
-  padding:9px 14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);
-  font-variant-numeric:tabular-nums;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
-}
-
-/* ---------- calling ---------- */
+.coordbar{padding:9px 14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .speed{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
 .sdial{
   display:flex;flex-direction:column;gap:1px;text-decoration:none;
   border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
-  padding:12px 14px;border-radius:var(--radius);min-height:64px;justify-content:center;
+  padding:12px 14px;border-radius:4px;min-height:64px;justify-content:center;
 }
 .sdial b{font-size:15.5px;font-weight:600}
 .sdial span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
-.readout{
-  font-size:30px;font-weight:600;letter-spacing:0.02em;font-variant-numeric:tabular-nums;
-  min-height:42px;padding:6px 2px;word-break:break-all;line-height:1.2;
-}
+.readout{font-size:30px;font-weight:600;letter-spacing:0.02em;font-variant-numeric:tabular-nums;min-height:42px;padding:6px 2px;word-break:break-all;line-height:1.2}
 .readout:empty::before{content:"Enter a number";color:var(--muted);font-size:17px;font-weight:400;letter-spacing:0}
 .pad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}
-.key{
-  font:inherit;font-size:22px;font-weight:600;padding:14px 0;cursor:pointer;
-  border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:var(--radius);
-}
+.key{font:inherit;font-size:22px;font-weight:600;padding:14px 0;cursor:pointer;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:4px}
 .key:active{background:var(--line)}
 .key small{display:block;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.08em}
-.cascade{margin-top:12px;padding:12px;border:1px dashed var(--line);border-radius:var(--radius);display:none}
+.cascade{margin-top:12px;padding:12px;border:1px dashed var(--line);border-radius:4px;display:none}
 .cascade.on{display:block}
 .cascade .who{font-weight:600;font-size:17px;margin:0 0 2px}
 .cascade .pos{color:var(--muted);font-size:13.5px;margin:0}
-
-/* ---------- rights ---------- */
 .rtabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0}
-.rtab{
-  font:inherit;font-size:14px;padding:8px 13px;border-radius:99px;cursor:pointer;
-  border:1px solid var(--line);background:var(--paper);color:var(--ink);
-}
+.rtab{font:inherit;font-size:14px;padding:8px 13px;border-radius:99px;cursor:pointer;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
 .rtab[aria-selected=true]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .rpanel{display:none;margin-top:6px}
 .rpanel.on{display:block}
-.law{
-  font-size:12.5px;color:var(--muted);margin-top:5px;display:block;
-  padding-left:10px;border-left:2px solid var(--line);
-}
-
-/* ---------- profile ---------- */
+.law{font-size:12.5px;color:var(--muted);margin-top:5px;display:block;padding-left:10px;border-left:2px solid var(--line)}
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.idcard{
-  display:flex;gap:14px;align-items:center;padding:14px;margin-bottom:10px;
-  border:1px solid var(--line);border-left:4px solid var(--signal);
-  border-radius:var(--radius);background:var(--surface);
-}
-.idcard .init{
-  width:52px;height:52px;border-radius:50%;flex:none;background:var(--surface-2);
-  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:21px;color:var(--muted);
-}
+.idcard{display:flex;gap:14px;align-items:center;padding:14px;margin-bottom:10px;border:1px solid var(--line);border-left:4px solid var(--signal);border-radius:4px;background:var(--surface)}
+.idcard .init{width:52px;height:52px;border-radius:50%;flex:none;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:21px;color:var(--muted)}
 .idcard .who{font-weight:700;font-size:18px;letter-spacing:-0.01em}
 .idcard .meta{color:var(--muted);font-size:13.5px}
 .idcard .meta em{font-style:normal;color:var(--signal);font-weight:600}
-.addr{
-  display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line);
-}
+.addr{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
 .addr .grow{flex:1;min-width:0}
 .addr .alabel{font-weight:600;font-size:14.5px}
 .addr .atext{color:var(--muted);font-size:14px;white-space:pre-wrap}
 .saved{font-size:13px;color:var(--calm);font-weight:500}
-
-/* ---------- safety rules ---------- */
 .rulegroup{margin-top:20px}
-.rulegroup > h3{
-  padding-bottom:7px;border-bottom:2px solid var(--ink);margin-bottom:2px;
-}
+.rulegroup > h3{padding-bottom:7px;border-bottom:2px solid var(--ink);margin-bottom:2px}
 .rule{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
-.rule input[type=checkbox]{
-  width:21px;height:21px;flex:none;margin:2px 0 0;accent-color:var(--calm);cursor:pointer;
-}
-.rule label{
-  margin:0;color:var(--ink);font-size:15.5px;font-weight:500;cursor:pointer;line-height:1.45;max-width:60ch;
-}
+.rule input[type=checkbox]{width:21px;height:21px;flex:none;margin:2px 0 0;accent-color:var(--calm);cursor:pointer}
+.rule label{margin:0;color:var(--ink);font-size:15.5px;font-weight:500;cursor:pointer;line-height:1.45;max-width:60ch}
 .rule .why{display:block;color:var(--muted);font-size:13.5px;font-weight:400;margin-top:2px}
 .rule input:checked + label{color:var(--muted)}
 .rule input:checked + label > span:first-child{text-decoration:line-through}
-.progress{
-  display:flex;align-items:center;gap:12px;margin-top:16px;padding:12px 14px;
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
-}
+.progress{display:flex;align-items:center;gap:12px;margin-top:16px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:4px}
 .progress .bar{flex:1;height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden}
 .progress .fill{height:100%;background:var(--calm);width:0%;transition:width .3s ease}
 .progress b{font-variant-numeric:tabular-nums;font-size:15px}
-
-/* ---------- page nav ---------- */
-.pagenav{
-  display:flex;gap:6px;padding:0 0 12px;
-}
-.pagenav button{
-  font:inherit;font-size:14.5px;font-weight:600;padding:8px 16px;cursor:pointer;
-  border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px;
-}
+.pagenav{display:flex;gap:6px;padding:0 0 12px}
+.pagenav button{font:inherit;font-size:14.5px;font-weight:600;padding:8px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px}
 .pagenav button[aria-current="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .page{display:none}
 .page.on{display:block}
-
-/* ---------- recognise-abuse panel (dark, matches DV awareness material) ---------- */
-.dv{
-  background:#15111C;color:#F1EEF7;border-radius:6px;padding:26px 22px;margin-top:0;
-}
+.dv{background:#15111C;color:#F1EEF7;border-radius:6px;padding:26px 22px;margin-top:0}
 .dv .eyebrow{color:#C9A9F2;font-weight:600;font-size:14.5px;margin:0 0 4px}
 .dv h2{color:#fff;margin-bottom:4px}
 .dv .lede{color:#C7BFD6;max-width:60ch}
-.dv .signs{
-  list-style:none;margin:16px 0 0;padding:0;display:grid;gap:9px;
-  grid-template-columns:1fr;
-}
-@media (min-width:560px){ .dv .signs{grid-template-columns:1fr 1fr} }
-.dv .signs li{
-  display:flex;gap:9px;align-items:flex-start;font-size:14.5px;color:#E7E1F0;line-height:1.4;
-}
+.dv .signs{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:9px;grid-template-columns:1fr}
+@media (min-width:560px){.dv .signs{grid-template-columns:1fr 1fr}}
+.dv .signs li{display:flex;gap:9px;align-items:flex-start;font-size:14.5px;color:#E7E1F0;line-height:1.4}
 .dv .signs li::before{content:"";width:7px;height:7px;border-radius:50%;background:#A87CE0;margin-top:7px;flex:none}
 .dv .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
 .dv .trio div{text-align:left}
-.dv .trio .tic{
-  width:38px;height:38px;border-radius:50%;background:#3B2A57;color:#D9C4F5;
-  display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:8px;
-}
+.dv .trio .tic{width:38px;height:38px;border-radius:50%;background:#3B2A57;color:#D9C4F5;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:8px}
 .dv .trio h4{margin:0 0 3px;font-size:14.5px;color:#fff}
 .dv .trio p{margin:0;font-size:13px;color:#B6AEC4;max-width:none}
-.dv .banner{
-  margin-top:22px;padding:14px 16px;border:1px solid #4A3768;border-radius:5px;
-  color:#F1EEF7;font-size:15px;
-}
-.dv .callrow{
-  margin-top:18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  padding-top:18px;border-top:1px solid #35284A;
-}
-.dv .callrow a{
-  background:#8548C9;color:#fff;text-decoration:none;font-weight:700;font-size:16px;
-  padding:11px 20px;border-radius:5px;
-}
+.dv .banner{margin-top:22px;padding:14px 16px;border:1px solid #4A3768;border-radius:5px;color:#F1EEF7;font-size:15px}
+.dv .callrow{margin-top:18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:18px;border-top:1px solid #35284A}
+.dv .callrow a{background:#8548C9;color:#fff;text-decoration:none;font-weight:700;font-size:16px;padding:11px 20px;border-radius:5px}
 .dv .callrow span{color:#B6AEC4;font-size:13.5px}
-
-/* ---------- cloud sync ---------- */
-.sync{
-  display:flex;gap:14px;align-items:flex-start;
-  border:1px solid var(--line);border-left:4px solid var(--muted);border-radius:var(--radius);
-  padding:16px;background:var(--surface);margin-bottom:14px;transition:border-color .2s ease;
-}
-.sync.on{border-left-color:var(--calm)}
-.sync.off{border-left-color:var(--signal)}
-.sync .sicon{
-  width:40px;height:40px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
-  background:var(--surface-2);color:var(--muted);
-}
-.sync.on .sicon{background:color-mix(in srgb, var(--calm) 18%, var(--surface-2));color:var(--calm)}
-.sync .sbody{flex:1;min-width:0}
-.sync .srow{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
-.sync .stitle{font-weight:700;font-size:15.5px;letter-spacing:-0.01em}
-.sync .signedas{color:var(--muted);font-size:13px;margin-left:auto}
-.sync .ssub{color:var(--muted);font-size:13.5px;margin:3px 0 0;max-width:52ch}
-.sync form{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.sync input[type=email]{flex:1;min-width:170px}
-.sync .btn{padding:10px 16px;min-height:42px;font-size:14.5px}
-.configwarn{
-  margin-top:10px;font-size:13px;color:var(--signal);background:var(--surface-2);
-  border-left:3px solid var(--signal);padding:8px 10px;border-radius:3px;
-}
-
-/* ---------- team ---------- */
 .team{margin-top:6px;border-top:1px solid var(--line)}
-.trow{
-  display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);
-}
-.trow .tnum{
-  width:34px;flex:none;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;font-weight:600;
-}
-.trow .tinit{
-  width:46px;height:46px;border-radius:50%;flex:none;background:var(--surface-2);
-  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:var(--muted);
-}
+.trow{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+.trow .tnum{width:34px;flex:none;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;font-weight:600}
+.trow .tinit{width:46px;height:46px;border-radius:50%;flex:none;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:var(--muted)}
 .trow .tname{font-weight:600;font-size:16.5px;letter-spacing:-0.01em}
-
-/* ---------- bottom bar ---------- */
 .bar{
   position:fixed;left:0;right:0;bottom:0;z-index:50;
   background:var(--surface);border-top:1px solid var(--line);
@@ -447,10 +396,23 @@ details.guide li{margin-bottom:7px;max-width:64ch}
   display:flex;gap:8px;
 }
 .bar a,.bar button{flex:1;min-height:52px;font-size:15.5px}
-
-footer{padding:28px 0 36px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
-footer p{max-width:64ch}
-
+.app-body footer{padding:28px 0 36px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+.app-body footer p{max-width:64ch}
+.guest-banner{
+  background:linear-gradient(135deg,#1f6feb,#388bfd);color:#fff;
+  padding:10px 16px;font-size:13.5px;font-weight:600;
+  text-align:center;display:flex;align-items:center;justify-content:center;
+  gap:10px;flex-wrap:wrap;
+}
+.guest-banner a{
+  color:#fff;text-decoration:underline;cursor:pointer;font-weight:700;
+}
+.guest-banner button{
+  background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);
+  color:#fff;padding:4px 12px;border-radius:99px;font:inherit;
+  font-size:12.5px;font-weight:600;cursor:pointer;
+}
+.guest-banner button:hover{background:rgba(255,255,255,.3)}
 @media (max-width:420px){
   .dial .num{font-size:25px}
   .two{grid-template-columns:1fr}
@@ -459,148 +421,95 @@ footer p{max-width:64ch}
   *{animation:none !important;transition:none !important}
 }
 
-/* ---------- auth gate ---------- */
-#authGate{
-  position:fixed;inset:0;z-index:100;
-  display:flex;align-items:center;justify-content:center;
-  padding:24px;overflow-y:auto;
-  background:var(--paper);
-  background-image:
-    radial-gradient(ellipse 800px 500px at 10% -10%, color-mix(in srgb, var(--signal) 10%, transparent), transparent 60%),
-    radial-gradient(ellipse 800px 500px at 100% 10%, color-mix(in srgb, var(--calm) 10%, transparent), transparent 55%);
-}
-#authGate.hidden{display:none}
-.authcard{width:100%;max-width:380px;padding:8px 0 40px}
-.authmark{font-weight:700;font-size:27px;letter-spacing:-0.025em;margin:0 0 2px;text-align:center}
-.authmark span{color:var(--signal)}
-.authtag{color:var(--muted);font-size:14.5px;text-align:center;margin:0 0 26px}
-.authpanel{
-  background:var(--surface);border:1px solid var(--line);border-radius:6px;
-  padding:22px 20px;box-shadow:0 10px 30px -12px rgba(0,0,0,.25);
-}
-.authtabs{display:flex;gap:6px;margin-bottom:18px;background:var(--surface-2);border-radius:99px;padding:3px}
-.authtab{
-  flex:1;font:inherit;font-size:14px;font-weight:600;padding:9px 10px;border-radius:99px;
-  border:none;background:transparent;color:var(--muted);cursor:pointer;
-}
-.authtab[aria-selected=true]{background:var(--ink);color:var(--paper)}
-.authview{display:none}
-.authview.on{display:block}
-.authnote{font-size:13px;color:var(--muted);margin:14px 0 0;text-align:center}
-.authnote a,.linklike{background:none;border:none;padding:0;color:var(--calm);font:inherit;font-weight:600;cursor:pointer;text-decoration:underline}
-.authstatus{font-size:14px;margin:12px 0 0;min-height:1.2em;color:var(--muted)}
-.authstatus.ok{color:var(--calm);font-weight:500}
-.authstatus.bad{color:var(--signal);font-weight:500}
-.pwrow{position:relative}
-.pwrow .toggle{
-  position:absolute;right:6px;top:29px;background:none;border:none;color:var(--muted);
-  font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;padding:6px 8px;
-}
-.authfoot{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);text-align:center}
-.guestbtn{background:none;border:none;color:var(--muted);font:inherit;font-size:13.5px;text-decoration:underline;cursor:pointer}
+/* ---- view switching ---- */
+#loginView{display:block}
+#appView{display:none}
+#appView.on{display:block}
+#loginView.hidden{display:none}
 </style>
 </head>
 <body>
 
-<!-- ================= AUTH GATE ================= -->
-<div id="authGate">
-  <div class="authcard">
-    <h1 class="authmark">Sur<span>a</span>ksha</h1>
-    <p class="authtag">Sign in to keep your safety setup private on this device</p>
+<!-- ============================================================
+     VIEW 1 — LOGIN PAGE
+     ============================================================ -->
+<div id="loginView" class="login-body" style="display:flex;align-items:center;justify-content:center;min-height:100vh;">
+  <div class="login-wrapper">
+    <div class="login-brand">Sur<span>a</span>ksha <span class="dot"></span></div>
 
-    <div class="authpanel">
-      <div class="authtabs" role="tablist">
-        <button class="authtab" type="button" role="tab" data-a="login" aria-selected="true">Log in</button>
-        <button class="authtab" type="button" role="tab" data-a="signup" aria-selected="false">Create account</button>
-      </div>
+    <div class="login-card">
+      <h2 id="formTitle">Sign in to Suraksha</h2>
 
-      <!-- ---- LOG IN ---- -->
-      <div class="authview on" data-av="login">
-        <div class="field">
-          <label for="liUser">Username</label>
-          <input type="text" id="liUser" autocomplete="username" autocapitalize="off">
-        </div>
-        <div class="field pwrow">
-          <label for="liPass">Password</label>
-          <input type="password" id="liPass" autocomplete="current-password">
-          <button class="toggle" type="button" data-show="liPass">Show</button>
-        </div>
-        <div class="btnrow">
-          <button class="btn btn-go btn-wide" id="liGo" type="button">Log in</button>
-        </div>
-        <p class="authnote"><button class="linklike" type="button" id="toForgot">Forgot your password?</button></p>
-        <p class="authstatus" id="liStatus" role="status" aria-live="polite"></p>
-      </div>
-
-      <!-- ---- CREATE ACCOUNT ---- -->
-      <div class="authview" data-av="signup">
-        <div class="field">
-          <label for="suUser">Choose a username</label>
-          <input type="text" id="suUser" autocomplete="username" autocapitalize="off">
-        </div>
-        <div class="field pwrow">
-          <label for="suPass">Choose a password</label>
-          <input type="password" id="suPass" autocomplete="new-password">
-          <button class="toggle" type="button" data-show="suPass">Show</button>
-        </div>
-        <div class="field">
-          <label for="suQ">Security question</label>
-          <select id="suQ">
-            <option value="pet">What was the name of your first pet?</option>
-            <option value="school">What was the name of your first school?</option>
-            <option value="city">In what city were you born?</option>
-            <option value="mother">What is your mother's maiden name?</option>
-            <option value="custom">Write my own question</option>
-          </select>
-        </div>
-        <div class="field" id="suQCustomWrap" style="display:none">
-          <label for="suQCustom">Your question</label>
-          <input type="text" id="suQCustom" placeholder="e.g. What street did you grow up on?">
-        </div>
-        <div class="field">
-          <label for="suA">Answer</label>
-          <input type="text" id="suA" autocomplete="off">
-        </div>
-        <div class="btnrow">
-          <button class="btn btn-go btn-wide" id="suGo" type="button">Create account</button>
-        </div>
-        <p class="authstatus" id="suStatus" role="status" aria-live="polite"></p>
-      </div>
-
-      <!-- ---- FORGOT PASSWORD ---- -->
-      <div class="authview" data-av="forgot">
-        <p class="status" style="margin-top:0" id="fgIntro">Enter your username to see your security question.</p>
-        <div class="field">
-          <label for="fgUser">Username</label>
-          <input type="text" id="fgUser" autocomplete="username" autocapitalize="off">
-        </div>
-        <div class="btnrow" id="fgFindRow">
-          <button class="btn btn-wide" id="fgFind" type="button">Find my account</button>
+      <form id="authForm" novalidate>
+        <div class="login-field" id="nameField" style="display:none">
+          <label for="name">Full name</label>
+          <input type="text" id="name" placeholder="Ananya Sharma" autocomplete="name">
         </div>
 
-        <div id="fgQWrap" style="display:none">
-          <div class="field">
-            <label id="fgQLabel" for="fgA">Security question</label>
-            <input type="text" id="fgA" placeholder="Your answer" autocomplete="off">
+        <div class="login-field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+        </div>
+
+        <div class="login-field">
+          <label for="password">Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+            <button type="button" class="pw-toggle" id="pwToggle">Show</button>
           </div>
-          <div class="field pwrow">
-            <label for="fgNewPass">New password</label>
-            <input type="password" id="fgNewPass" autocomplete="new-password">
-            <button class="toggle" type="button" data-show="fgNewPass">Show</button>
-          </div>
-          <div class="btnrow">
-            <button class="btn btn-go btn-wide" id="fgReset" type="button">Reset password</button>
-          </div>
+          <div class="hint" id="pwHint" style="display:none">At least 6 characters.</div>
         </div>
-        <p class="authstatus" id="fgStatus" role="status" aria-live="polite"></p>
-        <p class="authnote"><button class="linklike" type="button" id="fromForgot">Back to log in</button></p>
+
+        <div class="row-between" id="rememberRow">
+          <label><input type="checkbox" id="remember" checked> Remember me</label>
+          <a href="#" id="forgotLink">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn-signin" id="submitBtn">Sign in</button>
+        <p class="status-msg" id="statusMsg"></p>
+      </form>
+
+      <div class="divider">OR</div>
+
+      <div class="alt-signin">
+        <button type="button" id="passkeyBtn">🔑 Passkey</button>
+        <button type="button" id="googleBtn">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Google
+        </button>
       </div>
 
-      <div class="authfoot">
-        <button class="guestbtn" type="button" id="skipAuth">Skip for now — use as guest on this device</button>
-      </div>
+      <!-- ============ GUEST BUTTON ============ -->
+      <button type="button" class="guest-btn" id="guestBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+        Continue as Guest
+      </button>
+      <p class="guest-note">Open Suraksha without an account. All features work — nothing is saved to a cloud.</p>
+    </div>
+
+    <div class="bottom-text">
+      <span id="switchText">New to Suraksha?</span>
+      <a id="switchLink" href="#">Create an account</a>
+    </div>
+
+    <div class="footer-links">
+      <a href="#">Terms</a><a href="#">Privacy</a><a href="#">Docs</a><a href="#">Contact</a>
     </div>
   </div>
+</div>
+
+<!-- ============================================================
+     VIEW 2 — FULL SURAKSHA APP
+     ============================================================ -->
+<div id="appView" class="app-body">
+
+<!-- guest banner (only shown in guest mode) -->
+<div class="guest-banner" id="guestBanner" style="display:none;">
+  <span>👤 Browsing as Guest</span>
+  <button type="button" id="signInFromApp">Sign in to save data</button>
 </div>
 
 <header class="top">
@@ -630,7 +539,6 @@ footer p{max-width:64ch}
 
 <div id="page-home" class="page on">
 
-<!-- ================= LOCATION ================= -->
 <section id="location">
   <h2>Send where you are</h2>
   <p class="lede">Your phone finds your location, and this writes the message. Send it on WhatsApp or SMS in two taps.</p>
@@ -648,7 +556,7 @@ footer p{max-width:64ch}
         <span class="lt">Live — updating as you move</span>
         <span class="elapsed" id="liveElapsed">00:00</span>
       </div>
-      <canvas id="trail" class="trailmap" width="700" height="380" aria-label="Map of the path you have travelled since tracking started"></canvas>
+      <canvas id="trail" class="trailmap" width="700" height="380"></canvas>
       <div class="livestats">
         <div class="stat"><b id="statDist">0 m</b><span>Travelled</span></div>
         <div class="stat"><b id="statSpeed">—</b><span>Speed</span></div>
@@ -674,7 +582,6 @@ footer p{max-width:64ch}
   </div>
 </section>
 
-<!-- ================= CALLING ================= -->
 <section id="calling">
   <h2>Calling</h2>
   <p class="lede">Everything you'd need to dial, without hunting through your contacts list.</p>
@@ -727,7 +634,6 @@ footer p{max-width:64ch}
   </div>
 </section>
 
-<!-- ================= CHECK-IN ================= -->
 <section id="checkin">
   <h2>Safety timer</h2>
   <p class="lede">Heading somewhere and want someone to know if you don't arrive? Start a timer. If you don't tap <em>I'm safe</em> before it runs out, this device sounds an alarm and opens your alert message.</p>
@@ -748,7 +654,6 @@ footer p{max-width:64ch}
   </div>
 </section>
 
-<!-- ================= FAKE CALL ================= -->
 <section id="fakecall">
   <h2>Fake call</h2>
   <p class="lede">A reason to leave, out loud, without explaining yourself. Your phone rings, you answer, you talk. Keep this tab open in the background.</p>
@@ -775,29 +680,26 @@ footer p{max-width:64ch}
   </div>
 </section>
 
-<!-- ================= HELPLINES ================= -->
 <section id="helplines">
   <h2>Helplines</h2>
   <p class="lede">All free, all 24×7 unless noted. Tap to dial.</p>
   <div class="lines">
     <a class="line" href="tel:112"><span class="grow"><span class="lname">Emergency Response Support</span><span class="ldesc">Police, fire and ambulance on one number, all of India</span></span><span class="lnum">112</span></a>
     <a class="line" href="tel:1091"><span class="grow"><span class="lname">Women in distress</span><span class="ldesc">Police women's helpline</span></span><span class="lnum">1091</span></a>
-    <a class="line" href="tel:181"><span class="grow"><span class="lname">Women's helpline</span><span class="ldesc">Violence, abuse, shelter, counselling — links you to One Stop Centres</span></span><span class="lnum">181</span></a>
-    <a class="line" href="tel:14490"><span class="grow"><span class="lname">National Commission for Women</span><span class="ldesc">Counsellor-staffed; complaints and referrals. Also on WhatsApp at 7827170170</span></span><span class="lnum">14490</span></a>
-    <a class="line" href="tel:1930"><span class="grow"><span class="lname">Cybercrime and online fraud</span><span class="ldesc">Report within the first hour to have the best chance of freezing money</span></span><span class="lnum">1930</span></a>
-    <a class="line" href="tel:1098"><span class="grow"><span class="lname">Childline</span><span class="ldesc">Any child in danger, distress or being married off</span></span><span class="lnum">1098</span></a>
+    <a class="line" href="tel:181"><span class="grow"><span class="lname">Women's helpline</span><span class="ldesc">Violence, abuse, shelter, counselling</span></span><span class="lnum">181</span></a>
+    <a class="line" href="tel:14490"><span class="grow"><span class="lname">National Commission for Women</span><span class="ldesc">Counsellor-staffed; complaints and referrals</span></span><span class="lnum">14490</span></a>
+    <a class="line" href="tel:1930"><span class="grow"><span class="lname">Cybercrime and online fraud</span><span class="ldesc">Report within the first hour</span></span><span class="lnum">1930</span></a>
+    <a class="line" href="tel:1098"><span class="grow"><span class="lname">Childline</span><span class="ldesc">Any child in danger or distress</span></span><span class="lnum">1098</span></a>
     <a class="line" href="tel:1094"><span class="grow"><span class="lname">Missing persons</span><span class="ldesc">Missing women and children</span></span><span class="lnum">1094</span></a>
-    <a class="line" href="tel:15100"><span class="grow"><span class="lname">Free legal aid</span><span class="ldesc">NALSA — a lawyer at no cost, and help filing</span></span><span class="lnum">15100</span></a>
-    <a class="line" href="tel:14416"><span class="grow"><span class="lname">Tele-MANAS</span><span class="ldesc">Mental health support in many Indian languages</span></span><span class="lnum">14416</span></a>
+    <a class="line" href="tel:15100"><span class="grow"><span class="lname">Free legal aid</span><span class="ldesc">NALSA — a lawyer at no cost</span></span><span class="lnum">15100</span></a>
+    <a class="line" href="tel:14416"><span class="grow"><span class="lname">Tele-MANAS</span><span class="ldesc">Mental health support</span></span><span class="lnum">14416</span></a>
     <a class="line" href="tel:108"><span class="grow"><span class="lname">Ambulance</span><span class="ldesc">102 also works in most states</span></span><span class="lnum">108</span></a>
   </div>
-  <p class="status">In Rajasthan, 1090 reaches the Abhay command centre and 18001200020 is the state women's helpline. Elsewhere, 181 and 1091 are the ones to remember.</p>
 </section>
 
-<!-- ================= RULES ================= -->
 <section id="rules">
   <h2>Safety rules</h2>
-  <p class="lede">Not a lecture — a setup checklist. Most of these you do once and never think about again. Tick them off as you go; this device remembers.</p>
+  <p class="lede">A setup checklist. Tick them off as you go; this device remembers.</p>
 
   <div class="progress">
     <b id="ruleCount">0 of 24</b>
@@ -807,46 +709,45 @@ footer p{max-width:64ch}
 
   <div class="rulegroup">
     <h3>Set up once</h3>
-    <div class="rule"><input type="checkbox" id="r1"><label for="r1"><span>Turn on your phone's own SOS</span><span class="why">Five presses of the power button on Android, or hold side + volume on iPhone. It dials and alerts without unlocking.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r2"><label for="r2"><span>Put emergency contacts on your lock screen</span><span class="why">Medical ID on iPhone, Emergency info on Android. A stranger or a paramedic can reach your people without your passcode.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r3"><label for="r3"><span>Learn 112, 1091 and 181 by heart</span><span class="why">A dead battery, a borrowed phone, a stranger's phone — you won't have your contacts list.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r4"><label for="r4"><span>Keep a power bank and a short cable in your bag</span><span class="why">A phone at 3% is the single most common reason a safety plan fails.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r5"><label for="r5"><span>Set a code word with two people</span><span class="why">Something ordinary you'd never otherwise say — "did you feed the cat?" — that means send help without asking questions.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r6"><label for="r6"><span>Photograph your ID, and keep it somewhere you can reach</span><span class="why">Email it to yourself. Losing a bag shouldn't also mean losing proof of who you are.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r1"><label for="r1"><span>Turn on your phone's own SOS</span><span class="why">Five presses of the power button on Android.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r2"><label for="r2"><span>Put emergency contacts on your lock screen</span><span class="why">Medical ID on iPhone, Emergency info on Android.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r3"><label for="r3"><span>Learn 112, 1091 and 181 by heart</span><span class="why">You won't have your contacts list in an emergency.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r4"><label for="r4"><span>Keep a power bank and a short cable in your bag</span><span class="why">A dead phone is the most common failure.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r5"><label for="r5"><span>Set a code word with two people</span><span class="why">Something ordinary that means "send help".</span></label></div>
+    <div class="rule"><input type="checkbox" id="r6"><label for="r6"><span>Photograph your ID, keep it somewhere you can reach</span><span class="why">Email it to yourself.</span></label></div>
   </div>
 
   <div class="rulegroup">
     <h3>Before you leave</h3>
-    <div class="rule"><input type="checkbox" id="r7"><label for="r7"><span>One person always knows where you're going and when you'll be back</span><span class="why">Not the whole plan. Just the destination and a time.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r8"><label for="r8"><span>Share live location for the duration, not 15 minutes</span><span class="why">WhatsApp lets you share for 8 hours. A 15-minute share expires exactly when things go wrong.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r9"><label for="r9"><span>Charge to full, and know the route yourself</span><span class="why">If you can picture the route, you'll notice when it changes.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r10"><label for="r10"><span>Carry enough cash to get home without an app</span><span class="why">Dead phone, no network, no UPI. Five hundred rupees folded somewhere separate from your wallet.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r11"><label for="r11"><span>Wear what you can move in, if you get the choice</span><span class="why">Not about modesty — about being able to run, and knowing where your hands are.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r7"><label for="r7"><span>One person always knows where you're going</span><span class="why">Destination and a time.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r8"><label for="r8"><span>Share live location for the duration</span><span class="why">WhatsApp lets you share for 8 hours.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r9"><label for="r9"><span>Charge to full, know the route yourself</span><span class="why">If you can picture it, you'll notice changes.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r10"><label for="r10"><span>Carry enough cash to get home</span><span class="why">Dead phone, no network, no UPI.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r11"><label for="r11"><span>Wear what you can move in</span><span class="why">Being able to run matters.</span></label></div>
   </div>
 
   <div class="rulegroup">
     <h3>Out there</h3>
-    <div class="rule"><input type="checkbox" id="r12"><label for="r12"><span>Trust the feeling before you can explain it</span><span class="why">You'll usually feel wrong before you can say why. Leave first; work out whether you overreacted later, from somewhere safe.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r13"><label for="r13"><span>You never owe an explanation for leaving</span><span class="why">No apology, no excuse, no waiting for a polite moment. Being thought rude is a very cheap price.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r14"><label for="r14"><span>Keep one ear free</span><span class="why">Footsteps, an engine slowing behind you, someone's breathing. Noise-cancelling is the wrong setting for a dark street.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r15"><label for="r15"><span>Photograph the number plate before you sit down</span><span class="why">Do it where the driver can see you doing it. That alone changes the odds.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r16"><label for="r16"><span>Never let yourself be moved to a second location</span><span class="why">Whatever is happening is at its least dangerous right where you are, in public. Fight, shout, run — but don't get in the vehicle.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r17"><label for="r17"><span>Being followed? Go somewhere staffed, not home</span><span class="why">A hospital, petrol pump, hotel lobby or open shop. Never lead someone to your own door.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r18"><label for="r18"><span>Shout specifics, not screams</span><span class="why">"This man is following me" makes people look up. A scream alone makes people assume it's someone else's problem.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r19"><label for="r19"><span>Watch your own drink, always</span><span class="why">Carry it, or leave it. If it's been out of your sight or tastes odd, abandon it and tell a friend right then.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r12"><label for="r12"><span>Trust the feeling before you can explain it</span><span class="why">Leave first; analyse later.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r13"><label for="r13"><span>You never owe an explanation for leaving</span><span class="why">Being thought rude is a cheap price.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r14"><label for="r14"><span>Keep one ear free</span><span class="why">Noise-cancelling is the wrong setting.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r15"><label for="r15"><span>Photograph the number plate before you sit down</span><span class="why">Do it visibly — it changes the odds.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r16"><label for="r16"><span>Never let yourself be moved to a second location</span><span class="why">Fight, shout, run — don't get in the vehicle.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r17"><label for="r17"><span>Being followed? Go somewhere staffed, not home</span><span class="why">Hospital, petrol pump, hotel lobby.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r18"><label for="r18"><span>Shout specifics, not screams</span><span class="why">"This man is following me."</span></label></div>
+    <div class="rule"><input type="checkbox" id="r19"><label for="r19"><span>Watch your own drink, always</span><span class="why">Carry it or leave it.</span></label></div>
   </div>
 
   <div class="rulegroup">
     <h3>Online</h3>
-    <div class="rule"><input type="checkbox" id="r20"><label for="r20"><span>Two-factor on your email first, then everything else</span><span class="why">Whoever controls your email controls every account you own.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r21"><label for="r21"><span>Don't post where you are while you're still there</span><span class="why">Post the photos when you get home. Real-time location is the part that's useful to someone watching.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r22"><label for="r22"><span>Check who can see your photos and your phone number</span><span class="why">Profile photo, last seen, story visibility. Default settings are built for reach, not for you.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r23"><label for="r23"><span>Screenshot before you block</span><span class="why">Blocking first destroys the only evidence you had. Capture the handle, the URL and the timestamp.</span></label></div>
-    <div class="rule"><input type="checkbox" id="r24"><label for="r24"><span>Meeting someone from an app? Public place, own transport, someone told</span><span class="why">And a video call before you go. It's the cheapest way to find out if the person is who they said.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r20"><label for="r20"><span>Two-factor on your email first</span><span class="why">It controls every other account.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r21"><label for="r21"><span>Don't post where you are while you're there</span><span class="why">Post when you get home.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r22"><label for="r22"><span>Check who can see your photos and number</span><span class="why">Defaults are built for reach.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r23"><label for="r23"><span>Screenshot before you block</span><span class="why">Blocking destroys the evidence.</span></label></div>
+    <div class="rule"><input type="checkbox" id="r24"><label for="r24"><span>Meeting from an app? Public place, own transport</span><span class="why">Video call first.</span></label></div>
   </div>
 </section>
 
-<!-- ================= GUIDES ================= -->
 <section id="guides">
   <h2>If you're in it right now</h2>
   <p class="lede">Short, practical, no lectures.</p>
@@ -854,63 +755,61 @@ footer p{max-width:64ch}
   <details class="guide">
     <summary>In a cab or auto</summary>
     <div class="body"><ul>
-      <li>Before you sit: photograph the number plate and send it to someone. Doing it visibly is itself a deterrent.</li>
-      <li>Share the live trip from the app. If it's a street auto, share your live location from WhatsApp instead — 8 hours, not 15 minutes.</li>
-      <li>Sit in the back, on the side away from the driver, with the door unlocked on your side.</li>
-      <li>If the route feels wrong, say out loud on a call that you're near a specific landmark. Wrong turns at low speed are the moment to get out, not the highway.</li>
-      <li>You don't owe anyone conversation. Not answering personal questions is normal and fine.</li>
+      <li>Photograph the number plate and send it to someone.</li>
+      <li>Share the live trip from the app.</li>
+      <li>Sit in the back, door unlocked on your side.</li>
+      <li>If the route feels wrong, get out at low speed — not on the highway.</li>
     </ul></div>
   </details>
 
   <details class="guide">
     <summary>Walking, late or alone</summary>
     <div class="body"><ul>
-      <li>One earphone out, or none. Hearing footsteps behind you matters more than the playlist.</li>
-      <li>Walk facing traffic where you can, in the middle of the footpath, away from parked vehicles and doorways.</li>
-      <li>If you think you're being followed, cross the road. If they cross too, go into any open shop, petrol pump, hospital or hotel lobby and tell the staff. Don't walk to your own door.</li>
-      <li>Shout what's happening, not just noise — "this man is following me" makes people look. "Fire" makes people come.</li>
-      <li>Keys between your fingers is a myth that injures you. A loud whistle, your phone's siren and distance work better.</li>
+      <li>One earphone out, or none.</li>
+      <li>Walk facing traffic, away from parked vehicles.</li>
+      <li>Being followed? Cross the road. Go to a shop, pump, hospital or lobby.</li>
+      <li>Shout what's happening — "this man is following me".</li>
+      <li>A loud whistle or phone siren beats keys between fingers.</li>
     </ul></div>
   </details>
 
   <details class="guide">
     <summary>Harassment at work</summary>
     <div class="body"><ul>
-      <li>Write it down the same day: date, time, exact words, who else was around. A contemporaneous note carries real weight later.</li>
-      <li>Every workplace with 10 or more employees must have an Internal Committee under the POSH Act, 2013. Ask HR for its members in writing.</li>
-      <li>Fewer than 10 employees, or the complaint is against the employer? Go to the Local Committee through your District Officer, or file on the government's SHe-Box portal.</li>
-      <li>The complaint should normally be filed within three months, though the committee can extend that for good reason.</li>
-      <li>Conciliation can only happen if you want it, and it can never be a money settlement dressed up as one.</li>
+      <li>Write it down the same day: date, time, words, witnesses.</li>
+      <li>Workplaces with 10+ staff must have an Internal Committee under POSH Act, 2013.</li>
+      <li>Fewer than 10? Local Committee via District Officer, or SHe-Box portal.</li>
+      <li>File within three months; extension possible.</li>
+      <li>Conciliation only if you want it — never a money settlement.</li>
     </ul></div>
   </details>
 
   <details class="guide">
     <summary>Online harassment, stalking, leaked photos</summary>
     <div class="body"><ul>
-      <li>Screenshot everything with the URL, handle and timestamp visible, before you block. Blocking first loses the evidence.</li>
-      <li>Report at cybercrime.gov.in — the women-and-children section lets you report anonymously.</li>
-      <li>For intimate images shared without consent, also file directly with the platform under its non-consensual imagery policy, which is faster than the police route.</li>
-      <li>Money already lost? Call 1930 immediately. The first hour is when a transfer can still be frozen.</li>
-      <li>Sextortion is a crime against you, not by you. Don't pay — it never stops at one payment.</li>
+      <li>Screenshot with URL, handle, timestamp — before blocking.</li>
+      <li>Report at cybercrime.gov.in — anonymous option available.</li>
+      <li>Intimate images: file with platform under NCII policy too.</li>
+      <li>Money lost? Call 1930 immediately.</li>
+      <li>Sextortion is a crime against you. Don't pay.</li>
     </ul></div>
   </details>
 
   <details class="guide">
     <summary>Violence at home</summary>
     <div class="body"><ul>
-      <li>The Protection of Women from Domestic Violence Act, 2005 covers physical, sexual, verbal, emotional and economic abuse — and applies to live-in relationships, not only marriage.</li>
-      <li>You have the right to stay in the shared household. Being thrown out is itself something a court can reverse.</li>
-      <li>Every district has a Protection Officer and a One Stop Centre. Call 181 and ask them to connect you.</li>
-      <li>Keep somewhere else: ID, bank papers, marriage documents, children's papers, a spare phone, some cash. With a friend, not in the house.</li>
-      <li>Get injuries examined by a doctor and keep the paper. Medical records are the evidence that lasts.</li>
+      <li>DV Act 2005 covers physical, sexual, verbal, emotional, economic abuse.</li>
+      <li>Right to stay in the shared household.</li>
+      <li>Every district has a Protection Officer and One Stop Centre. Call 181.</li>
+      <li>Keep ID, papers, cash somewhere else.</li>
+      <li>Get injuries examined and keep the paper.</li>
     </ul></div>
   </details>
 </section>
 
-<!-- ================= RIGHTS ================= -->
 <section id="rights">
   <h2>Your rights</h2>
-  <p class="lede">What Indian law already gives you. Saying it out loud, at the desk or in the HR meeting, changes how things go.</p>
+  <p class="lede">What Indian law already gives you.</p>
 
   <div class="rtabs" role="tablist">
     <button class="rtab" type="button" role="tab" data-r="police" aria-selected="true">Police &amp; FIR</button>
@@ -922,142 +821,67 @@ footer p{max-width:64ch}
   </div>
 
   <div class="rpanel on" data-rp="police">
-    <div class="right"><h3>Any police station, anywhere</h3><p>A Zero FIR can be filed at any station regardless of where the incident happened. It is then transferred to the right one. "Not our area" is not a valid refusal.</p><span class="law">BNSS, 2023 — registration irrespective of jurisdiction</span></div>
-    <div class="right"><h3>An FIR cannot be refused</h3><p>For a cognizable offence, registration is mandatory and free. If it's refused, send your complaint in writing to the Superintendent of Police, or go directly to a Magistrate. You're entitled to a free copy of the FIR.</p></div>
-    <div class="right"><h3>Your statement, your terms</h3><p>In sexual offence cases the statement is recorded by a woman officer, and it can be recorded at your home or another place you choose, with someone of your choice present. If you have a disability, an interpreter or special educator must be provided and the statement videographed.</p></div>
-    <div class="right"><h3>Arrest timings</h3><p>A woman should not ordinarily be arrested before 6am or after 6pm, and only by a woman officer. Exceptions need a magistrate's prior written permission.</p></div>
-    <div class="right"><h3>Free treatment, no FIR needed first</h3><p>Every hospital, government or private, must give free first aid and treatment to a survivor of sexual assault or acid attack, and inform the police itself. They cannot ask you to bring an FIR first.</p></div>
-    <div class="right"><h3>No two-finger test</h3><p>The Supreme Court has banned it outright and called it re-victimising. Any doctor who conducts one is committing misconduct.</p></div>
-    <div class="right"><h3>You can report late</h3><p>There is no time limit on reporting a sexual offence. A delayed complaint is still a valid complaint.</p></div>
+    <div class="right"><h3>Any police station, anywhere</h3><p>A Zero FIR can be filed at any station. "Not our area" is not a valid refusal.</p><span class="law">BNSS, 2023</span></div>
+    <div class="right"><h3>An FIR cannot be refused</h3><p>For cognizable offences, registration is mandatory and free. You get a free copy.</p></div>
+    <div class="right"><h3>Your statement, your terms</h3><p>In sexual offence cases, recorded by a woman officer, at a place you choose.</p></div>
+    <div class="right"><h3>Arrest timings</h3><p>A woman should not ordinarily be arrested before 6am or after 6pm, only by a woman officer.</p></div>
+    <div class="right"><h3>Free treatment, no FIR needed first</h3><p>Every hospital must give free first aid to survivors, and inform police themselves.</p></div>
+    <div class="right"><h3>No two-finger test</h3><p>Banned by the Supreme Court. Any doctor conducting one is committing misconduct.</p></div>
+    <div class="right"><h3>You can report late</h3><p>No time limit on reporting a sexual offence.</p></div>
   </div>
 
   <div class="rpanel" data-rp="work">
-    <div class="right"><h3>Every workplace with 10+ staff needs a committee</h3><p>An Internal Committee, headed by a senior woman, with an external member from an NGO or legal background. Not having one is itself a violation, and HR must tell you who is on it.</p><span class="law">Sexual Harassment of Women at Workplace (POSH) Act, 2013</span></div>
-    <div class="right"><h3>Smaller workplaces are still covered</h3><p>Under 10 employees, informal work, domestic work, or a complaint against the employer himself — go to the Local Committee through your District Officer, or file online on the government's SHe-Box portal.</p></div>
-    <div class="right"><h3>Relief while the inquiry runs</h3><p>You can ask for a transfer for yourself or the respondent, up to three months of paid leave over and above your normal leave, or for him to be stopped from reporting on your work. The inquiry should finish within 90 days.</p></div>
-    <div class="right"><h3>Retaliation is not allowed</h3><p>Being sidelined, denied a promotion, or pushed out after complaining is itself actionable. Conciliation can only happen if you ask for it, and it can never be a cash settlement.</p></div>
-    <div class="right"><h3>26 weeks of paid maternity leave</h3><p>For your first two children; 12 weeks after that, and 12 weeks for an adopting or commissioning mother. You cannot be dismissed for being pregnant, and workplaces with 50+ employees must provide a creche.</p><span class="law">Maternity Benefit (Amendment) Act, 2017</span></div>
-    <div class="right"><h3>Equal pay for the same work</h3><p>Discriminating on pay or on recruitment for the same or similar work, on the ground of sex, is prohibited.</p><span class="law">Code on Wages, 2019</span></div>
+    <div class="right"><h3>Every workplace with 10+ staff needs a committee</h3><p>Internal Committee with a senior woman and an external member.</p><span class="law">POSH Act, 2013</span></div>
+    <div class="right"><h3>Smaller workplaces are still covered</h3><p>Local Committee via District Officer, or SHe-Box portal.</p></div>
+    <div class="right"><h3>Relief while the inquiry runs</h3><p>Transfer, up to 3 months paid leave, or stop him from reporting on your work.</p></div>
+    <div class="right"><h3>Retaliation is not allowed</h3><p>Being sidelined after complaining is actionable.</p></div>
+    <div class="right"><h3>26 weeks of paid maternity leave</h3><p>For first two children. Creche if 50+ employees.</p><span class="law">Maternity Benefit Act, 2017</span></div>
+    <div class="right"><h3>Equal pay for the same work</h3><p>Sex-based pay discrimination is prohibited.</p><span class="law">Code on Wages, 2019</span></div>
   </div>
 
   <div class="rpanel" data-rp="home">
-    <div class="right"><h3>Abuse is more than bruises</h3><p>The law covers physical, sexual, verbal, emotional and economic abuse — including withholding money, taking your salary, or threatening to throw you out.</p><span class="law">Protection of Women from Domestic Violence Act, 2005</span></div>
-    <div class="right"><h3>It applies to live-in relationships</h3><p>You do not have to be married. Relationships "in the nature of marriage" are covered, as are mothers, sisters and daughters facing abuse from family members.</p></div>
-    <div class="right"><h3>The right to stay in the house</h3><p>You cannot be evicted from a shared household, whether or not you own it or your name is on the rent. A court can order him to leave instead.</p></div>
-    <div class="right"><h3>Orders a magistrate can pass</h3><p>Protection orders stopping contact, residence orders, monetary relief for expenses and lost earnings, custody of children, and compensation. Apply through a Protection Officer — every district has one — or a lawyer.</p></div>
-    <div class="right"><h3>Cruelty and dowry are crimes</h3><p>Cruelty by a husband or his relatives is a criminal offence, as is demanding dowry, giving it or taking it. Harassment over dowry is punishable regardless of whether anything was paid.</p><span class="law">BNS s.85 (earlier IPC 498A); Dowry Prohibition Act, 1961</span></div>
-    <div class="right"><h3>Streedhan is yours alone</h3><p>Everything given to you before, during or after marriage — jewellery, cash, gifts — is your absolute property. Your husband and in-laws are only custodians and must return it on demand.</p></div>
-    <div class="right"><h3>Maintenance</h3><p>A wife, including a divorced wife who hasn't remarried, can claim maintenance from her husband. It can be claimed through the criminal court, the family court, or under the Domestic Violence Act.</p><span class="law">BNSS s.144 (earlier CrPC s.125)</span></div>
+    <div class="right"><h3>Abuse is more than bruises</h3><p>Physical, sexual, verbal, emotional, economic — all covered.</p><span class="law">DV Act, 2005</span></div>
+    <div class="right"><h3>It applies to live-in relationships</h3><p>You don't have to be married.</p></div>
+    <div class="right"><h3>The right to stay in the house</h3><p>You can't be evicted from a shared household.</p></div>
+    <div class="right"><h3>Orders a magistrate can pass</h3><p>Protection, residence, monetary relief, custody, compensation.</p></div>
+    <div class="right"><h3>Cruelty and dowry are crimes</h3><p>Demanding, giving or taking dowry is punishable.</p><span class="law">BNS s.85; Dowry Prohibition Act, 1961</span></div>
+    <div class="right"><h3>Streedhan is yours alone</h3><p>Husband and in-laws are only custodians.</p></div>
+    <div class="right"><h3>Maintenance</h3><p>A wife (or divorced wife not remarried) can claim maintenance.</p><span class="law">BNSS s.144</span></div>
   </div>
 
   <div class="rpanel" data-rp="money">
-    <div class="right"><h3>Daughters inherit equally</h3><p>A daughter is a coparcener in ancestral property from birth, with the same rights and liabilities as a son. The Supreme Court confirmed in 2020 that this applies whether or not the father was alive in 2005.</p><span class="law">Hindu Succession (Amendment) Act, 2005; Vineeta Sharma v. Rakesh Sharma</span></div>
-    <div class="right"><h3>Marriage doesn't end it</h3><p>Getting married does not take away your share in your parents' property. Signing a "relinquishment" at a wedding under pressure can be challenged.</p></div>
-    <div class="right"><h3>Banking on your own</h3><p>You can open an account, take a loan, hold property and run a business without a husband's, father's or any male relative's signature or consent. A bank asking for one is in the wrong.</p></div>
-    <div class="right"><h3>Your salary is yours</h3><p>Nobody in your household has a legal claim on your earnings. Being made to hand over your salary is economic abuse under the Domestic Violence Act.</p></div>
-    <div class="right"><h3>Lower stamp duty</h3><p>Most states charge women buyers a reduced rate of stamp duty on property registration. Worth asking about before a sale deed is drawn up in someone else's name.</p></div>
+    <div class="right"><h3>Daughters inherit equally</h3><p>A daughter is a coparcener from birth.</p><span class="law">HSA 2005; Vineeta Sharma v. Rakesh Sharma</span></div>
+    <div class="right"><h3>Marriage doesn't end it</h3><p>Marrying doesn't remove your share.</p></div>
+    <div class="right"><h3>Banking on your own</h3><p>No male signature needed for accounts, loans, property.</p></div>
+    <div class="right"><h3>Your salary is yours</h3><p>Being made to hand it over is economic abuse.</p></div>
+    <div class="right"><h3>Lower stamp duty</h3><p>Most states charge women a reduced rate.</p></div>
   </div>
 
   <div class="rpanel" data-rp="online">
-    <div class="right"><h3>Your name stays out of it</h3><p>Publishing the identity of a survivor of a sexual offence is itself a crime. Media, police and online accounts cannot name you or print details that identify you.</p></div>
-    <div class="right"><h3>Intimate images must come down in 24 hours</h3><p>Platforms are required to remove non-consensual intimate imagery, including morphed and AI-generated images, within 24 hours of a complaint. Sharing such images is separately punishable.</p><span class="law">IT Rules, 2021; IT Act s.66E, 67A</span></div>
-    <div class="right"><h3>Report anonymously</h3><p>cybercrime.gov.in has a dedicated section for crimes against women and children where you can report without giving your name. For money already lost, call 1930 within the hour.</p></div>
-    <div class="right"><h3>Online stalking is stalking</h3><p>Repeatedly contacting you, or monitoring your internet or messaging activity against your wishes, is a criminal offence — not "just messages".</p><span class="law">BNS s.78 (earlier IPC 354D)</span></div>
-    <div class="right"><h3>Sextortion is a crime against you</h3><p>You have committed no offence by being in the images. Don't pay. Screenshot, report, and tell one person you trust.</p></div>
+    <div class="right"><h3>Your name stays out of it</h3><p>Publishing a survivor's identity is a crime.</p></div>
+    <div class="right"><h3>Intimate images must come down in 24 hours</h3><p>Includes morphed and AI-generated.</p><span class="law">IT Rules, 2021</span></div>
+    <div class="right"><h3>Report anonymously</h3><p>cybercrime.gov.in has a section for crimes against women.</p></div>
+    <div class="right"><h3>Online stalking is stalking</h3><p>Repeated contact or monitoring is a crime.</p><span class="law">BNS s.78</span></div>
+    <div class="right"><h3>Sextortion is a crime against you</h3><p>Don't pay. Screenshot, report, tell someone.</p></div>
   </div>
 
   <div class="rpanel" data-rp="court">
-    <div class="right"><h3>A lawyer costs you nothing</h3><p>Every woman is entitled to free legal aid through the District Legal Services Authority, whatever her income. Call 15100 or walk into the DLSA office at your district court.</p><span class="law">Legal Services Authorities Act, 1987 — s.12(c)</span></div>
-    <div class="right"><h3>Trials held in private</h3><p>Sexual offence trials are conducted in camera, and as far as practicable before a woman judge. The public and press are kept out.</p></div>
-    <div class="right"><h3>Your past is not on trial</h3><p>Evidence of your character or previous sexual experience is not admissible on the question of consent. Questions about it can be objected to.</p></div>
-    <div class="right"><h3>Compensation, separate from the verdict</h3><p>Victim compensation schemes run through the Legal Services Authority, and can be awarded even where the accused is not convicted or not traced.</p></div>
-    <div class="right"><h3>You must be kept informed</h3><p>You're entitled to be told how the investigation is progressing, and to be heard before the accused is released on bail in serious offences.</p></div>
+    <div class="right"><h3>A lawyer costs you nothing</h3><p>Every woman is entitled to free legal aid.</p><span class="law">Legal Services Authorities Act, 1987</span></div>
+    <div class="right"><h3>Trials held in private</h3><p>Sexual offence trials in camera, before a woman judge where possible.</p></div>
+    <div class="right"><h3>Your past is not on trial</h3><p>Character or previous sexual history is inadmissible on consent.</p></div>
+    <div class="right"><h3>Compensation, separate from verdict</h3><p>Victim compensation schemes via Legal Services Authority.</p></div>
+    <div class="right"><h3>You must be kept informed</h3><p>About investigation progress; heard before bail.</p></div>
   </div>
 
-  <p class="caveat">India's criminal laws were replaced in July 2024 — section numbers changed from the IPC and CrPC to the Bharatiya Nyaya Sanhita and Bharatiya Nagarik Suraksha Sanhita, but these protections carried over. This page is general information, not legal advice. For anything specific, talk to a lawyer or call 15100.</p>
+  <p class="caveat">India's criminal laws were replaced in July 2024 — IPC and CrPC became BNS and BNSS, but these protections carried over. This page is general information, not legal advice. For anything specific, call 15100.</p>
 </section>
 
-</div><!-- /page-home -->
+</div>
 
 <div id="page-profile" class="page">
-
-<div class="sync off" id="syncCard">
-  <span class="sicon" id="syncIcon" aria-hidden="true">
-    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H6.5A4.5 4.5 0 0 1 5 10.2 5.5 5.5 0 0 1 15.9 8H16.5a4 4 0 0 1 1 7.9"/></svg>
-  </span>
-  <div class="sbody">
-    <div class="srow">
-      <span class="stitle" id="syncTitle">Not synced</span>
-      <span class="signedas" id="syncSub"></span>
-    </div>
-    <p class="ssub" id="syncDesc">Sign in to keep your profile and contacts backed up and available on any device. Without this, everything still works — it just stays only on this device.</p>
-    <form id="syncForm">
-      <input type="email" id="syncEmail" placeholder="you@example.com" autocomplete="email" required>
-      <button class="btn btn-go" id="syncSend" type="submit">Send magic link</button>
-      <button class="btn" id="syncOut" type="button" style="display:none">Sign out</button>
-    </form>
-    <p class="configwarn" id="configWarn" style="display:none">This deployment hasn't been connected to a database yet — add your Supabase URL and key near the top of the file's script to turn this on.</p>
-  </div>
-</div>
-
-<div class="panel" id="mapPanel">
-  <h3>Live location</h3>
-  <p class="status">Your current position, updating in real time. Same tracking as the Home page — start it here or there, either shows it.</p>
-  <div class="btnrow">
-    <button class="btn btn-red" id="liveBtnP" type="button">Start live tracking</button>
-  </div>
-
-  <div class="live" id="livePanelP">
-    <div class="livehead">
-      <span class="blip" aria-hidden="true"></span>
-      <span class="lt">Live — updating as you move</span>
-      <span class="elapsed" id="liveElapsedP">00:00</span>
-    </div>
-    <canvas id="trailP" class="trailmap compact" width="700" height="300" aria-label="Map of the path you have travelled since tracking started"></canvas>
-    <div class="livestats">
-      <div class="stat"><b id="statDistP">0 m</b><span>Travelled</span></div>
-      <div class="stat"><b id="statSpeedP">—</b><span>Speed</span></div>
-      <div class="stat"><b id="statAccP">—</b><span>Accuracy</span></div>
-    </div>
-    <div class="coordbar">
-      <span id="liveCoordsP">Waiting for the first fix…</span>
-      <a href="#" id="liveMapP" target="_blank" rel="noopener" style="margin-left:auto">Open in Maps</a>
-    </div>
-  </div>
-</div>
-
-<section id="dv-aware">
-  <div class="dv">
-    <p class="eyebrow">Recognise abuse</p>
-    <h2>It isn't only physical</h2>
-    <p class="lede">Domestic violence can happen to anyone, in any household. It can be physical, emotional, sexual, financial or psychological — and none of it is your fault.</p>
-    <ul class="signs">
-      <li>Constant fear or walking on eggshells at home</li>
-      <li>Being cut off from family, friends or your own money</li>
-      <li>Insults, humiliation or constant criticism</li>
-      <li>Jealousy, control, or being told what to wear</li>
-      <li>Threats, intimidation or guilt-tripping</li>
-      <li>Physical harm, or the threat of it</li>
-      <li>Your salary or spending controlled by someone else</li>
-      <li>Your phone, calls or messages monitored</li>
-    </ul>
-    <div class="trio">
-      <div><span class="tic">👂</span><h4>Listen</h4><p>Believe her. Your support can genuinely save a life.</p></div>
-      <div><span class="tic">🤝</span><h4>Support</h4><p>Encourage her to seek help, and be patient with her pace.</p></div>
-      <div><span class="tic">📣</span><h4>Speak up</h4><p>Break the silence around you. Awareness prevents violence.</p></div>
-    </div>
-    <p class="banner">You are not alone, and help is available — in your own city, right now.</p>
-    <div class="callrow">
-      <a href="tel:181">Call 181 — 24×7, free</a>
-      <span>Confidential · Nationwide · Also connects you to shelters and legal aid</span>
-    </div>
-  </div>
-</section>
-
-<!-- ================= CONTACTS ================= -->
 <section id="contacts">
   <h2>Your profile</h2>
-  <p class="lede">Details worth having ready before you need them. All of it stays in this browser on this device — nothing is uploaded, and no one else can see it.</p>
+  <p class="lede">Details worth having ready. All of it stays in this browser on this device — nothing is uploaded.</p>
 
   <div class="idcard">
     <div class="init" id="pInit">—</div>
@@ -1092,7 +916,7 @@ footer p{max-width:64ch}
       </div>
     </div>
     <div class="field">
-      <label for="pMed">Medical notes — allergies, conditions, medication</label>
+      <label for="pMed">Medical notes</label>
       <input type="text" id="pMed" placeholder="Asthma. Allergic to penicillin." autocomplete="off">
     </div>
   </div>
@@ -1109,7 +933,7 @@ footer p{max-width:64ch}
     </div>
     <div class="field">
       <label for="pStation">Nearest police station</label>
-      <input type="text" id="pStation" placeholder="Vaishali Nagar Police Station — 0141 2354 xxx" autocomplete="off">
+      <input type="text" id="pStation" placeholder="Vaishali Nagar Police Station" autocomplete="off">
     </div>
     <div class="btnrow">
       <a class="btn" id="homeNav" href="#" target="_blank" rel="noopener">Directions home</a>
@@ -1119,7 +943,7 @@ footer p{max-width:64ch}
 
   <div class="panel">
     <h3>Emergency contacts</h3>
-    <p class="status">People who would actually pick up at 2am. The first one is who your alert message goes to by default.</p>
+    <p class="status">People who would actually pick up at 2am.</p>
     <div class="two" style="margin-top:12px">
       <div class="field">
         <label for="cName">Name and relationship</label>
@@ -1138,12 +962,10 @@ footer p{max-width:64ch}
   <div class="btnrow">
     <button class="btn btn-go" id="saveProfile" type="button">Save profile</button>
     <button class="btn" id="clearProfile" type="button">Clear everything</button>
-    <button class="btn" id="logoutBtn" type="button">Log out</button>
   </div>
   <p class="status" id="profStatus" role="status" aria-live="polite"></p>
 </section>
-
-</div><!-- /page-profile -->
+</div>
 
 <div id="page-team" class="page">
 <section id="team">
@@ -1156,24 +978,23 @@ footer p{max-width:64ch}
     <div class="trow"><span class="tnum">04</span><span class="tinit">K</span><span class="tname">Kanak Kumari</span></div>
   </div>
 </section>
-</div><!-- /page-team -->
+</div>
 
 <footer>
-  <p>Suraksha is a page, not an emergency service. It can't call anyone for you and it can't reach the police on its own. In danger right now, dial 112.</p>
-  <p style="margin-top:10px">Your contacts and settings stay in this browser on this device. Nothing typed here is sent anywhere.</p>
+  <p>Suraksha is a page, not an emergency service. In danger right now, dial 112.</p>
+  <p style="margin-top:10px">Your contacts and settings stay in this browser on this device.</p>
 </footer>
 
 </main>
 
-<!-- ================= BOTTOM BAR ================= -->
 <div class="bar">
   <a class="btn btn-red" href="tel:112">Call 112</a>
   <button class="btn" id="sirenBtn" type="button">Siren</button>
   <button class="btn" id="quickAlert" type="button">Alert contacts</button>
 </div>
 
-<!-- ================= OVERLAYS ================= -->
-<div class="overlay" id="callOverlay" role="dialog" aria-modal="true" aria-label="Incoming call">
+<!-- overlays -->
+<div class="overlay" id="callOverlay" role="dialog" aria-modal="true">
   <div class="callcard">
     <div class="avatar ringing" id="callInitial">P</div>
     <p class="callname" id="callWho">Papa</p>
@@ -1185,7 +1006,7 @@ footer p{max-width:64ch}
   </div>
 </div>
 
-<div class="overlay" id="alarmOverlay" role="dialog" aria-modal="true" aria-label="Timer finished">
+<div class="overlay" id="alarmOverlay" role="dialog" aria-modal="true">
   <div class="alarmcard">
     <h3>Your timer ran out</h3>
     <p>You didn't check in. Silence this, or send your alert now.</p>
@@ -1196,235 +1017,219 @@ footer p{max-width:64ch}
   </div>
 </div>
 
+</div><!-- /appView -->
+
 <script>
 (function(){
 "use strict";
 var $ = function(id){ return document.getElementById(id); };
 
-/* ---------------- auth gate ---------------- */
-var AKEY = 'sk_account';
-var QUESTIONS = {
-  pet: "What was the name of your first pet?",
-  school: "What was the name of your first school?",
-  city: "In what city were you born?",
-  mother: "What is your mother's maiden name?"
-};
+/* ============================================================
+   LOGIN LOGIC
+   ============================================================ */
+var loginView = $('loginView');
+var appView   = $('appView');
+var GUEST_KEY = 'suraksha_guest';
+var SESSION_KEY = 'suraksha_session';
+var USERS_KEY = 'suraksha_users';
+var REMEMBER_KEY = 'suraksha_remember';
 
-function normAnswer(s){ return (s||'').trim().toLowerCase(); }
-
-function sha256(str){
-  if(window.crypto && crypto.subtle && crypto.subtle.digest){
-    var buf = new TextEncoder().encode(str);
-    return crypto.subtle.digest('SHA-256', buf).then(function(hashBuf){
-      var bytes = Array.prototype.slice.call(new Uint8Array(hashBuf));
-      return bytes.map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
-    });
-  }
-  // very old browser fallback — not cryptographic, just avoids storing plain text
+function hash(str){
   var h = 0;
-  for(var i = 0; i < str.length; i++){ h = ((h<<5)-h) + str.charCodeAt(i); h |= 0; }
-  return Promise.resolve('fnv' + Math.abs(h).toString(16));
+  for (var i = 0; i < str.length; i++){ h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
+  return 'h' + Math.abs(h).toString(36);
 }
+function loadUsers(){ try{ return JSON.parse(localStorage.getItem(USERS_KEY)) || {}; }catch(e){ return {}; } }
+function saveUsers(u){ localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
 
-function loadAccount(){
-  try{
-    var raw = localStorage.getItem(AKEY);
-    return raw ? JSON.parse(raw) : null;
-  }catch(e){ return null; }
-}
-function saveAccount(acc){
-  try{ localStorage.setItem(AKEY, JSON.stringify(acc)); return true; }
-  catch(e){ return false; }
-}
-
-var SKEY = 'sk_session';
-function isLoggedIn(){
-  try{ return localStorage.getItem(SKEY) === '1' || sessionStorage.getItem(SKEY) === '1'; }
-  catch(e){ return false; }
-}
-function setLoggedIn(){
-  try{ localStorage.setItem(SKEY, '1'); }catch(e){}
-}
-function clearSession(){
-  try{ localStorage.removeItem(SKEY); sessionStorage.removeItem(SKEY); }catch(e){}
-}
-
-function setAuthStatus(el, text, cls){
-  el.textContent = text;
-  el.className = 'authstatus' + (cls ? ' ' + cls : '');
-}
-
-function openGate(){
-  var gate = $('authGate');
-  if(gate) gate.classList.remove('hidden');
-}
-function closeGate(){
-  var gate = $('authGate');
-  if(gate) gate.classList.add('hidden');
-}
-
-function switchAuthView(name){
-  Array.prototype.forEach.call(document.querySelectorAll('.authview'), function(v){
-    v.classList.toggle('on', v.dataset.av === name);
-  });
-  Array.prototype.forEach.call(document.querySelectorAll('.authtab'), function(t){
-    t.setAttribute('aria-selected', t.dataset.a === name ? 'true' : 'false');
-  });
-}
-Array.prototype.forEach.call(document.querySelectorAll('.authtab'), function(t){
-  t.addEventListener('click', function(){ switchAuthView(t.dataset.a); });
-});
-var toForgotBtn = $('toForgot');
-if(toForgotBtn) toForgotBtn.addEventListener('click', function(){
-  $('fgQWrap').style.display = 'none';
-  $('fgFindRow').style.display = 'flex';
-  $('fgIntro').textContent = 'Enter your username to see your security question.';
-  setAuthStatus($('fgStatus'), '');
-  switchAuthView('forgot');
-});
-var fromForgotBtn = $('fromForgot');
-if(fromForgotBtn) fromForgotBtn.addEventListener('click', function(){ switchAuthView('login'); });
-
-Array.prototype.forEach.call(document.querySelectorAll('.toggle'), function(btn){
-  btn.addEventListener('click', function(){
-    var input = $(btn.dataset.show);
-    if(!input) return;
-    var showing = input.type === 'text';
-    input.type = showing ? 'password' : 'text';
-    btn.textContent = showing ? 'Show' : 'Hide';
-  });
-});
-
-var suQSel = $('suQ');
-if(suQSel) suQSel.addEventListener('change', function(){
-  $('suQCustomWrap').style.display = suQSel.value === 'custom' ? 'block' : 'none';
-});
-
-/* ---- create account ---- */
-var suGoBtn = $('suGo');
-if(suGoBtn) suGoBtn.addEventListener('click', function(){
-  var user = $('suUser').value.trim();
-  var pass = $('suPass').value;
-  var qKey = $('suQ').value;
-  var qText = qKey === 'custom' ? $('suQCustom').value.trim() : QUESTIONS[qKey];
-  var answer = $('suA').value;
-
-  if(!user || !pass){ setAuthStatus($('suStatus'), 'Add a username and a password.', 'bad'); return; }
-  if(pass.length < 4){ setAuthStatus($('suStatus'), 'Use at least 4 characters for the password.', 'bad'); return; }
-  if(!qText){ setAuthStatus($('suStatus'), 'Add your security question.', 'bad'); return; }
-  if(!answer){ setAuthStatus($('suStatus'), 'Add an answer to your security question.', 'bad'); return; }
-
-  var existing = loadAccount();
-  if(existing && existing.user && existing.user.toLowerCase() === user.toLowerCase()){
-    setAuthStatus($('suStatus'), 'That username is already set up on this device. Log in instead, or use Forgot password.', 'bad');
-    return;
-  }
-
-  suGoBtn.disabled = true;
-  Promise.all([sha256(pass), sha256(normAnswer(answer))]).then(function(hashes){
-    saveAccount({ user: user, passHash: hashes[0], question: qText, answerHash: hashes[1] });
-    suGoBtn.disabled = false;
-    setAuthStatus($('suStatus'), 'Account created.', 'ok');
-    setLoggedIn();
-    closeGate();
-  });
-});
-
-/* ---- log in ---- */
-var liGoBtn = $('liGo');
-if(liGoBtn) liGoBtn.addEventListener('click', function(){
-  var user = $('liUser').value.trim();
-  var pass = $('liPass').value;
-  var acc = loadAccount();
-  if(!acc){ setAuthStatus($('liStatus'), 'No account set up on this device yet — create one.', 'bad'); return; }
-  if(!user || !pass){ setAuthStatus($('liStatus'), 'Enter your username and password.', 'bad'); return; }
-  if(user.toLowerCase() !== acc.user.toLowerCase()){ setAuthStatus($('liStatus'), 'That username doesn\'t match this device.', 'bad'); return; }
-
-  liGoBtn.disabled = true;
-  sha256(pass).then(function(hash){
-    liGoBtn.disabled = false;
-    if(hash === acc.passHash){
-      setAuthStatus($('liStatus'), 'Welcome back.', 'ok');
-      setLoggedIn();
-      closeGate();
-    } else {
-      setAuthStatus($('liStatus'), 'Wrong password.', 'bad');
-    }
-  });
-});
-[$('liUser'), $('liPass')].forEach(function(inp){
-  if(inp) inp.addEventListener('keydown', function(e){ if(e.key === 'Enter') liGoBtn.click(); });
-});
-
-/* ---- forgot password ---- */
-var fgFindBtn = $('fgFind');
-if(fgFindBtn) fgFindBtn.addEventListener('click', function(){
-  var user = $('fgUser').value.trim();
-  var acc = loadAccount();
-  if(!acc){ setAuthStatus($('fgStatus'), 'No account is set up on this device.', 'bad'); return; }
-  if(!user || user.toLowerCase() !== acc.user.toLowerCase()){
-    setAuthStatus($('fgStatus'), 'That username doesn\'t match this device.', 'bad'); return;
-  }
-  $('fgQLabel').textContent = acc.question;
-  $('fgQWrap').style.display = 'block';
-  $('fgFindRow').style.display = 'none';
-  $('fgIntro').textContent = 'Answer your security question to reset your password.';
-  setAuthStatus($('fgStatus'), '');
-});
-var fgResetBtn = $('fgReset');
-if(fgResetBtn) fgResetBtn.addEventListener('click', function(){
-  var acc = loadAccount();
-  if(!acc) return;
-  var answer = $('fgA').value;
-  var newPass = $('fgNewPass').value;
-  if(!answer){ setAuthStatus($('fgStatus'), 'Enter your answer.', 'bad'); return; }
-  if(!newPass || newPass.length < 4){ setAuthStatus($('fgStatus'), 'Choose a new password of at least 4 characters.', 'bad'); return; }
-
-  fgResetBtn.disabled = true;
-  sha256(normAnswer(answer)).then(function(ansHash){
-    if(ansHash !== acc.answerHash){
-      fgResetBtn.disabled = false;
-      setAuthStatus($('fgStatus'), 'That answer doesn\'t match.', 'bad');
-      return;
-    }
-    sha256(newPass).then(function(passHash){
-      acc.passHash = passHash;
-      saveAccount(acc);
-      fgResetBtn.disabled = false;
-      setAuthStatus($('fgStatus'), 'Password reset. You can log in now.', 'ok');
-      $('liUser').value = acc.user;
-      $('fgA').value = ''; $('fgNewPass').value = '';
-      setTimeout(function(){ switchAuthView('login'); }, 900);
-    });
-  });
-});
-
-var skipBtn = $('skipAuth');
-if(skipBtn) skipBtn.addEventListener('click', function(){ closeGate(); });
-
-/* ---- decide what to show on load ---- */
-(function initGate(){
-  var acc = loadAccount();
-  if(!acc){
-    switchAuthView('signup');
-    openGate();
-  } else if(!isLoggedIn()){
-    $('liUser').value = acc.user;
-    switchAuthView('login');
-    openGate();
+function openApp(asGuest){
+  loginView.classList.add('hidden');
+  loginView.style.display = 'none';
+  appView.classList.add('on');
+  var banner = $('guestBanner');
+  if (asGuest){
+    banner.style.display = 'flex';
+    try{ localStorage.setItem(GUEST_KEY, JSON.stringify({isGuest:true, startedAt:new Date().toISOString()})); }catch(e){}
   } else {
-    closeGate();
+    banner.style.display = 'none';
+    try{ localStorage.removeItem(GUEST_KEY); }catch(e){}
   }
-})();
+  // repaint theme button
+  if (typeof paintThemeBtn === 'function') paintThemeBtn();
+}
 
-/* ---------------- theme ---------------- */
+function backToLogin(){
+  appView.classList.remove('on');
+  loginView.style.display = 'flex';
+  loginView.classList.remove('hidden');
+}
+
+/* -------- GUEST BUTTON — opens the full app -------- */
+$('guestBtn').addEventListener('click', function(){
+  openApp(true);
+});
+
+/* -------- Sign in from banner -------- */
+$('signInFromApp').addEventListener('click', function(){
+  try{ localStorage.removeItem(GUEST_KEY); }catch(e){}
+  backToLogin();
+});
+
+/* -------- Sign in / Sign up -------- */
+var mode = 'signin';
+var formTitle = $('formTitle'), nameField = $('nameField'), nameInput = $('name');
+var emailInput = $('email'), passInput = $('password');
+var pwToggle = $('pwToggle'), pwHint = $('pwHint');
+var rememberRow = $('rememberRow'), rememberChk = $('remember');
+var forgotLink = $('forgotLink'), submitBtn = $('submitBtn');
+var statusMsg = $('statusMsg'), switchText = $('switchText'), switchLink = $('switchLink');
+
+function setStatus(t, c){ statusMsg.textContent = t || ''; statusMsg.className = 'status-msg' + (c ? ' ' + c : ''); }
+
+function setMode(m){
+  mode = m;
+  if (m === 'signup'){
+    formTitle.textContent = 'Create your account';
+    nameField.style.display = 'block';
+    pwHint.style.display = 'block';
+    rememberRow.style.display = 'none';
+    forgotLink.style.display = 'none';
+    submitBtn.textContent = 'Create account';
+    switchText.textContent = 'Already have an account?';
+    switchLink.textContent = 'Sign in';
+  } else {
+    formTitle.textContent = 'Sign in to Suraksha';
+    nameField.style.display = 'none';
+    pwHint.style.display = 'none';
+    rememberRow.style.display = 'flex';
+    forgotLink.style.display = 'inline';
+    submitBtn.textContent = 'Sign in';
+    switchText.textContent = 'New to Suraksha?';
+    switchLink.textContent = 'Create an account';
+  }
+  setStatus(''); nameInput.value = ''; passInput.value = '';
+}
+
+pwToggle.addEventListener('click', function(){
+  var showing = passInput.type === 'text';
+  passInput.type = showing ? 'password' : 'text';
+  pwToggle.textContent = showing ? 'Show' : 'Hide';
+  passInput.focus();
+});
+
+switchLink.addEventListener('click', function(e){
+  e.preventDefault();
+  setMode(mode === 'signin' ? 'signup' : 'signin');
+  emailInput.focus();
+});
+
+function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+$('authForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  setStatus('');
+  var email = emailInput.value.trim().toLowerCase();
+  var password = passInput.value;
+
+  if (mode === 'signup'){
+    var name = nameInput.value.trim();
+    if (!name){ setStatus('Please enter your full name.'); nameInput.focus(); return; }
+    if (!isValidEmail(email)){ setStatus('Please enter a valid email address.'); emailInput.focus(); return; }
+    if (password.length < 6){ setStatus('Password must be at least 6 characters.'); passInput.focus(); return; }
+  } else {
+    if (!isValidEmail(email)){ setStatus('Please enter a valid email address.'); emailInput.focus(); return; }
+    if (!password){ setStatus('Please enter your password.'); passInput.focus(); return; }
+  }
+
+  submitBtn.disabled = true;
+  var label = submitBtn.textContent;
+  submitBtn.textContent = mode === 'signup' ? 'Creating…' : 'Signing in…';
+
+  setTimeout(function(){
+    try {
+      if (mode === 'signup'){
+        var users = loadUsers();
+        if (users[email]){
+          setStatus('An account with this email already exists. Try signing in.');
+          return;
+        }
+        users[email] = {
+          id: 'u_' + Date.now().toString(36) + Math.random().toString(36).slice(2,7),
+          name: nameInput.value.trim(), email: email, pw: hash(password),
+          joined: new Date().toISOString()
+        };
+        saveUsers(users);
+        localStorage.setItem(SESSION_KEY, JSON.stringify(users[email]));
+        openApp(false);
+      } else {
+        var users2 = loadUsers();
+        var u = users2[email];
+        if (!u){ setStatus('No account found with that email.'); return; }
+        if (u.pw !== hash(password)){ setStatus('Incorrect password. Try again.'); passInput.focus(); return; }
+        if (rememberChk.checked) localStorage.setItem(REMEMBER_KEY, email);
+        localStorage.setItem(SESSION_KEY, JSON.stringify(u));
+        openApp(false);
+      }
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = label;
+    }
+  }, 650);
+});
+
+forgotLink.addEventListener('click', function(e){
+  e.preventDefault();
+  var email = (prompt('Enter your account email to reset password:') || '').trim().toLowerCase();
+  if (!email) return;
+  var users = loadUsers();
+  if (!users[email]){ alert('No account with that email.'); return; }
+  var newPw = prompt('Enter a new password (min 6 characters):');
+  if (newPw === null) return;
+  if (newPw.length < 6){ alert('Password too short.'); return; }
+  users[email].pw = hash(newPw);
+  saveUsers(users);
+  alert('Password updated. You can sign in now.');
+  emailInput.value = email;
+  passInput.focus();
+});
+
+$('passkeyBtn').addEventListener('click', function(){
+  alert('Passkey sign-in would open your device authenticator.');
+});
+
+$('googleBtn').addEventListener('click', function(){
+  var email = 'demo.user@gmail.com';
+  var users = loadUsers();
+  if (!users[email]){
+    users[email] = {
+      id: 'u_google_' + Date.now().toString(36),
+      name: 'Demo User', email: email, pw: hash('google-oauth-' + Date.now()),
+      joined: new Date().toISOString()
+    };
+    saveUsers(users);
+  }
+  localStorage.setItem(SESSION_KEY, JSON.stringify(users[email]));
+  openApp(false);
+});
+
+/* boot login */
+setMode('signin');
+try {
+  var remembered = localStorage.getItem(REMEMBER_KEY);
+  if (remembered) emailInput.value = remembered;
+} catch(e){}
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setStatus(''); });
+
+/* ============================================================
+   SURAKSHA APP LOGIC (original)
+   ============================================================ */
 var themeBtn = $('themeBtn');
 function currentDark(){
   var t = document.documentElement.getAttribute('data-theme');
   if(t) return t === 'dark';
   return window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
-function paintThemeBtn(){ themeBtn.textContent = currentDark() ? 'Light' : 'Dark'; }
+function paintThemeBtn(){ if(themeBtn) themeBtn.textContent = currentDark() ? 'Light' : 'Dark'; }
 try{
   var savedTheme = localStorage.getItem('sk_theme');
   if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
@@ -1437,228 +1242,22 @@ themeBtn.addEventListener('click', function(){
   paintThemeBtn();
 });
 
-/* ============================================================
-   CLOUD SYNC — Supabase
-   ------------------------------------------------------------
-   Fill in these two values from your own project:
-   Supabase dashboard → Settings → API → Project URL / anon key.
-   Everything below degrades gracefully if you leave them blank:
-   the app just runs on-device only, exactly as before.
-   ============================================================ */
-var SUPABASE_URL = 'https://ajojoywzmjwutnwwsacl.supabase.co';
-var SUPABASE_ANON_KEY = 'sb_publishable_wDOIgrprOns-gBO7bDT4Sg_ZVZ0n0Cy';
-
-var sb = null;
-var sbUser = null;
-var configured = SUPABASE_URL.indexOf('YOUR-PROJECT') === -1 && SUPABASE_ANON_KEY.indexOf('YOUR-ANON') === -1;
-
-if(configured && window.supabase && window.supabase.createClient){
-  sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-} else {
-  var cw = $('configWarn'); if(cw) cw.style.display = 'block';
-}
-
-function uuid(){
-  if(window.crypto && crypto.randomUUID) return crypto.randomUUID();
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
-    var r = Math.random()*16|0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-  });
-}
-
-function setSyncStatus(text, state){
-  var card = $('syncCard');
-  if(card) card.className = 'sync' + (state === 'on' ? ' on' : state === 'off' ? ' off' : '');
-  var el = $('syncDesc');
-  if(el) el.textContent = text;
-}
-
-function paintSyncUI(){
-  if(!$('syncCard')) return;
-  if(sbUser){
-    $('syncTitle').textContent = 'Synced';
-    $('syncCard').className = 'sync on';
-    $('syncSub').textContent = sbUser.email || '';
-    $('syncForm').style.display = 'none';
-    $('syncOut').style.display = 'inline-flex';
-    $('syncDesc').textContent = 'Your profile, contacts and checklist are backed up and will show up on any device you sign into.';
-  } else {
-    $('syncTitle').textContent = configured ? 'Not synced' : 'Cloud sync not set up';
-    $('syncCard').className = 'sync off';
-    $('syncSub').textContent = '';
-    $('syncForm').style.display = 'flex';
-    $('syncOut').style.display = 'none';
-    if(configured){
-      $('syncDesc').textContent = 'Sign in to keep your profile and contacts backed up and available on any device. Without this, everything still works — it just stays only on this device.';
-    }
-  }
-}
-paintSyncUI();
-
-if(sb){
-  sb.auth.getSession().then(function(res){
-    var session = res.data && res.data.session;
-    if(session){ sbUser = session.user; paintSyncUI(); cloudPullAll(sbUser.id); }
-  });
-  sb.auth.onAuthStateChange(function(event, session){
-    if(event === 'SIGNED_IN' && session){
-      sbUser = session.user; paintSyncUI();
-      setSyncStatus('Signed in. Loading your saved data…', 'on');
-      cloudPullAll(sbUser.id);
-    } else if(event === 'SIGNED_OUT'){
-      sbUser = null; paintSyncUI();
-    }
-  });
-}
-
-var syncForm = $('syncForm');
-if(syncForm){
-  syncForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    if(!sb){ setSyncStatus('Cloud sync isn\'t connected yet on this deployment.', 'off'); return; }
-    var email = $('syncEmail').value.trim();
-    if(!email) return;
-    $('syncSend').disabled = true;
-    $('syncSend').textContent = 'Sending…';
-    sb.auth.signInWithOtp({
-      email: email,
-      options: { emailRedirectTo: window.location.href.split('#')[0] }
-    }).then(function(res){
-      $('syncSend').disabled = false;
-      $('syncSend').textContent = 'Send magic link';
-      if(res.error) setSyncStatus(res.error.message, 'off');
-      else setSyncStatus('Check ' + email + ' for a sign-in link, then come back to this tab.', 'off');
-    });
-  });
-}
-var syncOutBtn = $('syncOut');
-if(syncOutBtn){
-  syncOutBtn.addEventListener('click', function(){
-    if(sb) sb.auth.signOut();
-    sbUser = null; paintSyncUI();
-    setSyncStatus('Signed out. Your data on this device is untouched.', 'off');
-  });
-}
-
-/* ---- cloud CRUD — every one of these is a no-op if not signed in ---- */
-function cloudPushProfile(){
-  if(!sb || !sbUser) return;
-  sb.from('profiles').upsert({
-    id: sbUser.id,
-    full_name: profile.pName || null,
-    blood_group: profile.pBlood || null,
-    age: profile.pAge ? parseInt(profile.pAge,10) : null,
-    vehicle_no: profile.pVehicle || null,
-    medical_notes: profile.pMed || null,
-    home_address: profile.pHome || null,
-    work_address: profile.pWork || null,
-    nearest_station: profile.pStation || null
-  }).then(function(res){
-    if(res.error) setSyncStatus('Couldn\'t save to the cloud: ' + res.error.message, 'off');
-  });
-}
-function cloudUpsertContact(c, order){
-  if(!sb || !sbUser) return;
-  sb.from('emergency_contacts').upsert({
-    id: c.id, user_id: sbUser.id, name: c.name, phone: c.num, sort_order: order || 0
-  }).then(function(res){
-    if(res.error) setSyncStatus('Couldn\'t save that contact to the cloud: ' + res.error.message, 'off');
-  });
-}
-function cloudDeleteContact(id){
-  if(!sb || !sbUser || !id) return;
-  sb.from('emergency_contacts').delete().eq('id', id).then(function(){});
-}
-function cloudSetRule(ruleId, done){
-  if(!sb || !sbUser) return;
-  if(done){
-    sb.from('rule_progress').upsert({ user_id: sbUser.id, rule_id: ruleId }).then(function(){});
-  } else {
-    sb.from('rule_progress').delete().eq('user_id', sbUser.id).eq('rule_id', ruleId).then(function(){});
-  }
-}
-function cloudClearRules(){
-  if(!sb || !sbUser) return;
-  sb.from('rule_progress').delete().eq('user_id', sbUser.id).then(function(){});
-}
-function cloudWipeAll(){
-  if(!sb || !sbUser) return;
-  cloudPushProfile();
-  sb.from('emergency_contacts').delete().eq('user_id', sbUser.id).then(function(){});
-  sb.from('rule_progress').delete().eq('user_id', sbUser.id).then(function(){});
-}
-function logAlert(via){
-  if(!sb || !sbUser) return;
-  sb.from('sos_alerts').insert({
-    user_id: sbUser.id,
-    lat: coords ? parseFloat(coords.lat) : null,
-    lon: coords ? parseFloat(coords.lon) : null,
-    accuracy_m: coords ? coords.acc : null,
-    message: baseMessage(),
-    sent_via: via
-  }).then(function(){});
-}
-function cloudPullAll(uid){
-  if(!sb) return;
-  Promise.all([
-    sb.from('profiles').select('*').eq('id', uid).maybeSingle(),
-    sb.from('emergency_contacts').select('*').eq('user_id', uid).order('sort_order'),
-    sb.from('rule_progress').select('rule_id').eq('user_id', uid)
-  ]).then(function(results){
-    var prof = results[0].data, cons = results[1].data, rules = results[2].data;
-    if(prof){
-      profile.pName = prof.full_name || '';
-      profile.pBlood = prof.blood_group || '';
-      profile.pAge = prof.age || '';
-      profile.pVehicle = prof.vehicle_no || '';
-      profile.pMed = prof.medical_notes || '';
-      profile.pHome = prof.home_address || '';
-      profile.pWork = prof.work_address || '';
-      profile.pStation = prof.nearest_station || '';
-      fillProfile(); paintIdCard();
-      try{ localStorage.setItem(PKEY, JSON.stringify(profile)); }catch(e){}
-    }
-    if(cons){
-      contacts = cons.map(function(c){ return { id:c.id, name:c.name, num:c.phone }; });
-      renderContacts();
-      try{ localStorage.setItem(KEY, JSON.stringify(contacts)); }catch(e){}
-    }
-    if(rules){
-      ticked = {};
-      rules.forEach(function(r){ ticked[r.rule_id] = true; });
-      Array.prototype.forEach.call(boxes, function(b){ b.checked = !!ticked[b.id]; });
-      try{ localStorage.setItem(RKEY, JSON.stringify(ticked)); }catch(e){}
-      paintRules();
-    }
-    refreshShare();
-    setSyncStatus('Your profile, contacts and checklist are backed up and will show up on any device you sign into.', 'on');
-  }).catch(function(err){
-    setSyncStatus('Could not load your saved data: ' + err.message, 'off');
-  });
-}
-
-/* ---------------- contacts ---------------- */
+/* -------- contacts -------- */
 var KEY = 'sk_contacts';
 var contacts = [];
-try{
-  var raw = localStorage.getItem(KEY);
-  if(raw) contacts = JSON.parse(raw) || [];
-}catch(e){ contacts = []; }
+try{ var raw = localStorage.getItem(KEY); if(raw) contacts = JSON.parse(raw) || []; }catch(e){ contacts = []; }
 if(!Array.isArray(contacts)) contacts = [];
 
-function saveContacts(){
-  try{ localStorage.setItem(KEY, JSON.stringify(contacts)); }
-  catch(e){ setStatus($('shareStatus'),'This browser blocked saving. Contacts will be lost when you close the tab.','bad'); }
-}
+function saveContacts(){ try{ localStorage.setItem(KEY, JSON.stringify(contacts)); }catch(e){} }
 function digits(s){ return (s||'').replace(/[^\d+]/g,''); }
 function waNumber(s){
   var d = digits(s).replace(/^\+/,'');
-  if(d.length === 10) d = '91' + d;          // assume India for bare 10-digit
+  if(d.length === 10) d = '91' + d;
   if(d.length === 11 && d.charAt(0) === '0') d = '91' + d.slice(1);
   return d;
 }
 function renderContacts(){
-  var list = $('cList');
+  var list = $('cList'); if(!list) return;
   list.innerHTML = '';
   $('cEmpty').style.display = contacts.length ? 'none' : 'block';
   contacts.forEach(function(c, i){
@@ -1671,43 +1270,35 @@ function renderContacts(){
     call.className = 'icobtn'; call.href = 'tel:' + digits(c.num); call.textContent = 'Call';
     var del = document.createElement('button');
     del.className = 'icobtn'; del.type = 'button'; del.textContent = 'Remove';
-    del.setAttribute('aria-label','Remove ' + c.name);
     del.addEventListener('click', function(){
-      var removed = contacts.splice(i,1)[0];
-      saveContacts(); renderContacts(); refreshShare();
-      if(removed && removed.id) cloudDeleteContact(removed.id);
+      contacts.splice(i,1); saveContacts(); renderContacts(); refreshShare();
     });
     li.appendChild(g); li.appendChild(call); li.appendChild(del);
     list.appendChild(li);
   });
 }
-$('addC').addEventListener('click', function(){
+if ($('addC')) $('addC').addEventListener('click', function(){
   var n = $('cName').value.trim(), p = $('cNum').value.trim();
   if(!n || !digits(p)){
     setStatus($('shareStatus'),'Add both a name and a phone number.','bad');
     return;
   }
-  var newContact = { id: uuid(), name:n, num:p };
-  contacts.push(newContact);
+  contacts.push({ name:n, num:p });
   saveContacts(); renderContacts(); refreshShare();
   $('cName').value = ''; $('cNum').value = '';
   setStatus($('shareStatus'), n + ' saved on this device.', 'ok');
-  cloudUpsertContact(newContact, contacts.length - 1);
 });
 renderContacts();
 
-/* ---------------- location + message ---------------- */
+/* -------- location + message -------- */
 var coords = null;
-function setStatus(el, text, cls){
-  el.textContent = text;
-  el.className = 'status' + (cls ? ' ' + cls : '');
-}
+function setStatus(el, text, cls){ if(!el) return; el.textContent = text; el.className = 'status' + (cls ? ' ' + cls : ''); }
 function stamp(){
   var d = new Date();
   return d.toLocaleString(undefined,{hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'});
 }
 function baseMessage(){
-  var t = $('msgBox').value.trim();
+  var t = $('msgBox') ? $('msgBox').value.trim() : '';
   if(!t) t = 'I need help. Please call me now.';
   if(coords){
     t += '\n\nMy location: https://maps.google.com/?q=' + coords.lat + ',' + coords.lon;
@@ -1718,20 +1309,16 @@ function baseMessage(){
 function refreshShare(){
   var text = encodeURIComponent(baseMessage());
   var first = contacts.length ? waNumber(contacts[0].num) : '';
-  $('waBtn').href = first ? ('https://wa.me/' + first + '?text=' + text)
-                          : ('https://wa.me/?text=' + text);
+  if ($('waBtn')) $('waBtn').href = first ? ('https://wa.me/' + first + '?text=' + text) : ('https://wa.me/?text=' + text);
   var smsTo = contacts.map(function(c){ return digits(c.num); }).join(',');
   var sep = (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) ? '&' : '?';
-  $('smsBtn').href = 'sms:' + smsTo + sep + 'body=' + text;
+  if ($('smsBtn')) $('smsBtn').href = 'sms:' + smsTo + sep + 'body=' + text;
 }
-$('msgBox').addEventListener('input', refreshShare);
+if ($('msgBox')) $('msgBox').addEventListener('input', refreshShare);
 refreshShare();
 
-$('locBtn').addEventListener('click', function(){
-  if(!navigator.geolocation){
-    setStatus($('locStatus'),'This browser can\'t get a location. Type a landmark into the message instead.','bad');
-    return;
-  }
+if ($('locBtn')) $('locBtn').addEventListener('click', function(){
+  if(!navigator.geolocation){ setStatus($('locStatus'),'No location support.','bad'); return; }
   setStatus($('locStatus'),'Finding you…');
   navigator.geolocation.getCurrentPosition(function(pos){
     coords = {
@@ -1739,45 +1326,42 @@ $('locBtn').addEventListener('click', function(){
       lon: pos.coords.longitude.toFixed(6),
       acc: Math.round(pos.coords.accuracy)
     };
-    setStatus($('locStatus'),'Found you, within about ' + coords.acc + ' m. It\'s been added to the message below.','ok');
+    setStatus($('locStatus'),'Found you, within about ' + coords.acc + ' m.','ok');
     refreshShare();
   }, function(err){
     var m = 'Couldn\'t get your location.';
-    if(err.code === 1) m = 'Location is blocked. Allow it in your browser\'s site settings, or type a landmark into the message.';
-    if(err.code === 3) m = 'Location timed out. Try again, or move near a window.';
+    if(err.code === 1) m = 'Location is blocked.';
+    if(err.code === 3) m = 'Location timed out.';
     setStatus($('locStatus'), m, 'bad');
   }, { enableHighAccuracy:true, timeout:12000, maximumAge:0 });
 });
 
-$('copyBtn').addEventListener('click', function(){
+if ($('copyBtn')) $('copyBtn').addEventListener('click', function(){
   var txt = baseMessage();
-  function done(){ setStatus($('shareStatus'),'Copied. Paste it anywhere.','ok'); }
+  function done(){ setStatus($('shareStatus'),'Copied.','ok'); }
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(txt).then(done, fallback);
-  } else { fallback(); }
+  } else fallback();
   function fallback(){
     var ta = document.createElement('textarea');
     ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
     document.body.appendChild(ta); ta.select();
-    try{ document.execCommand('copy'); done(); }
-    catch(e){ setStatus($('shareStatus'),'Copying is blocked here. Select the message and copy it manually.','bad'); }
+    try{ document.execCommand('copy'); done(); }catch(e){}
     document.body.removeChild(ta);
   }
 });
 
-$('waBtn').addEventListener('click', function(){ logAlert('whatsapp'); });
-$('smsBtn').addEventListener('click', function(){ logAlert('sms'); });
-
-$('quickAlert').addEventListener('click', function(){
+if ($('quickAlert')) $('quickAlert').addEventListener('click', function(){
   showPage('home');
-  document.getElementById('location').scrollIntoView({behavior:'smooth', block:'start'});
+  var loc = document.getElementById('location');
+  if(loc) loc.scrollIntoView({behavior:'smooth', block:'start'});
   if(!coords) $('locBtn').click();
   setStatus($('shareStatus'), contacts.length
-    ? 'Ready to send to ' + contacts[0].name + '. Pick WhatsApp or SMS.'
-    : 'Add a trusted contact first, or use WhatsApp and choose someone there.', contacts.length ? 'ok' : 'bad');
+    ? 'Ready to send to ' + contacts[0].name + '.'
+    : 'Add a trusted contact first.', contacts.length ? 'ok' : 'bad');
 });
 
-/* ---------------- audio ---------------- */
+/* -------- audio -------- */
 var ac = null, sirenNodes = null, ringTimer = null;
 function audio(){
   if(!ac){
@@ -1816,7 +1400,7 @@ function stopSiren(){
   sirenNodes = null;
   $('sirenBtn').textContent = 'Siren';
 }
-$('sirenBtn').addEventListener('click', function(){
+if ($('sirenBtn')) $('sirenBtn').addEventListener('click', function(){
   sirenNodes ? stopSiren() : startSiren();
 });
 
@@ -1835,22 +1419,17 @@ function ringOnce(){
     o.stop(c.currentTime + off + 0.36); o2.stop(c.currentTime + off + 0.36);
   });
 }
-function startRinging(){
-  ringOnce();
-  ringTimer = setInterval(ringOnce, 2600);
-}
-function stopRinging(){
-  if(ringTimer){ clearInterval(ringTimer); ringTimer = null; }
-}
+function startRinging(){ ringOnce(); ringTimer = setInterval(ringOnce, 2600); }
+function stopRinging(){ if(ringTimer){ clearInterval(ringTimer); ringTimer = null; } }
 
-/* ---------------- fake call ---------------- */
+/* -------- fake call -------- */
 var fakeTimer = null, callClock = null;
-$('fakeBtn').addEventListener('click', function(){
-  audio(); // unlock audio on this tap
+if ($('fakeBtn')) $('fakeBtn').addEventListener('click', function(){
+  audio();
   if(fakeTimer){ clearTimeout(fakeTimer); fakeTimer = null; }
   var name = $('callerName').value.trim() || 'Papa';
   var secs = parseInt($('callDelay').value, 10);
-  setStatus($('fakeStatus'), name + ' will call in ' + secs + ' seconds. Leave this tab open.', 'ok');
+  setStatus($('fakeStatus'), name + ' will call in ' + secs + ' seconds.', 'ok');
   fakeTimer = setTimeout(function(){
     $('callWho').textContent = name;
     $('callInitial').textContent = name.charAt(0).toUpperCase();
@@ -1869,8 +1448,8 @@ function endCall(){
   setStatus($('fakeStatus'), '');
   if(navigator.vibrate) navigator.vibrate(0);
 }
-$('declineBtn').addEventListener('click', endCall);
-$('acceptBtn').addEventListener('click', function(){
+if ($('declineBtn')) $('declineBtn').addEventListener('click', endCall);
+if ($('acceptBtn')) $('acceptBtn').addEventListener('click', function(){
   stopRinging();
   if(navigator.vibrate) navigator.vibrate(0);
   $('callInitial').classList.remove('ringing');
@@ -1883,19 +1462,17 @@ $('acceptBtn').addEventListener('click', function(){
   }, 1000);
 });
 
-/* ---------------- safety timer ---------------- */
+/* -------- safety timer -------- */
 var chosen = 15, tick = null, endAt = 0;
-Array.prototype.forEach.call($('mins').querySelectorAll('.chip'), function(b){
+if ($('mins')) Array.prototype.forEach.call($('mins').querySelectorAll('.chip'), function(b){
   b.addEventListener('click', function(){
-    Array.prototype.forEach.call($('mins').querySelectorAll('.chip'), function(x){
-      x.setAttribute('aria-pressed','false');
-    });
+    Array.prototype.forEach.call($('mins').querySelectorAll('.chip'), function(x){ x.setAttribute('aria-pressed','false'); });
     b.setAttribute('aria-pressed','true');
     chosen = parseInt(b.dataset.m, 10);
     if(!tick) $('clock').textContent = String(chosen).padStart(2,'0') + ':00';
   });
 });
-$('clock').textContent = '15:00';
+if ($('clock')) $('clock').textContent = '15:00';
 
 function paintClock(ms){
   var s = Math.max(0, Math.round(ms/1000));
@@ -1903,7 +1480,7 @@ function paintClock(ms){
   $('clock').textContent = m + ':' + r;
   $('clock').classList.toggle('warn', s <= 60);
 }
-$('startT').addEventListener('click', function(){
+if ($('startT')) $('startT').addEventListener('click', function(){
   audio();
   if(tick) clearInterval(tick);
   endAt = Date.now() + chosen*60000;
@@ -1922,24 +1499,24 @@ $('startT').addEventListener('click', function(){
     }
   }, 250);
 });
-$('safeT').addEventListener('click', function(){
+if ($('safeT')) $('safeT').addEventListener('click', function(){
   if(tick){ clearInterval(tick); tick = null; }
   stopSiren();
   $('alarmOverlay').classList.remove('on');
   paintClock(chosen*60000);
   $('clock').classList.remove('warn');
-  setStatus($('timerStatus'), 'Timer stopped. Glad you\'re there.', 'ok');
+  setStatus($('timerStatus'), 'Timer stopped.', 'ok');
   if(navigator.vibrate) navigator.vibrate(0);
 });
-$('stopAlarm').addEventListener('click', function(){ $('safeT').click(); });
-$('alarmSend').addEventListener('click', function(){
+if ($('stopAlarm')) $('stopAlarm').addEventListener('click', function(){ $('safeT').click(); });
+if ($('alarmSend')) $('alarmSend').addEventListener('click', function(){
   stopSiren();
   $('alarmOverlay').classList.remove('on');
   if(navigator.vibrate) navigator.vibrate(0);
   $('quickAlert').click();
 });
 
-/* ---------------- live location ---------------- */
+/* -------- live location -------- */
 var watchId = null, path = [], dist = 0, liveStart = 0, liveClock = null;
 
 function haversine(a, b){
@@ -1949,33 +1526,24 @@ function haversine(a, b){
   var h = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(la1)*Math.cos(la2)*Math.sin(dLon/2)*Math.sin(dLon/2);
   return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
 }
-function fmtDist(m){
-  return m < 1000 ? Math.round(m) + ' m' : (m/1000).toFixed(2) + ' km';
-}
-function cssVar(n){
-  return getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-}
+function fmtDist(m){ return m < 1000 ? Math.round(m) + ' m' : (m/1000).toFixed(2) + ' km'; }
+function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
 var LIVE_MOUNTS = [
-  { btn:'liveBtn',  panel:'livePanel',  trail:'trail',  elapsed:'liveElapsed',  dist:'statDist',  speed:'statSpeed',  acc:'statAcc',  coordsEl:'liveCoords',  mapLink:'liveMap' },
-  { btn:'liveBtnP', panel:'livePanelP', trail:'trailP', elapsed:'liveElapsedP', dist:'statDistP', speed:'statSpeedP', acc:'statAccP', coordsEl:'liveCoordsP', mapLink:'liveMapP' }
+  { btn:'liveBtn',  panel:'livePanel',  trail:'trail',  elapsed:'liveElapsed',  dist:'statDist',  speed:'statSpeed',  acc:'statAcc',  coordsEl:'liveCoords',  mapLink:'liveMap' }
 ];
 function drawTrailOn(cv){
   if(!cv || !cv.getContext) return;
   var g = cv.getContext('2d'), W = cv.width, H = cv.height, pad = 34;
   g.clearRect(0,0,W,H);
-  g.fillStyle = cssVar('--paper'); g.fillRect(0,0,W,H);
-
-  /* grid */
-  g.strokeStyle = cssVar('--line'); g.lineWidth = 1;
+  g.fillStyle = cssVar('--paper') || '#eee'; g.fillRect(0,0,W,H);
+  g.strokeStyle = cssVar('--line') || '#ccc'; g.lineWidth = 1;
   for(var x = 0; x <= W; x += 50){ g.beginPath(); g.moveTo(x+.5,0); g.lineTo(x+.5,H); g.stroke(); }
   for(var y = 0; y <= H; y += 50){ g.beginPath(); g.moveTo(0,y+.5); g.lineTo(W,y+.5); g.stroke(); }
-
   if(!path.length){
-    g.fillStyle = cssVar('--muted'); g.font = '16px Archivo, sans-serif'; g.textAlign = 'center';
+    g.fillStyle = cssVar('--muted') || '#666'; g.font = '16px Archivo, sans-serif'; g.textAlign = 'center';
     g.fillText('Waiting for a GPS fix…', W/2, H/2);
     return;
   }
-
   var lats = path.map(function(p){ return p.lat; }), lons = path.map(function(p){ return p.lon; });
   var minLa = Math.min.apply(null,lats), maxLa = Math.max.apply(null,lats);
   var minLo = Math.min.apply(null,lons), maxLo = Math.max.apply(null,lons);
@@ -1984,76 +1552,55 @@ function drawTrailOn(cv){
   var cLa = (minLa + maxLa)/2, cLo = (minLo + maxLo)/2;
   var size = Math.min(W, H) - pad*2;
   function px(p){
-    return {
-      x: W/2 + ((p.lon - cLo) / span) * size,
-      y: H/2 - ((p.lat - cLa) / span) * size
-    };
+    return { x: W/2 + ((p.lon - cLo) / span) * size, y: H/2 - ((p.lat - cLa) / span) * size };
   }
-
-  /* path */
   if(path.length > 1){
-    g.strokeStyle = cssVar('--calm'); g.lineWidth = 3;
+    g.strokeStyle = cssVar('--calm') || '#333'; g.lineWidth = 3;
     g.lineJoin = 'round'; g.lineCap = 'round';
     g.beginPath();
     path.forEach(function(p,i){ var q = px(p); i ? g.lineTo(q.x,q.y) : g.moveTo(q.x,q.y); });
     g.stroke();
   }
-  /* start marker */
   var s = px(path[0]);
-  g.fillStyle = cssVar('--muted');
+  g.fillStyle = cssVar('--muted') || '#666';
   g.beginPath(); g.arc(s.x, s.y, 5, 0, Math.PI*2); g.fill();
   g.font = '12px Archivo, sans-serif'; g.textAlign = 'left';
   g.fillText('Start', s.x + 9, s.y + 4);
-
-  /* current position */
   var c = px(path[path.length-1]);
-  g.fillStyle = cssVar('--signal');
+  g.fillStyle = cssVar('--signal') || '#f00';
   g.globalAlpha = 0.18;
   g.beginPath(); g.arc(c.x, c.y, 18, 0, Math.PI*2); g.fill();
   g.globalAlpha = 1;
   g.beginPath(); g.arc(c.x, c.y, 7, 0, Math.PI*2); g.fill();
-  g.strokeStyle = cssVar('--paper'); g.lineWidth = 2; g.stroke();
-
-  /* scale bar */
-  var metresAcross = span * 111320;
-  g.fillStyle = cssVar('--muted'); g.textAlign = 'left'; g.font = '12px Archivo, sans-serif';
-  g.fillText('about ' + fmtDist(metresAcross) + ' across', 12, H - 12);
+  g.strokeStyle = cssVar('--paper') || '#fff'; g.lineWidth = 2; g.stroke();
 }
-function drawTrail(){
-  LIVE_MOUNTS.forEach(function(m){ drawTrailOn($(m.trail)); });
-}
+function drawTrail(){ LIVE_MOUNTS.forEach(function(m){ drawTrailOn($(m.trail)); }); }
 function liveTick(){
   var s = Math.round((Date.now() - liveStart)/1000);
   var t = String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
   LIVE_MOUNTS.forEach(function(m){ var el = $(m.elapsed); if(el) el.textContent = t; });
 }
 function startLive(){
-  if(!navigator.geolocation){
-    setStatus($('locStatus'), 'This browser can\'t track location.', 'bad'); return;
-  }
-  path = []; dist = 0;
-  liveStart = Date.now();
+  if(!navigator.geolocation){ setStatus($('locStatus'), 'No location support.', 'bad'); return; }
+  path = []; dist = 0; liveStart = Date.now();
   LIVE_MOUNTS.forEach(function(m){
     var p = $(m.panel); if(p) p.classList.add('on');
     var b = $(m.btn); if(b){ b.textContent = 'Stop live tracking'; b.classList.remove('btn-red'); }
   });
-  setStatus($('locStatus'), 'Tracking. Your message updates itself as you move — resend it any time for a fresh position.', 'ok');
+  setStatus($('locStatus'), 'Tracking. Your message updates itself as you move.', 'ok');
   drawTrail();
   liveClock = setInterval(liveTick, 1000);
-
   watchId = navigator.geolocation.watchPosition(function(pos){
     var p = { lat: pos.coords.latitude, lon: pos.coords.longitude, t: Date.now() };
     if(path.length){
       var d = haversine(path[path.length-1], p);
-      if(d < 2 && pos.coords.accuracy > 25) return;   /* ignore GPS jitter */
+      if(d < 2 && pos.coords.accuracy > 25) return;
       dist += d;
     }
     path.push(p);
     if(path.length > 900) path.shift();
-
     coords = { lat: p.lat.toFixed(6), lon: p.lon.toFixed(6), acc: Math.round(pos.coords.accuracy) };
-    var speedTxt = (pos.coords.speed != null && pos.coords.speed >= 0)
-      ? (pos.coords.speed * 3.6).toFixed(1) + ' km/h' : '—';
+    var speedTxt = (pos.coords.speed != null && pos.coords.speed >= 0) ? (pos.coords.speed * 3.6).toFixed(1) + ' km/h' : '—';
     LIVE_MOUNTS.forEach(function(m){
       var d1=$(m.dist), s1=$(m.speed), a1=$(m.acc), c1=$(m.coordsEl), l1=$(m.mapLink);
       if(d1) d1.textContent = fmtDist(dist);
@@ -2062,11 +1609,10 @@ function startLive(){
       if(c1) c1.textContent = coords.lat + ', ' + coords.lon;
       if(l1) l1.href = 'https://maps.google.com/?q=' + coords.lat + ',' + coords.lon;
     });
-    drawTrail();
-    refreshShare();
+    drawTrail(); refreshShare();
   }, function(err){
-    var m = 'Tracking stopped — couldn\'t read your location.';
-    if(err.code === 1) m = 'Location is blocked. Allow it in your browser\'s site settings and start again.';
+    var m = 'Tracking stopped.';
+    if(err.code === 1) m = 'Location is blocked.';
     setStatus($('locStatus'), m, 'bad');
     stopLive();
   }, { enableHighAccuracy:true, timeout:20000, maximumAge:1000 });
@@ -2081,16 +1627,14 @@ function stopLive(){
 function toggleLive(){
   if(watchId !== null){
     stopLive();
-    setStatus($('locStatus'), 'Tracking stopped. Your last position is still in the message.', 'ok');
-  } else {
-    startLive();
-  }
+    setStatus($('locStatus'), 'Tracking stopped.', 'ok');
+  } else startLive();
 }
 LIVE_MOUNTS.forEach(function(m){
   var b = $(m.btn); if(b) b.addEventListener('click', toggleLive);
 });
 
-/* ---------------- calling: speed dial ---------------- */
+/* -------- speed dial -------- */
 var HELPLINES = [
   { name:'Emergency', num:'112' },
   { name:'Women in distress', num:'1091' },
@@ -2100,7 +1644,7 @@ var HELPLINES = [
   { name:'Ambulance', num:'108' }
 ];
 function renderSpeed(){
-  var grid = $('speedGrid');
+  var grid = $('speedGrid'); if(!grid) return;
   grid.innerHTML = '';
   contacts.concat(HELPLINES).forEach(function(c){
     var a = document.createElement('a');
@@ -2114,16 +1658,13 @@ function renderSpeed(){
 }
 renderSpeed();
 
-/* ---------------- calling: cascade ---------------- */
+/* -------- cascade -------- */
 var casIdx = 0;
 function showCascade(){
-  if(!contacts.length){
-    setStatus($('speedNote'), 'Add a trusted contact above first.', 'bad');
-    return;
-  }
+  if(!contacts.length){ setStatus($('speedNote'), 'Add a trusted contact first.', 'bad'); return; }
   if(casIdx >= contacts.length){
     $('cascadeWho').textContent = 'Everyone tried';
-    $('cascadePos').textContent = 'Nobody answered. Consider calling 112 or 1091.';
+    $('cascadePos').textContent = 'Nobody answered. Consider calling 112.';
     $('cascadeCall').href = 'tel:112';
     $('cascadeCall').textContent = 'Call 112 instead';
     return;
@@ -2135,38 +1676,31 @@ function showCascade(){
   $('cascadeCall').href = 'tel:' + digits(c.num);
   $('cascadeCall').textContent = 'Call ' + c.name;
 }
-$('cascadeStart').addEventListener('click', function(){ casIdx = 0; showCascade(); });
-$('cascadeNext').addEventListener('click', function(){ casIdx++; showCascade(); });
-$('cascadeStop').addEventListener('click', function(){
-  $('cascadePanel').classList.remove('on'); casIdx = 0;
-});
+if ($('cascadeStart')) $('cascadeStart').addEventListener('click', function(){ casIdx = 0; showCascade(); });
+if ($('cascadeNext')) $('cascadeNext').addEventListener('click', function(){ casIdx++; showCascade(); });
+if ($('cascadeStop')) $('cascadeStop').addEventListener('click', function(){ $('cascadePanel').classList.remove('on'); casIdx = 0; });
 
-/* ---------------- calling: keypad ---------------- */
+/* -------- keypad -------- */
 var padVal = '';
 function paintPad(){
-  $('padOut').textContent = padVal;
-  $('padCall').href = padVal ? 'tel:' + padVal : '#';
+  if ($('padOut')) $('padOut').textContent = padVal;
+  if ($('padCall')) $('padCall').href = padVal ? 'tel:' + padVal : '#';
 }
-Array.prototype.forEach.call($('pad').querySelectorAll('.key'), function(k){
+if ($('pad')) Array.prototype.forEach.call($('pad').querySelectorAll('.key'), function(k){
   k.addEventListener('click', function(){
     if(padVal.length < 18){ padVal += k.dataset.k; paintPad(); }
   });
 });
-$('padDel').addEventListener('click', function(){ padVal = padVal.slice(0,-1); paintPad(); });
-$('padSave').addEventListener('click', function(){
-  if(!padVal){ return; }
+if ($('padDel')) $('padDel').addEventListener('click', function(){ padVal = padVal.slice(0,-1); paintPad(); });
+if ($('padSave')) $('padSave').addEventListener('click', function(){
+  if(!padVal) return;
   $('cNum').value = padVal;
   $('cName').focus();
   document.getElementById('contacts').scrollIntoView({behavior:'smooth', block:'start'});
 });
 paintPad();
 
-/* keep speed dial in sync when contacts change */
-var _render = renderContacts;
-renderContacts = function(){ _render(); renderSpeed(); };
-renderSpeed();
-
-/* ---------------- rights tabs ---------------- */
+/* -------- rights tabs -------- */
 var rtabs = document.querySelectorAll('.rtab');
 Array.prototype.forEach.call(rtabs, function(t){
   t.addEventListener('click', function(){
@@ -2178,23 +1712,17 @@ Array.prototype.forEach.call(rtabs, function(t){
   });
 });
 
-/* ---------------- profile ---------------- */
+/* -------- profile -------- */
 var PKEY = 'sk_profile';
 var PFIELDS = ['pName','pBlood','pAge','pVehicle','pMed','pHome','pWork','pStation'];
 var profile = {};
 var includeHome = false;
-try{
-  var praw = localStorage.getItem(PKEY);
-  if(praw) profile = JSON.parse(praw) || {};
-}catch(e){ profile = {}; }
+try{ var praw = localStorage.getItem(PKEY); if(praw) profile = JSON.parse(praw) || {}; }catch(e){ profile = {}; }
 
-function readProfile(){
-  PFIELDS.forEach(function(f){ profile[f] = $(f).value.trim(); });
-}
-function fillProfile(){
-  PFIELDS.forEach(function(f){ if(profile[f]) $(f).value = profile[f]; });
-}
+function readProfile(){ PFIELDS.forEach(function(f){ if($(f)) profile[f] = $(f).value.trim(); }); }
+function fillProfile(){ PFIELDS.forEach(function(f){ if(profile[f] && $(f)) $(f).value = profile[f]; }); }
 function paintIdCard(){
+  if (!$('pInit')) return;
   var n = profile.pName || '';
   $('pInit').textContent = n ? n.charAt(0).toUpperCase() : '—';
   $('pWho').textContent = n || 'No profile yet';
@@ -2214,60 +1742,37 @@ function paintIdCard(){
   } else {
     $('pMeta').textContent = 'Fill this in and it gets attached to every alert you send.';
   }
-  $('homeNav').href = profile.pHome
+  if ($('homeNav')) $('homeNav').href = profile.pHome
     ? 'https://maps.google.com/maps?daddr=' + encodeURIComponent(profile.pHome)
     : '#';
 }
 function saveProfile(quiet){
   readProfile();
-  try{
-    localStorage.setItem(PKEY, JSON.stringify(profile));
-    if(!quiet) setStatus($('profStatus'), 'Profile saved on this device.', 'ok');
-  }catch(e){
-    setStatus($('profStatus'), 'This browser blocked saving. The profile will be lost when you close the tab.', 'bad');
-  }
+  try{ localStorage.setItem(PKEY, JSON.stringify(profile)); if(!quiet) setStatus($('profStatus'), 'Profile saved.', 'ok'); }
+  catch(e){ setStatus($('profStatus'), 'Browser blocked saving.', 'bad'); }
   paintIdCard();
   refreshShare();
-  cloudPushProfile();
 }
-fillProfile();
-paintIdCard();
-PFIELDS.forEach(function(f){
-  $(f).addEventListener('change', function(){ saveProfile(true); });
-});
-$('saveProfile').addEventListener('click', function(){ saveProfile(false); });
-$('clearProfile').addEventListener('click', function(){
-  if(!window.confirm('Delete your profile and all saved contacts from this device?')) return;
+fillProfile(); paintIdCard();
+PFIELDS.forEach(function(f){ if($(f)) $(f).addEventListener('change', function(){ saveProfile(true); }); });
+if ($('saveProfile')) $('saveProfile').addEventListener('click', function(){ saveProfile(false); });
+if ($('clearProfile')) $('clearProfile').addEventListener('click', function(){
+  if(!window.confirm('Delete your profile and all saved contacts?')) return;
   profile = {}; contacts = [];
-  PFIELDS.forEach(function(f){ $(f).value = ''; });
+  PFIELDS.forEach(function(f){ if($(f)) $(f).value = ''; });
   try{ localStorage.removeItem(PKEY); localStorage.removeItem(KEY); }catch(e){}
   renderContacts(); paintIdCard(); refreshShare();
   setStatus($('profStatus'), 'Everything cleared.', 'ok');
-  cloudWipeAll();
 });
-var logoutBtn = $('logoutBtn');
-if(logoutBtn) logoutBtn.addEventListener('click', function(){
-  clearSession();
-  var acc = loadAccount();
-  if(acc) $('liUser').value = acc.user;
-  $('liPass').value = '';
-  switchAuthView('login');
-  openGate();
-});
-
-$('shareHome').addEventListener('click', function(){
-  if(!profile.pHome){
-    setStatus($('profStatus'), 'Add your home address first.', 'bad'); return;
-  }
+if ($('shareHome')) $('shareHome').addEventListener('click', function(){
+  if(!profile.pHome){ setStatus($('profStatus'), 'Add your home address first.', 'bad'); return; }
   includeHome = !includeHome;
   $('shareHome').textContent = includeHome ? 'Remove home from my alert' : 'Add home to my alert';
   refreshShare();
-  setStatus($('profStatus'), includeHome
-    ? 'Your home address is now part of the alert message.'
-    : 'Home address removed from the alert message.', 'ok');
+  setStatus($('profStatus'), includeHome ? 'Home added to the alert.' : 'Home removed.', 'ok');
 });
 
-/* profile details get appended to every alert */
+/* profile details appended to alerts */
 var _base = baseMessage;
 baseMessage = function(){
   var t = _base();
@@ -2281,20 +1786,17 @@ baseMessage = function(){
 };
 refreshShare();
 
-/* ---------------- safety rules ---------------- */
+/* -------- safety rules -------- */
 var RKEY = 'sk_rules';
 var boxes = document.querySelectorAll('.rule input[type=checkbox]');
 var ticked = {};
-try{
-  var rraw = localStorage.getItem(RKEY);
-  if(rraw) ticked = JSON.parse(rraw) || {};
-}catch(e){ ticked = {}; }
+try{ var rraw = localStorage.getItem(RKEY); if(rraw) ticked = JSON.parse(rraw) || {}; }catch(e){ ticked = {}; }
 
 function paintRules(){
   var done = 0;
   Array.prototype.forEach.call(boxes, function(b){ if(b.checked) done++; });
-  $('ruleCount').textContent = done + ' of ' + boxes.length;
-  $('ruleFill').style.width = Math.round(done / boxes.length * 100) + '%';
+  if ($('ruleCount')) $('ruleCount').textContent = done + ' of ' + boxes.length;
+  if ($('ruleFill')) $('ruleFill').style.width = Math.round(done / boxes.length * 100) + '%';
 }
 Array.prototype.forEach.call(boxes, function(b){
   if(ticked[b.id]) b.checked = true;
@@ -2302,43 +1804,38 @@ Array.prototype.forEach.call(boxes, function(b){
     ticked[b.id] = b.checked;
     try{ localStorage.setItem(RKEY, JSON.stringify(ticked)); }catch(e){}
     paintRules();
-    cloudSetRule(b.id, b.checked);
   });
 });
-$('ruleReset').addEventListener('click', function(){
+if ($('ruleReset')) $('ruleReset').addEventListener('click', function(){
   ticked = {};
   Array.prototype.forEach.call(boxes, function(b){ b.checked = false; });
   try{ localStorage.removeItem(RKEY); }catch(e){}
   paintRules();
-  cloudClearRules();
 });
 paintRules();
 
-/* ---------------- page nav ---------------- */
+/* -------- page nav -------- */
 var navBtns = document.querySelectorAll('.pagenav button');
 function showPage(name){
-  document.querySelectorAll('.page').forEach(function(p){
+  Array.prototype.forEach.call(document.querySelectorAll('.page'), function(p){
     p.classList.toggle('on', p.id === 'page-' + name);
   });
-  navBtns.forEach(function(b){
+  Array.prototype.forEach.call(navBtns, function(b){
     b.setAttribute('aria-current', b.dataset.page === name ? 'true' : 'false');
   });
-  window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+  window.scrollTo({top:0, behavior:'auto'});
 }
-navBtns.forEach(function(b){
-  b.addEventListener('click', function(){
-    showPage(b.dataset.page);
-    history.replaceState(null, '', '#' + b.dataset.page);
-  });
+Array.prototype.forEach.call(navBtns, function(b){
+  b.addEventListener('click', function(){ showPage(b.dataset.page); });
 });
-if(location.hash === '#profile') showPage('profile');
 
-/* close overlays on Escape */
+/* -------- escape closes overlays -------- */
 document.addEventListener('keydown', function(e){
   if(e.key !== 'Escape') return;
-  if($('callOverlay').classList.contains('on')) endCall();
-  if($('alarmOverlay').classList.contains('on')) $('stopAlarm').click();
+  if($('callOverlay') && $('callOverlay').classList.contains('on')) endCall();
+  if($('alarmOverlay') && $('alarmOverlay').classList.contains('on')) $('stopAlarm').click();
 });
+
 })();
 </script>
 </body>
