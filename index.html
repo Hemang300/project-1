@@ -241,6 +241,8 @@ details.guide li{margin-bottom:7px;max-width:64ch}
 .livehead .lt{font-weight:600;font-size:14.5px}
 .livehead .elapsed{margin-left:auto;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
 #trail{display:block;width:100%;height:190px;background:var(--paper)}
+.trailmap{display:block;width:100%;height:190px;background:var(--paper)}
+.trailmap.compact{height:150px}
 .livestats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
 .stat{padding:10px 12px;border-right:1px solid var(--line)}
 .stat:last-child{border-right:none}
@@ -412,6 +414,20 @@ details.guide li{margin-bottom:7px;max-width:64ch}
   border-left:3px solid var(--signal);padding:8px 10px;border-radius:3px;
 }
 
+/* ---------- team ---------- */
+.team{margin-top:6px;border-top:1px solid var(--line)}
+.trow{
+  display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);
+}
+.trow .tnum{
+  width:34px;flex:none;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;font-weight:600;
+}
+.trow .tinit{
+  width:46px;height:46px;border-radius:50%;flex:none;background:var(--surface-2);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:var(--muted);
+}
+.trow .tname{font-weight:600;font-size:16.5px;letter-spacing:-0.01em}
+
 /* ---------- bottom bar ---------- */
 .bar{
   position:fixed;left:0;right:0;bottom:0;z-index:50;
@@ -453,6 +469,7 @@ footer p{max-width:64ch}
     <nav class="pagenav">
       <button type="button" data-page="home" aria-current="true">Home</button>
       <button type="button" data-page="profile" aria-current="false">Profile</button>
+      <button type="button" data-page="team" aria-current="false">Team</button>
     </nav>
   </div>
 </header>
@@ -479,7 +496,7 @@ footer p{max-width:64ch}
         <span class="lt">Live — updating as you move</span>
         <span class="elapsed" id="liveElapsed">00:00</span>
       </div>
-      <canvas id="trail" width="700" height="380" aria-label="Map of the path you have travelled since tracking started"></canvas>
+      <canvas id="trail" class="trailmap" width="700" height="380" aria-label="Map of the path you have travelled since tracking started"></canvas>
       <div class="livestats">
         <div class="stat"><b id="statDist">0 m</b><span>Travelled</span></div>
         <div class="stat"><b id="statSpeed">—</b><span>Speed</span></div>
@@ -831,6 +848,32 @@ footer p{max-width:64ch}
   </div>
 </div>
 
+<div class="panel" id="mapPanel">
+  <h3>Live location</h3>
+  <p class="status">Your current position, updating in real time. Same tracking as the Home page — start it here or there, either shows it.</p>
+  <div class="btnrow">
+    <button class="btn btn-red" id="liveBtnP" type="button">Start live tracking</button>
+  </div>
+
+  <div class="live" id="livePanelP">
+    <div class="livehead">
+      <span class="blip" aria-hidden="true"></span>
+      <span class="lt">Live — updating as you move</span>
+      <span class="elapsed" id="liveElapsedP">00:00</span>
+    </div>
+    <canvas id="trailP" class="trailmap compact" width="700" height="300" aria-label="Map of the path you have travelled since tracking started"></canvas>
+    <div class="livestats">
+      <div class="stat"><b id="statDistP">0 m</b><span>Travelled</span></div>
+      <div class="stat"><b id="statSpeedP">—</b><span>Speed</span></div>
+      <div class="stat"><b id="statAccP">—</b><span>Accuracy</span></div>
+    </div>
+    <div class="coordbar">
+      <span id="liveCoordsP">Waiting for the first fix…</span>
+      <a href="#" id="liveMapP" target="_blank" rel="noopener" style="margin-left:auto">Open in Maps</a>
+    </div>
+  </div>
+</div>
+
 <section id="dv-aware">
   <div class="dv">
     <p class="eyebrow">Recognise abuse</p>
@@ -948,6 +991,19 @@ footer p{max-width:64ch}
 </section>
 
 </div><!-- /page-profile -->
+
+<div id="page-team" class="page">
+<section id="team">
+  <h2>Team</h2>
+  <p class="lede">The people who built Suraksha.</p>
+  <div class="team">
+    <div class="trow"><span class="tnum">01</span><span class="tinit">P</span><span class="tname">Praveen Kumar</span></div>
+    <div class="trow"><span class="tnum">02</span><span class="tinit">H</span><span class="tname">Hemang Choudhary</span></div>
+    <div class="trow"><span class="tnum">03</span><span class="tinit">N</span><span class="tname">Nilesh Kumawat</span></div>
+    <div class="trow"><span class="tnum">04</span><span class="tinit">K</span><span class="tname">Kanak Kumari</span></div>
+  </div>
+</section>
+</div><!-- /page-team -->
 
 <footer>
   <p>Suraksha is a page, not an emergency service. It can't call anyone for you and it can't reach the police on its own. In danger right now, dial 112.</p>
@@ -1530,8 +1586,12 @@ function fmtDist(m){
 function cssVar(n){
   return getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 }
-function drawTrail(){
-  var cv = $('trail'); if(!cv.getContext) return;
+var LIVE_MOUNTS = [
+  { btn:'liveBtn',  panel:'livePanel',  trail:'trail',  elapsed:'liveElapsed',  dist:'statDist',  speed:'statSpeed',  acc:'statAcc',  coordsEl:'liveCoords',  mapLink:'liveMap' },
+  { btn:'liveBtnP', panel:'livePanelP', trail:'trailP', elapsed:'liveElapsedP', dist:'statDistP', speed:'statSpeedP', acc:'statAccP', coordsEl:'liveCoordsP', mapLink:'liveMapP' }
+];
+function drawTrailOn(cv){
+  if(!cv || !cv.getContext) return;
   var g = cv.getContext('2d'), W = cv.width, H = cv.height, pad = 34;
   g.clearRect(0,0,W,H);
   g.fillStyle = cssVar('--paper'); g.fillRect(0,0,W,H);
@@ -1590,9 +1650,13 @@ function drawTrail(){
   g.fillStyle = cssVar('--muted'); g.textAlign = 'left'; g.font = '12px Archivo, sans-serif';
   g.fillText('about ' + fmtDist(metresAcross) + ' across', 12, H - 12);
 }
+function drawTrail(){
+  LIVE_MOUNTS.forEach(function(m){ drawTrailOn($(m.trail)); });
+}
 function liveTick(){
   var s = Math.round((Date.now() - liveStart)/1000);
-  $('liveElapsed').textContent = String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+  var t = String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+  LIVE_MOUNTS.forEach(function(m){ var el = $(m.elapsed); if(el) el.textContent = t; });
 }
 function startLive(){
   if(!navigator.geolocation){
@@ -1600,9 +1664,10 @@ function startLive(){
   }
   path = []; dist = 0;
   liveStart = Date.now();
-  $('livePanel').classList.add('on');
-  $('liveBtn').textContent = 'Stop live tracking';
-  $('liveBtn').classList.remove('btn-red');
+  LIVE_MOUNTS.forEach(function(m){
+    var p = $(m.panel); if(p) p.classList.add('on');
+    var b = $(m.btn); if(b){ b.textContent = 'Stop live tracking'; b.classList.remove('btn-red'); }
+  });
   setStatus($('locStatus'), 'Tracking. Your message updates itself as you move — resend it any time for a fresh position.', 'ok');
   drawTrail();
   liveClock = setInterval(liveTick, 1000);
@@ -1618,12 +1683,16 @@ function startLive(){
     if(path.length > 900) path.shift();
 
     coords = { lat: p.lat.toFixed(6), lon: p.lon.toFixed(6), acc: Math.round(pos.coords.accuracy) };
-    $('statDist').textContent = fmtDist(dist);
-    $('statAcc').textContent = Math.round(pos.coords.accuracy) + ' m';
-    $('statSpeed').textContent = (pos.coords.speed != null && pos.coords.speed >= 0)
+    var speedTxt = (pos.coords.speed != null && pos.coords.speed >= 0)
       ? (pos.coords.speed * 3.6).toFixed(1) + ' km/h' : '—';
-    $('liveCoords').textContent = coords.lat + ', ' + coords.lon;
-    $('liveMap').href = 'https://maps.google.com/?q=' + coords.lat + ',' + coords.lon;
+    LIVE_MOUNTS.forEach(function(m){
+      var d1=$(m.dist), s1=$(m.speed), a1=$(m.acc), c1=$(m.coordsEl), l1=$(m.mapLink);
+      if(d1) d1.textContent = fmtDist(dist);
+      if(a1) a1.textContent = Math.round(pos.coords.accuracy) + ' m';
+      if(s1) s1.textContent = speedTxt;
+      if(c1) c1.textContent = coords.lat + ', ' + coords.lon;
+      if(l1) l1.href = 'https://maps.google.com/?q=' + coords.lat + ',' + coords.lon;
+    });
     drawTrail();
     refreshShare();
   }, function(err){
@@ -1636,16 +1705,20 @@ function startLive(){
 function stopLive(){
   if(watchId !== null){ navigator.geolocation.clearWatch(watchId); watchId = null; }
   if(liveClock){ clearInterval(liveClock); liveClock = null; }
-  $('liveBtn').textContent = 'Start live tracking';
-  $('liveBtn').classList.add('btn-red');
+  LIVE_MOUNTS.forEach(function(m){
+    var b = $(m.btn); if(b){ b.textContent = 'Start live tracking'; b.classList.add('btn-red'); }
+  });
 }
-$('liveBtn').addEventListener('click', function(){
+function toggleLive(){
   if(watchId !== null){
     stopLive();
     setStatus($('locStatus'), 'Tracking stopped. Your last position is still in the message.', 'ok');
   } else {
     startLive();
   }
+}
+LIVE_MOUNTS.forEach(function(m){
+  var b = $(m.btn); if(b) b.addEventListener('click', toggleLive);
 });
 
 /* ---------------- calling: speed dial ---------------- */
