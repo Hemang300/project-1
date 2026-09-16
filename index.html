@@ -6,149 +6,415 @@
 <title>Suraksha — women's safety, in one place</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&display=swap" rel="stylesheet">
 
 <style>
 /* ============================================================
-   LOGIN PAGE STYLES
+   LOGIN PAGE — modern glassmorphism + hero image
    ============================================================ */
+*{margin:0;padding:0;box-sizing:border-box}
+
 .login-body{
   font-family:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
-  background:#0b0f13;min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  padding:1.5rem;color:#e6edf3;margin:0;
+  min-height:100vh;
+  background:#07090d;
+  color:#e6edf3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1.5rem;
+  position:relative;
+  overflow:hidden;
 }
+
+/* ---- Layered background: image + gradient mesh ---- */
 .login-body::before{
-  content:'';position:fixed;inset:0;
-  background:
-    radial-gradient(circle at 30% 10%, rgba(88,166,255,.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 90%, rgba(190,22,34,.06) 0%, transparent 55%),
-    radial-gradient(circle at 70% 20%, rgba(56,139,253,.04) 0%, transparent 40%);
-  pointer-events:none;z-index:0;
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=80');
+  background-size:cover;
+  background-position:center;
+  filter:brightness(.35) saturate(1.2) blur(2px);
+  transform:scale(1.05);
+  z-index:0;
 }
 .login-body::after{
-  content:'';position:fixed;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.012) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px);
-  background-size:44px 44px;pointer-events:none;z-index:0;
+  content:'';
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(190,22,34,.35) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 80%, rgba(31,111,235,.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(133,72,201,.15) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(7,9,13,.5) 0%, rgba(7,9,13,.85) 100%);
+  z-index:1;
 }
+
+/* floating orbs */
+.orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(70px);
+  opacity:.5;
+  z-index:1;
+  animation:float 18s ease-in-out infinite;
+  pointer-events:none;
+}
+.orb.o1{width:380px;height:380px;background:#be1622;top:-100px;left:-80px;animation-delay:0s}
+.orb.o2{width:420px;height:420px;background:#1f6feb;bottom:-150px;right:-100px;animation-delay:-6s}
+.orb.o3{width:300px;height:300px;background:#8548c9;top:40%;left:60%;animation-delay:-12s}
+
+@keyframes float{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(40px,-50px) scale(1.08)}
+  66%{transform:translate(-30px,40px) scale(.95)}
+}
+
 .login-wrapper{
-  position:relative;z-index:1;width:100%;max-width:372px;
-  display:flex;flex-direction:column;align-items:center;gap:1.25rem;
-  animation:fadeUp .45s ease-out;
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:920px;
+  display:grid;
+  grid-template-columns:1.05fr 1fr;
+  background:rgba(22,27,34,.6);
+  backdrop-filter:blur(24px) saturate(1.4);
+  -webkit-backdrop-filter:blur(24px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.6),
+    0 0 0 1px rgba(255,255,255,.03) inset,
+    0 1px 0 rgba(255,255,255,.08) inset;
+  animation:cardIn .7s cubic-bezier(.16,1,.3,1);
 }
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.login-brand{
-  display:flex;align-items:center;gap:.5rem;font-size:1.65rem;font-weight:700;
-  letter-spacing:-.025em;color:#f0f6fc;
+@keyframes cardIn{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
+
+/* ---- LEFT: hero panel with image ---- */
+.hero-panel{
+  position:relative;
+  padding:2.75rem 2.25rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:
+    linear-gradient(160deg, rgba(190,22,34,.28), rgba(133,72,201,.15) 50%, rgba(31,111,235,.25)),
+    url('https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1200&q=80');
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+  overflow:hidden;
+  min-height:560px;
 }
-.login-brand span{color:#e8323f}
-.login-brand .dot{
-  width:8px;height:8px;background:#e8323f;border-radius:50%;
-  display:inline-block;margin-left:4px;margin-top:6px;opacity:.9;
+.hero-panel::before{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg, rgba(10,6,18,.35) 0%, rgba(10,6,18,.75) 100%);
+  z-index:1;
 }
-.login-card{
-  background:#161b22;border:1px solid #30363d;border-radius:8px;
-  padding:1.5rem 1.5rem 1.75rem;width:100%;
-  box-shadow:0 4px 14px rgba(0,0,0,.4);
+.hero-panel > *{position:relative;z-index:2}
+
+.hero-top{display:flex;align-items:center;gap:.6rem;font-size:1.35rem;font-weight:800;letter-spacing:-.02em}
+.hero-top .brandmark{
+  width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(135deg,#be1622,#8548c9);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 20px rgba(190,22,34,.5);
+  flex:none;
 }
-.login-card h2{
-  font-size:1.35rem;font-weight:600;text-align:center;
-  margin:0 0 1.5rem;letter-spacing:-.01em;color:#f0f6fc;
+.hero-top .brandmark svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.hero-top span.a{color:#ff5263}
+
+.hero-mid h1{
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:700;
+  font-size:2.5rem;
+  line-height:1.08;
+  letter-spacing:-.02em;
+  margin-bottom:.85rem;
 }
+.hero-mid h1 em{
+  font-style:italic;
+  background:linear-gradient(120deg,#ff5263,#ffb0b8);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-mid p{
+  font-size:1rem;
+  line-height:1.6;
+  color:rgba(255,255,255,.78);
+  max-width:34ch;
+}
+
+.hero-stats{
+  display:flex;
+  gap:1.5rem;
+  margin-top:2rem;
+  flex-wrap:wrap;
+}
+.hero-stats div{display:flex;flex-direction:column}
+.hero-stats b{
+  font-family:'Fraunces',serif;
+  font-size:1.6rem;
+  font-weight:700;
+  background:linear-gradient(120deg,#fff,#ffd0d5);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero-stats span{font-size:.75rem;color:rgba(255,255,255,.65);letter-spacing:.02em;text-transform:uppercase;margin-top:2px}
+
+.hero-bottom{
+  display:flex;
+  gap:.5rem;
+  flex-wrap:wrap;
+  margin-top:1.5rem;
+}
+.hero-chip{
+  font-size:.72rem;
+  padding:.4rem .75rem;
+  border-radius:99px;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(6px);
+  color:rgba(255,255,255,.9);
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+}
+.hero-chip::before{content:'●';color:#5cc0a5;font-size:.6rem}
+
+/* ---- RIGHT: login form ---- */
+.form-panel{
+  padding:2.5rem 2.25rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  background:rgba(13,17,23,.55);
+  border-left:1px solid rgba(255,255,255,.06);
+}
+
+.form-panel h2{
+  font-size:1.55rem;
+  font-weight:700;
+  letter-spacing:-.02em;
+  color:#fff;
+  margin-bottom:.35rem;
+}
+.form-sub{
+  font-size:.85rem;
+  color:rgba(230,237,243,.55);
+  margin-bottom:1.75rem;
+}
+
 .login-field{margin-bottom:1rem}
 .login-field label{
-  display:block;font-size:.8rem;font-weight:500;
-  color:#c9d1d9;margin-bottom:.4rem;letter-spacing:.01em;
-}
-.login-field input{
-  width:100%;padding:.65rem .9rem;font:inherit;font-size:.95rem;
-  background:#0d1117;border:1px solid #30363d;border-radius:6px;
-  color:#e6edf3;transition:border-color .15s,box-shadow .15s;outline:none;
-}
-.login-field input:focus{border-color:#58a6ff;box-shadow:0 0 0 3px rgba(88,166,255,.3)}
-.login-field input::placeholder{color:#6e7681}
-.login-field .hint{font-size:.72rem;color:#6e7681;margin-top:.3rem}
-.pw-wrap{position:relative}
-.pw-wrap input{padding-right:3rem}
-.pw-toggle{
-  position:absolute;right:.5rem;top:50%;transform:translateY(-50%);
-  background:none;border:none;color:#6e7681;cursor:pointer;
-  font:inherit;font-size:.78rem;font-weight:500;padding:.25rem .4rem;
-}
-.pw-toggle:hover{color:#58a6ff}
-.row-between{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:1rem;font-size:.82rem;
-}
-.row-between label{display:flex;align-items:center;gap:.4rem;color:#c9d1d9;cursor:pointer;font-weight:500}
-.row-between input[type=checkbox]{accent-color:#238636;width:14px;height:14px;cursor:pointer}
-.row-between a{color:#58a6ff;text-decoration:none}
-.row-between a:hover{text-decoration:underline}
-.btn-signin{
-  width:100%;padding:.7rem 1rem;font:inherit;font-weight:600;font-size:.95rem;
-  background:#238636;border:1px solid rgba(240,246,252,.1);border-radius:6px;
-  color:#fff;cursor:pointer;transition:background .15s,transform .05s;
+  display:block;
+  font-size:.78rem;
+  font-weight:600;
+  color:rgba(230,237,243,.75);
+  margin-bottom:.4rem;
   letter-spacing:.01em;
 }
-.btn-signin:hover{background:#2ea043}
-.btn-signin:active{background:#238636;transform:scale(.985)}
-.btn-signin:disabled{opacity:.6;cursor:not-allowed}
-.divider{
-  display:flex;align-items:center;gap:.75rem;margin:1.35rem 0 1rem;
-  color:#6e7681;font-size:.75rem;font-weight:500;letter-spacing:.04em;
+.login-field input{
+  width:100%;
+  padding:.8rem 1rem;
+  font:inherit;
+  font-size:.95rem;
+  background:rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  color:#fff;
+  transition:border-color .18s, box-shadow .18s, background .18s;
+  outline:none;
 }
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:#30363d}
+.login-field input:focus{
+  border-color:rgba(88,166,255,.7);
+  background:rgba(0,0,0,.5);
+  box-shadow:0 0 0 4px rgba(88,166,255,.15);
+}
+.login-field input::placeholder{color:rgba(230,237,243,.35)}
+.login-field .hint{font-size:.7rem;color:rgba(230,237,243,.4);margin-top:.3rem}
+
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:3.2rem}
+.pw-toggle{
+  position:absolute;
+  right:.5rem;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  color:rgba(230,237,243,.7);
+  cursor:pointer;
+  font:inherit;
+  font-size:.72rem;
+  font-weight:600;
+  padding:.35rem .6rem;
+  border-radius:6px;
+  transition:all .15s;
+}
+.pw-toggle:hover{background:rgba(255,255,255,.12);color:#fff}
+
+.row-between{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:1.25rem;
+  font-size:.82rem;
+}
+.row-between label{
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  color:rgba(230,237,243,.75);
+  cursor:pointer;
+  font-weight:500;
+}
+.row-between input[type=checkbox]{accent-color:#be1622;width:15px;height:15px;cursor:pointer}
+.row-between a{color:#79c0ff;text-decoration:none;font-weight:500}
+.row-between a:hover{text-decoration:underline}
+
+.btn-signin{
+  width:100%;
+  padding:.85rem 1rem;
+  font:inherit;
+  font-weight:700;
+  font-size:.95rem;
+  background:linear-gradient(135deg,#be1622,#e8323f);
+  border:none;
+  border-radius:10px;
+  color:#fff;
+  cursor:pointer;
+  transition:transform .1s, box-shadow .2s, filter .15s;
+  letter-spacing:.01em;
+  box-shadow:0 6px 22px rgba(190,22,34,.4);
+}
+.btn-signin:hover{filter:brightness(1.1);box-shadow:0 8px 28px rgba(190,22,34,.55)}
+.btn-signin:active{transform:scale(.985)}
+.btn-signin:disabled{opacity:.6;cursor:not-allowed}
+
+.divider{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  margin:1.4rem 0 1rem;
+  color:rgba(230,237,243,.35);
+  font-size:.7rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.1)}
+
 .alt-signin{display:flex;gap:.6rem}
 .alt-signin button{
-  flex:1;padding:.6rem .5rem;font:inherit;font-size:.85rem;font-weight:500;
-  background:#21262d;border:1px solid #30363d;border-radius:6px;color:#e6edf3;
-  cursor:pointer;transition:background .15s,border-color .15s;
-  display:flex;align-items:center;justify-content:center;gap:.4rem;
+  flex:1;
+  padding:.7rem .5rem;
+  font:inherit;
+  font-size:.82rem;
+  font-weight:600;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:10px;
+  color:#e6edf3;
+  cursor:pointer;
+  transition:background .15s, border-color .15s, transform .1s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.45rem;
 }
-.alt-signin button:hover{background:#30363d;border-color:#8b949e}
-.alt-signin button svg{width:18px;height:18px}
+.alt-signin button:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
+.alt-signin button:active{transform:scale(.98)}
+.alt-signin button svg{width:16px;height:16px}
 
-/* ============ GUEST BUTTON ============ */
+/* ---- GUEST BUTTON ---- */
 .guest-btn{
-  width:100%;margin-top:1rem;padding:.75rem 1rem;
-  font:inherit;font-weight:700;font-size:.95rem;
-  background:linear-gradient(135deg,#1f6feb,#388bfd);
-  border:none;border-radius:6px;color:#fff;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:.55rem;
-  transition:filter .15s,transform .05s,box-shadow .15s;
-  letter-spacing:.01em;box-shadow:0 2px 10px rgba(31,111,235,.35);
+  width:100%;
+  margin-top:1.1rem;
+  padding:.9rem 1rem;
+  font:inherit;
+  font-weight:700;
+  font-size:.95rem;
+  background:linear-gradient(135deg,rgba(31,111,235,.9),rgba(56,139,253,.9));
+  border:1px solid rgba(88,166,255,.4);
+  border-radius:10px;
+  color:#fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.55rem;
+  transition:filter .15s, transform .1s, box-shadow .2s;
+  letter-spacing:.01em;
+  box-shadow:0 6px 22px rgba(31,111,235,.35);
+  position:relative;
+  overflow:hidden;
 }
-.guest-btn:hover{filter:brightness(1.1);box-shadow:0 4px 16px rgba(31,111,235,.5)}
-.guest-btn:active{transform:scale(.99)}
+.guest-btn::after{
+  content:'';
+  position:absolute;
+  top:0;left:-100%;
+  width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
+  transition:left .6s;
+}
+.guest-btn:hover::after{left:100%}
+.guest-btn:hover{filter:brightness(1.12);box-shadow:0 8px 28px rgba(31,111,235,.55)}
+.guest-btn:active{transform:scale(.985)}
 .guest-btn svg{width:17px;height:17px}
+
 .guest-note{
-  font-size:.72rem;color:#6e7681;text-align:center;
-  margin-top:.55rem;line-height:1.45;
+  font-size:.7rem;
+  color:rgba(230,237,243,.4);
+  text-align:center;
+  margin-top:.6rem;
+  line-height:1.45;
 }
+
 .bottom-text{
-  margin-top:1.25rem;padding:.85rem 1rem;border:1px solid #30363d;
-  border-radius:8px;text-align:center;font-size:.9rem;color:#c9d1d9;
+  margin-top:1.4rem;
+  padding:.9rem 1rem;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;
+  text-align:center;
+  font-size:.85rem;
+  color:rgba(230,237,243,.65);
+  background:rgba(255,255,255,.02);
 }
-.bottom-text a{color:#58a6ff;text-decoration:none;font-weight:500;margin-left:4px;cursor:pointer}
+.bottom-text a{color:#79c0ff;text-decoration:none;font-weight:600;margin-left:4px;cursor:pointer}
 .bottom-text a:hover{text-decoration:underline}
-.footer-links{
-  display:flex;gap:1.2rem;justify-content:center;margin-top:1rem;
-  font-size:.72rem;color:#6e7681;flex-wrap:wrap;
+
+.status-msg{font-size:.83rem;margin-top:.75rem;color:#ff7b72;min-height:1.2rem;font-weight:500}
+.status-msg.ok{color:#5cc0a5}
+.status-msg.info{color:#79c0ff}
+
+:focus-visible{outline:3px solid #58a6ff;outline-offset:2px;border-radius:6px}
+
+/* mobile: stack hero above form */
+@media (max-width:860px){
+  .login-wrapper{grid-template-columns:1fr;max-width:440px}
+  .hero-panel{min-height:auto;padding:1.75rem 1.5rem;border-radius:20px 20px 0 0}
+  .hero-mid h1{font-size:1.85rem}
+  .hero-mid p{font-size:.9rem;max-width:100%}
+  .hero-stats{gap:1.1rem;margin-top:1.25rem}
+  .hero-stats b{font-size:1.25rem}
+  .hero-bottom{display:none}
+  .form-panel{padding:1.75rem 1.5rem;border-left:none;border-top:1px solid rgba(255,255,255,.06)}
+  .form-panel h2{font-size:1.3rem}
 }
-.footer-links a{color:#6e7681;text-decoration:none}
-.footer-links a:hover{color:#58a6ff}
-.status-msg{
-  font-size:.85rem;margin-top:.75rem;color:#f85149;
-  min-height:1.2rem;font-weight:500;
+@media (max-width:420px){
+  .login-body{padding:.75rem}
+  .hero-mid h1{font-size:1.55rem}
+  .hero-top{font-size:1.15rem}
 }
-.status-msg.ok{color:#3fb950}
-.status-msg.info{color:#58a6ff}
-:focus-visible{outline:3px solid #58a6ff;outline-offset:2px;border-radius:4px}
 
 /* ============================================================
-   SURAKSHA APP STYLES (original — unchanged)
+   SURAKSHA APP STYLES
    ============================================================ */
 :root{
   --paper:#E7EAE5;--surface:#F6F7F4;--surface-2:#DDE1DB;
@@ -194,9 +460,11 @@ header.top{border-bottom:1px solid var(--line);background:var(--surface)}
 .dial{
   display:flex;flex-direction:column;gap:2px;
   background:var(--signal);color:var(--signal-ink);
-  text-decoration:none;padding:14px 12px;border-radius:4px;
+  text-decoration:none;padding:14px 12px;border-radius:8px;
   min-height:92px;justify-content:center;
+  transition:transform .1s;
 }
+.dial:hover{transform:translateY(-2px)}
 .dial .num{font-size:30px;font-weight:700;letter-spacing:-0.03em;line-height:1}
 .dial .who{font-size:13px;line-height:1.25;opacity:.92}
 .dialnote{color:var(--muted);font-size:13.5px;margin:10px 0 0}
@@ -205,16 +473,17 @@ header.top{border-bottom:1px solid var(--line);background:var(--surface)}
 .app-body h3{font-size:16.5px;margin:0 0 4px;font-weight:600}
 .lede{color:var(--muted);margin:0 0 18px;font-size:15.5px;max-width:60ch}
 .app-body p{max-width:68ch}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px}
 .panel + .panel{margin-top:10px}
 .btn{
   font:inherit;font-weight:600;font-size:15px;
   border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
-  padding:11px 16px;border-radius:4px;cursor:pointer;
+  padding:11px 16px;border-radius:8px;cursor:pointer;
   text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-height:46px;
+  min-height:46px;transition:transform .1s,border-color .15s;
 }
 .btn:hover{border-color:var(--muted)}
+.btn:active{transform:scale(.98)}
 .btn-go{background:var(--calm);border-color:var(--calm);color:#fff}
 .btn-red{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
 .btn-wide{width:100%}
@@ -223,7 +492,7 @@ header.top{border-bottom:1px solid var(--line);background:var(--surface)}
 .app-body label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:5px;font-weight:500}
 .app-body input[type=text],.app-body input[type=tel],.app-body input[type=number],.app-body textarea,.app-body select{
   font:inherit;width:100%;padding:10px 12px;border:1px solid var(--line);
-  background:var(--paper);color:var(--ink);border-radius:4px;
+  background:var(--paper);color:var(--ink);border-radius:8px;
 }
 .app-body textarea{min-height:92px;resize:vertical;line-height:1.5}
 .field + .field{margin-top:10px}
@@ -238,7 +507,7 @@ ul.contacts li .cnum{color:var(--muted);font-size:14px;font-variant-numeric:tabu
 ul.contacts li .grow{flex:1;min-width:0}
 .icobtn{
   background:none;border:1px solid var(--line);color:var(--muted);
-  border-radius:4px;padding:6px 10px;font:inherit;font-size:13px;cursor:pointer;
+  border-radius:8px;padding:6px 10px;font:inherit;font-size:13px;cursor:pointer;
 }
 .empty{color:var(--muted);font-size:14.5px;margin:12px 0 0}
 .clock{font-size:56px;font-weight:700;letter-spacing:-0.04em;line-height:1;font-variant-numeric:tabular-nums;margin:6px 0 2px}
@@ -299,7 +568,7 @@ details.guide li{margin-bottom:7px;max-width:64ch}
   margin-top:16px;padding:12px 14px;border-left:3px solid var(--muted);
   color:var(--muted);font-size:14.5px;background:var(--surface);
 }
-.live{margin-top:12px;border:1px solid var(--line);border-radius:4px;overflow:hidden;display:none}
+.live{margin-top:12px;border:1px solid var(--line);border-radius:8px;overflow:hidden;display:none}
 .live.on{display:block}
 .livehead{display:flex;align-items:center;gap:9px;padding:11px 14px;background:var(--surface-2);border-bottom:1px solid var(--line)}
 .blip{width:10px;height:10px;border-radius:50%;background:var(--signal);flex:none;animation:blink 1.4s ease-in-out infinite}
@@ -319,17 +588,19 @@ details.guide li{margin-bottom:7px;max-width:64ch}
 .sdial{
   display:flex;flex-direction:column;gap:1px;text-decoration:none;
   border:1px solid var(--line);background:var(--surface-2);color:var(--ink);
-  padding:12px 14px;border-radius:4px;min-height:64px;justify-content:center;
+  padding:12px 14px;border-radius:8px;min-height:64px;justify-content:center;
+  transition:transform .1s;
 }
+.sdial:hover{transform:translateY(-2px)}
 .sdial b{font-size:15.5px;font-weight:600}
 .sdial span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 .readout{font-size:30px;font-weight:600;letter-spacing:0.02em;font-variant-numeric:tabular-nums;min-height:42px;padding:6px 2px;word-break:break-all;line-height:1.2}
 .readout:empty::before{content:"Enter a number";color:var(--muted);font-size:17px;font-weight:400;letter-spacing:0}
 .pad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:8px}
-.key{font:inherit;font-size:22px;font-weight:600;padding:14px 0;cursor:pointer;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:4px}
+.key{font:inherit;font-size:22px;font-weight:600;padding:14px 0;cursor:pointer;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);border-radius:8px}
 .key:active{background:var(--line)}
 .key small{display:block;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.08em}
-.cascade{margin-top:12px;padding:12px;border:1px dashed var(--line);border-radius:4px;display:none}
+.cascade{margin-top:12px;padding:12px;border:1px dashed var(--line);border-radius:8px;display:none}
 .cascade.on{display:block}
 .cascade .who{font-weight:600;font-size:17px;margin:0 0 2px}
 .cascade .pos{color:var(--muted);font-size:13.5px;margin:0}
@@ -340,7 +611,7 @@ details.guide li{margin-bottom:7px;max-width:64ch}
 .rpanel.on{display:block}
 .law{font-size:12.5px;color:var(--muted);margin-top:5px;display:block;padding-left:10px;border-left:2px solid var(--line)}
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.idcard{display:flex;gap:14px;align-items:center;padding:14px;margin-bottom:10px;border:1px solid var(--line);border-left:4px solid var(--signal);border-radius:4px;background:var(--surface)}
+.idcard{display:flex;gap:14px;align-items:center;padding:14px;margin-bottom:10px;border:1px solid var(--line);border-left:4px solid var(--signal);border-radius:8px;background:var(--surface)}
 .idcard .init{width:52px;height:52px;border-radius:50%;flex:none;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:21px;color:var(--muted)}
 .idcard .who{font-weight:700;font-size:18px;letter-spacing:-0.01em}
 .idcard .meta{color:var(--muted);font-size:13.5px}
@@ -358,7 +629,7 @@ details.guide li{margin-bottom:7px;max-width:64ch}
 .rule .why{display:block;color:var(--muted);font-size:13.5px;font-weight:400;margin-top:2px}
 .rule input:checked + label{color:var(--muted)}
 .rule input:checked + label > span:first-child{text-decoration:line-through}
-.progress{display:flex;align-items:center;gap:12px;margin-top:16px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:4px}
+.progress{display:flex;align-items:center;gap:12px;margin-top:16px;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-radius:8px}
 .progress .bar{flex:1;height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden}
 .progress .fill{height:100%;background:var(--calm);width:0%;transition:width .3s ease}
 .progress b{font-variant-numeric:tabular-nums;font-size:15px}
@@ -367,7 +638,7 @@ details.guide li{margin-bottom:7px;max-width:64ch}
 .pagenav button[aria-current="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .page{display:none}
 .page.on{display:block}
-.dv{background:#15111C;color:#F1EEF7;border-radius:6px;padding:26px 22px;margin-top:0}
+.dv{background:#15111C;color:#F1EEF7;border-radius:12px;padding:26px 22px;margin-top:0}
 .dv .eyebrow{color:#C9A9F2;font-weight:600;font-size:14.5px;margin:0 0 4px}
 .dv h2{color:#fff;margin-bottom:4px}
 .dv .lede{color:#C7BFD6;max-width:60ch}
@@ -380,9 +651,9 @@ details.guide li{margin-bottom:7px;max-width:64ch}
 .dv .trio .tic{width:38px;height:38px;border-radius:50%;background:#3B2A57;color:#D9C4F5;display:flex;align-items:center;justify-content:center;font-size:17px;margin-bottom:8px}
 .dv .trio h4{margin:0 0 3px;font-size:14.5px;color:#fff}
 .dv .trio p{margin:0;font-size:13px;color:#B6AEC4;max-width:none}
-.dv .banner{margin-top:22px;padding:14px 16px;border:1px solid #4A3768;border-radius:5px;color:#F1EEF7;font-size:15px}
+.dv .banner{margin-top:22px;padding:14px 16px;border:1px solid #4A3768;border-radius:8px;color:#F1EEF7;font-size:15px}
 .dv .callrow{margin-top:18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:18px;border-top:1px solid #35284A}
-.dv .callrow a{background:#8548C9;color:#fff;text-decoration:none;font-weight:700;font-size:16px;padding:11px 20px;border-radius:5px}
+.dv .callrow a{background:#8548C9;color:#fff;text-decoration:none;font-weight:700;font-size:16px;padding:11px 20px;border-radius:8px}
 .dv .callrow span{color:#B6AEC4;font-size:13.5px}
 .team{margin-top:6px;border-top:1px solid var(--line)}
 .trow{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
@@ -404,9 +675,7 @@ details.guide li{margin-bottom:7px;max-width:64ch}
   text-align:center;display:flex;align-items:center;justify-content:center;
   gap:10px;flex-wrap:wrap;
 }
-.guest-banner a{
-  color:#fff;text-decoration:underline;cursor:pointer;font-weight:700;
-}
+.guest-banner a{color:#fff;text-decoration:underline;cursor:pointer;font-weight:700}
 .guest-banner button{
   background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);
   color:#fff;padding:4px 12px;border-radius:99px;font:inherit;
@@ -421,7 +690,6 @@ details.guide li{margin-bottom:7px;max-width:64ch}
   *{animation:none !important;transition:none !important}
 }
 
-/* ---- view switching ---- */
 #loginView{display:block}
 #appView{display:none}
 #appView.on{display:block}
@@ -431,14 +699,46 @@ details.guide li{margin-bottom:7px;max-width:64ch}
 <body>
 
 <!-- ============================================================
-     VIEW 1 — LOGIN PAGE
+     LOGIN VIEW
      ============================================================ -->
 <div id="loginView" class="login-body" style="display:flex;align-items:center;justify-content:center;min-height:100vh;">
-  <div class="login-wrapper">
-    <div class="login-brand">Sur<span>a</span>ksha <span class="dot"></span></div>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
 
-    <div class="login-card">
-      <h2 id="formTitle">Sign in to Suraksha</h2>
+  <div class="login-wrapper">
+    <!-- LEFT: hero image panel -->
+    <div class="hero-panel">
+      <div class="hero-top">
+        <div class="brandmark">
+          <svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <div>Sur<span class="a">a</span>ksha</div>
+      </div>
+
+      <div class="hero-mid">
+        <h1>Safety, <em>in one place.</em></h1>
+        <p>Help, numbers and rights for women in India. Works without an account.</p>
+
+        <div class="hero-stats">
+          <div><b>112</b><span>Emergency</span></div>
+          <div><b>24×7</b><span>Helplines</span></div>
+          <div><b>10+</b><span>Rights covered</span></div>
+        </div>
+      </div>
+
+      <div class="hero-bottom">
+        <span class="hero-chip">Live tracking</span>
+        <span class="hero-chip">Safety timer</span>
+        <span class="hero-chip">Fake call</span>
+        <span class="hero-chip">Offline ready</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: form panel -->
+    <div class="form-panel">
+      <h2 id="formTitle">Welcome back</h2>
+      <p class="form-sub" id="formSub">Sign in to keep your data safe and synced.</p>
 
       <form id="authForm" novalidate>
         <div class="login-field" id="nameField" style="display:none">
@@ -469,17 +769,19 @@ details.guide li{margin-bottom:7px;max-width:64ch}
         <p class="status-msg" id="statusMsg"></p>
       </form>
 
-      <div class="divider">OR</div>
+      <div class="divider">or</div>
 
       <div class="alt-signin">
-        <button type="button" id="passkeyBtn">🔑 Passkey</button>
+        <button type="button" id="passkeyBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="12" r="3"/><path d="M11 12h9M18 12v3M15 12v2"/></svg>
+          Passkey
+        </button>
         <button type="button" id="googleBtn">
-          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           Google
         </button>
       </div>
 
-      <!-- ============ GUEST BUTTON ============ -->
       <button type="button" class="guest-btn" id="guestBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -487,26 +789,21 @@ details.guide li{margin-bottom:7px;max-width:64ch}
         </svg>
         Continue as Guest
       </button>
-      <p class="guest-note">Open Suraksha without an account. All features work — nothing is saved to a cloud.</p>
-    </div>
+      <p class="guest-note">No account needed. All features work — nothing is saved to a cloud.</p>
 
-    <div class="bottom-text">
-      <span id="switchText">New to Suraksha?</span>
-      <a id="switchLink" href="#">Create an account</a>
-    </div>
-
-    <div class="footer-links">
-      <a href="#">Terms</a><a href="#">Privacy</a><a href="#">Docs</a><a href="#">Contact</a>
+      <div class="bottom-text">
+        <span id="switchText">New here?</span>
+        <a id="switchLink" href="#">Create an account</a>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ============================================================
-     VIEW 2 — FULL SURAKSHA APP
+     APP VIEW
      ============================================================ -->
 <div id="appView" class="app-body">
 
-<!-- guest banner (only shown in guest mode) -->
 <div class="guest-banner" id="guestBanner" style="display:none;">
   <span>👤 Browsing as Guest</span>
   <button type="button" id="signInFromApp">Sign in to save data</button>
@@ -993,7 +1290,6 @@ details.guide li{margin-bottom:7px;max-width:64ch}
   <button class="btn" id="quickAlert" type="button">Alert contacts</button>
 </div>
 
-<!-- overlays -->
 <div class="overlay" id="callOverlay" role="dialog" aria-modal="true">
   <div class="callcard">
     <div class="avatar ringing" id="callInitial">P</div>
@@ -1025,7 +1321,7 @@ details.guide li{margin-bottom:7px;max-width:64ch}
 var $ = function(id){ return document.getElementById(id); };
 
 /* ============================================================
-   LOGIN LOGIC
+   LOGIN
    ============================================================ */
 var loginView = $('loginView');
 var appView   = $('appView');
@@ -1054,20 +1350,17 @@ function openApp(asGuest){
     banner.style.display = 'none';
     try{ localStorage.removeItem(GUEST_KEY); }catch(e){}
   }
-  // repaint theme button
-  if (typeof paintThemeBtn === 'function') paintThemeBtn();
+  paintThemeBtn();
+  window.scrollTo(0,0);
 }
-
 function backToLogin(){
   appView.classList.remove('on');
   loginView.style.display = 'flex';
   loginView.classList.remove('hidden');
 }
 
-/* -------- GUEST BUTTON — opens the full app -------- */
-$('guestBtn').addEventListener('click', function(){
-  openApp(true);
-});
+/* -------- GUEST — opens the app -------- */
+$('guestBtn').addEventListener('click', function(){ openApp(true); });
 
 /* -------- Sign in from banner -------- */
 $('signInFromApp').addEventListener('click', function(){
@@ -1075,9 +1368,10 @@ $('signInFromApp').addEventListener('click', function(){
   backToLogin();
 });
 
-/* -------- Sign in / Sign up -------- */
+/* -------- Auth form -------- */
 var mode = 'signin';
-var formTitle = $('formTitle'), nameField = $('nameField'), nameInput = $('name');
+var formTitle = $('formTitle'), formSub = $('formSub');
+var nameField = $('nameField'), nameInput = $('name');
 var emailInput = $('email'), passInput = $('password');
 var pwToggle = $('pwToggle'), pwHint = $('pwHint');
 var rememberRow = $('rememberRow'), rememberChk = $('remember');
@@ -1090,6 +1384,7 @@ function setMode(m){
   mode = m;
   if (m === 'signup'){
     formTitle.textContent = 'Create your account';
+    formSub.textContent = 'Takes a few seconds. Keeps your data synced.';
     nameField.style.display = 'block';
     pwHint.style.display = 'block';
     rememberRow.style.display = 'none';
@@ -1098,16 +1393,19 @@ function setMode(m){
     switchText.textContent = 'Already have an account?';
     switchLink.textContent = 'Sign in';
   } else {
-    formTitle.textContent = 'Sign in to Suraksha';
+    formTitle.textContent = 'Welcome back';
+    formSub.textContent = 'Sign in to keep your data safe and synced.';
     nameField.style.display = 'none';
     pwHint.style.display = 'none';
     rememberRow.style.display = 'flex';
     forgotLink.style.display = 'inline';
     submitBtn.textContent = 'Sign in';
-    switchText.textContent = 'New to Suraksha?';
+    switchText.textContent = 'New here?';
     switchLink.textContent = 'Create an account';
   }
-  setStatus(''); nameInput.value = ''; passInput.value = '';
+  setStatus('');
+  if(nameInput) nameInput.value = '';
+  passInput.value = '';
 }
 
 pwToggle.addEventListener('click', function(){
@@ -1212,7 +1510,6 @@ $('googleBtn').addEventListener('click', function(){
   openApp(false);
 });
 
-/* boot login */
 setMode('signin');
 try {
   var remembered = localStorage.getItem(REMEMBER_KEY);
@@ -1221,7 +1518,7 @@ try {
 document.addEventListener('keydown', function(e){ if (e.key === 'Escape') setStatus(''); });
 
 /* ============================================================
-   SURAKSHA APP LOGIC (original)
+   APP LOGIC
    ============================================================ */
 var themeBtn = $('themeBtn');
 function currentDark(){
@@ -1235,14 +1532,14 @@ try{
   if(savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
 }catch(e){}
 paintThemeBtn();
-themeBtn.addEventListener('click', function(){
+if (themeBtn) themeBtn.addEventListener('click', function(){
   var next = currentDark() ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   try{ localStorage.setItem('sk_theme', next); }catch(e){}
   paintThemeBtn();
 });
 
-/* -------- contacts -------- */
+/* contacts */
 var KEY = 'sk_contacts';
 var contacts = [];
 try{ var raw = localStorage.getItem(KEY); if(raw) contacts = JSON.parse(raw) || []; }catch(e){ contacts = []; }
@@ -1279,18 +1576,15 @@ function renderContacts(){
 }
 if ($('addC')) $('addC').addEventListener('click', function(){
   var n = $('cName').value.trim(), p = $('cNum').value.trim();
-  if(!n || !digits(p)){
-    setStatus($('shareStatus'),'Add both a name and a phone number.','bad');
-    return;
-  }
+  if(!n || !digits(p)){ setStatus($('shareStatus'),'Add both a name and a phone number.','bad'); return; }
   contacts.push({ name:n, num:p });
   saveContacts(); renderContacts(); refreshShare();
   $('cName').value = ''; $('cNum').value = '';
-  setStatus($('shareStatus'), n + ' saved on this device.', 'ok');
+  setStatus($('shareStatus'), n + ' saved.', 'ok');
 });
 renderContacts();
 
-/* -------- location + message -------- */
+/* location + message */
 var coords = null;
 function setStatus(el, text, cls){ if(!el) return; el.textContent = text; el.className = 'status' + (cls ? ' ' + cls : ''); }
 function stamp(){
@@ -1361,7 +1655,7 @@ if ($('quickAlert')) $('quickAlert').addEventListener('click', function(){
     : 'Add a trusted contact first.', contacts.length ? 'ok' : 'bad');
 });
 
-/* -------- audio -------- */
+/* audio */
 var ac = null, sirenNodes = null, ringTimer = null;
 function audio(){
   if(!ac){
@@ -1422,7 +1716,7 @@ function ringOnce(){
 function startRinging(){ ringOnce(); ringTimer = setInterval(ringOnce, 2600); }
 function stopRinging(){ if(ringTimer){ clearInterval(ringTimer); ringTimer = null; } }
 
-/* -------- fake call -------- */
+/* fake call */
 var fakeTimer = null, callClock = null;
 if ($('fakeBtn')) $('fakeBtn').addEventListener('click', function(){
   audio();
@@ -1462,7 +1756,7 @@ if ($('acceptBtn')) $('acceptBtn').addEventListener('click', function(){
   }, 1000);
 });
 
-/* -------- safety timer -------- */
+/* safety timer */
 var chosen = 15, tick = null, endAt = 0;
 if ($('mins')) Array.prototype.forEach.call($('mins').querySelectorAll('.chip'), function(b){
   b.addEventListener('click', function(){
@@ -1516,9 +1810,8 @@ if ($('alarmSend')) $('alarmSend').addEventListener('click', function(){
   $('quickAlert').click();
 });
 
-/* -------- live location -------- */
+/* live location */
 var watchId = null, path = [], dist = 0, liveStart = 0, liveClock = null;
-
 function haversine(a, b){
   var R = 6371000, toRad = Math.PI/180;
   var dLat = (b.lat - a.lat) * toRad, dLon = (b.lon - a.lon) * toRad;
@@ -1551,9 +1844,7 @@ function drawTrailOn(cv){
   var span = Math.max(spanLa, spanLo);
   var cLa = (minLa + maxLa)/2, cLo = (minLo + maxLo)/2;
   var size = Math.min(W, H) - pad*2;
-  function px(p){
-    return { x: W/2 + ((p.lon - cLo) / span) * size, y: H/2 - ((p.lat - cLa) / span) * size };
-  }
+  function px(p){ return { x: W/2 + ((p.lon - cLo) / span) * size, y: H/2 - ((p.lat - cLa) / span) * size }; }
   if(path.length > 1){
     g.strokeStyle = cssVar('--calm') || '#333'; g.lineWidth = 3;
     g.lineJoin = 'round'; g.lineCap = 'round';
@@ -1625,16 +1916,14 @@ function stopLive(){
   });
 }
 function toggleLive(){
-  if(watchId !== null){
-    stopLive();
-    setStatus($('locStatus'), 'Tracking stopped.', 'ok');
-  } else startLive();
+  if(watchId !== null){ stopLive(); setStatus($('locStatus'), 'Tracking stopped.', 'ok'); }
+  else startLive();
 }
 LIVE_MOUNTS.forEach(function(m){
   var b = $(m.btn); if(b) b.addEventListener('click', toggleLive);
 });
 
-/* -------- speed dial -------- */
+/* speed dial */
 var HELPLINES = [
   { name:'Emergency', num:'112' },
   { name:'Women in distress', num:'1091' },
@@ -1658,7 +1947,7 @@ function renderSpeed(){
 }
 renderSpeed();
 
-/* -------- cascade -------- */
+/* cascade */
 var casIdx = 0;
 function showCascade(){
   if(!contacts.length){ setStatus($('speedNote'), 'Add a trusted contact first.', 'bad'); return; }
@@ -1680,7 +1969,7 @@ if ($('cascadeStart')) $('cascadeStart').addEventListener('click', function(){ c
 if ($('cascadeNext')) $('cascadeNext').addEventListener('click', function(){ casIdx++; showCascade(); });
 if ($('cascadeStop')) $('cascadeStop').addEventListener('click', function(){ $('cascadePanel').classList.remove('on'); casIdx = 0; });
 
-/* -------- keypad -------- */
+/* keypad */
 var padVal = '';
 function paintPad(){
   if ($('padOut')) $('padOut').textContent = padVal;
@@ -1700,7 +1989,7 @@ if ($('padSave')) $('padSave').addEventListener('click', function(){
 });
 paintPad();
 
-/* -------- rights tabs -------- */
+/* rights tabs */
 var rtabs = document.querySelectorAll('.rtab');
 Array.prototype.forEach.call(rtabs, function(t){
   t.addEventListener('click', function(){
@@ -1712,7 +2001,7 @@ Array.prototype.forEach.call(rtabs, function(t){
   });
 });
 
-/* -------- profile -------- */
+/* profile */
 var PKEY = 'sk_profile';
 var PFIELDS = ['pName','pBlood','pAge','pVehicle','pMed','pHome','pWork','pStation'];
 var profile = {};
@@ -1772,7 +2061,6 @@ if ($('shareHome')) $('shareHome').addEventListener('click', function(){
   setStatus($('profStatus'), includeHome ? 'Home added to the alert.' : 'Home removed.', 'ok');
 });
 
-/* profile details appended to alerts */
 var _base = baseMessage;
 baseMessage = function(){
   var t = _base();
@@ -1786,7 +2074,7 @@ baseMessage = function(){
 };
 refreshShare();
 
-/* -------- safety rules -------- */
+/* safety rules */
 var RKEY = 'sk_rules';
 var boxes = document.querySelectorAll('.rule input[type=checkbox]');
 var ticked = {};
@@ -1814,7 +2102,7 @@ if ($('ruleReset')) $('ruleReset').addEventListener('click', function(){
 });
 paintRules();
 
-/* -------- page nav -------- */
+/* page nav */
 var navBtns = document.querySelectorAll('.pagenav button');
 function showPage(name){
   Array.prototype.forEach.call(document.querySelectorAll('.page'), function(p){
@@ -1829,7 +2117,6 @@ Array.prototype.forEach.call(navBtns, function(b){
   b.addEventListener('click', function(){ showPage(b.dataset.page); });
 });
 
-/* -------- escape closes overlays -------- */
 document.addEventListener('keydown', function(e){
   if(e.key !== 'Escape') return;
   if($('callOverlay') && $('callOverlay').classList.contains('on')) endCall();
