@@ -10,6 +10,150 @@
 
 <style>
 /* ============================================================
+   SPLASH SCREEN — app ki tarah opening
+   ============================================================ */
+.splash-screen{
+  position:fixed;inset:0;z-index:99999;
+  background:#07090d;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  overflow:hidden;
+  transition:opacity .7s ease, transform .7s ease, visibility .7s ease;
+}
+.splash-screen.fade-out{
+  opacity:0;
+  transform:scale(1.15);
+  visibility:hidden;
+  pointer-events:none;
+}
+.splash-screen::before{
+  content:'';position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=80');
+  background-size:cover;background-position:center;
+  filter:brightness(.35) saturate(1.2);
+  transform:scale(1.05);
+}
+.splash-screen::after{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(190,22,34,.45) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(31,111,235,.4) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(133,72,201,.2) 0%, transparent 60%);
+}
+.splash-content{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;align-items:center;
+  animation:splashZoomIn 1.4s cubic-bezier(.16,1,.3,1);
+}
+@keyframes splashZoomIn{
+  0%{opacity:0;transform:scale(.4) translateY(40px)}
+  100%{opacity:1;transform:scale(1) translateY(0)}
+}
+
+/* Shield logo */
+.splash-shield{
+  width:140px;height:140px;border-radius:50%;
+  background:linear-gradient(135deg,#be1622,#e8323f 50%,#8548c9);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  box-shadow:
+    0 0 0 6px rgba(255,255,255,.06),
+    0 20px 60px rgba(190,22,34,.7),
+    0 0 100px rgba(190,22,34,.5);
+  animation:shieldFloat 2.5s ease-in-out infinite;
+}
+@keyframes shieldFloat{
+  0%,100%{transform:translateY(0) rotate(-2deg)}
+  50%{transform:translateY(-10px) rotate(2deg)}
+}
+.splash-shield::before{
+  content:'';position:absolute;inset:-20px;border-radius:50%;
+  border:2px solid rgba(232,50,63,.4);
+  animation:ripple 2.2s ease-out infinite;
+}
+.splash-shield::after{
+  content:'';position:absolute;inset:-20px;border-radius:50%;
+  border:2px solid rgba(88,166,255,.3);
+  animation:ripple 2.2s ease-out infinite 1.1s;
+}
+@keyframes ripple{
+  0%{transform:scale(.9);opacity:1}
+  100%{transform:scale(1.5);opacity:0}
+}
+.splash-shield svg{
+  width:68px;height:68px;
+  stroke:#fff;fill:none;stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,.4));
+}
+
+/* Name */
+.splash-name{
+  margin-top:2.5rem;
+  font-family:'Fraunces',Georgia,serif;
+  font-weight:800;font-size:3.4rem;
+  letter-spacing:-.03em;
+  color:#fff;
+  text-shadow:0 4px 40px rgba(190,22,34,.6);
+}
+.splash-name span{
+  color:#ff5263;
+  font-style:italic;
+}
+
+/* Tagline */
+.splash-tagline{
+  margin-top:.85rem;
+  font-size:.95rem;
+  color:rgba(230,237,243,.7);
+  letter-spacing:.05em;
+  font-weight:500;
+}
+
+/* Loading dots */
+.splash-dots{
+  margin-top:3rem;
+  display:flex;gap:10px;
+}
+.splash-dots span{
+  width:12px;height:12px;border-radius:50%;
+  background:#ff5263;
+  animation:dotBounce 1.4s ease-in-out infinite;
+}
+.splash-dots span:nth-child(2){background:#58a6ff;animation-delay:.15s}
+.splash-dots span:nth-child(3){background:#8548c9;animation-delay:.3s}
+@keyframes dotBounce{
+  0%,100%{transform:scale(.7);opacity:.4}
+  50%{transform:scale(1.2);opacity:1}
+}
+
+/* Progress line */
+.splash-progress{
+  margin-top:1.75rem;
+  width:200px;height:3px;
+  background:rgba(255,255,255,.1);
+  border-radius:99px;
+  overflow:hidden;
+  position:relative;
+}
+.splash-progress::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:0%;
+  background:linear-gradient(90deg,#be1622,#8548c9,#1f6feb);
+  border-radius:99px;
+  animation:progressBar 2.6s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes progressBar{0%{width:0%}100%{width:100%}}
+
+.splash-loading-text{
+  margin-top:.85rem;
+  font-size:.7rem;
+  color:rgba(230,237,243,.45);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+/* ============================================================
    LOGIN PAGE
    ============================================================ */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -19,7 +163,10 @@
   min-height:100vh;background:#07090d;color:#e6edf3;
   display:flex;align-items:center;justify-content:center;
   padding:1.5rem;position:relative;overflow:hidden;
+  opacity:0;
+  transition:opacity .6s ease;
 }
+.login-body.visible{opacity:1}
 .login-body::before{
   content:'';position:fixed;inset:0;
   background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=80');
@@ -136,11 +283,15 @@
   .hero-bottom{display:none}
   .form-panel{padding:1.75rem 1.5rem;border-left:none;border-top:1px solid rgba(255,255,255,.06)}
   .form-panel h2{font-size:1.3rem}
+  .splash-name{font-size:2.4rem}
+  .splash-shield{width:110px;height:110px}
+  .splash-shield svg{width:54px;height:54px}
 }
 @media (max-width:420px){
   .login-body{padding:.75rem}
   .hero-mid h1{font-size:1.55rem}
   .hero-top{font-size:1.15rem}
+  .splash-name{font-size:2rem}
 }
 
 /* ============================================================
@@ -416,9 +567,6 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 .dv .callrow a{background:linear-gradient(135deg,#8548C9,#a86ce0);color:#fff;text-decoration:none;font-weight:800;font-size:16px;padding:12px 22px;border-radius:10px;box-shadow:0 6px 20px rgba(133,72,201,.4);font-family:'Fraunces',serif}
 .dv .callrow span{color:#B6AEC4;font-size:13.5px}
 
-/* ============================================================
-   TEAM — clickable cards
-   ============================================================ */
 .team{margin-top:12px;display:grid;gap:12px}
 .tcard{
   display:flex;align-items:center;gap:16px;padding:16px;
@@ -449,7 +597,6 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 }
 .tcard:hover .tarrow{transform:translateX(4px);color:var(--signal)}
 
-/* Team detail view */
 .tdetail{display:none;animation:fadeSlide .3s ease}
 .tdetail.on{display:block}
 .backbtn{
@@ -509,7 +656,6 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 
 .tbio{font-size:15px;color:var(--muted);line-height:1.65}
 
-/* Contact form */
 .contactform{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--card-shadow);position:relative;overflow:hidden}
 .contactform::before{
   content:'';position:absolute;inset:0;
@@ -520,7 +666,6 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 .contactform h3{font-family:'Fraunces',serif;font-size:18px;font-weight:800;margin:0 0 4px}
 .contactform .sub{color:var(--muted);font-size:14px;margin:0 0 16px}
 
-/* Toast */
 .toast{
   position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
   background:var(--ink);color:var(--paper);border-radius:12px;
@@ -557,18 +702,35 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 
-#loginView{display:block}
+#loginView{display:none}
 #appView{display:none}
 #appView.on{display:block}
 #loginView.hidden{display:none}
+#loginView.visible{display:flex}
 </style>
 </head>
 <body>
 
 <!-- ============================================================
+     SPLASH SCREEN — app opening animation
+     ============================================================ -->
+<div id="splashScreen" class="splash-screen">
+  <div class="splash-content">
+    <div class="splash-shield">
+      <svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+    </div>
+    <h1 class="splash-name">Sur<span>a</span>ksha</h1>
+    <p class="splash-tagline">Help, numbers and rights — for women in India</p>
+    <div class="splash-dots"><span></span><span></span><span></span></div>
+    <div class="splash-progress"></div>
+    <p class="splash-loading-text">Loading your safety net…</p>
+  </div>
+</div>
+
+<!-- ============================================================
      LOGIN VIEW
      ============================================================ -->
-<div id="loginView" class="login-body" style="display:flex;align-items:center;justify-content:center;min-height:100vh;">
+<div id="loginView" class="login-body">
   <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
 
   <div class="login-wrapper">
@@ -1053,14 +1215,12 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 <div id="page-team" class="page">
 <section id="team-section">
 
-  <!-- Team list view -->
   <div id="teamListView">
     <h2>Team</h2>
     <p class="lede">The people who built Suraksha. Tap a member to see their profile and contact details.</p>
     <div class="team" id="teamGrid"></div>
   </div>
 
-  <!-- Team member detail view -->
   <div id="teamDetailView" class="tdetail">
     <button class="backbtn" id="teamBack">← Back to team</button>
     <div id="teamDetailContent"></div>
@@ -1186,6 +1346,34 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 var $ = function(id){ return document.getElementById(id); };
 
 /* ============================================================
+   SPLASH SCREEN — auto-dismiss after 2.6s
+   ============================================================ */
+(function initSplash(){
+  var splash = $('splashScreen');
+  var loginView = $('loginView');
+  if (!splash) return;
+
+  /* Prevent scroll during splash */
+  document.body.style.overflow = 'hidden';
+
+  setTimeout(function(){
+    /* Fade splash out */
+    splash.classList.add('fade-out');
+    document.body.style.overflow = '';
+
+    /* Show login page with smooth fade */
+    if (loginView){
+      loginView.classList.add('visible');
+    }
+
+    /* Remove splash from DOM */
+    setTimeout(function(){
+      if (splash && splash.parentNode) splash.parentNode.removeChild(splash);
+    }, 800);
+  }, 2600);
+})();
+
+/* ============================================================
    LOGIN
    ============================================================ */
 var loginView = $('loginView');
@@ -1204,7 +1392,7 @@ function loadUsers(){ try{ return JSON.parse(localStorage.getItem(USERS_KEY)) ||
 function saveUsers(u){ localStorage.setItem(USERS_KEY, JSON.stringify(u)); }
 
 function openApp(asGuest){
-  loginView.classList.add('hidden');
+  loginView.classList.remove('visible');
   loginView.style.display = 'none';
   appView.classList.add('on');
   var banner = $('guestBanner');
@@ -1221,7 +1409,7 @@ function openApp(asGuest){
 function backToLogin(){
   appView.classList.remove('on');
   loginView.style.display = 'flex';
-  loginView.classList.remove('hidden');
+  loginView.classList.add('visible');
 }
 
 $('guestBtn').addEventListener('click', function(){ openApp(true); });
@@ -1384,86 +1572,39 @@ function toast(msg){
 }
 
 /* ============================================================
-   TEAM DATA — test details
+   TEAM DATA
    ============================================================ */
 var TEAM = [
   {
-    id: 'praveen',
-    name: 'Praveen Kumar',
-    role: 'Founder & Lead Developer',
-    initials: 'P',
-    bio: 'Praveen started Suraksha after a friend needed help finding the right helpline number at 2am. He leads product and engineering, and spends his weekends talking to women\'s safety NGOs across Rajasthan.',
-    email: 'praveen@suraksha.example',
-    phone: '+91 98765 43210',
-    location: 'Jaipur, Rajasthan',
-    role2: 'Full-stack developer',
-    joined: 'January 2024',
-    skills: ['JavaScript', 'Supabase', 'UI/UX', 'Product'],
-    social: {
-      github: 'https://github.com/praveen',
-      linkedin: 'https://linkedin.com/in/praveen',
-      twitter: 'https://twitter.com/praveen'
-    }
+    id: 'praveen', name: 'Praveen Kumar', role: 'Founder & Lead Developer', initials: 'P',
+    bio: 'Praveen started Suraksha after a friend needed help finding the right helpline number at 2am. He leads product and engineering.',
+    email: 'praveen@suraksha.example', phone: '+91 98765 43210', location: 'Jaipur, Rajasthan',
+    joined: 'January 2024', skills: ['JavaScript', 'Supabase', 'UI/UX', 'Product'],
+    social: { github: 'https://github.com/praveen', linkedin: 'https://linkedin.com/in/praveen', twitter: 'https://twitter.com/praveen' }
   },
   {
-    id: 'hemang',
-    name: 'Hemang Choudhary',
-    role: 'Design Lead',
-    initials: 'H',
-    bio: 'Hemang shaped how Suraksha looks and feels. He believes safety tools should be calm and clear, not scary — which is why the interface stays quiet even during an emergency. Previously designed for two fintech startups.',
-    email: 'hemang@suraksha.example',
-    phone: '+91 98765 43211',
-    location: 'Udaipur, Rajasthan',
-    role2: 'UI/UX Designer',
-    joined: 'February 2024',
-    skills: ['Figma', 'Design systems', 'Accessibility', 'Brand'],
-    social: {
-      github: 'https://github.com/hemang',
-      linkedin: 'https://linkedin.com/in/hemang',
-      twitter: 'https://twitter.com/hemang'
-    }
+    id: 'hemang', name: 'Hemang Choudhary', role: 'Design Lead', initials: 'H',
+    bio: 'Hemang shaped how Suraksha looks and feels. He believes safety tools should be calm and clear, not scary.',
+    email: 'hemang@suraksha.example', phone: '+91 98765 43211', location: 'Udaipur, Rajasthan',
+    joined: 'February 2024', skills: ['Figma', 'Design systems', 'Accessibility', 'Brand'],
+    social: { github: 'https://github.com/hemang', linkedin: 'https://linkedin.com/in/hemang', twitter: 'https://twitter.com/hemang' }
   },
   {
-    id: 'nilesh',
-    name: 'Nilesh Kumawat',
-    role: 'Backend & Security',
-    initials: 'N',
-    bio: 'Nilesh makes sure nothing you type here leaves your device unless you want it to. He handles the backend, the encryption, and the endless reviews to keep things private. Loves a good puzzle and a bad pun.',
-    email: 'nilesh@suraksha.example',
-    phone: '+91 98765 43212',
-    location: 'Jodhpur, Rajasthan',
-    role2: 'Backend engineer',
-    joined: 'March 2024',
-    skills: ['Node.js', 'PostgreSQL', 'Auth', 'Privacy'],
-    social: {
-      github: 'https://github.com/nilesh',
-      linkedin: 'https://linkedin.com/in/nilesh',
-      twitter: 'https://twitter.com/nilesh'
-    }
+    id: 'nilesh', name: 'Nilesh Kumawat', role: 'Backend & Security', initials: 'N',
+    bio: 'Nilesh makes sure nothing you type here leaves your device unless you want it to.',
+    email: 'nilesh@suraksha.example', phone: '+91 98765 43212', location: 'Jodhpur, Rajasthan',
+    joined: 'March 2024', skills: ['Node.js', 'PostgreSQL', 'Auth', 'Privacy'],
+    social: { github: 'https://github.com/nilesh', linkedin: 'https://linkedin.com/in/nilesh', twitter: 'https://twitter.com/nilesh' }
   },
   {
-    id: 'kanak',
-    name: 'Kanak Kumari',
-    role: 'Research & Outreach',
-    initials: 'K',
-    bio: 'Kanak wrote most of the guides and the rights section. She works with lawyers, counsellors and women\'s collectives to make sure every line is accurate and every number is current. Speaks Hindi, English and Marwari.',
-    email: 'kanak@suraksha.example',
-    phone: '+91 98765 43213',
-    location: 'Kota, Rajasthan',
-    role2: 'Legal & content researcher',
-    joined: 'April 2024',
-    skills: ['Legal research', 'Content', 'Translation', 'Community'],
-    social: {
-      github: 'https://github.com/kanak',
-      linkedin: 'https://linkedin.com/in/kanak',
-      twitter: 'https://twitter.com/kanak'
-    }
+    id: 'kanak', name: 'Kanak Kumari', role: 'Research & Outreach', initials: 'K',
+    bio: 'Kanak wrote most of the guides and the rights section. She works with lawyers and women\'s collectives.',
+    email: 'kanak@suraksha.example', phone: '+91 98765 43213', location: 'Kota, Rajasthan',
+    joined: 'April 2024', skills: ['Legal research', 'Content', 'Translation', 'Community'],
+    social: { github: 'https://github.com/kanak', linkedin: 'https://linkedin.com/in/kanak', twitter: 'https://twitter.com/kanak' }
   }
 ];
 
-/* ============================================================
-   RENDER TEAM LIST
-   ============================================================ */
 var teamGrid = $('teamGrid');
 var teamListView = $('teamListView');
 var teamDetailView = $('teamDetailView');
@@ -1497,9 +1638,6 @@ function renderTeamList(){
   });
 }
 
-/* ============================================================
-   SHOW TEAM MEMBER DETAIL
-   ============================================================ */
 function showTeamDetail(m){
   teamListView.style.display = 'none';
   teamDetailView.classList.add('on');
@@ -1517,68 +1655,28 @@ function showTeamDetail(m){
         '<div class="trole-big">' + m.role + '</div>' +
       '</div>' +
     '</div>' +
-
     '<div class="tcard-info">' +
       '<h3>📋 Contact details</h3>' +
-      '<div class="tinfo-row">' +
-        '<span class="tico">✉️</span>' +
-        '<div><div class="tlabel">Email</div><div class="tvalue"><a href="mailto:' + m.email + '">' + m.email + '</a></div></div>' +
-      '</div>' +
-      '<div class="tinfo-row">' +
-        '<span class="tico">📞</span>' +
-        '<div><div class="tlabel">Phone</div><div class="tvalue"><a href="tel:' + m.phone.replace(/\s/g,'') + '">' + m.phone + '</a></div></div>' +
-      '</div>' +
-      '<div class="tinfo-row">' +
-        '<span class="tico">📍</span>' +
-        '<div><div class="tlabel">Based in</div><div class="tvalue">' + m.location + '</div></div>' +
-      '</div>' +
-      '<div class="tinfo-row">' +
-        '<span class="tico">🕒</span>' +
-        '<div><div class="tlabel">Joined Suraksha</div><div class="tvalue">' + m.joined + '</div></div>' +
-      '</div>' +
+      '<div class="tinfo-row"><span class="tico">✉️</span><div><div class="tlabel">Email</div><div class="tvalue"><a href="mailto:' + m.email + '">' + m.email + '</a></div></div></div>' +
+      '<div class="tinfo-row"><span class="tico">📞</span><div><div class="tlabel">Phone</div><div class="tvalue"><a href="tel:' + m.phone.replace(/\s/g,'') + '">' + m.phone + '</a></div></div></div>' +
+      '<div class="tinfo-row"><span class="tico">📍</span><div><div class="tlabel">Based in</div><div class="tvalue">' + m.location + '</div></div></div>' +
+      '<div class="tinfo-row"><span class="tico">🕒</span><div><div class="tlabel">Joined Suraksha</div><div class="tvalue">' + m.joined + '</div></div></div>' +
     '</div>' +
-
-    '<div class="tcard-info">' +
-      '<h3>👤 About</h3>' +
-      '<p class="tbio">' + m.bio + '</p>' +
-    '</div>' +
-
-    '<div class="tcard-info">' +
-      '<h3>🛠️ Skills & focus</h3>' +
-      '<div>' + skillsHtml + '</div>' +
-    '</div>' +
-
+    '<div class="tcard-info"><h3>👤 About</h3><p class="tbio">' + m.bio + '</p></div>' +
+    '<div class="tcard-info"><h3>🛠️ Skills & focus</h3><div>' + skillsHtml + '</div></div>' +
     '<div class="tcard-info">' +
       '<h3>🌐 Find them online</h3>' +
-      '<div class="tinfo-row">' +
-        '<span class="tico">💻</span>' +
-        '<div><div class="tlabel">GitHub</div><div class="tvalue"><a href="' + m.social.github + '" target="_blank" rel="noopener">' + m.social.github.replace('https://','') + '</a></div></div>' +
-      '</div>' +
-      '<div class="tinfo-row">' +
-        '<span class="tico">💼</span>' +
-        '<div><div class="tlabel">LinkedIn</div><div class="tvalue"><a href="' + m.social.linkedin + '" target="_blank" rel="noopener">' + m.social.linkedin.replace('https://','') + '</a></div></div>' +
-      '</div>' +
-      '<div class="tinfo-row">' +
-        '<span class="tico">🐦</span>' +
-        '<div><div class="tlabel">Twitter / X</div><div class="tvalue"><a href="' + m.social.twitter + '" target="_blank" rel="noopener">' + m.social.twitter.replace('https://','') + '</a></div></div>' +
-      '</div>' +
+      '<div class="tinfo-row"><span class="tico">💻</span><div><div class="tlabel">GitHub</div><div class="tvalue"><a href="' + m.social.github + '" target="_blank" rel="noopener">' + m.social.github.replace('https://','') + '</a></div></div></div>' +
+      '<div class="tinfo-row"><span class="tico">💼</span><div><div class="tlabel">LinkedIn</div><div class="tvalue"><a href="' + m.social.linkedin + '" target="_blank" rel="noopener">' + m.social.linkedin.replace('https://','') + '</a></div></div></div>' +
+      '<div class="tinfo-row"><span class="tico">🐦</span><div><div class="tlabel">Twitter / X</div><div class="tvalue"><a href="' + m.social.twitter + '" target="_blank" rel="noopener">' + m.social.twitter.replace('https://','') + '</a></div></div></div>' +
     '</div>' +
-
     '<div class="contactform" style="margin-top:12px">' +
       '<h3>📩 Send ' + m.name.split(' ')[0] + ' a message</h3>' +
       '<p class="sub">Direct message — goes straight to their inbox.</p>' +
       '<form id="tmForm-' + m.id + '" novalidate>' +
-        '<div class="field">' +
-          '<label for="tmFrom-' + m.id + '">Your email</label>' +
-          '<input type="email" id="tmFrom-' + m.id + '" placeholder="you@example.com" autocomplete="email">' +
-        '</div>' +
-        '<div class="field">' +
-          '<label for="tmMsg-' + m.id + '">Message</label>' +
-          '<textarea id="tmMsg-' + m.id + '" placeholder="Hi ' + m.name.split(' ')[0] + ', …"></textarea>' +
-        '</div>' +
-        '<div class="btnrow" style="margin-top:14px">' +
-          '<button type="submit" class="btn btn-go">Send message</button>' +
-        '</div>' +
+        '<div class="field"><label for="tmFrom-' + m.id + '">Your email</label><input type="email" id="tmFrom-' + m.id + '" placeholder="you@example.com" autocomplete="email"></div>' +
+        '<div class="field"><label for="tmMsg-' + m.id + '">Message</label><textarea id="tmMsg-' + m.id + '" placeholder="Hi ' + m.name.split(' ')[0] + ', …"></textarea></div>' +
+        '<div class="btnrow" style="margin-top:14px"><button type="submit" class="btn btn-go">Send message</button></div>' +
         '<p class="status" id="tmStatus-' + m.id + '"></p>' +
       '</form>' +
     '</div>';
@@ -1611,7 +1709,7 @@ $('teamBack').addEventListener('click', function(){
 renderTeamList();
 
 /* ============================================================
-   CONTACT FORM (global)
+   CONTACT FORM
    ============================================================ */
 var contactForm = $('contactForm');
 if (contactForm) {
@@ -1622,22 +1720,19 @@ if (contactForm) {
     var subject = $('cfSubject').value;
     var msg = $('cfMessage').value.trim();
     var st = $('cfStatus');
-
     if (!name){ st.textContent = 'Please enter your name.'; st.className = 'status bad'; $('cfName').focus(); return; }
     if (!isValidEmail(email)){ st.textContent = 'Please enter a valid email.'; st.className = 'status bad'; $('cfEmail').focus(); return; }
     if (!subject){ st.textContent = 'Please choose a subject.'; st.className = 'status bad'; $('cfSubject').focus(); return; }
-    if (msg.length < 5){ st.textContent = 'Please write a message (at least 5 characters).'; st.className = 'status bad'; $('cfMessage').focus(); return; }
-
+    if (msg.length < 5){ st.textContent = 'Please write a message.'; st.className = 'status bad'; $('cfMessage').focus(); return; }
     var btn = $('cfSubmit');
     btn.disabled = true;
     var lbl = btn.textContent;
     btn.textContent = 'Sending…';
     st.textContent = ''; st.className = 'status';
-
     setTimeout(function(){
       btn.disabled = false;
       btn.textContent = lbl;
-      st.textContent = '✓ Thanks ' + name + ' — we got your message and will reply to ' + email + ' soon.';
+      st.textContent = '✓ Thanks ' + name + ' — we got your message.';
       st.className = 'status ok';
       contactForm.reset();
       toast('Message sent — thank you!');
@@ -1649,7 +1744,7 @@ if (contactForm) {
 }
 
 /* ============================================================
-   APP LOGIC (contacts, location, timer, etc.)
+   APP LOGIC
    ============================================================ */
 var KEY = 'sk_contacts';
 var contacts = [];
