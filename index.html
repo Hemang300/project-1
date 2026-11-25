@@ -492,7 +492,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 .coordbar a:hover{text-decoration:underline}
 
 .speed{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:14px}
-.sdial{display:flex;flex-direction:column;gap:2px;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:14px 16px;border-radius:12px;min-height:68px;justify-content:center;transition:transform .12s, box-shadow .15s, border-color .15s;position:relative;overflow:hidden}
+.sdial{display:flex;flex-direction:column;gap:2px;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:14px 16px;border-radius:12px;min-height:68px;justify-content:center;transition:transform .12s, box-shadow .15s, border-color .15s;position:relative;overflow:hidden;cursor:pointer}
 .sdial::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--signal),var(--calm));opacity:0;transition:opacity .2s}
 .sdial:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1);border-color:var(--muted)}
 .sdial:hover::before{opacity:1}
@@ -547,25 +547,6 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 .pagenav button[aria-current="true"]{background:linear-gradient(135deg,var(--ink),#3a4a58);color:var(--paper);border-color:transparent;box-shadow:0 4px 14px rgba(0,0,0,.2)}
 .page{display:none}
 .page.on{display:block}
-
-.dv{background:linear-gradient(160deg,#15111C,#1f1830);color:#F1EEF7;border-radius:16px;padding:30px 26px;margin-top:0;position:relative;overflow:hidden}
-.dv::before{content:'';position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=80');background-size:cover;background-position:center;opacity:.08}
-.dv > *{position:relative}
-.dv .eyebrow{color:#C9A9F2;font-weight:700;font-size:14.5px;margin:0 0 4px;letter-spacing:.05em;text-transform:uppercase}
-.dv h2{color:#fff;margin-bottom:6px}
-.dv .lede{color:#C7BFD6;max-width:60ch}
-.dv .signs{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px;grid-template-columns:1fr}
-@media (min-width:560px){.dv .signs{grid-template-columns:1fr 1fr}}
-.dv .signs li{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;color:#E7E1F0;line-height:1.5;background:rgba(255,255,255,.03);padding:10px 12px;border-radius:8px;border-left:2px solid rgba(168,124,224,.4)}
-.dv .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
-.dv .trio div{text-align:left}
-.dv .trio .tic{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#3B2A57,#5a4180);color:#D9C4F5;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px}
-.dv .trio h4{margin:0 0 4px;font-size:15px;color:#fff}
-.dv .trio p{margin:0;font-size:13px;color:#B6AEC4;max-width:none;line-height:1.5}
-.dv .banner{margin-top:24px;padding:16px 18px;border:1px solid #4A3768;border-radius:10px;color:#F1EEF7;font-size:15px;background:rgba(133,72,201,.1)}
-.dv .callrow{margin-top:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-top:20px;border-top:1px solid #35284A}
-.dv .callrow a{background:linear-gradient(135deg,#8548C9,#a86ce0);color:#fff;text-decoration:none;font-weight:800;font-size:16px;padding:12px 22px;border-radius:10px;box-shadow:0 6px 20px rgba(133,72,201,.4);font-family:'Fraunces',serif}
-.dv .callrow span{color:#B6AEC4;font-size:13.5px}
 
 .team{margin-top:12px;display:grid;gap:12px}
 .tcard{
@@ -711,9 +692,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 </head>
 <body>
 
-<!-- ============================================================
-     SPLASH SCREEN — app opening animation
-     ============================================================ -->
+<!-- SPLASH SCREEN -->
 <div id="splashScreen" class="splash-screen">
   <div class="splash-content">
     <div class="splash-shield">
@@ -727,9 +706,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
   </div>
 </div>
 
-<!-- ============================================================
-     LOGIN VIEW
-     ============================================================ -->
+<!-- LOGIN VIEW -->
 <div id="loginView" class="login-body">
   <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
 
@@ -812,9 +789,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
   </div>
 </div>
 
-<!-- ============================================================
-     APP VIEW
-     ============================================================ -->
+<!-- APP VIEW -->
 <div id="appView" class="app-body">
 
 <div class="guest-banner" id="guestBanner" style="display:none;">
@@ -1141,7 +1116,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 
 </div>
 
-<!-- ================= PROFILE ================= -->
+<!-- PROFILE -->
 <div id="page-profile" class="page">
 <section id="contacts">
   <h2>Your profile</h2>
@@ -1211,7 +1186,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 </section>
 </div>
 
-<!-- ================= TEAM ================= -->
+<!-- TEAM -->
 <div id="page-team" class="page">
 <section id="team-section">
 
@@ -1229,7 +1204,7 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 </section>
 </div>
 
-<!-- ================= CONTACT ================= -->
+<!-- CONTACT -->
 <div id="page-contact" class="page">
 <section id="contact-section">
   <h2>Contact us</h2>
@@ -1346,27 +1321,17 @@ details.guide li{margin-bottom:9px;max-width:64ch;line-height:1.5}
 var $ = function(id){ return document.getElementById(id); };
 
 /* ============================================================
-   SPLASH SCREEN — auto-dismiss after 2.6s
+   SPLASH SCREEN
    ============================================================ */
 (function initSplash(){
   var splash = $('splashScreen');
   var loginView = $('loginView');
   if (!splash) return;
-
-  /* Prevent scroll during splash */
   document.body.style.overflow = 'hidden';
-
   setTimeout(function(){
-    /* Fade splash out */
     splash.classList.add('fade-out');
     document.body.style.overflow = '';
-
-    /* Show login page with smooth fade */
-    if (loginView){
-      loginView.classList.add('visible');
-    }
-
-    /* Remove splash from DOM */
+    if (loginView) loginView.classList.add('visible');
     setTimeout(function(){
       if (splash && splash.parentNode) splash.parentNode.removeChild(splash);
     }, 800);
@@ -1404,6 +1369,7 @@ function openApp(asGuest){
     try{ localStorage.removeItem(GUEST_KEY); }catch(e){}
   }
   paintThemeBtn();
+  renderSpeedDial();
   window.scrollTo(0,0);
 }
 function backToLogin(){
@@ -1565,6 +1531,7 @@ if (themeBtn) themeBtn.addEventListener('click', function(){
 var toastEl = $('toast');
 var toastTimer;
 function toast(msg){
+  if(!toastEl) return;
   toastEl.textContent = msg;
   toastEl.classList.add('on');
   clearTimeout(toastTimer);
@@ -1572,36 +1539,40 @@ function toast(msg){
 }
 
 /* ============================================================
-   TEAM DATA
+   PAGE NAVIGATION
+   ============================================================ */
+document.querySelectorAll('.pagenav button').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var page = btn.getAttribute('data-page');
+    document.querySelectorAll('.pagenav button').forEach(function(b){ b.setAttribute('aria-current','false'); });
+    btn.setAttribute('aria-current','true');
+    document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('on'); });
+    var target = $('page-' + page);
+    if (target) target.classList.add('on');
+    window.scrollTo(0,0);
+  });
+});
+
+/* ============================================================
+   TEAM DATA — only Vastika Choudhary
    ============================================================ */
 var TEAM = [
   {
-    id: 'praveen', name: 'Praveen Kumar', role: 'Founder & Lead Developer', initials: 'P',
-    bio: 'Praveen started Suraksha after a friend needed help finding the right helpline number at 2am. He leads product and engineering.',
-    email: 'praveen@suraksha.example', phone: '+91 98765 43210', location: 'Jaipur, Rajasthan',
-    joined: 'January 2024', skills: ['JavaScript', 'Supabase', 'UI/UX', 'Product'],
-    social: { github: 'https://github.com/praveen', linkedin: 'https://linkedin.com/in/praveen', twitter: 'https://twitter.com/praveen' }
-  },
-  {
-    id: 'hemang', name: 'Hemang Choudhary', role: 'Design Lead', initials: 'H',
-    bio: 'Hemang shaped how Suraksha looks and feels. He believes safety tools should be calm and clear, not scary.',
-    email: 'hemang@suraksha.example', phone: '+91 98765 43211', location: 'Udaipur, Rajasthan',
-    joined: 'February 2024', skills: ['Figma', 'Design systems', 'Accessibility', 'Brand'],
-    social: { github: 'https://github.com/hemang', linkedin: 'https://linkedin.com/in/hemang', twitter: 'https://twitter.com/hemang' }
-  },
-  {
-    id: 'nilesh', name: 'Nilesh Kumawat', role: 'Backend & Security', initials: 'N',
-    bio: 'Nilesh makes sure nothing you type here leaves your device unless you want it to.',
-    email: 'nilesh@suraksha.example', phone: '+91 98765 43212', location: 'Jodhpur, Rajasthan',
-    joined: 'March 2024', skills: ['Node.js', 'PostgreSQL', 'Auth', 'Privacy'],
-    social: { github: 'https://github.com/nilesh', linkedin: 'https://linkedin.com/in/nilesh', twitter: 'https://twitter.com/nilesh' }
-  },
-  {
-    id: 'kanak', name: 'Kanak Kumari', role: 'Research & Outreach', initials: 'K',
-    bio: 'Kanak wrote most of the guides and the rights section. She works with lawyers and women\'s collectives.',
-    email: 'kanak@suraksha.example', phone: '+91 98765 43213', location: 'Kota, Rajasthan',
-    joined: 'April 2024', skills: ['Legal research', 'Content', 'Translation', 'Community'],
-    social: { github: 'https://github.com/kanak', linkedin: 'https://linkedin.com/in/kanak', twitter: 'https://twitter.com/kanak' }
+    id: 'vastika',
+    name: 'Vastika Choudhary',
+    role: 'Founder & Lead Developer',
+    initials: 'V',
+    bio: 'Vastika started Suraksha with a simple belief: safety information should never be hard to find. She leads product, engineering, and everything in between.',
+    email: 'vastika@suraksha.example',
+    phone: '+91 98765 43210',
+    location: 'Jaipur, Rajasthan',
+    joined: 'January 2024',
+    skills: ['JavaScript', 'Supabase', 'UI/UX', 'Product'],
+    social: {
+      github: 'https://github.com/vastika',
+      linkedin: 'https://linkedin.com/in/vastika',
+      twitter: 'https://twitter.com/vastika'
+    }
   }
 ];
 
@@ -1611,6 +1582,7 @@ var teamDetailView = $('teamDetailView');
 var teamDetailContent = $('teamDetailContent');
 
 function renderTeamList(){
+  if(!teamGrid) return;
   teamGrid.innerHTML = '';
   TEAM.forEach(function(m){
     var btn = document.createElement('button');
@@ -1744,7 +1716,7 @@ if (contactForm) {
 }
 
 /* ============================================================
-   APP LOGIC
+   APP LOGIC — CONTACTS
    ============================================================ */
 var KEY = 'sk_contacts';
 var contacts = [];
@@ -1759,10 +1731,12 @@ function waNumber(s){
   if(d.length === 11 && d.charAt(0) === '0') d = '91' + d.slice(1);
   return d;
 }
+function setStatus(el, text, cls){ if(!el) return; el.textContent = text; el.className = 'status' + (cls ? ' ' + cls : ''); }
+
 function renderContacts(){
   var list = $('cList'); if(!list) return;
   list.innerHTML = '';
-  $('cEmpty').style.display = contacts.length ? 'none' : 'block';
+  if ($('cEmpty')) $('cEmpty').style.display = contacts.length ? 'none' : 'block';
   contacts.forEach(function(c, i){
     var li = document.createElement('li');
     var g = document.createElement('span'); g.className = 'grow';
@@ -1774,7 +1748,7 @@ function renderContacts(){
     var del = document.createElement('button');
     del.className = 'icobtn'; del.type = 'button'; del.textContent = 'Remove';
     del.addEventListener('click', function(){
-      contacts.splice(i,1); saveContacts(); renderContacts(); refreshShare();
+      contacts.splice(i,1); saveContacts(); renderContacts(); refreshShare(); renderSpeedDial();
     });
     li.appendChild(g); li.appendChild(call); li.appendChild(del);
     list.appendChild(li);
@@ -1782,16 +1756,18 @@ function renderContacts(){
 }
 if ($('addC')) $('addC').addEventListener('click', function(){
   var n = $('cName').value.trim(), p = $('cNum').value.trim();
-  if(!n || !digits(p)){ setStatus($('shareStatus'),'Add both a name and a phone number.','bad'); return; }
+  if(!n || !digits(p)){ setStatus($('profStatus'),'Add both a name and a phone number.','bad'); return; }
   contacts.push({ name:n, num:p });
-  saveContacts(); renderContacts(); refreshShare();
+  saveContacts(); renderContacts(); refreshShare(); renderSpeedDial();
   $('cName').value = ''; $('cNum').value = '';
-  setStatus($('shareStatus'), n + ' saved.', 'ok');
+  setStatus($('profStatus'), n + ' saved.', 'ok');
+  toast(n + ' added');
 });
-renderContacts();
 
+/* ============================================================
+   LOCATION + SHARE
+   ============================================================ */
 var coords = null;
-function setStatus(el, text, cls){ if(!el) return; el.textContent = text; el.className = 'status' + (cls ? ' ' + cls : ''); }
 function stamp(){
   var d = new Date();
   return d.toLocaleString(undefined,{hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'});
@@ -1810,481 +1786,555 @@ function refreshShare(){
   var first = contacts.length ? waNumber(contacts[0].num) : '';
   if ($('waBtn')) $('waBtn').href = first ? ('https://wa.me/' + first + '?text=' + text) : ('https://wa.me/?text=' + text);
   var smsTo = contacts.map(function(c){ return digits(c.num); }).join(',');
-  var sep = (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) ? '&' : '?';
-  if ($('smsBtn')) $('smsBtn').href = 'sms:' + smsTo + sep + 'body=' + text;
+  if ($('smsBtn')) $('smsBtn').href = 'sms:' + smsTo + '?body=' + text;
 }
-if ($('msgBox')) $('msgBox').addEventListener('input', refreshShare);
-refreshShare();
+
+function geoFind(success, fail){
+  if(!navigator.geolocation){ fail('This browser cannot find your location.'); return; }
+  navigator.geolocation.getCurrentPosition(function(pos){
+    var c = pos.coords;
+    success({ lat: c.latitude.toFixed(6), lon: c.longitude.toFixed(6), acc: Math.round(c.accuracy) });
+  }, function(err){
+    var msg = 'Location failed.';
+    if(err.code === 1) msg = 'Permission denied. Allow location and try again.';
+    else if(err.code === 2) msg = 'Position unavailable. Try again.';
+    else if(err.code === 3) msg = 'Timed out. Try again.';
+    fail(msg);
+  }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 });
+}
 
 if ($('locBtn')) $('locBtn').addEventListener('click', function(){
-  if(!navigator.geolocation){ setStatus($('locStatus'),'No location support.','bad'); return; }
-  setStatus($('locStatus'),'Finding you…');
-  navigator.geolocation.getCurrentPosition(function(pos){
-    coords = { lat: pos.coords.latitude.toFixed(6), lon: pos.coords.longitude.toFixed(6), acc: Math.round(pos.coords.accuracy) };
-    setStatus($('locStatus'),'Found you, within about ' + coords.acc + ' m.','ok');
+  setStatus($('locStatus'), 'Finding your location…');
+  geoFind(function(c){
+    coords = c;
+    setStatus($('locStatus'), 'Got it. Accurate to about ' + c.acc + ' m.', 'ok');
     refreshShare();
-  }, function(err){
-    var m = 'Couldn\'t get your location.';
-    if(err.code === 1) m = 'Location is blocked.';
-    if(err.code === 3) m = 'Location timed out.';
-    setStatus($('locStatus'), m, 'bad');
-  }, { enableHighAccuracy:true, timeout:12000, maximumAge:0 });
+  }, function(m){ setStatus($('locStatus'), m, 'bad'); });
 });
 
 if ($('copyBtn')) $('copyBtn').addEventListener('click', function(){
-  var txt = baseMessage();
-  function done(){ setStatus($('shareStatus'),'Copied.','ok'); }
-  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, fallback); } else fallback();
-  function fallback(){
-    var ta = document.createElement('textarea');
-    ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
-    document.body.appendChild(ta); ta.select();
-    try{ document.execCommand('copy'); done(); }catch(e){}
-    document.body.removeChild(ta);
-  }
+  var text = baseMessage();
+  function done(){ setStatus($('shareStatus'), 'Copied. Paste it anywhere.', 'ok'); toast('Message copied'); }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text); done(); });
+  } else { fallbackCopy(text); done(); }
 });
-
-if ($('quickAlert')) $('quickAlert').addEventListener('click', function(){
-  showPage('home');
-  var loc = document.getElementById('location');
-  if(loc) loc.scrollIntoView({behavior:'smooth', block:'start'});
-  if(!coords) $('locBtn').click();
-  setStatus($('shareStatus'), contacts.length ? 'Ready to send to ' + contacts[0].name + '.' : 'Add a trusted contact first.', contacts.length ? 'ok' : 'bad');
-});
-
-/* audio */
-var ac = null, sirenNodes = null, ringTimer = null;
-function audio(){
-  if(!ac){ var C = window.AudioContext || window.webkitAudioContext; if(!C) return null; ac = new C(); }
-  if(ac.state === 'suspended') ac.resume();
-  return ac;
+function fallbackCopy(text){
+  var ta = document.createElement('textarea');
+  ta.value = text; document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(e){}
+  document.body.removeChild(ta);
 }
-function startSiren(){
-  var c = audio(); if(!c || sirenNodes) return;
-  var osc = c.createOscillator(), gain = c.createGain();
-  osc.type = 'sawtooth';
-  osc.frequency.setValueAtTime(600, c.currentTime);
-  gain.gain.setValueAtTime(0.0001, c.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.35, c.currentTime + 0.05);
-  osc.connect(gain); gain.connect(c.destination);
-  osc.start();
-  var t = c.currentTime, up = true;
-  for(var i=0; i<600; i++){ osc.frequency.linearRampToValueAtTime(up ? 1100 : 550, t + 0.6); t += 0.6; up = !up; }
-  sirenNodes = { osc:osc, gain:gain };
-  $('sirenBtn').textContent = '🔇 Stop siren';
-}
-function stopSiren(){
-  if(!sirenNodes) return;
-  try{
-    sirenNodes.gain.gain.cancelScheduledValues(ac.currentTime);
-    sirenNodes.gain.gain.setValueAtTime(sirenNodes.gain.gain.value, ac.currentTime);
-    sirenNodes.gain.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.08);
-    sirenNodes.osc.stop(ac.currentTime + 0.12);
-  }catch(e){}
-  sirenNodes = null;
-  $('sirenBtn').textContent = '🔊 Siren';
-}
-if ($('sirenBtn')) $('sirenBtn').addEventListener('click', function(){ sirenNodes ? stopSiren() : startSiren(); });
+if ($('waBtn')) $('waBtn').addEventListener('click', refreshShare);
+if ($('smsBtn')) $('smsBtn').addEventListener('click', refreshShare);
+if ($('msgBox')) $('msgBox').addEventListener('input', refreshShare);
 
-function ringOnce(){
-  var c = audio(); if(!c) return;
-  [0, 0.4].forEach(function(off){
-    var o = c.createOscillator(), g = c.createGain();
-    o.type = 'sine'; o.frequency.value = 440;
-    var o2 = c.createOscillator(); o2.type = 'sine'; o2.frequency.value = 480;
-    g.gain.setValueAtTime(0.0001, c.currentTime + off);
-    g.gain.exponentialRampToValueAtTime(0.25, c.currentTime + off + 0.02);
-    g.gain.setValueAtTime(0.25, c.currentTime + off + 0.3);
-    g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + off + 0.34);
-    o.connect(g); o2.connect(g); g.connect(c.destination);
-    o.start(c.currentTime + off); o2.start(c.currentTime + off);
-    o.stop(c.currentTime + off + 0.36); o2.stop(c.currentTime + off + 0.36);
-  });
-}
-function startRinging(){ ringOnce(); ringTimer = setInterval(ringOnce, 2600); }
-function stopRinging(){ if(ringTimer){ clearInterval(ringTimer); ringTimer = null; } }
+/* ============================================================
+   LIVE TRACKING
+   ============================================================ */
+var liveWatch = null, liveStart = null, liveTimer = null;
+var livePath = [], liveDist = 0, liveLastPos = null;
+var liveCtx = null, liveCanvas = null;
 
-var fakeTimer = null, callClock = null;
-if ($('fakeBtn')) $('fakeBtn').addEventListener('click', function(){
-  audio();
-  if(fakeTimer){ clearTimeout(fakeTimer); fakeTimer = null; }
-  var name = $('callerName').value.trim() || 'Papa';
-  var secs = parseInt($('callDelay').value, 10);
-  setStatus($('fakeStatus'), name + ' will call in ' + secs + ' seconds.', 'ok');
-  fakeTimer = setTimeout(function(){
-    $('callWho').textContent = name;
-    $('callInitial').textContent = name.charAt(0).toUpperCase();
-    $('callInitial').classList.add('ringing');
-    $('callSub').textContent = 'Incoming call — mobile';
-    $('callOverlay').classList.add('on');
-    $('acceptBtn').focus();
-    startRinging();
-    if(navigator.vibrate) navigator.vibrate([500,300,500,300,500]);
-  }, secs * 1000);
-});
-function endCall(){
-  stopRinging();
-  if(callClock){ clearInterval(callClock); callClock = null; }
-  $('callOverlay').classList.remove('on');
-  setStatus($('fakeStatus'), '');
-  if(navigator.vibrate) navigator.vibrate(0);
-}
-if ($('declineBtn')) $('declineBtn').addEventListener('click', endCall);
-if ($('acceptBtn')) $('acceptBtn').addEventListener('click', function(){
-  stopRinging();
-  if(navigator.vibrate) navigator.vibrate(0);
-  $('callInitial').classList.remove('ringing');
-  var s = 0;
-  $('callSub').textContent = '00:00';
-  callClock = setInterval(function(){
-    s++;
-    var m = String(Math.floor(s/60)).padStart(2,'0'), r = String(s%60).padStart(2,'0');
-    $('callSub').textContent = m + ':' + r;
-  }, 1000);
-});
-
-var chosen = 15, tick = null, endAt = 0;
-if ($('mins')) Array.prototype.forEach.call($('mins').querySelectorAll('.chip'), function(b){
-  b.addEventListener('click', function(){
-    Array.prototype.forEach.call($('mins').querySelectorAll('.chip'), function(x){ x.setAttribute('aria-pressed','false'); });
-    b.setAttribute('aria-pressed','true');
-    chosen = parseInt(b.dataset.m, 10);
-    if(!tick) $('clock').textContent = String(chosen).padStart(2,'0') + ':00';
-  });
-});
-if ($('clock')) $('clock').textContent = '15:00';
-
-function paintClock(ms){
-  var s = Math.max(0, Math.round(ms/1000));
-  var m = String(Math.floor(s/60)).padStart(2,'0'), r = String(s%60).padStart(2,'0');
-  $('clock').textContent = m + ':' + r;
-  $('clock').classList.toggle('warn', s <= 60);
-}
-if ($('startT')) $('startT').addEventListener('click', function(){
-  audio();
-  if(tick) clearInterval(tick);
-  endAt = Date.now() + chosen*60000;
-  paintClock(chosen*60000);
-  setStatus($('timerStatus'), 'Running. Tap "I\'m safe" when you arrive.', 'ok');
-  tick = setInterval(function(){
-    var left = endAt - Date.now();
-    paintClock(left);
-    if(left <= 0){
-      clearInterval(tick); tick = null;
-      setStatus($('timerStatus'), 'Timer ran out.', 'bad');
-      $('alarmOverlay').classList.add('on');
-      $('stopAlarm').focus();
-      startSiren();
-      if(navigator.vibrate) navigator.vibrate([800,200,800,200,800]);
-    }
-  }, 250);
-});
-if ($('safeT')) $('safeT').addEventListener('click', function(){
-  if(tick){ clearInterval(tick); tick = null; }
-  stopSiren();
-  $('alarmOverlay').classList.remove('on');
-  paintClock(chosen*60000);
-  $('clock').classList.remove('warn');
-  setStatus($('timerStatus'), 'Timer stopped.', 'ok');
-  if(navigator.vibrate) navigator.vibrate(0);
-});
-if ($('stopAlarm')) $('stopAlarm').addEventListener('click', function(){ $('safeT').click(); });
-if ($('alarmSend')) $('alarmSend').addEventListener('click', function(){
-  stopSiren();
-  $('alarmOverlay').classList.remove('on');
-  if(navigator.vibrate) navigator.vibrate(0);
-  $('quickAlert').click();
-});
-
-var watchId = null, path = [], dist = 0, liveStart = 0, liveClock = null;
 function haversine(a, b){
-  var R = 6371000, toRad = Math.PI/180;
-  var dLat = (b.lat - a.lat) * toRad, dLon = (b.lon - a.lon) * toRad;
-  var la1 = a.lat * toRad, la2 = b.lat * toRad;
-  var h = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(la1)*Math.cos(la2)*Math.sin(dLon/2)*Math.sin(dLon/2);
-  return 2 * R * Math.asin(Math.min(1, Math.sqrt(h)));
+  var R = 6371000;
+  var lat1 = a.lat * Math.PI/180, lat2 = b.lat * Math.PI/180;
+  var dLat = (b.lat - a.lat) * Math.PI/180;
+  var dLon = (b.lon - a.lon) * Math.PI/180;
+  var x = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)*Math.sin(dLon/2);
+  return 2 * R * Math.atan2(Math.sqrt(x), Math.sqrt(1-x));
 }
-function fmtDist(m){ return m < 1000 ? Math.round(m) + ' m' : (m/1000).toFixed(2) + ' km'; }
-function cssVar(n){ return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function fmtDist(m){
+  if(m < 1000) return Math.round(m) + ' m';
+  return (m/1000).toFixed(2) + ' km';
+}
+function fmtSpeed(mps){
+  if(mps == null || isNaN(mps)) return '—';
+  return (mps * 3.6).toFixed(1) + ' km/h';
+}
 function drawTrail(){
-  var cv = $('trail'); if(!cv || !cv.getContext) return;
-  var g = cv.getContext('2d'), W = cv.width, H = cv.height, pad = 34;
-  g.clearRect(0,0,W,H);
-  g.fillStyle = cssVar('--paper') || '#eee'; g.fillRect(0,0,W,H);
-  g.strokeStyle = cssVar('--line') || '#ccc'; g.lineWidth = 1;
-  for(var x = 0; x <= W; x += 50){ g.beginPath(); g.moveTo(x+.5,0); g.lineTo(x+.5,H); g.stroke(); }
-  for(var y = 0; y <= H; y += 50){ g.beginPath(); g.moveTo(0,y+.5); g.lineTo(W,y+.5); g.stroke(); }
-  if(!path.length){
-    g.fillStyle = cssVar('--muted') || '#666'; g.font = '16px Archivo, sans-serif'; g.textAlign = 'center';
-    g.fillText('Waiting for a GPS fix…', W/2, H/2);
+  if(!liveCtx) return;
+  var w = liveCanvas.width, h = liveCanvas.height;
+  liveCtx.clearRect(0, 0, w, h);
+  liveCtx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--paper') || '#fff';
+  liveCtx.fillRect(0, 0, w, h);
+  if (livePath.length < 1) return;
+
+  var minLat = Infinity, maxLat = -Infinity, minLon = Infinity, maxLon = -Infinity;
+  livePath.forEach(function(p){
+    if(p.lat < minLat) minLat = p.lat;
+    if(p.lat > maxLat) maxLat = p.lat;
+    if(p.lon < minLon) minLon = p.lon;
+    if(p.lon > maxLon) maxLon = p.lon;
+  });
+  var pad = 30;
+  var latRange = maxLat - minLat || 0.0001;
+  var lonRange = maxLon - minLon || 0.0001;
+  var scaleX = (w - pad*2) / lonRange;
+  var scaleY = (h - pad*2) / latRange;
+  var scale = Math.min(scaleX, scaleY);
+  var offX = (w - lonRange*scale)/2;
+  var offY = (h - latRange*scale)/2;
+  function x(lon){ return offX + (lon - minLon) * scale; }
+  function y(lat){ return h - offY - (lat - minLat) * scale; }
+
+  var signal = getComputedStyle(document.documentElement).getPropertyValue('--signal') || '#BE1622';
+  var calm = getComputedStyle(document.documentElement).getPropertyValue('--calm') || '#1B6353';
+
+  liveCtx.lineWidth = 3;
+  liveCtx.strokeStyle = signal;
+  liveCtx.beginPath();
+  livePath.forEach(function(p, i){
+    if(i === 0) liveCtx.moveTo(x(p.lon), y(p.lat));
+    else liveCtx.lineTo(x(p.lon), y(p.lat));
+  });
+  liveCtx.stroke();
+
+  var last = livePath[livePath.length-1];
+  liveCtx.fillStyle = calm;
+  liveCtx.beginPath();
+  liveCtx.arc(x(last.lon), y(last.lat), 7, 0, Math.PI*2);
+  liveCtx.fill();
+  liveCtx.fillStyle = '#fff';
+  liveCtx.beginPath();
+  liveCtx.arc(x(last.lon), y(last.lat), 3, 0, Math.PI*2);
+  liveCtx.fill();
+}
+
+function tickLive(){
+  if(!liveStart) return;
+  var s = Math.floor((Date.now() - liveStart) / 1000);
+  var mm = String(Math.floor(s/60)).padStart(2,'0');
+  var ss = String(s%60).padStart(2,'0');
+  if ($('liveElapsed')) $('liveElapsed').textContent = mm + ':' + ss;
+}
+
+if ($('liveBtn')) $('liveBtn').addEventListener('click', function(){
+  if (liveWatch != null){
+    navigator.geolocation.clearWatch(liveWatch);
+    liveWatch = null;
+    if(liveTimer){ clearInterval(liveTimer); liveTimer = null; }
+    if ($('livePanel')) $('livePanel').classList.remove('on');
+    $('liveBtn').textContent = '🔴 Start live tracking';
+    setStatus($('locStatus'), 'Live tracking stopped.', 'ok');
     return;
   }
-  var lats = path.map(function(p){ return p.lat; }), lons = path.map(function(p){ return p.lon; });
-  var minLa = Math.min.apply(null,lats), maxLa = Math.max.apply(null,lats);
-  var minLo = Math.min.apply(null,lons), maxLo = Math.max.apply(null,lons);
-  var spanLa = Math.max(maxLa - minLa, 0.00035), spanLo = Math.max(maxLo - minLo, 0.00035);
-  var span = Math.max(spanLa, spanLo);
-  var cLa = (minLa + maxLa)/2, cLo = (minLo + maxLo)/2;
-  var size = Math.min(W, H) - pad*2;
-  function px(p){ return { x: W/2 + ((p.lon - cLo) / span) * size, y: H/2 - ((p.lat - cLa) / span) * size }; }
-  if(path.length > 1){
-    g.strokeStyle = cssVar('--calm') || '#333'; g.lineWidth = 4;
-    g.lineJoin = 'round'; g.lineCap = 'round';
-    g.beginPath();
-    path.forEach(function(p,i){ var q = px(p); i ? g.lineTo(q.x,q.y) : g.moveTo(q.x,q.y); });
-    g.stroke();
+  if(!navigator.geolocation){ setStatus($('locStatus'), 'This browser cannot do live tracking.', 'bad'); return; }
+  livePath = []; liveDist = 0; liveLastPos = null; liveStart = Date.now();
+  if ($('livePanel')) $('livePanel').classList.add('on');
+  liveCanvas = $('trail');
+  if (liveCanvas){
+    var dpr = window.devicePixelRatio || 1;
+    liveCanvas.width = liveCanvas.clientWidth * dpr;
+    liveCanvas.height = liveCanvas.clientHeight * dpr;
+    liveCtx = liveCanvas.getContext('2d');
+    liveCtx.scale(dpr, dpr);
+    liveCanvas.width = liveCanvas.clientWidth;
+    liveCanvas.height = liveCanvas.clientHeight;
   }
-  var s = px(path[0]);
-  g.fillStyle = cssVar('--muted') || '#666';
-  g.beginPath(); g.arc(s.x, s.y, 6, 0, Math.PI*2); g.fill();
-  var c = px(path[path.length-1]);
-  g.fillStyle = cssVar('--signal') || '#f00';
-  g.globalAlpha = 0.2; g.beginPath(); g.arc(c.x, c.y, 22, 0, Math.PI*2); g.fill();
-  g.globalAlpha = 1; g.beginPath(); g.arc(c.x, c.y, 8, 0, Math.PI*2); g.fill();
-  g.strokeStyle = '#fff'; g.lineWidth = 2.5; g.stroke();
-}
-function liveTick(){
-  var s = Math.round((Date.now() - liveStart)/1000);
-  var t = String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
-  if ($('liveElapsed')) $('liveElapsed').textContent = t;
-}
-function startLive(){
-  if(!navigator.geolocation){ setStatus($('locStatus'), 'No location support.', 'bad'); return; }
-  path = []; dist = 0; liveStart = Date.now();
-  $('livePanel').classList.add('on');
-  $('liveBtn').textContent = '🔴 Stop live tracking';
-  $('liveBtn').classList.remove('btn-red');
-  setStatus($('locStatus'), 'Tracking. Your message updates itself as you move.', 'ok');
-  drawTrail();
-  liveClock = setInterval(liveTick, 1000);
-  watchId = navigator.geolocation.watchPosition(function(pos){
-    var p = { lat: pos.coords.latitude, lon: pos.coords.longitude, t: Date.now() };
-    if(path.length){
-      var d = haversine(path[path.length-1], p);
-      if(d < 2 && pos.coords.accuracy > 25) return;
-      dist += d;
+  $('liveBtn').textContent = '⏹ Stop live tracking';
+  setStatus($('locStatus'), 'Live tracking on. Keep this tab open.', 'ok');
+  if(liveTimer) clearInterval(liveTimer);
+  liveTimer = setInterval(tickLive, 1000);
+
+  liveWatch = navigator.geolocation.watchPosition(function(pos){
+    var c = pos.coords;
+    var p = { lat: c.latitude, lon: c.longitude };
+    if (liveLastPos){
+      liveDist += haversine(liveLastPos, p);
     }
-    path.push(p);
-    if(path.length > 900) path.shift();
-    coords = { lat: p.lat.toFixed(6), lon: p.lon.toFixed(6), acc: Math.round(pos.coords.accuracy) };
-    var speedTxt = (pos.coords.speed != null && pos.coords.speed >= 0) ? (pos.coords.speed * 3.6).toFixed(1) + ' km/h' : '—';
-    if($('statDist')) $('statDist').textContent = fmtDist(dist);
-    if($('statAcc')) $('statAcc').textContent = Math.round(pos.coords.accuracy) + ' m';
-    if($('statSpeed')) $('statSpeed').textContent = speedTxt;
-    if($('liveCoords')) $('liveCoords').textContent = coords.lat + ', ' + coords.lon;
-    if($('liveMap')) $('liveMap').href = 'https://maps.google.com/?q=' + coords.lat + ',' + coords.lon;
-    drawTrail(); refreshShare();
+    liveLastPos = p;
+    livePath.push(p);
+    coords = { lat: p.lat.toFixed(6), lon: p.lon.toFixed(6), acc: Math.round(c.accuracy) };
+    refreshShare();
+    if ($('statDist')) $('statDist').textContent = fmtDist(liveDist);
+    if ($('statSpeed')) $('statSpeed').textContent = fmtSpeed(c.speed);
+    if ($('statAcc')) $('statAcc').textContent = '±' + Math.round(c.accuracy) + ' m';
+    if ($('liveCoords')) $('liveCoords').textContent = p.lat.toFixed(5) + ', ' + p.lon.toFixed(5);
+    if ($('liveMap')) $('liveMap').href = 'https://maps.google.com/?q=' + p.lat + ',' + p.lon;
+    drawTrail();
   }, function(err){
-    var m = 'Tracking stopped.';
-    if(err.code === 1) m = 'Location is blocked.';
-    setStatus($('locStatus'), m, 'bad');
-    stopLive();
-  }, { enableHighAccuracy:true, timeout:20000, maximumAge:1000 });
-}
-function stopLive(){
-  if(watchId !== null){ navigator.geolocation.clearWatch(watchId); watchId = null; }
-  if(liveClock){ clearInterval(liveClock); liveClock = null; }
-  $('liveBtn').textContent = '🔴 Start live tracking';
-  $('liveBtn').classList.add('btn-red');
-}
-if ($('liveBtn')) $('liveBtn').addEventListener('click', function(){
-  if(watchId !== null){ stopLive(); setStatus($('locStatus'), 'Tracking stopped.', 'ok'); }
-  else startLive();
+    setStatus($('locStatus'), 'Live update error: ' + (err.message || 'unknown'), 'bad');
+  }, { enableHighAccuracy: true, maximumAge: 0, timeout: 20000 });
 });
 
+/* ============================================================
+   SPEED DIAL
+   ============================================================ */
 var HELPLINES = [
-  { name:'Emergency', num:'112' },
-  { name:'Women in distress', num:'1091' },
-  { name:'Women\'s helpline', num:'181' },
-  { name:'Cybercrime', num:'1930' },
-  { name:'Legal aid', num:'15100' },
-  { name:'Ambulance', num:'108' }
+  { name: 'Emergency', num: '112' },
+  { name: 'Women in distress', num: '1091' },
+  { name: "Women's helpline", num: '181' },
+  { name: 'Cybercrime', num: '1930' },
+  { name: 'Ambulance', num: '108' },
+  { name: 'Legal aid', num: '15100' }
 ];
-function renderSpeed(){
+function renderSpeedDial(){
   var grid = $('speedGrid'); if(!grid) return;
   grid.innerHTML = '';
-  contacts.concat(HELPLINES).forEach(function(c){
+  contacts.forEach(function(c){
     var a = document.createElement('a');
-    a.className = 'sdial';
-    a.href = 'tel:' + digits(c.num);
-    var b = document.createElement('b'); b.textContent = c.name;
-    var s = document.createElement('span'); s.textContent = c.num;
-    a.appendChild(b); a.appendChild(s);
+    a.className = 'sdial'; a.href = 'tel:' + digits(c.num);
+    a.innerHTML = '<b>' + c.name + '</b><span>' + c.num + '</span>';
+    grid.appendChild(a);
+  });
+  HELPLINES.forEach(function(h){
+    var a = document.createElement('a');
+    a.className = 'sdial'; a.href = 'tel:' + h.num;
+    a.innerHTML = '<b>' + h.name + '</b><span>' + h.num + '</span>';
     grid.appendChild(a);
   });
 }
-renderSpeed();
 
-var casIdx = 0;
+/* ============================================================
+   CASCADE CALL
+   ============================================================ */
+var cascadeIdx = 0;
+if ($('cascadeStart')) $('cascadeStart').addEventListener('click', function(){
+  if(!contacts.length){ toast('Add emergency contacts first'); return; }
+  cascadeIdx = 0;
+  showCascade();
+  $('cascadePanel').classList.add('on');
+});
 function showCascade(){
-  if(!contacts.length){ setStatus($('speedNote'), 'Add a trusted contact first.', 'bad'); return; }
-  if(casIdx >= contacts.length){
-    $('cascadeWho').textContent = 'Everyone tried';
-    $('cascadePos').textContent = 'Nobody answered. Consider calling 112.';
-    $('cascadeCall').href = 'tel:112';
-    $('cascadeCall').textContent = 'Call 112 instead';
+  if(cascadeIdx >= contacts.length){
+    $('cascadePanel').classList.remove('on');
+    toast('Called everyone on your list');
     return;
   }
-  var c = contacts[casIdx];
-  $('cascadePanel').classList.add('on');
-  $('cascadeWho').textContent = c.name;
-  $('cascadePos').textContent = c.num + ' — ' + (casIdx+1) + ' of ' + contacts.length;
-  $('cascadeCall').href = 'tel:' + digits(c.num);
-  $('cascadeCall').textContent = 'Call ' + c.name;
+  var c = contacts[cascadeIdx];
+  if ($('cascadeWho')) $('cascadeWho').textContent = c.name;
+  if ($('cascadePos')) $('cascadePos').textContent = 'Position ' + (cascadeIdx+1) + ' of ' + contacts.length + ' — ' + c.num;
+  if ($('cascadeCall')) $('cascadeCall').href = 'tel:' + digits(c.num);
 }
-if ($('cascadeStart')) $('cascadeStart').addEventListener('click', function(){ casIdx = 0; showCascade(); });
-if ($('cascadeNext')) $('cascadeNext').addEventListener('click', function(){ casIdx++; showCascade(); });
-if ($('cascadeStop')) $('cascadeStop').addEventListener('click', function(){ $('cascadePanel').classList.remove('on'); casIdx = 0; });
+if ($('cascadeNext')) $('cascadeNext').addEventListener('click', function(){ cascadeIdx++; showCascade(); });
+if ($('cascadeStop')) $('cascadeStop').addEventListener('click', function(){
+  $('cascadePanel').classList.remove('on');
+  toast('Cascade stopped');
+});
 
+/* ============================================================
+   KEYPAD
+   ============================================================ */
 var padVal = '';
-function paintPad(){
-  if ($('padOut')) $('padOut').textContent = padVal;
-  if ($('padCall')) $('padCall').href = padVal ? 'tel:' + padVal : '#';
-}
-if ($('pad')) Array.prototype.forEach.call($('pad').querySelectorAll('.key'), function(k){
+var padOut = $('padOut');
+document.querySelectorAll('#pad .key').forEach(function(k){
   k.addEventListener('click', function(){
-    if(padVal.length < 18){ padVal += k.dataset.k; paintPad(); }
+    padVal += k.getAttribute('data-k');
+    if (padOut) padOut.textContent = padVal;
+    if ($('padCall')) $('padCall').href = 'tel:' + padVal;
   });
 });
-if ($('padDel')) $('padDel').addEventListener('click', function(){ padVal = padVal.slice(0,-1); paintPad(); });
+if ($('padDel')) $('padDel').addEventListener('click', function(){
+  padVal = padVal.slice(0, -1);
+  if (padOut) padOut.textContent = padVal;
+  if ($('padCall')) $('padCall').href = 'tel:' + padVal;
+});
 if ($('padSave')) $('padSave').addEventListener('click', function(){
-  if(!padVal) return;
-  $('cNum').value = padVal;
-  $('cName').focus();
-  document.getElementById('contacts').scrollIntoView({behavior:'smooth', block:'start'});
+  if(!padVal){ toast('Type a number first'); return; }
+  var n = prompt('Name for ' + padVal + ':', 'Contact');
+  if(!n) return;
+  contacts.push({ name:n, num:padVal });
+  saveContacts(); renderContacts(); refreshShare(); renderSpeedDial();
+  toast(n + ' saved');
 });
-paintPad();
 
-var rtabs = document.querySelectorAll('.rtab');
-Array.prototype.forEach.call(rtabs, function(t){
-  t.addEventListener('click', function(){
-    Array.prototype.forEach.call(rtabs, function(x){ x.setAttribute('aria-selected','false'); });
-    t.setAttribute('aria-selected','true');
-    Array.prototype.forEach.call(document.querySelectorAll('.rpanel'), function(p){
-      p.classList.toggle('on', p.dataset.rp === t.dataset.r);
-    });
+/* ============================================================
+   SAFETY TIMER
+   ============================================================ */
+var timerMin = 15, timerEnd = null, timerInt = null;
+document.querySelectorAll('#mins .chip').forEach(function(ch){
+  ch.addEventListener('click', function(){
+    document.querySelectorAll('#mins .chip').forEach(function(c){ c.setAttribute('aria-pressed','false'); });
+    ch.setAttribute('aria-pressed','true');
+    timerMin = parseInt(ch.getAttribute('data-m'), 10);
+    updateClock();
   });
 });
-
-var PKEY = 'sk_profile';
-var PFIELDS = ['pName','pBlood','pAge','pVehicle','pMed','pHome','pWork','pStation'];
-var profile = {};
-var includeHome = false;
-try{ var praw = localStorage.getItem(PKEY); if(praw) profile = JSON.parse(praw) || {}; }catch(e){ profile = {}; }
-
-function readProfile(){ PFIELDS.forEach(function(f){ if($(f)) profile[f] = $(f).value.trim(); }); }
-function fillProfile(){ PFIELDS.forEach(function(f){ if(profile[f] && $(f)) $(f).value = profile[f]; }); }
-function paintIdCard(){
-  if (!$('pInit')) return;
-  var n = profile.pName || '';
-  $('pInit').textContent = n ? n.charAt(0).toUpperCase() : '—';
-  $('pWho').textContent = n || 'No profile yet';
-  var bits = [];
-  if(profile.pAge) bits.push(profile.pAge + ' years');
-  if(profile.pBlood) bits.push('Blood group ' + profile.pBlood);
-  if(profile.pVehicle) bits.push(profile.pVehicle);
-  if(profile.pMed) bits.push(profile.pMed);
-  $('pMeta').innerHTML = '';
-  if(bits.length){
-    bits.forEach(function(b, i){
-      var s = document.createElement(i === 1 ? 'em' : 'span');
-      s.textContent = b;
-      $('pMeta').appendChild(s);
-      if(i < bits.length - 1) $('pMeta').appendChild(document.createTextNode(' · '));
-    });
-  } else {
-    $('pMeta').textContent = 'Fill this in and it gets attached to every alert you send.';
+function updateClock(){
+  var clockEl = $('clock'); if(!clockEl) return;
+  if(!timerEnd){
+    clockEl.textContent = String(timerMin).padStart(2,'0') + ':00';
+    clockEl.classList.remove('warn');
+    return;
   }
-  if ($('homeNav')) $('homeNav').href = profile.pHome ? 'https://maps.google.com/maps?daddr=' + encodeURIComponent(profile.pHome) : '#';
+  var left = Math.max(0, Math.floor((timerEnd - Date.now()) / 1000));
+  var mm = String(Math.floor(left/60)).padStart(2,'0');
+  var ss = String(left%60).padStart(2,'0');
+  clockEl.textContent = mm + ':' + ss;
+  if (left < 60) clockEl.classList.add('warn');
+  if (left <= 0){
+    clearInterval(timerInt); timerInt = null;
+    if ($('alarmOverlay')) $('alarmOverlay').classList.add('on');
+    playSiren(3);
+  }
 }
-function saveProfile(quiet){
-  readProfile();
-  try{ localStorage.setItem(PKEY, JSON.stringify(profile)); if(!quiet) setStatus($('profStatus'), 'Profile saved.', 'ok'); }
-  catch(e){ setStatus($('profStatus'), 'Browser blocked saving.', 'bad'); }
-  paintIdCard();
-  refreshShare();
-}
-fillProfile(); paintIdCard();
-PFIELDS.forEach(function(f){ if($(f)) $(f).addEventListener('change', function(){ saveProfile(true); }); });
-if ($('saveProfile')) $('saveProfile').addEventListener('click', function(){ saveProfile(false); });
-if ($('clearProfile')) $('clearProfile').addEventListener('click', function(){
-  if(!window.confirm('Delete your profile and all saved contacts?')) return;
-  profile = {}; contacts = [];
-  PFIELDS.forEach(function(f){ if($(f)) $(f).value = ''; });
-  try{ localStorage.removeItem(PKEY); localStorage.removeItem(KEY); }catch(e){}
-  renderContacts(); paintIdCard(); refreshShare();
-  setStatus($('profStatus'), 'Everything cleared.', 'ok');
+if ($('startT')) $('startT').addEventListener('click', function(){
+  timerEnd = Date.now() + timerMin*60*1000;
+  setStatus($('timerStatus'), 'Timer started for ' + timerMin + ' min.', 'ok');
+  if(timerInt) clearInterval(timerInt);
+  timerInt = setInterval(updateClock, 1000);
+  updateClock();
 });
-if ($('shareHome')) $('shareHome').addEventListener('click', function(){
-  if(!profile.pHome){ setStatus($('profStatus'), 'Add your home address first.', 'bad'); return; }
-  includeHome = !includeHome;
-  $('shareHome').textContent = includeHome ? 'Remove home from my alert' : 'Add home to my alert';
-  refreshShare();
-  setStatus($('profStatus'), includeHome ? 'Home added to the alert.' : 'Home removed.', 'ok');
+if ($('safeT')) $('safeT').addEventListener('click', function(){
+  timerEnd = null;
+  if(timerInt) clearInterval(timerInt);
+  timerInt = null;
+  setStatus($('timerStatus'), 'Marked safe. Timer cancelled.', 'ok');
+  updateClock();
+});
+if ($('stopAlarm')) $('stopAlarm').addEventListener('click', function(){
+  $('alarmOverlay').classList.remove('on');
+  stopSiren();
+  timerEnd = null;
+  updateClock();
+});
+if ($('alarmSend')) $('alarmSend').addEventListener('click', function(){
+  $('alarmOverlay').classList.remove('on');
+  stopSiren();
+  alertContacts();
 });
 
-var _base = baseMessage;
-baseMessage = function(){
-  var t = _base();
-  var tail = [];
-  if(profile.pName) tail.push('Name: ' + profile.pName);
-  if(profile.pBlood) tail.push('Blood group: ' + profile.pBlood);
-  if(profile.pMed) tail.push('Medical: ' + profile.pMed);
-  if(profile.pVehicle) tail.push('Vehicle: ' + profile.pVehicle);
-  if(includeHome && profile.pHome) tail.push('Home: ' + profile.pHome.replace(/\s*\n\s*/g,', '));
-  return tail.length ? t + '\n\n' + tail.join('\n') : t;
-};
-refreshShare();
+/* ============================================================
+   FAKE CALL
+   ============================================================ */
+var fakeTimeout = null;
+if ($('fakeBtn')) $('fakeBtn').addEventListener('click', function(){
+  var name = ($('callerName').value || 'Papa').trim();
+  var delay = parseInt($('callDelay').value, 10) || 15;
+  if(fakeTimeout) clearTimeout(fakeTimeout);
+  setStatus($('fakeStatus'), 'Ring scheduled in ' + delay + ' sec. Don\'t close this tab.', 'ok');
+  fakeTimeout = setTimeout(function(){
+    showFakeCall(name);
+  }, delay*1000);
+});
+function showFakeCall(name){
+  var ov = $('callOverlay'); if(!ov) return;
+  $('callWho').textContent = name;
+  $('callInitial').textContent = name.charAt(0).toUpperCase();
+  ov.classList.add('on');
+  playRingtone();
+}
+if ($('acceptBtn')) $('acceptBtn').addEventListener('click', function(){
+  $('callOverlay').classList.remove('on');
+  stopRingtone();
+  toast('Call answered — keep talking');
+});
+if ($('declineBtn')) $('declineBtn').addEventListener('click', function(){
+  $('callOverlay').classList.remove('on');
+  stopRingtone();
+  toast('Call ended');
+});
 
-var RKEY = 'sk_rules';
-var boxes = document.querySelectorAll('.rule input[type=checkbox]');
-var ticked = {};
-try{ var rraw = localStorage.getItem(RKEY); if(rraw) ticked = JSON.parse(rraw) || {}; }catch(e){ ticked = {}; }
+/* ============================================================
+   SIREN / RINGTONE (WebAudio)
+   ============================================================ */
+var audioCtx = null, sirenOsc = null, sirenGain = null, sirenInterval = null;
+function ensureAudio(){
+  if(!audioCtx){
+    try{ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){}
+  }
+  return audioCtx;
+}
+function playSiren(seconds){
+  var ctx = ensureAudio(); if(!ctx) return;
+  if (ctx.state === 'suspended') ctx.resume();
+  sirenOsc = ctx.createOscillator();
+  sirenGain = ctx.createGain();
+  sirenOsc.type = 'sawtooth';
+  sirenOsc.frequency.value = 700;
+  sirenGain.gain.value = 0.08;
+  sirenOsc.connect(sirenGain).connect(ctx.destination);
+  sirenOsc.start();
+  var t0 = ctx.currentTime;
+  var period = 1.2;
+  var steps = Math.max(1, Math.floor((seconds||5) / period));
+  for (var i = 0; i < steps; i++){
+    sirenOsc.frequency.setValueAtTime(700, t0 + i*period);
+    sirenOsc.frequency.linearRampToValueAtTime(1200, t0 + i*period + period/2);
+    sirenOsc.frequency.linearRampToValueAtTime(700, t0 + i*period + period);
+  }
+  if (seconds && seconds > 0){
+    sirenInterval = setTimeout(stopSiren, seconds*1000);
+  }
+}
+function stopSiren(){
+  if (sirenInterval){ clearTimeout(sirenInterval); sirenInterval = null; }
+  if (sirenOsc){
+    try{ sirenOsc.stop(); }catch(e){}
+    sirenOsc = null;
+  }
+}
+var ringtoneInt = null;
+function playRingtone(){
+  if(ringtoneInt) return;
+  var playBeep = function(){
+    var ctx = ensureAudio(); if(!ctx) return;
+    if (ctx.state === 'suspended') ctx.resume();
+    var o = ctx.createOscillator();
+    var g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = 880;
+    g.gain.value = 0.08;
+    o.connect(g).connect(ctx.destination);
+    o.start();
+    o.stop(ctx.currentTime + 0.4);
+  };
+  playBeep();
+  ringtoneInt = setInterval(playBeep, 1200);
+}
+function stopRingtone(){
+  if(ringtoneInt){ clearInterval(ringtoneInt); ringtoneInt = null; }
+}
+if ($('sirenBtn')) $('sirenBtn').addEventListener('click', function(){
+  if (sirenOsc){ stopSiren(); toast('Siren off'); return; }
+  playSiren(8);
+  toast('Siren on — tap again to stop');
+});
+if ($('quickAlert')) $('quickAlert').addEventListener('click', alertContacts);
+
+function alertContacts(){
+  if(!contacts.length){
+    toast('No emergency contacts saved — add some in Profile');
+    return;
+  }
+  setStatus($('locStatus'), 'Finding your location before sending…');
+  geoFind(function(c){
+    coords = c;
+    refreshShare();
+    var msg = baseMessage();
+    var text = encodeURIComponent(msg);
+    var first = contacts[0];
+    window.location.href = 'https://wa.me/' + waNumber(first.num) + '?text=' + text;
+    setStatus($('locStatus'), 'Alert opened for ' + first.name + '.', 'ok');
+  }, function(err){
+    var text = encodeURIComponent(baseMessage());
+    var first = contacts[0];
+    window.location.href = 'https://wa.me/' + waNumber(first.num) + '?text=' + text;
+    setStatus($('locStatus'), err + ' Sending without coordinates.', 'bad');
+  });
+}
+
+/* ============================================================
+   RULES CHECKLIST
+   ============================================================ */
+var RULES_KEY = 'sk_rules';
+var ruleIds = [];
+for (var i = 1; i <= 24; i++) ruleIds.push('r' + i);
+function loadRules(){ try{ return JSON.parse(localStorage.getItem(RULES_KEY)) || {}; }catch(e){ return {}; } }
+function saveRules(o){ try{ localStorage.setItem(RULES_KEY, JSON.stringify(o)); }catch(e){} }
 function paintRules(){
-  var done = 0;
-  Array.prototype.forEach.call(boxes, function(b){ if(b.checked) done++; });
-  if ($('ruleCount')) $('ruleCount').textContent = done + ' of ' + boxes.length;
-  if ($('ruleFill')) $('ruleFill').style.width = Math.round(done / boxes.length * 100) + '%';
+  var s = loadRules();
+  var checked = 0;
+  ruleIds.forEach(function(id){
+    var cb = $(id); if(!cb) return;
+    cb.checked = !!s[id];
+    if(cb.checked) checked++;
+  });
+  if ($('ruleCount')) $('ruleCount').textContent = checked + ' of ' + ruleIds.length;
+  if ($('ruleFill')) $('ruleFill').style.width = (checked / ruleIds.length * 100) + '%';
 }
-Array.prototype.forEach.call(boxes, function(b){
-  if(ticked[b.id]) b.checked = true;
-  b.addEventListener('change', function(){
-    ticked[b.id] = b.checked;
-    try{ localStorage.setItem(RKEY, JSON.stringify(ticked)); }catch(e){}
+ruleIds.forEach(function(id){
+  var cb = $(id); if(!cb) return;
+  cb.addEventListener('change', function(){
+    var s = loadRules();
+    s[id] = cb.checked;
+    saveRules(s);
     paintRules();
   });
 });
 if ($('ruleReset')) $('ruleReset').addEventListener('click', function(){
-  ticked = {};
-  Array.prototype.forEach.call(boxes, function(b){ b.checked = false; });
-  try{ localStorage.removeItem(RKEY); }catch(e){}
+  saveRules({});
   paintRules();
+  toast('Checklist reset');
 });
 paintRules();
 
-var navBtns = document.querySelectorAll('.pagenav button');
-function showPage(name){
-  Array.prototype.forEach.call(document.querySelectorAll('.page'), function(p){
-    p.classList.toggle('on', p.id === 'page-' + name);
+/* ============================================================
+   RIGHTS TABS
+   ============================================================ */
+document.querySelectorAll('.rtab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    var r = tab.getAttribute('data-r');
+    document.querySelectorAll('.rtab').forEach(function(t){ t.setAttribute('aria-selected','false'); });
+    tab.setAttribute('aria-selected','true');
+    document.querySelectorAll('.rpanel').forEach(function(p){
+      p.classList.toggle('on', p.getAttribute('data-rp') === r);
+    });
   });
-  Array.prototype.forEach.call(navBtns, function(b){
-    b.setAttribute('aria-current', b.dataset.page === name ? 'true' : 'false');
-  });
-  if (name !== 'team') {
-    if (teamDetailView) teamDetailView.classList.remove('on');
-    if (teamListView) teamListView.style.display = 'block';
-  }
-  window.scrollTo({top:0, behavior:'auto'});
-}
-Array.prototype.forEach.call(navBtns, function(b){
-  b.addEventListener('click', function(){ showPage(b.dataset.page); });
 });
 
-document.addEventListener('keydown', function(e){
-  if(e.key !== 'Escape') return;
-  if($('callOverlay') && $('callOverlay').classList.contains('on')) endCall();
-  if($('alarmOverlay') && $('alarmOverlay').classList.contains('on')) $('stopAlarm').click();
+/* ============================================================
+   PROFILE SAVE / LOAD
+   ============================================================ */
+var PROFILE_KEY = 'sk_profile';
+function loadProfile(){ try{ return JSON.parse(localStorage.getItem(PROFILE_KEY)) || {}; }catch(e){ return {}; } }
+function saveProfile(o){ try{ localStorage.setItem(PROFILE_KEY, JSON.stringify(o)); }catch(e){} }
+function applyProfile(p){
+  if ($('pName')) $('pName').value = p.name || '';
+  if ($('pBlood')) $('pBlood').value = p.blood || '';
+  if ($('pAge')) $('pAge').value = p.age || '';
+  if ($('pVehicle')) $('pVehicle').value = p.vehicle || '';
+  if ($('pMed')) $('pMed').value = p.med || '';
+  if ($('pHome')) $('pHome').value = p.home || '';
+  if ($('pWork')) $('pWork').value = p.work || '';
+  if ($('pStation')) $('pStation').value = p.station || '';
+  var init = (p.name || '').trim().charAt(0).toUpperCase();
+  if ($('pInit')) $('pInit').textContent = init || '—';
+  if ($('pWho')) $('pWho').textContent = p.name || 'No profile yet';
+  var bits = [];
+  if (p.age) bits.push(p.age + ' yrs');
+  if (p.blood) bits.push(p.blood);
+  if (p.station) bits.push(p.station);
+  if ($('pMeta')) $('pMeta').textContent = bits.length ? bits.join(' · ') : 'Fill this in and it gets attached to every alert you send.';
+  if ($('homeNav')){
+    if (p.home) $('homeNav').href = 'https://maps.google.com/?q=' + encodeURIComponent(p.home);
+    else $('homeNav').href = '#';
+  }
+}
+if ($('saveProfile')) $('saveProfile').addEventListener('click', function(){
+  var p = {
+    name: $('pName').value.trim(),
+    blood: $('pBlood').value,
+    age: $('pAge').value,
+    vehicle: $('pVehicle').value.trim(),
+    med: $('pMed').value.trim(),
+    home: $('pHome').value.trim(),
+    work: $('pWork').value.trim(),
+    station: $('pStation').value.trim()
+  };
+  saveProfile(p);
+  applyProfile(p);
+  setStatus($('profStatus'), 'Profile saved on this device.', 'ok');
+  toast('Profile saved');
 });
+if ($('clearProfile')) $('clearProfile').addEventListener('click', function(){
+  if(!confirm('Delete profile, contacts, checklist, and settings from this device?')) return;
+  try{
+    localStorage.removeItem(PROFILE_KEY);
+    localStorage.removeItem(KEY);
+    localStorage.removeItem(RULES_KEY);
+  }catch(e){}
+  contacts = [];
+  saveContacts(); renderContacts(); refreshShare(); renderSpeedDial();
+  applyProfile({});
+  paintRules();
+  setStatus($('profStatus'), 'Everything cleared on this device.', 'ok');
+  toast('Cleared');
+});
+if ($('shareHome')) $('shareHome').addEventListener('click', function(){
+  var h = $('pHome').value.trim();
+  if(!h){ toast('Add a home address first'); return; }
+  var msg = ($('msgBox').value.trim() || 'I need help.') + '\n\nMy home: ' + h;
+  $('msgBox').value = msg;
+  refreshShare();
+  toast('Home address added to alert');
+});
+
+applyProfile(loadProfile());
+renderContacts();
+refreshShare();
+renderSpeedDial();
+updateClock();
 
 })();
 </script>
